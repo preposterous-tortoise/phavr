@@ -1,8 +1,7 @@
-function homeCtrl($scope, $location){
+angular.module('drakeApp.home', [])
+.controller('homeCtrl', function ($scope, $location){
   
-  
+  $scope.testVar = true;
 
-}
+});
 
-angular.module('drakeApp')
-.controller('homeCtrl', ['$scope', '$location', homeCtrl]);

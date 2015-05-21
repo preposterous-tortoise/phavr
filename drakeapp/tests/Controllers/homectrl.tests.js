@@ -1,7 +1,7 @@
 describe('homeCtrl', function() {
   var scope;
 
-  beforeEach(module('drakeApp'));
+  beforeEach(module('drakeApp.home'));
 
   beforeEach(inject(function($rootScope, $controller) {
     scope = $rootScope.$new();
