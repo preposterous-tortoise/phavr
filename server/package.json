@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/preposterous-tortoise/drakeapp/issues"
   },
-  "homepage": "https://github.com/preposterous-tortoise/drakeapp"
+  "homepage": "https://github.com/preposterous-tortoise/drakeapp",
+  "dependencies": {
+    "mongoose": "^4.0.3"
+  }
 }
