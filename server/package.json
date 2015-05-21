@@ -1,0 +1,19 @@
+{
+  "name": "drakeapp",
+  "version": "1.0.0",
+  "description": "Get the photos you want to see.",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/preposterous-tortoise/drakeapp"
+  },
+  "author": "preposterous tortoise",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/preposterous-tortoise/drakeapp/issues"
+  },
+  "homepage": "https://github.com/preposterous-tortoise/drakeapp"
+}
