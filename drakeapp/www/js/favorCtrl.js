@@ -1,8 +1,7 @@
-function favorCtrl($scope, $location){
+angular.module('drakeApp.favor', [])
+.controller('favorCtrl', function ($scope, $location){
   
   
 
-}
+});
 
-angular.module('drakeApp')
-.controller('favorCtrl', ['$scope', '$location', favorCtrl]);

@@ -1,8 +1,7 @@
-function loginCtrl($scope, $location){
+angular.module('drakeApp.login', [])
+.controller('loginCtrl', function ($scope, $location){
   
   
 
-}
+});
 
-angular.module('drakeApp')
-.controller('loginCtrl', ['$scope', '$location', loginCtrl]);
