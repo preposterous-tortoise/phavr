@@ -1,6 +1,6 @@
 angular.module('ionic.example', ['ionic'])
 
-    .controller('MapCtrl', function($scope, $ionicLoading, $compile) {
+    .controller('MapCtrl', function($scope, $ionicLoading, $compile, $http) {
       function initialize() {
         var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
         
@@ -11,6 +11,10 @@ angular.module('ionic.example', ['ionic'])
         };
         var map = new google.maps.Map(document.getElementById("map"),
             mapOptions);
+        google.maps.event.addListener(map, "bounds_changed", function() {
+           // send the new bounds back to your server
+           console.log("map bounds{"+map.getBounds());
+        });
 
         var input = (document.getElementById('pac-input'));
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -57,6 +61,7 @@ angular.module('ionic.example', ['ionic'])
                 (place.address_components[2] && place.address_components[2].short_name || '')
               ].join(' ');
             }
+            $scope.saveRequest(place.name, place.geometry.location);
 
             infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
             infowindow.open(map, marker);
@@ -83,6 +88,20 @@ angular.module('ionic.example', ['ionic'])
 */
         $scope.map = map;
         $scope.centerOnMe();
+      }
+      $scope.saveRequest = function (description, location) {
+        $http({
+                method: 'POST',
+                url: '/api/requests/create',
+                data: {
+                    description: description,
+                    location: location
+                }
+            })
+            .then(function(resp) {
+              console.log(resp);
+                return resp;
+            });
       }
       google.maps.event.addDomListener(window, 'load', initialize);
       
