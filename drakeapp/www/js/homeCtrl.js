@@ -28,6 +28,10 @@ angular.module('drakeApp.home', [])
     request.votes--;
   };
 
+  $scope.favorDetails = function(){
+    $location.path('/favordetails');
+  }
+
   $scope.testVar = true;
 
 });
