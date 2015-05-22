@@ -3,7 +3,8 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('drakeApp', ['ionic'])
+angular.module('drakeApp', ['ionic', 'drakeApp.home', 'drakeApp.nav', 'drakeApp.favor',
+                              'drakeApp.login', 'drakeApp.requestMap'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -24,12 +25,12 @@ angular.module('drakeApp', ['ionic'])
   //home template
   $stateProvider.state('home', {
     url: '/',
-    templateUrl: './views/home.html',
+    templateUrl: 'views/home.html',
     controller: 'homeCtrl'
   })
 
-  $stateProvider.state('requestMap', {
-    url: '/requestMap',
+  $stateProvider.state('requestmap', {
+    url: '/requestmap',
     templateUrl: './views/requestMap.html',
     controller: 'requestMapCtrl'
   })

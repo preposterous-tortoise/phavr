@@ -1,8 +1,7 @@
-function requestMapCtrl($scope, $location){
+angular.module('drakeApp.requestMap', [])
+.controller('requestMapCtrl', function ($scope, $location){
   
   
 
-}
+});
 
-angular.module('drakeApp')
-.controller('requestMapCtrl', ['$scope', '$location', requestMapCtrl]);

@@ -1,9 +1,18 @@
 <ion-view title="login">
   <ion-content padding="false">
-    
-    
-    
-
-   
+    <h2>Drake App</h2>
+    <form ng-submit="letsGo()">
+	    <div class="list list-inset">
+	      <label class="item item-input">
+	        <input ng-model="username" type="text" placeholder="Username">
+	      </label>
+	      <label class="item item-input">
+	        <input ng-model="password" type="text" placeholder="Password">
+	      </label>
+	    </div> 
+	    <div>
+          <button type="submit" class="button button-block button-calm">Submit</button>
+        </div>
+	</form>
   </ion-content>
 </ion-view>
