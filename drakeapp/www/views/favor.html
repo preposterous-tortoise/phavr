@@ -1,9 +1,21 @@
 <ion-view title="favor">
   <ion-content padding="false">
-    
-    
-   <h1> hello </h1>
-
-   
+    <h2>Favors</h2>
+    <form>   
+        <div class="padding">
+          <label class="item item-input">
+            <input ng-model="review.username" type="text" placeholder="Your name?" required>
+          </label>
+          <label class="item item-input">
+            <input ng-model="review.venue" type="text" placeholder="Tags?">
+          </label>
+          <label class="item item-input reviewText">
+            <textarea ng-model="review.textReview" placeholder="What do you want to see?"></textarea>
+          </label>
+        </div>
+        <div>
+          <button type="submit" class="button button-block button-calm">Submit</button>
+        </div>
+    </form>
   </ion-content>
 </ion-view>
