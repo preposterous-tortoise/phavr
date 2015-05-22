@@ -29,8 +29,8 @@ angular.module('drakeApp', ['ionic', 'drakeApp.home', 'drakeApp.nav', 'drakeApp.
     controller: 'homeCtrl'
   })
 
-  $stateProvider.state('requestMap', {
-    url: '/requestMap',
+  $stateProvider.state('requestmap', {
+    url: '/requestmap',
     templateUrl: './views/requestMap.html',
     controller: 'requestMapCtrl'
   })
