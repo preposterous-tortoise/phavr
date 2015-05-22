@@ -13,6 +13,7 @@ angular.module('ionic.example', ['ionic'])
             mapOptions);
 
         var input = (document.getElementById('pac-input'));
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         var autocomplete = new google.maps.places.Autocomplete(input);
           autocomplete.bindTo('bounds', map);
 
@@ -70,7 +71,7 @@ angular.module('ionic.example', ['ionic'])
           content: compiled[0]
         });*/
 
-        var marker = new google.maps.Marker({
+/*        var marker = new google.maps.Marker({
           position: myLatlng,
           map: map,
           title: 'Uluru (Ayers Rock)'
@@ -79,8 +80,9 @@ angular.module('ionic.example', ['ionic'])
         google.maps.event.addListener(marker, 'click', function() {
           infowindow.open(map,marker);
         });
-
+*/
         $scope.map = map;
+        $scope.centerOnMe();
       }
       google.maps.event.addDomListener(window, 'load', initialize);
       
