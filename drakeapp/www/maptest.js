@@ -14,9 +14,7 @@ angular.module('ionic.example', ['ionic'])
         google.maps.event.addListener(map, "bounds_changed", function() {
            // send the new bounds back to your server
            console.log("map bounds{"+map.getBounds());
-           var bounds = map.getBounds();
-           console.log("NE: ", bounds.getNorthEast().lng(), bounds.getNorthEast().lat());
-           console.log("SW: ", bounds.getSouthWest().lng(), bounds.getSouthWest().lat());
+           $scope.fetchRequests(map.getBounds());
         });
 
         var input = (document.getElementById('pac-input'));
@@ -64,7 +62,7 @@ angular.module('ionic.example', ['ionic'])
                 (place.address_components[2] && place.address_components[2].short_name || '')
               ].join(' ');
             }
-            $scope.saveRequest(place.name, place.geometry.location);
+            $scope.saveRequest(place.name, place.geometry.location, place.icon);
 
             infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
             infowindow.open(map, marker);
@@ -92,13 +90,14 @@ angular.module('ionic.example', ['ionic'])
         $scope.map = map;
         $scope.centerOnMe();
       }
-      $scope.saveRequest = function (description, location) {
+      $scope.saveRequest = function (description, location, icon) {
         $http({
                 method: 'POST',
                 url: '/api/requests/create',
                 data: {
                     description: description,
-                    location: location
+                    location: location, 
+                    icon: icon
                 }
             })
             .then(function(resp) {
@@ -107,7 +106,24 @@ angular.module('ionic.example', ['ionic'])
             });
       }
       $scope.fetchRequests = function(bounds) {
-
+        console.log("SW: ", bounds.getSouthWest().lng(), bounds.getSouthWest().lat());
+        console.log("NE: ", bounds.getNorthEast().lng(), bounds.getNorthEast().lat());
+        var box = [ [bounds.getSouthWest().lng(), bounds.getSouthWest().lat()],
+          [bounds.getNorthEast().lng(), bounds.getNorthEast().lat()]];
+        $http({
+                method: 'POST',
+                url: '/api/requests/',
+                data: {
+                    box: box
+                }
+            })
+            .success(function(resp, status, headers, config) {
+              console.log(resp);
+                return resp;
+            })
+            .error(function(data, status, headers, config) {
+              console.log('fetch Requests error: ', data, status, headers, config);
+            });
       }
       google.maps.event.addDomListener(window, 'load', initialize);
       

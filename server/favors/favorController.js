@@ -1,40 +1,67 @@
 var Favor = require('../db/favorModel.js');
 var Q = require('q');
 
+var coords = [
+  [
+    [-122.610168, 37.598167],
+    [-122.288818, 37.598167],
+    [-122.288818, 37.845833],
+    [-122.610168, 37.845833],
+    [-122.610168, 37.598167]
+  ]
+];
+
 module.exports = {
   fetchFavors: function(req, res, next) {
-  	// query = MyModel.where({loc: {$within : {$box : box}}});
-   //  query.run(cb);
-    res.send('fetchFavors called with body: ' + JSON.stringify(req.body));
+  	var box = req.body.box;
+  	var polyBox = [  // sw, ne
+  	  [
+  	    [box[0][0], box[0][1]],
+  	    [box[1][0], box[0][1]],
+  	    [box[1][0], box[1][1]],
+  	    [box[0][0], box[1][1]],
+  	    [box[0][0], box[0][1]]
+  	  ]
+  	]
+
+    var query = Favor.find({
+      "loc": {
+        "$geoWithin": {
+          "$geometry": {
+            "type": "Polygon",
+            "coordinates": polyBox
+          }
+        }
+      }
+    });
+    query.exec(function(err, docs) {
+      res.json(docs);
+      if (err) {
+        console.log('ERROR in Favor.find ', err)
+        res.send('ERROR in Favor.find ' + err)
+      }
+    });
   },
+  
   createFavor: function(req, res, next) {
-    
-  	/*var collection = db.collection('places');
 
-	  collection.ensureIndex({loc: "2d"}, {min: -500, max: 500, w:1}, function(err, result) {
-	    if(err) return console.dir(err);
-
-	    collection.insert(document, {w:1}, function(err, result) {
-	      if(err) return console.dir(err)
-	    });
-	  });*/
-
-		var favor = new Favor({
-		  topic: 'dummy topic',
-		  description: req.body.description,
-		  user_id: 1,
-		  photos: [],
-		  loc: {
-		  	"coordinates": [req.body.location.F, req.body.location.A]
-		  },
-		  votes: 0,
-		  isPrivate: false
-		});
-		favor.save(function (err) {
-		  if (err) console.log('ERROR in favor creation: ', err);
-		  if (err) throw err;
-		  //done(null, user);
-		});
+    var favor = new Favor({
+      topic: 'dummy topic',
+      description: req.body.description,
+      user_id: 1,
+      photos: [],
+      icon: req.body.icon,
+      loc: {
+        "coordinates": [req.body.location.F, req.body.location.A]
+      },
+      votes: 0,
+      isPrivate: false
+    });
+    favor.save(function(err) {
+      if (err) console.log('ERROR in favor creation: ', err);
+      if (err) throw err;
+      //done(null, user);
+    });
     res.send('createFavor called with body: ' + JSON.stringify(req.body));
   },
   updateFavor: function(req, res, next) {

@@ -11,6 +11,7 @@ var FavorSchema = mongoose.Schema({
   description: String,
   user_id: Number,
   photos: Array,
+  icon: String,
   loc: {
    'type': {type: String, enum: "Point", default: "Point"},
    'coordinates': { type: [Number],   default: [0,0]} 
