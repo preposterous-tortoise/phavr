@@ -14,6 +14,9 @@ angular.module('ionic.example', ['ionic'])
         google.maps.event.addListener(map, "bounds_changed", function() {
            // send the new bounds back to your server
            console.log("map bounds{"+map.getBounds());
+           var bounds = map.getBounds();
+           console.log("NE: ", bounds.getNorthEast().lng(), bounds.getNorthEast().lat());
+           console.log("SW: ", bounds.getSouthWest().lng(), bounds.getSouthWest().lat());
         });
 
         var input = (document.getElementById('pac-input'));
@@ -102,6 +105,9 @@ angular.module('ionic.example', ['ionic'])
               console.log(resp);
                 return resp;
             });
+      }
+      $scope.fetchRequests = function(bounds) {
+
       }
       google.maps.event.addDomListener(window, 'load', initialize);
       

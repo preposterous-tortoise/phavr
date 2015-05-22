@@ -3,7 +3,7 @@ var Q = require('q');
 
 module.exports = {
   fetchFavors: function(req, res, next) {
-  	// query = MyModel.where({location: {$within : {$box : box}}});
+  	// query = MyModel.where({loc: {$within : {$box : box}}});
    //  query.run(cb);
     res.send('fetchFavors called with body: ' + JSON.stringify(req.body));
   },
