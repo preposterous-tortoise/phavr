@@ -1,1 +1,10 @@
-/* Empty. Add your own CSS if you like */
+.item.wrap, .item-content.wrap {
+  white-space: normal;
+}
+
+.votes {
+  position: relative;
+  color: teal;
+  margin-left: 12px;
+}
+
