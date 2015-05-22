@@ -1,7 +1,12 @@
-/* Empty. Add your own CSS if you like */
-
-
 h2 {
 	color: silver;
+.item.wrap, .item-content.wrap {
+  white-space: normal;
+}
+
+.votes {
+  position: relative;
+  color: teal;
+  margin-left: 12px;
 }
 

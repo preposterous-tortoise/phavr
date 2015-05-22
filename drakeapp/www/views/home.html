@@ -1,7 +1,19 @@
 <ion-view title="home">
   <ion-content padding="false">
-    <h2> Home </h2>   
     <a href="/#/login">Login!</a> 
-  
+    <ion-list ng-repeat="request in requests | orderBy:'-votes'">
+      <ion-item>
+        <h3>{{request.topic}}</h3>
+        <div class="row">
+          <div class="col col-80">
+            <ion-item class="wrap">{{request.description}}</ion-item>
+          </div>
+          <div class="col">
+            <a ng-click="upVote(request)" class="button button-icon icon ion-ios-arrow-up"></a><br>
+            <span class="votes">{{request.votes}}</span><br>
+            <a ng-click="downVote(request)" class="button button-icon icon ion-ios-arrow-down"></a>
+          </div>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>
