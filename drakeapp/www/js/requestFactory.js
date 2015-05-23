@@ -1,4 +1,4 @@
-angular.module('drakeApp', [])
+angular.module('drakeApp.favorfact', [])
 .factory('Favors', function ($http, $location){
   return {
     //return all the favors within range of a location (sent as an obj)
