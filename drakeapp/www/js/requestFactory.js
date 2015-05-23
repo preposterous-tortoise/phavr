@@ -1,7 +1,5 @@
 function requestFactory($http, $location){
 
-  
-
   return requestFactory;
 }
 

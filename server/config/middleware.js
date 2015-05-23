@@ -25,7 +25,7 @@ module.exports = function(app, express){
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
-  app.get('/', auth.signInIfNotAuthenticated);
+  // app.get('/', auth.signInIfNotAuthenticated);
   app.use('/index.html', auth.signInIfNotAuthenticated);
   app.use(express.static(path.join(__dirname,'/../../drakeapp/www')));
 
