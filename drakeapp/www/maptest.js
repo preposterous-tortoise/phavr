@@ -1,8 +1,43 @@
 angular.module('ionic.example', ['ionic'])
 
     .controller('MapCtrl', function($scope, $ionicLoading, $compile, $http) {
+      var markerMap = {};
+
+      function getFavorForMarker(marker) {
+        var value;
+        for (var key in markerMap) {
+          value = markerMap[key];
+          if (value.marker === marker) {
+            return value.favor;
+          }
+        }
+      }
+      
+      function addMarker(favor, map) {
+        var coords = favor.loc.coordinates;
+        var location = {lat: coords[1], lng: coords[0]};
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+          });
+        marker.setIcon(/** @type {google.maps.Icon} */({
+          url: favor.icon,
+          size: new google.maps.Size(71, 71),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(35, 35)
+        }));
+        marker.setPosition(location);
+        marker.setVisible(true);
+        google.maps.event.addListener(marker, "click", function() {
+          var favor = getFavorForMarker(this);
+          alert('marker clicked: ' + favor.description);
+        });
+        markerMap[favor._id] = { marker: marker, favor: favor };
+      }
+
       function initialize() {
-        var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
+        var myLatlng = new google.maps.LatLng(37.786718, -122.41114199999998);
         
         var mapOptions = {
           center: myLatlng,
@@ -12,9 +47,14 @@ angular.module('ionic.example', ['ionic'])
         var map = new google.maps.Map(document.getElementById("map"),
             mapOptions);
         google.maps.event.addListener(map, "bounds_changed", function() {
-           // send the new bounds back to your server
-           console.log("map bounds{"+map.getBounds());
-           $scope.fetchRequests(map.getBounds());
+           var favors = $scope.fetchRequests(map.getBounds(), function (favors) {
+             if (favors) {
+              for (var i = 0; i < favors.length; i++) {
+                if (!(markerMap[favors[i]._id]))
+                  addMarker(favors[i], map);
+              }
+             }
+           });
         });
 
         var input = (document.getElementById('pac-input'));
@@ -68,27 +108,10 @@ angular.module('ionic.example', ['ionic'])
             infowindow.open(map, marker);
           });
 
-        
-        /*//Marker + infowindow + angularjs compiled ng-click
-        var contentString = "<div><a ng-click='clickTest()'>Click me!</a></div>";
-        var compiled = $compile(contentString)($scope);
 
-        var infowindow = new google.maps.InfoWindow({
-          content: compiled[0]
-        });*/
 
-/*        var marker = new google.maps.Marker({
-          position: myLatlng,
-          map: map,
-          title: 'Uluru (Ayers Rock)'
-        });
-
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.open(map,marker);
-        });
-*/
         $scope.map = map;
-        $scope.centerOnMe();
+        // $scope.centerOnMe();
       }
       $scope.saveRequest = function (description, location, icon) {
         $http({
@@ -105,24 +128,26 @@ angular.module('ionic.example', ['ionic'])
                 return resp;
             });
       }
-      $scope.fetchRequests = function(bounds) {
+      $scope.fetchRequests = function(bounds, callback) {
         console.log("SW: ", bounds.getSouthWest().lng(), bounds.getSouthWest().lat());
         console.log("NE: ", bounds.getNorthEast().lng(), bounds.getNorthEast().lat());
         var box = [ [bounds.getSouthWest().lng(), bounds.getSouthWest().lat()],
           [bounds.getNorthEast().lng(), bounds.getNorthEast().lat()]];
-        $http({
+        return $http({
                 method: 'POST',
                 url: '/api/requests/',
                 data: {
                     box: box
                 }
             })
-            .success(function(resp, status, headers, config) {
-              console.log(resp);
-                return resp;
+            .success(function(favors, status, headers, config) {
+              console.log(favors);
+              if (callback) callback(favors)
+              return favors;
             })
             .error(function(data, status, headers, config) {
               console.log('fetch Requests error: ', data, status, headers, config);
+              return null;
             });
       }
       google.maps.event.addDomListener(window, 'load', initialize);
