@@ -9,4 +9,10 @@ module.exports = function (app) {
 
   app.route('/update')
     .post(favorController.updateFavor);
+
+  app.route('/upVote')
+    .post(favorController.upVoteFavor);
+
+  app.route('/downVote')
+    .post(favorController.downVoteFavor);
 };

@@ -24,17 +24,29 @@ angular.module('drakeApp.favorDetails', [])
 
   $scope.getPhoto = function(){
   	photoFactory.getPicture().then(function(image){
-  		console.log(image);
-      $scope.takenPhoto = image;
-      //send the photo
+  		console.log(image)
+      return $http({
+        method: 'POST',
+        url: '/api/photos/create',
+        data: image
+      })
+      .then(function(resp){
+        console.log("This is the response from sending the photo! "+resp);
+      })
   	}, function(err) {
   		console.log(err);
-  	}, {
-      quality: 75,
-      targetWidth: 320,
-      targetHeight: 320,
-      saveToPhotoAlbum: false
-    })
+  	})
   };  
+
+  $scope.upVote = function(request) {
+    request.votes++;
+    // drakeApp.favorfact.upVote(favorID);
+  };
+
+  $scope.downVote = function(request) {
+    request.votes--;
+    // drakeApp.favorfact.downVote(favorID);
+
+  };
 
 });

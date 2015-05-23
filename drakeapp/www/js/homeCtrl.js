@@ -1,5 +1,5 @@
 angular.module('drakeApp.home', [])
-.controller('homeCtrl', function ($scope, $location){
+.controller('homeCtrl', function ($scope, $location, Favors){
  
   $scope.requests = [
     { 
@@ -22,10 +22,13 @@ angular.module('drakeApp.home', [])
 
   $scope.upVote = function(request) {
     request.votes++;
+    // drakeApp.favorfact.upVote(favorID);
+
   }; 
 
   $scope.downVote = function(request) {
     request.votes--;
+    // drakeApp.favorfact.downVote(favorID);
   };
 
   $scope.favorDetails = function(){

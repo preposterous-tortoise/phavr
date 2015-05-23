@@ -10,7 +10,27 @@ angular.module('drakeApp.favorfact', [])
         .error(function(data, status, headers, config) {
           //handle error
         });
+    },
+    upVote: function(favorID){
+      return $http({
+        method: 'POST',
+        url: '/api/requests/upVote',
+        data: favorID
+      })
+      .then(function(resp){
+        console.log(resp);
+      })
+    },
+    downVote: function(favorID){
+      return $http({
+        method: 'POST',
+        url: '/api/requests/downVote',
+        data: favorID
+      })
+      .then(function(resp){
+        console.log(resp);
+      })
     }
-  }
+  } 
 });
 

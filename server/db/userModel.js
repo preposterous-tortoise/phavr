@@ -9,7 +9,7 @@ var UserSchema = new Schema({
 	provider		: String, // Twitter, Facebook, etc
 	provider_id : {type: String, unique: true}, // id returned by Twitter, Facebook, etc.
 	photo			 : String, // user's photo or avatar
-	createdAt	 : {type: Date, default: Date.now} 
+	createdAt	 : {type: Date, default: Date.now}
 });
 
 module.exports = mongoose.model('users', UserSchema);
