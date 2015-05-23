@@ -11,6 +11,7 @@ angular.module('drakeApp.favorfact', [])
           //handle error
         });
     },
+    
     upVote: function(favorID){
       return $http({
         method: 'POST',
@@ -30,6 +31,11 @@ angular.module('drakeApp.favorfact', [])
       .then(function(resp){
         console.log(resp);
       })
+    
+    selectedFavor: null,
+
+    setFavor: function(request) {
+      this.selectedFavor = request;
     }
   } 
 });
