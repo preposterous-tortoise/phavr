@@ -1,5 +1,6 @@
-h2 {
+h2, h3 {
 	color: silver;
+}
 .item.wrap, .item-content.wrap {
   white-space: normal;
 }
@@ -10,3 +11,16 @@ h2 {
   margin-left: 12px;
 }
 
+.favorDetail {
+	height:300px;
+}
+
+.picVoting {
+	top: 50%;
+	left: 50%;
+}
+
+.bottom-detail {
+	border: none;
+
+}
