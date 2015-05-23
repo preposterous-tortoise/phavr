@@ -12,6 +12,15 @@ angular.module('drakeapp.photoFactory', [])
       }, options);
 
       return q.promise;
+    },
+
+    sendPicture: function(imageURI) {
+      $http.post('/api/photos/create', imageURI)
+        .success(function(data, status, headers, config) {
+          console.log('photo uploaded!');
+        })
+        .error(function(data, status, headers, config) {
+        });
     }
   }
 }]);

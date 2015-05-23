@@ -50,7 +50,7 @@ angular.module('drakeApp', ['ionic', 'drakeApp.home', 'drakeApp.nav', 'drakeApp.
   $stateProvider.state('favordetails', {
     url: '/favordetails',
     templateUrl: './views/favorDetails.html',
-    controller: 'favorDetailsCtrl'
+    controller: 'homeCtrl'
   })
 
   
