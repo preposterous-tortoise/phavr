@@ -10,6 +10,12 @@ angular.module('drakeApp.favorfact', [])
         .error(function(data, status, headers, config) {
           //handle error
         });
+    },
+    
+    selectedFavor: null,
+
+    setFavor: function(request) {
+      this.selectedFavor = request;
     }
   }
 });

@@ -2,6 +2,7 @@ angular.module('drakeApp.favorDetails', [])
 .controller('favorDetailsCtrl', function ($scope, $location, $http, photoFactory){
 
   $scope.takenPhoto;
+  $scope.selectedRequest;
   
   $scope.requests = [
     { 
@@ -26,7 +27,7 @@ angular.module('drakeApp.favorDetails', [])
   	photoFactory.getPicture().then(function(image){
   		console.log(image);
       $scope.takenPhoto = image;
-      //send the photo
+      
   	}, function(err) {
   		console.log(err);
   	}, {
