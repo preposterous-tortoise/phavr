@@ -1,12 +1,12 @@
 <ion-view title="home">
   <ion-content padding="false">
-    <a href="/#/login">Login!</a> 
-    <ion-list ng-repeat="request in requests | orderBy:'-votes'" ng-click="favorDetails()">
+    <a ui-sref="login">Login!</a> 
+    <ion-list ng-repeat="request in requests | orderBy:'-votes'">
       <ion-item>
         <h3>{{request.topic}}</h3>
         <div class="row">
           <div class="col col-80">
-            <ion-item class="wrap">{{request.description}}</ion-item>
+            <ion-item ng-click="favorDetails()" class="wrap">{{request.description}}</ion-item>
           </div>
           <div class="col">
             <div class="picVoting">

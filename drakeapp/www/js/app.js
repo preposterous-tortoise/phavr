@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('drakeApp', ['ionic', 'drakeApp.home', 'drakeApp.nav', 'drakeApp.favor',
-                              'drakeApp.login', 'drakeApp.requestMap', 'drakeApp.favorDetails', 'drakeapp.photoFactory'])
+                              'drakeApp.login', 'drakeApp.requestMap', 'drakeApp.favorDetails', 'drakeapp.photoFactory', 'drakeApp.favorfact'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
