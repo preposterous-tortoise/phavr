@@ -25,6 +25,11 @@ h2, h3 {
 
 }
 
+.cambutton {
+  position: relative;
+  margin: 0 auto;
+}
+
 // Google Maps
 
 #map {
@@ -61,3 +66,4 @@ h2, h3 {
 #pac-input:focus {
   border-color: #4d90fe;
 }
+
