@@ -24,3 +24,8 @@ h2, h3 {
 	border: none;
 
 }
+
+.cambutton {
+  position: relative;
+  margin: 0 auto;
+}
