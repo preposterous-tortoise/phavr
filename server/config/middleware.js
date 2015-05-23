@@ -4,7 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
+
+//Auth
 var auth = require('../auth/authPassport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 /**
  * Core Middleware
@@ -29,6 +32,7 @@ module.exports = function(app, express){
   app.use('/index.html', auth.signInIfNotAuthenticated);
   app.use(express.static(path.join(__dirname,'/../../drakeapp/www')));
 
+
   app.use('/api/requests', /*auth.authenticate, */favorRouter);
   app.use('/api/photos', /*auth.authenticate,*/ photoRouter);
 
@@ -45,7 +49,10 @@ module.exports = function(app, express){
     req.logout();
     res.redirect('/signin.html');
   });
-  app.get('/auth/facebook', passport.authenticate('facebook'));
+
+
+
+  app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends']} ));
   app.get('/auth/facebook/callback', passport.authenticate('facebook',
     { successRedirect: '/', failureRedirect: '/login' }
   ));
