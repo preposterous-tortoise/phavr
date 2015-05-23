@@ -26,6 +26,7 @@ angular.module('drakeApp.favorDetails', [])
   	photoFactory.getPicture().then(function(image){
   		console.log(image);
       $scope.takenPhoto = image;
+      //send the photo
   	}, function(err) {
   		console.log(err);
   	}, {

@@ -13,7 +13,7 @@
     -->
 
     <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script type="text/javascript" src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -37,9 +37,9 @@
          <ion-header-bar class="bar-stable bar-calm">
            <div class="button-bar">  
              <a ng-click="toggleLeft()" class="button button-icon icon ion-navicon"></a>
-             <a href="/#/requestmap" class ="button button-icon icon ion-earth"></a>
-             <a href="/#/" class="button button-icon icon ion-home"></a>
-             <a href="/#/favor" class="button button-icon icon ion-paper-airplane"></a>
+             <a ui-sref="requestmap" class ="button button-icon icon ion-earth"></a>
+             <a ui-sref="home" class="button button-icon icon ion-home"></a>
+             <a ui-sref="favor" class="button button-icon icon ion-paper-airplane"></a>
            </div>  
          </ion-header-bar>
 
