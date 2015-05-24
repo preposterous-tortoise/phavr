@@ -53,7 +53,7 @@ module.exports = {
         if (!err && user != null) return done(null, user);
 
         var user = new User({
-          // provider_id: profile.id,
+          provider_id: profile.id,
           // provider: profile.provider,
           // name: profile.displayName,
           // screen_name: profile.username,
