@@ -1,5 +1,5 @@
-var twitter = require('./twitter.js');
+var twitter = require('./twitterScrape.js');
 
 module.exports = function(app) {
-	// app.post('/', twitter)
-}
+	app.get('/', twitter.getPhotosByLocation);
+;}

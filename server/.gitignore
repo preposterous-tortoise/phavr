@@ -3,3 +3,9 @@ server/node_modules
 server/auth/authConfig.js
 drakeapp/www/lib
 webScraping/twitterCredentials.js
+db/journal
+db/drakeapp.0
+db/drakeapp.ns
+db/local.0
+db/local.ns
+db/mongod.lock
