@@ -8,4 +8,6 @@ db/drakeapp.0
 db/drakeapp.ns
 db/local.0
 db/local.ns
+db/
 db/mongod.lock
+webScraping/instagramCredentials.js
