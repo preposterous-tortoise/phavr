@@ -51,7 +51,7 @@ h2, h3 {
   outline: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
-
+/*
 #pac-input {
   background-color: #fff;
   font-family: Roboto;
@@ -65,5 +65,5 @@ h2, h3 {
 
 #pac-input:focus {
   border-color: #4d90fe;
-}
+}*/
 
