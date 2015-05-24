@@ -40,6 +40,10 @@ module.exports = function(app, express){
   require('../favors/favorRoutes.js')(favorRouter);
   require('../photos/photoRoutes.js')(photoRouter);
 
+  var twitterScrapeRouter = express.Router();
+  app.use('/api/twitter', /*auth.athenticate*/ twitterScrapeRouter);
+  require("../webScraping/twitterRoutes.js")(twitterScrapeRouter);
+
   // Passport initialization
   auth.init(passport);
   app.use(passport.initialize());
