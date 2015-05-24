@@ -15,6 +15,11 @@
     <!-- ionic/angularjs js -->
     <script type="text/javascript" src="lib/ionic/js/ionic.bundle.js"></script>
 
+    <!-- angular-google-maps --> 
+    <script src="lib/lodash/dist/lodash.min.js"></script>
+
+    <script src='lib/angular-google-maps/dist/angular-google-maps.min.js'></script>
+
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
@@ -28,7 +33,9 @@
     <script src="js/favorCtrl.js"></script>
     <script src="js/loginCtrl.js"></script>
     <script src="js/favorDetailsCtrl.js"></script>
-        <!-- google maps javascript -->
+    <!-- google maps javascript -->
+    <!--  EITHER IMPORT GOOGLE MAPS HERE (not using Angular Google Maps or 
+       IMPORT using config in app.js-->
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
   </head>
   <body ng-app="drakeApp">

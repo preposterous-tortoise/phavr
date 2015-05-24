@@ -1,8 +1,25 @@
-angular.module('drakeApp.requestMap', [])
-  .controller('requestMapCtrl', function($scope, $location, $http) {
+angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
+  .controller('requestMapCtrl', function($scope, $location, $http, uiGmapGoogleMapApi) {
 
     var markerMap = {};
     var initialized = false;
+
+    // Define variables for our Map object
+    var areaLat      = 37.786718,
+        areaLng      = -122.41114199999998,
+        areaZoom     = 16;
+
+      // var mapOptions = {
+      //   center: myLatlng,
+      //   zoom: 16,
+      //   mapTypeId: google.maps.MapTypeId.ROADMAP
+      // };
+
+    /*  ANGULAR GOOGLE MAPS INITIALIZATION */
+    uiGmapGoogleMapApi.then(function(maps) {
+      $scope.map     = { center: { latitude: areaLat, longitude: areaLng }, zoom: areaZoom };
+      $scope.options = { scrollwheel: false };
+    });
 
     function getFavorForMarker(marker) {
       var value;
@@ -59,6 +76,7 @@ angular.module('drakeApp.requestMap', [])
         zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
+      if (!document.getElementById("map")) return; // using angular google maps
       var map = new google.maps.Map(document.getElementById("map"), mapOptions);
       google.maps.event.addListener(map, "bounds_changed", function() {
         var favors = $scope.fetchRequests(map.getBounds(), function(favors) {

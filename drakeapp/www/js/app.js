@@ -4,7 +4,8 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('drakeApp', ['ionic', 'drakeApp.home', 'drakeApp.nav', 'drakeApp.favor',
-                              'drakeApp.login', 'drakeApp.requestMap', 'drakeApp.favorDetails', 'drakeapp.photoFactory', 'drakeApp.favorfact'])
+                              'drakeApp.login', 'drakeApp.requestMap', 'drakeApp.favorDetails',
+                              'drakeapp.photoFactory', 'drakeApp.favorfact', 'uiGmapgoogle-maps'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -18,7 +19,14 @@ angular.module('drakeApp', ['ionic', 'drakeApp.home', 'drakeApp.nav', 'drakeApp.
     }
   });
 })
-
+.config(function(uiGmapGoogleMapApiProvider) {
+  // asynchronously load the google maps api, as instructed by angular-google-maps.
+  // (see their docs for reference)
+  uiGmapGoogleMapApiProvider.configure({
+    v: '3.17',
+    libraries: 'places'
+  });
+})
 .config(function($stateProvider, $urlRouterProvider){
   $urlRouterProvider.otherwise('/')
   
