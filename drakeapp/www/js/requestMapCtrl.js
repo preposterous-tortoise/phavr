@@ -47,11 +47,11 @@ angular.module('drakeApp.requestMap', [])
     }
 
     function initialize() {
-    	if (initialized) {
-    		return;
-    	} else {
-    		initialized = true;
-    	}
+    	// if (initialized) {
+    	// 	return;
+    	// } else {
+    	// 	initialized = true;
+    	// }
       var myLatlng = new google.maps.LatLng(37.786718, -122.41114199999998);
 
       var mapOptions = {
@@ -72,24 +72,26 @@ angular.module('drakeApp.requestMap', [])
       });
 
       var input = (document.getElementById('pac-input'));
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-      var autocomplete = new google.maps.places.Autocomplete(input);
-      autocomplete.bindTo('bounds', map);
+      // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+      if (input) {
+	      var autocomplete = new google.maps.places.Autocomplete(input);
+	      autocomplete.bindTo('bounds', map);
 
-      google.maps.event.addListener(autocomplete, 'place_changed', function() {
-        var place = autocomplete.getPlace();
-        if (!place.geometry) {
-          return;
-        }
-        $scope.saveRequest(place.name, place.geometry.location, place.icon);
-        // If the place has a geometry, then present it on a map.
-        if (place.geometry.viewport) {
-          map.fitBounds(place.geometry.viewport);
-        } else {
-          map.setCenter(place.geometry.location);
-          map.setZoom(17); // Why 17? Because it looks good.
-        }
-      });
+	      google.maps.event.addListener(autocomplete, 'place_changed', function() {
+	        var place = autocomplete.getPlace();
+	        if (!place.geometry) {
+	          return;
+	        }
+	        $scope.saveRequest(place.name, place.geometry.location, place.icon);
+	        // If the place has a geometry, then present it on a map.
+	        if (place.geometry.viewport) {
+	          map.fitBounds(place.geometry.viewport);
+	        } else {
+	          map.setCenter(place.geometry.location);
+	          map.setZoom(17); // Why 17? Because it looks good.
+	        }
+	      });
+      }
 
       $scope.map = map;
     }
@@ -130,6 +132,7 @@ angular.module('drakeApp.requestMap', [])
           return null;
         });
     }
-    google.maps.event.addDomListener(window, 'load', initialize);
+    initialize();
+    //google.maps.event.addDomListener(window, 'load', initialize);
 
   });
