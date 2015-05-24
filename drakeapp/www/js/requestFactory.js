@@ -31,6 +31,8 @@ angular.module('drakeApp.favorfact', [])
       .then(function(resp){
         console.log(resp);
       })
+      
+    },
     
     selectedFavor: null,
 
