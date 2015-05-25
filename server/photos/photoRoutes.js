@@ -6,4 +6,10 @@ module.exports = function (app) {
 
   app.route('/update')
     .post(photoController.updatePhoto);
+
+  app.route('/upVote')
+    .post(photoController.upVotePhoto);
+
+  app.route('/downVote')
+    .post(photoController.downVotePhoto);
 };

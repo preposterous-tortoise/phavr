@@ -21,6 +21,26 @@ angular.module('drakeapp.photoFactory', [])
         })
         .error(function(data, status, headers, config) {
         });
-    }
+    },
+    upVote: function(photoID){
+      return $http({
+        method: 'POST',
+        url: '/api/photos/upVote',
+        data: photoID
+      })
+      .then(function(resp){
+        console.log(resp);
+      })
+    },
+    downVote: function(photoID){
+      return $http({
+        method: 'POST',
+        url: '/api/photos/downVote',
+        data: photoID
+      })
+      .then(function(resp){
+        console.log(resp);
+      }) 
+    },
   }
 }]);
