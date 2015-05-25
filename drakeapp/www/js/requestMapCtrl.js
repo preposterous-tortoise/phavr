@@ -80,7 +80,12 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
       if (!document.getElementById("map")) return; // using angular google maps
       var map = new google.maps.Map(document.getElementById("map"), mapOptions);
       google.maps.event.addListener(map, "bounds_changed", function() {
-        Favors.fetchRequests(getBoxForBounds(map.getBounds()), function(favors) {
+        var box = getBoxForBounds(map.getBounds());
+        if (box[0][0] === box[1][0]) {
+          console.log('EMPTY BOUNDS from google maps.');
+          return;
+        }
+        Favors.fetchRequests(box, function(favors) {
           if (favors) {
             for (var i = 0; i < favors.length; i++) {
               if (!(markerMap[favors[i]._id]))
