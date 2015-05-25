@@ -8,7 +8,7 @@ ig.use({
 });
 
 module.exports =  {
-
+	
 	getPhotosByLocation: function(req,res){
 		// ig.location_search({ lat: 48.8582, lng: 2.2945 }, {distance:100} ,function(err, result, remaining, limit) {
 		// 	res.json(result);
@@ -18,7 +18,6 @@ module.exports =  {
 			res.json(result);
 		});
 	}
-
 }
 
 
