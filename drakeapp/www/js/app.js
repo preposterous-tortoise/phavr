@@ -5,8 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('drakeApp', ['ionic', 'drakeApp.home', 'drakeApp.nav', 'drakeApp.favor',
                               'drakeApp.login', 'drakeApp.requestMap', 'drakeApp.favorDetails',
-                              'drakeapp.photoFactory', 'drakeApp.favorfact', 'uiGmapgoogle-maps'])
-
+                              'drakeapp.photoFactory', 'drakeApp.favorfact', 'drakeapp.locationFactory',
+                              'uiGmapgoogle-maps'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -58,7 +58,7 @@ angular.module('drakeApp', ['ionic', 'drakeApp.home', 'drakeApp.nav', 'drakeApp.
   $stateProvider.state('favordetails', {
     url: '/favordetails',
     templateUrl: './views/favorDetails.html',
-    controller: 'favorDetailsCtrl'
+    controller: 'homeCtrl'
   })
 
   

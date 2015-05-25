@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
  * favors belong to a user.
  */
 
-var FavorSchema = mongoose.Schema({
+var FavorSchema = new mongoose.Schema({
   topic: String,
   description: String,
   user_id: Number,
