@@ -1,8 +1,19 @@
-angular.module('drakeApp.requestMap', [])
-  .controller('requestMapCtrl', function($scope, $location, $http) {
+angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
+  .controller('requestMapCtrl', function($scope, $location, $http, uiGmapGoogleMapApi, Favors) {
 
     var markerMap = {};
     var initialized = false;
+
+    // Define variables for our Map object
+    var areaLat      = 37.786718,
+        areaLng      = -122.41114199999998,
+        areaZoom     = 16;
+
+    /*  ANGULAR GOOGLE MAPS INITIALIZATION */
+    uiGmapGoogleMapApi.then(function(maps) {
+      $scope.map     = { center: { latitude: areaLat, longitude: areaLng }, zoom: areaZoom };
+      $scope.options = { scrollwheel: false };
+    });
 
     function getFavorForMarker(marker) {
       var value;
@@ -46,6 +57,13 @@ angular.module('drakeApp.requestMap', [])
       };
     }
 
+    function getBoxForBounds(bounds) {
+      return [
+        [bounds.getSouthWest().lng(), bounds.getSouthWest().lat()],
+        [bounds.getNorthEast().lng(), bounds.getNorthEast().lat()]
+      ];
+    }
+
     function initialize() {
     	// if (initialized) {
     	// 	return;
@@ -59,9 +77,15 @@ angular.module('drakeApp.requestMap', [])
         zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
+      if (!document.getElementById("map")) return; // using angular google maps
       var map = new google.maps.Map(document.getElementById("map"), mapOptions);
       google.maps.event.addListener(map, "bounds_changed", function() {
-        var favors = $scope.fetchRequests(map.getBounds(), function(favors) {
+        var box = getBoxForBounds(map.getBounds());
+        if (box[0][0] === box[1][0]) {
+          console.log('EMPTY BOUNDS from google maps.');
+          return;
+        }
+        Favors.fetchRequests(box, function(favors) {
           if (favors) {
             for (var i = 0; i < favors.length; i++) {
               if (!(markerMap[favors[i]._id]))
@@ -82,7 +106,12 @@ angular.module('drakeApp.requestMap', [])
 	        if (!place.geometry) {
 	          return;
 	        }
-	        $scope.saveRequest(place.name, place.geometry.location, place.icon);
+          var favor = {
+            description: place.name,
+            location: place.geometry.location,
+            icon: place.icon
+          }
+	        Favors.saveRequest(favor);
 	        // If the place has a geometry, then present it on a map.
 	        if (place.geometry.viewport) {
 	          map.fitBounds(place.geometry.viewport);
@@ -95,20 +124,18 @@ angular.module('drakeApp.requestMap', [])
 
       $scope.map = map;
     }
-    $scope.saveRequest = function(description, location, icon) {
+    /*$scope.saveRequest = function(favor) {
       $http({
-          method: 'POST',
-          url: '/api/requests/create',
-          data: {
-            description: description,
-            location: location,
-            icon: icon
-          }
-        })
-        .then(function(resp) {
-          console.log(resp);
-          return resp;
-        });
+        method: 'POST',
+        url: '/api/requests/create',
+        data: favor
+      })
+      .success(function(data, status, headers, config) {
+        return data;
+      })
+      .error(function(data, status, headers, config) {
+        console.log('saveRequest error, ', data, status, headers, config);
+      });
     }
     $scope.fetchRequests = function(bounds, callback) {
       var box = [
@@ -128,10 +155,10 @@ angular.module('drakeApp.requestMap', [])
           return favors;
         })
         .error(function(data, status, headers, config) {
-          console.log('fetch Requests error: ', data, status, headers, config);
+          console.log('fetchRequests error: ', data, status, headers, config);
           return null;
         });
-    }
+    }*/
     initialize();
     //google.maps.event.addDomListener(window, 'load', initialize);
 
