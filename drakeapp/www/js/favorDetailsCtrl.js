@@ -1,8 +1,8 @@
 angular.module('drakeApp.favorDetails', [])
-.controller('favorDetailsCtrl', function ($scope, $location, $http, Favors, photoFactory){
+.controller('favorDetailsCtrl', function ($scope, $location, $http, photoFactory, Favors){
 
   $scope.takenPhoto;
-  $scope.selectedRequest;
+  $scope.selectedFavor = Favors.selectedFavor;
   
   $scope.requests = [
     { 
@@ -25,21 +25,21 @@ angular.module('drakeApp.favorDetails', [])
 
   $scope.getPhoto = function(){
   	photoFactory.getPicture().then(function(image){
-  		console.log(image)
+  		console.log(image);
       $scope.takenPhoto = image;
-      return $http({
-        method: 'POST',
-        url: '/api/photos/create',
-        data: image
-      })
-      .then(function(resp){
-        console.log("This is the response from sending the photo! "+resp);
-      })
-      
+      //send photo and the request id to store to the database
+      photoFactory.sendPhoto(image, $scope.selectedFavor._id);
+
   	}, function(err) {
   		console.log(err);
-  	})
-  };  
+  	}, {
+      quality: 75,
+      targetWidth: 320,
+      targetHeight: 320,
+      saveToPhotoAlbum: false
+    })
+  };
+
 
   $scope.upVote = function(request) {
     request.votes++;

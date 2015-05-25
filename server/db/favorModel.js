@@ -10,7 +10,6 @@ var FavorSchema = new mongoose.Schema({
   topic: String,
   description: String,
   user_id: Number,
-  photos: Array,
   icon: String,
   loc: {
    'type': {type: String, enum: "Point", default: "Point"},

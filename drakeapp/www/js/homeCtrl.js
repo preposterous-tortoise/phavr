@@ -26,6 +26,7 @@ angular.module('drakeApp.home', [])
     request.votes++;
     // drakeApp.favorfact.upVote(favorID);
     geo.getLocation( function(result){
+      console.log('hello');
       request.description = result[0] +","+ result[1];
     });
 

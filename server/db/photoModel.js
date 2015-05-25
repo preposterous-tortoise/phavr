@@ -8,10 +8,16 @@ var PhotoSchema = new mongoose.Schema({
   url: String,
   request_id: Number,
   user_id: Number,
-  votes: Number,
-  loc: Array,
+  votes: { type: Number, default: 0 },
+  loc: {
+   'type': {type: String, enum: "Point", default: "Point"},
+   'coordinates': { type: [Number],   default: [0,0]} 
+  },
   createdAt: { type: Date, expires: 86400, default: Date.now },
+  icon: String
 });
+
+PhotoSchema.index({loc: '2dsphere'});
 
 module.exports = mongoose.model('photo', PhotoSchema);
 

@@ -14,12 +14,14 @@ angular.module('drakeapp.photoFactory', [])
       return q.promise;
     },
 
-    sendPicture: function(imageURI) {
-      $http.post('/api/photos/create', imageURI)
+    sendPicture: function(imageURI, favorID) {
+      var data = { image: imageURI, favor_id: favorID };
+      $http.post('/api/photos/create', data)
         .success(function(data, status, headers, config) {
           console.log('photo uploaded!');
         })
         .error(function(data, status, headers, config) {
+          console.log('error during upload :[');
         });
     },
     upVote: function(photoID){

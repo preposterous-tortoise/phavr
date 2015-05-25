@@ -1,4 +1,4 @@
-// var Photo = require('./photoModel.js');
+var Photo = require('../db/photoModel.js');
 // var Q = require('q');
 var aws = require('aws-sdk');
 var uuid = require('uuid');
@@ -7,13 +7,20 @@ module.exports = {
   createPhoto: function(req, res, next) {
     var s3 = new aws.S3();
     var fileName = uuid.v1();
-    var params = {Bucket: 'drakeapp-photos', Body: req.body, Key: fileName, ACL: 'public-read'};
+    var params = {Bucket: 'drakeapp-photos', Body: req.body.image, Key: fileName, ACL: 'public-read', ContentType:'image/jpg'};
+    console.log('body',req.body);
     s3.putObject(params, function(err, info) {
       if(err) {
         console.log(err);
       } else {
-          //create a new photo object for db, attach it to the request
-          res.status(201).send('https://drakeapp-photos.s3.amazonaws.com/'+fileName+'.jpg');
+          //create a new photo object for db
+          var photo = new Photo({ url: 'https://drakeapp-photos.s3.amazonaws.com/'+fileName+'.jpg', 
+                                  request_id: req.body.favor_id
+                                });
+          photo.save(function (err) {
+            if(err) { console.log(err); }
+            res.status(201).send('Photo saved at https://drakeapp-photos.s3.amazonaws.com/'+fileName+'.jpg');
+          });
       }
     });
   },
