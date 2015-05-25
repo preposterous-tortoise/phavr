@@ -43,6 +43,18 @@ angular.module('drakeApp.home', [])
     $location.path('/favordetails');
   }
 
+  $scope.updateFavors = function(){
+    geo.getLocation(function(spot){
+      console.log(spot);
+      var radius = 0.289855;
+      var box = [[spot[1]-radius, spot[0]-radius], [spot[1]+radius, spot[0]+radius]];
+      console.log("THIS IS THE BOX " + box)
+      Favors.fetchRequests(box, function(data){
+        console.log("THIS IS FROM DATA "+data);
+      })
+    })
+  };
+
   $scope.getPhoto = function(){
   	photoFactory.getPicture().then(function(image){
   		console.log(image);
