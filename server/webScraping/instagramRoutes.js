@@ -1,5 +1,5 @@
-var instagram = require('./instagramScrape.js');
+// var instagram = require('./instagramScrape.js');
 
-module.exports = function(app) {
-	app.get('/', instagram.getPhotosByLocation);
-;}
+// module.exports = function(app) {
+// 	app.get('/', instagram.getPhotosByLocation);
+// ;}
