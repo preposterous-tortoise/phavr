@@ -1,14 +1,36 @@
 angular.module('drakeApp.favorfact', [])
 .factory('Favors', function ($http, $location){
   return {
-    //return all the favors within range of a location (sent as an obj)
-    getFavors: function(loc) { 
-      $http.post('/api/requests', loc)
-        .success(function(data, status, headers, config) {
-          //return the requests
+    saveRequest: function(request) {
+      $http({
+        method: 'POST',
+        url: '/api/requests/create',
+        data: request
+      })
+      .success(function(data, status, headers, config) {
+        return data;
+      })
+      .error(function(data, status, headers, config) {
+        console.log('saveRequest error, ', data, status, headers, config);
+      });
+    },
+    //  fetch requests in the specified box: [[sw.lng, sw.lat], [ne.lng, ne.lat]]
+    fetchRequests: function(box, callback) {
+      return $http({
+          method: 'POST',
+          url: '/api/requests/',
+          data: {
+            box: box
+          }
+        })
+        .success(function(requests, status, headers, config) {
+          console.log(requests);
+          if (callback) callback(requests)
+          return requests;
         })
         .error(function(data, status, headers, config) {
-          //handle error
+          console.log('fetchRequests error: ', data, status, headers, config);
+          return null;
         });
     }
   }

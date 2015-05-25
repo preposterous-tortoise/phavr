@@ -1,6 +1,9 @@
 <ion-view title="requestMap">
   <ion-content padding="false" ng-controller="requestMapCtrl">
-<!--     <div id="map" data-tap-disabled="true" style="width:100%; height:100%"></div> -->
-    <ui-gmap-google-map center="map.center" options="options" zoom="map.zoom" style="width:100%; height:100%"></ui-gmap-google-map>
+    <!--     <div id="map" data-tap-disabled="true" style="width:100%; height:100%"></div> -->
+    <ui-gmap-google-map center="map.center" options="options" zoom="map.zoom" style="width:100%; height:100%">
+      <ui-gmap-markers models="map.markers" coords="'self'" icon="'icon'" fit='true' modelsbyref="false">
+      </ui-gmap-markers>
+    </ui-gmap-google-map>
   </ion-content>
 </ion-view>
