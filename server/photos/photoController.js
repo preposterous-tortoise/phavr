@@ -2,14 +2,18 @@ var Photo = require('../db/photoModel.js');
 // var Q = require('q');
 var aws = require('aws-sdk');
 var uuid = require('uuid');
+var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
+var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
+var S3_BUCKET = process.env.S3_BUCKET;
 
 module.exports = {
   createPhoto: function(req, res, next) {
+    aws.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});
     var s3 = new aws.S3();
     var fileName = uuid.v1();
-    var params = {Bucket: 'drakeapp-photos', Body: req.body.image, Key: fileName, ACL: 'public-read', ContentType:'image/jpg'};
+    var params = {Bucket: S3_BUCKET, Body: req.body.image, Key: fileName, ACL: 'public-read', ContentType:'image/jpg'};
     console.log('body',req.body);
-    s3.putObject(params, function(err, info) {
+    s3.getSignedUrl('putObject', params, function(err, info) {
       if(err) {
         console.log(err);
       } else {
