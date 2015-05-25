@@ -21,6 +21,7 @@ angular.module('drakeapp.photoFactory', [])
           console.log('photo uploaded!');
         })
         .error(function(data, status, headers, config) {
+          console.log('error during upload :[');
         });
     },
     upVote: function(photoID){

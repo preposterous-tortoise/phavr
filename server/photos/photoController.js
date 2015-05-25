@@ -1,4 +1,4 @@
-var Photo = require('./photoModel.js');
+var Photo = require('../db/photoModel.js');
 // var Q = require('q');
 var aws = require('aws-sdk');
 var uuid = require('uuid');
@@ -7,7 +7,8 @@ module.exports = {
   createPhoto: function(req, res, next) {
     var s3 = new aws.S3();
     var fileName = uuid.v1();
-    var params = {Bucket: 'drakeapp-photos', Body: req.body.image, Key: fileName, ACL: 'public-read'};
+    var params = {Bucket: 'drakeapp-photos', Body: req.body.image, Key: fileName, ACL: 'public-read', ContentType:'image/jpg'};
+    console.log('body',req.body);
     s3.putObject(params, function(err, info) {
       if(err) {
         console.log(err);

@@ -1,5 +1,5 @@
 angular.module('drakeApp.home', [])
-.controller('homeCtrl', function ($scope, $location, Favors, photoFactory){
+.controller('homeCtrl', function ($scope, $location, Favors, photoFactory, geo){
  
   $scope.requests = [
     { 
@@ -25,6 +25,10 @@ angular.module('drakeApp.home', [])
   $scope.upVote = function(request) {
     request.votes++;
     // drakeApp.favorfact.upVote(favorID);
+    geo.getLocation( function(result){
+      console.log('hello');
+      request.description = result[0] +","+ result[1];
+    });
 
   }; 
 
@@ -38,6 +42,22 @@ angular.module('drakeApp.home', [])
     Favors.setFavor(request);
     $location.path('/favordetails');
   }
+
+  $scope.getPhoto = function(){
+  	photoFactory.getPicture().then(function(image){
+  		console.log(image);
+      $scope.takenPhoto = image;
+      photoFactory.sendPhoto(image);
+
+  	}, function(err) {
+  		console.log(err);
+  	}, {
+      quality: 75,
+      targetWidth: 320,
+      targetHeight: 320,
+      saveToPhotoAlbum: false
+    })
+  };
 
   $scope.testVar = true;
 
