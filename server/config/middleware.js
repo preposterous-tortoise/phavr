@@ -40,14 +40,14 @@ module.exports = function(app, express){
   require('../favors/favorRoutes.js')(favorRouter);
   require('../photos/photoRoutes.js')(photoRouter);
 
-  //Setting up twitter and instagram scraping routes
-  var twitterScrapeRouter = express.Router();
-  app.use('/api/twitter', /*auth.athenticate*/ twitterScrapeRouter);
-  require("../webScraping/twitterRoutes.js")(twitterScrapeRouter);
+  // //Setting up twitter and instagram scraping routes
+  // var twitterScrapeRouter = express.Router();
+  // app.use('/api/twitter', /*auth.athenticate*/ twitterScrapeRouter);
+  // require("../webScraping/twitterRoutes.js")(twitterScrapeRouter);
 
-  var instagramScrapeRouter = express.Router();
-  app.use('/api/instagram', /*auth.athenticate*/ instagramScrapeRouter);
-  require("../webScraping/instagramRoutes.js")(instagramScrapeRouter);
+  // var instagramScrapeRouter = express.Router();
+  // app.use('/api/instagram', /*auth.athenticate*/ instagramScrapeRouter);
+  // require("../webScraping/instagramRoutes.js")(instagramScrapeRouter);
 
 
   // Passport initialization
