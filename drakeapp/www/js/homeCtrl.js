@@ -1,5 +1,5 @@
 angular.module('drakeApp.home', [])
-.controller('homeCtrl', function ($scope, $location, Favors, photoFactory){
+.controller('homeCtrl', function ($scope, $location, Favors, photoFactory, geo){
  
   $scope.requests = [
     { 
@@ -25,6 +25,9 @@ angular.module('drakeApp.home', [])
   $scope.upVote = function(request) {
     request.votes++;
     // drakeApp.favorfact.upVote(favorID);
+    geo.getLocation( function(result){
+      request.description = result[0] +","+ result[1];
+    });
 
   }; 
 
