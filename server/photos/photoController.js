@@ -21,5 +21,33 @@ module.exports = {
   //for upvotes/downvotes
   updatePhoto: function(req, res, next) {
     res.send('updatePhoto called with body: ' + JSON.stringify(req.body));
+  },
+
+  upVotePhoto: function(req, res, next) {
+    // var userObj = req.session.passport.user;
+    // var create, newPortfolio;
+
+    // Photo.findAndModify({
+    //   query: { _id: req.body.photoID }, 
+    //   update: { $inc: { votes: 1} }, 
+    //   },
+    //   function(err, doc){
+    //       console.log('There was an error with the upPhotoVotes!!!!!');
+    //   });
+    // res.status(201).send('updateFavor called with body: ' + JSON.stringify(req.body));
+  },
+
+  downVotePhoto: function(req, res, next) {
+    // var userObj = req.session.passport.user;
+    // var create, newPortfolio;
+
+  //   Photo.findAndModify({
+  //     query: { _id: req.body.photoID }, 
+  //     update: { $inc: { votes: -1} }, 
+  //     },
+  //     function(err, doc){
+  //         console.log('There was an error with the downPhotoVotes!!!!!');
+  //     });
+  //   res.send('updateFavor called with body: ' + JSON.stringify(req.body));
   }
 }

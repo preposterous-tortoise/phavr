@@ -63,4 +63,3 @@ angular.module('drakeApp.favorfact', [])
     }
   }
 });
-

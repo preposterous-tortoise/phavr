@@ -1,5 +1,5 @@
 angular.module('drakeApp.favorDetails', [])
-.controller('favorDetailsCtrl', function ($scope, $location, $http, photoFactory){
+.controller('favorDetailsCtrl', function ($scope, $location, $http, Favors, photoFactory){
 
   $scope.takenPhoto;
   $scope.selectedRequest;
@@ -43,12 +43,23 @@ angular.module('drakeApp.favorDetails', [])
 
   $scope.upVote = function(request) {
     request.votes++;
-    // drakeApp.favorfact.upVote(favorID);
+    // Favors.upVote(favorID);
   };
 
   $scope.downVote = function(request) {
     request.votes--;
-    // drakeApp.favorfact.downVote(favorID);
+    // Favors.downVote(favorID);
+
+  };
+
+  $scope.upVotePhoto = function(photo) {
+    request.votes++;
+    // photoFactory.upVote(photo.ID);
+  };
+
+  $scope.downVotePhoto = function(photo) {
+    request.votes--;
+    // photoFactory.downVote(photo.ID);
 
   };
 
