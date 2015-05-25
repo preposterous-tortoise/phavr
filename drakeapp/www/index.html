@@ -13,7 +13,12 @@
     -->
 
     <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script type="text/javascript" src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- angular-google-maps --> 
+    <script src="lib/lodash/dist/lodash.min.js"></script>
+
+    <script src='lib/angular-google-maps/dist/angular-google-maps.min.js'></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -24,19 +29,50 @@
     <script src="js/mainCtrl.js"></script>
     <script src="js/photoFactory.js"></script>
     <script src="js/requestFactory.js"></script>
+    <script src="js/locationFactory.js"></script>
     <script src="js/requestMapCtrl.js"></script>
     <script src="js/favorCtrl.js"></script>
-    <script src="js/login.js"></script>
+    <script src="js/loginCtrl.js"></script>
+    <script src="js/favorDetailsCtrl.js"></script>
+    <!-- google maps javascript -->
+    <!--  EITHER IMPORT GOOGLE MAPS HERE (not using Angular Google Maps or 
+       IMPORT using config in app.js-->
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
   </head>
-  <body ng-app="starter">
+  <body ng-app="drakeApp">
 
-    <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
+    <ion-side-menus>
+     <ion-side-menu-content ng-controller="navCtrl">
+       <ion-pane>
+         <ion-header-bar class="bar-stable bar-calm">
+           <div class="button-bar">  
+             <a ng-click="toggleLeft()" class="button button-icon icon ion-navicon"></a>
+             <a ui-sref="requestmap" class ="button button-icon icon ion-earth"></a>
+             <a ui-sref="home" class="button button-icon icon ion-home"></a>
+             <a ui-sref="favor" class="button button-icon icon ion-paper-airplane"></a>
+           </div>  
+         </ion-header-bar>
+
+         <!-- <ion-content> -->
+           <ion-nav-view></ion-nav-view>
+         <!-- </ion-content> -->
+       </ion-pane>
+     </ion-side-menu-content>
+
+     <ion-side-menu side="left" ng-controller="navCtrl">
+      <ion-header-bar ng-click="toggleLeft()" class="bar-dark">
+        <h1 class="title">Options</h1>
       </ion-header-bar>
       <ion-content>
-        <ion-nav-view></ion-nav-view>
-      </ion-content>
-    </ion-pane>
+         <ion-list>
+           <ion-item>One</ion-item>
+           <ion-item>Two</ion-item>
+           <ion-item>Three</ion-item>
+           <ion-item>Four</ion-item>
+         </ion-list>
+       </ion-content>
+     </ion-side-menu>
+      
+    </ion-side-menus>
   </body>
 </html>

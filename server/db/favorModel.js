@@ -6,16 +6,22 @@ var mongoose = require('mongoose');
  * favors belong to a user.
  */
 
-var FavorSchema = mongoose.Schema({
+var FavorSchema = new mongoose.Schema({
   topic: String,
   description: String,
   user_id: Number,
   photos: Array,
-  loc: Array,
+  icon: String,
+  loc: {
+   'type': {type: String, enum: "Point", default: "Point"},
+   'coordinates': { type: [Number],   default: [0,0]} 
+  },
   votes: Number,
   isPrivate: Boolean,
   createdAt: { type: Date, expires: 86400, default: Date.now }
 });
+
+FavorSchema.index({loc: '2dsphere'});
 
 module.exports = mongoose.model('favor', FavorSchema);
 

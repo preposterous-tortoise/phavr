@@ -39,9 +39,9 @@ module.exports = {
       done(null, obj);
     });
 
-    /*passport.use(new FacebookStrategy({
-      consumerKey: config.facebook.key,
-      consumerSecret: config.facebook.secret,
+    passport.use(new FacebookStrategy({
+      clientID: config.facebook.clientID,
+      clientSecret: config.facebook.clientSecret,
       callbackURL: '/auth/facebook/callback'
     }, function (accessToken, refreshToken, profile, done) {
       User.findOne({
@@ -54,10 +54,10 @@ module.exports = {
 
         var user = new User({
           provider_id: profile.id,
-          provider: profile.provider,
-          name: profile.displayName,
-          screen_name: profile.username,
-          photo: profile.photos[0].value
+          // provider: profile.provider,
+          // name: profile.displayName,
+          // screen_name: profile.username,
+          // photo: profile.photos[0].value
         });
         user.save(function (err) {
           if (err) console.log('ERROR in user creation on login: ', err);
@@ -65,7 +65,7 @@ module.exports = {
           done(null, user);
         });
       });
-    }));*/
+    }));
 
   },
 

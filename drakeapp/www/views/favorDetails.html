@@ -1,0 +1,23 @@
+<ion-view title="login">
+  <ion-content padding="false">
+    <h2>{{ selectedFavor.topic }}</h2>
+    <h3>{{ selectedFavor.description }}</h3>
+    <ion-list ng-repeat="photo in selectedFavor.photos" ng-click="favorDetails()">
+      <ion-item>
+        <div class="row">
+          <div class="col col-80">
+            <ion-item class="wrap"><img class="favorDetail" src="{{photo}}"></ion-item>
+          </div>  
+          <div class="col">
+            <a ng-click="upVote(selectedFavor)" class="button button-icon icon ion-ios-arrow-up"></a><br>
+            <span class="votes">{{selectedFavor.votes}}</span><br>
+            <a ng-click="downVote(selectedFavor)" class="button button-icon icon ion-ios-arrow-down"></a>
+          </div> 
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <ion-footer-bar class="bar-calm">	 
+	<button class="button cambutton button-icon icon ion-camera" ng-click="getPhoto()"></button>	  
+  </ion-footer-bar>
+</ion-view>
