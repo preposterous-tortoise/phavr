@@ -1,6 +1,7 @@
 <ion-view title="home">
   <ion-content padding="false">
     <a ui-sref="login">Login!</a> 
+    <button ng-click="updateFavors()">Test Update!</button>
     <ion-list ng-repeat="request in requests | orderBy:'-votes'">
       <ion-item>
         <h3>{{request.topic}}</h3>
