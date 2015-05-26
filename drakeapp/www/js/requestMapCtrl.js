@@ -53,7 +53,8 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
       }));
       marker.setPosition(location);
       marker.setVisible(true);
-      infowindow.setContent('<div>' + favor.description + '</div><div><strong>' + favor.place_name + '</strong><br>');
+      var description = favor.description || "";
+      infowindow.setContent('<div>' + description + '</div><div><strong>' + favor.place_name + '</strong><br>');
       infowindow.open(map, marker);
       if (favor._id) {
         google.maps.event.addListener(marker, "click", function() {
