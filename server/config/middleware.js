@@ -45,9 +45,9 @@ module.exports = function(app, express){
   // app.use('/api/twitter', /*auth.athenticate*/ twitterScrapeRouter);
   // require("../webScraping/twitterRoutes.js")(twitterScrapeRouter);
 
-  // var instagramScrapeRouter = express.Router();
-  // app.use('/api/instagram', /*auth.athenticate*/ instagramScrapeRouter);
-  // require("../webScraping/instagramRoutes.js")(instagramScrapeRouter);
+  var instagramScrapeRouter = express.Router();
+  app.use('/api/instagram', /*auth.athenticate*/ instagramScrapeRouter);
+  require("../webScraping/instagramRoutes.js")(instagramScrapeRouter);
 
 
   // Passport initialization

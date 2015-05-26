@@ -3,24 +3,12 @@ angular.module('drakeApp.favorDetails', [])
 
   $scope.takenPhoto;
   $scope.selectedFavor = Favors.selectedFavor;
+  $scope.instagramPictures = [];
+  $scope.arrays = [{id:1}, {id:2}];
+  //how does this Favors.selectedFavor work (question from darren)
+  console.log($scope.selectedFavor);
   
   $scope.requests = [
-    { 
-      _id: 1,
-      topic: 'LEMME SEE DRAKE',
-      description: 'hey if somebody could take a pic of drake from the front row, that would be rad',
-      photos: ["http://upload.wikimedia.org/wikipedia/en/thumb/0/01/Golden_State_Warriors_logo.svg/838px-Golden_State_Warriors_logo.svg.png"],
-      hasPhotos: false,
-      votes: 0
-    },
-    {
-      _id: 2,
-      topic: 'black tshirt',
-      description: 'take a picture of somebody wearing a black t-shirt plz',
-      photos: ["http://upload.wikimedia.org/wikipedia/en/thumb/0/01/Golden_State_Warriors_logo.svg/838px-Golden_State_Warriors_logo.svg.png"],
-      hasPhotos: false,
-      votes: 0
-    }
   ];
 
   $scope.getPhoto = function(){
@@ -43,6 +31,18 @@ angular.module('drakeApp.favorDetails', [])
   };
 
 
+  $scope.getInstagramPictures= function() {
+
+    photoFactory.getInstagramPictures($scope.selectedFavor, function(data){
+
+      $scope.requests = data.map(function(photo){
+        return {photos: photo.images.standard_resolution.url};
+      });
+
+
+    });
+  }
+
   $scope.upVote = function(request) {
     request.votes++;
     // Favors.upVote(favorID);
@@ -64,5 +64,9 @@ angular.module('drakeApp.favorDetails', [])
     // photoFactory.downVote(photo.ID);
 
   };
+
+  //get instagram pictures
+  $scope.getInstagramPictures();
+
 
 });

@@ -12,7 +12,6 @@ var processing = false;
         var longi 
     	navigator.geolocation.getCurrentPosition( function(position){
     		processing = false;
-    		console.log(position.coords.latitude, position.coords.longitude);
             lat = position.coords.latitude;
             longi = position.coords.longitude;
             callback([lat, longi]);

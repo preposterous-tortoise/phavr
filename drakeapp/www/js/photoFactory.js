@@ -14,6 +14,22 @@ angular.module('drakeapp.photoFactory', [])
       return q.promise;
     },
 
+    getInstagramPictures: function(favor, callback){
+
+      var data = {
+        lat: favor.loc.coordinates[1],
+        long: favor.loc.coordinates[0]
+      };
+      $http.post('http://localhost:3000/api/instagram/', data)
+        .success(function(data, status, headers, config) {
+          callback(data);
+          console.log('got all instagram photos by location ');
+        })
+        .error(function(data, status, headers, config) {
+          console.log('error getting instagram photos');
+        });
+    },
+
     sendPicture: function(imageURI, favorID) {
       var data = { image: imageURI, favor_id: favorID };
       $http.post('https://drakeapp.herokuapp.com/api/photos/create', data)

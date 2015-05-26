@@ -63,30 +63,23 @@ module.exports = {
   },
 
   upVoteFavor: function(req, res, next) {
-    // var userObj = req.session.passport.user;
-    // var create, newPortfolio;
+  
+    Favor.findByIdAndUpdate(req.body._id, 
+      {votes: req.body.votes+1 }, 
+      function(err, data){
+      res.send('successfully upvoted');
+    });
 
-    Favor.findAndModify({
-      query: { _id: req.body.favorID }, 
-      update: { $inc: { votes: 1} }, 
-      },
-      function(err, doc){
-          console.log('There was an error with the upVotes!!!!!');
-      });
-    res.status(201).send('updateFavor called with body: ' + JSON.stringify(req.body));
   },
 
   downVoteFavor: function(req, res, next) {
     // var userObj = req.session.passport.user;
     // var create, newPortfolio;
 
-    Favor.findAndModify({
-      query: { _id: req.body.favorID }, 
-      update: { $inc: { votes: -1} }, 
-      },
-      function(err, doc){
-          console.log('There was an error with the downVotes!!!!!');
-      });
-    res.send('updateFavor called with body: ' + JSON.stringify(req.body));
+    Favor.findByIdAndUpdate(req.body._id, 
+      {votes: req.body.votes-1 }, 
+      function(err, data){
+      res.send('successfully downvoted');
+    });
   }
 }
