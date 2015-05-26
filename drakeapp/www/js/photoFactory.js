@@ -1,9 +1,9 @@
 angular.module('drakeapp.photoFactory', [])
-.factory('photoFactory', ['$q', function($q) {
+.factory('photoFactory', ['$q', '$http', function($q, $http) {
   return {
     getPicture: function(options) {
       var q = $q.defer();
-
+      console.log('in the photoFactory...');
       navigator.camera.getPicture(function(result) {
         //something with camera
         q.resolve(result);
@@ -16,7 +16,7 @@ angular.module('drakeapp.photoFactory', [])
 
     sendPicture: function(imageURI, favorID) {
       var data = { image: imageURI, favor_id: favorID };
-      $http.post('/api/photos/create', data)
+      $http.post('https://drakeapp.herokuapp.com/api/photos/create', data)
         .success(function(data, status, headers, config) {
           console.log('photo uploaded!');
         })
