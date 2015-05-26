@@ -1,5 +1,5 @@
 angular.module('drakeApp.favor', [])
-.controller('favorCtrl', function ($scope, $location, Favors){
+.controller('favorCtrl', function ($scope, $window, $location, Favors){
 
 	$scope.createFavor = function() {
 		var mapFavor = $scope.$$nextSibling.favor;
@@ -8,6 +8,7 @@ angular.module('drakeApp.favor', [])
 		$scope.favor.location = mapFavor.location;
 		$scope.favor.icon = mapFavor.icon;
 		Favors.saveRequest($scope.favor);
+		$window.location = '/';
 	};
 
 });
