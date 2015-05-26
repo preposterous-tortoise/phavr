@@ -16,23 +16,19 @@ angular.module('drakeApp.home', [])
   };
 
   $scope.favorDetails = function(favor){
-    console.log(favor);
+
     Favors.setFavor(favor);
     $location.path('/favordetails');
   }
 
   $scope.updateFavors = function(){
     geo.getLocation(function(spot){
-      console.log(spot);
+
       var radius = 0.289855;
       var box = [[spot[1]-radius, spot[0]-radius], [spot[1]+radius, spot[0]+radius]];
-      console.log("THIS IS THE BOX " + box)
+
       Favors.fetchRequests(box, function(data){
-        console.log("thisis")
-        console.log(typeof data);
-        console.log(data);
         $scope.favors = $scope.favors.concat(data);
-        console.log($scope.favors[0]);
       })
     })
   };

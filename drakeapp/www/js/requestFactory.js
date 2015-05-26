@@ -24,7 +24,7 @@ angular.module('drakeApp.favorfact', [])
           }
         })
         .success(function(requests, status, headers, config) {
-          console.log(requests);
+
           if (callback) callback(requests)
           return requests;
         })
