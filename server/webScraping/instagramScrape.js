@@ -1,11 +1,16 @@
 var ig = require('instagram-node').instagram();
-process.env.instagram_clientID || var igCredentials = require('./instagramCredentials.js');
+// var igCredentials = require('./instagramCredentials.js');
+
+// ig.use({
+// 	client_id: process.env.instagram_clientID || igCredentials.instagram_client_ID,
+// 	client_secret: process.env.instagram_client_secret || igCredentials.instagram_client_secret 
+// });
+
 
 ig.use({
-	client_id: process.env.instagram_clientID || igCredentials.instagram_client_ID,
-	client_secret: process.env.instagram_client_secret || igCredentials.instagram_client_secret 
+	client_id: process.env.instagram_clientID,
+	client_secret: process.env.instagram_client_secret 
 });
-
 
 module.exports =  {
 	getPhotosByLocation: function(req,res){
