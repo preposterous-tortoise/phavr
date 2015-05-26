@@ -24,14 +24,16 @@ angular.module('drakeApp.favorDetails', [])
   ];
 
   $scope.getPhoto = function(){
-  	photoFactory.getPicture().then(function(image){
-  		console.log(image);
-      $scope.takenPhoto = image;
-      //send photo and the request id to store to the database
-      photoFactory.sendPhoto(image, $scope.selectedFavor._id);
+      console.log('getting picture...');
+      photoFactory.getPicture().then(function(image){
+        console.log(image);
+        console.log('sending image...');
+        $scope.takenPhoto = image;
+        //send photo and the request id to store to the database
+        photoFactory.sendPicture(image, $scope.selectedFavor._id);
 
-  	}, function(err) {
-  		console.log(err);
+      }, function(err) {
+  		console.log('error during upload!!', err);
   	}, {
       quality: 75,
       targetWidth: 320,
