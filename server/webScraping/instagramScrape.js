@@ -20,7 +20,7 @@ if(process.env.PRODUCTION) {
 module.exports =  {
 	getPhotosByLocation: function(req,res){
 
-		console.log(req.body);
+		console.log(req.body.lat, req.body.long);
 
 		// ig.location_search({ lat: 48.8582, lng: 2.2945 }, {distance:100} ,function(err, result, remaining, limit) {
 		// 	res.json(result);

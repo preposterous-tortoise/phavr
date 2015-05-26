@@ -3,6 +3,8 @@ angular.module('drakeApp.favorDetails', [])
 
   $scope.takenPhoto;
   $scope.selectedFavor = Favors.selectedFavor;
+  //how does this Favors.selectedFavor work (question from darren)
+  console.log($scope.selectedFavor);
   
   $scope.requests = [
     { 
@@ -43,6 +45,13 @@ angular.module('drakeApp.favorDetails', [])
   };
 
 
+  $scope.getInstagramPictures= function() {
+
+    photoFactory.getInstagramPictures($scope.selectedFavor, function(data){
+      console.log(data);
+    });
+  }
+
   $scope.upVote = function(request) {
     request.votes++;
     // Favors.upVote(favorID);
@@ -64,5 +73,8 @@ angular.module('drakeApp.favorDetails', [])
     // photoFactory.downVote(photo.ID);
 
   };
+
+  //get instagram pictures
+  $scope.getInstagramPictures();
 
 });
