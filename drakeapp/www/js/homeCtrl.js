@@ -20,26 +20,23 @@ angular.module('drakeApp.home', [])
     }
   ];
 
+  $scope.favors = [];
+
   $scope.selectedFavor = Favors.selectedFavor;
 
-  $scope.upVote = function(request) {
-    request.votes++;
-    // drakeApp.favorfact.upVote(favorID);
-    geo.getLocation( function(result){
-      console.log('hello');
-      request.description = result[0] +","+ result[1];
-    });
-
+  $scope.upVote = function(favor) {
+    favor.votes++;
+    Favors.upVote(favor);
   }; 
 
-  $scope.downVote = function(request) {
-    request.votes--;
-    // drakeApp.favorfact.downVote(favorID);
+  $scope.downVote = function(favor) {
+    favor.votes--;
+    Favors.downVote(favor);
   };
 
-  $scope.favorDetails = function(request){
-    console.log(request);
-    Favors.setFavor(request);
+  $scope.favorDetails = function(favor){
+    console.log(favor);
+    Favors.setFavor(favor);
     $location.path('/favordetails');
   }
 
@@ -50,7 +47,11 @@ angular.module('drakeApp.home', [])
       var box = [[spot[1]-radius, spot[0]-radius], [spot[1]+radius, spot[0]+radius]];
       console.log("THIS IS THE BOX " + box)
       Favors.fetchRequests(box, function(data){
-        console.log("THIS IS FROM DATA "+data);
+        console.log("thisis")
+        console.log(typeof data);
+        console.log(data);
+        $scope.favors = $scope.favors.concat(data);
+        console.log($scope.favors[0]);
       })
     })
   };
