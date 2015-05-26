@@ -1,5 +1,9 @@
+
+
 angular.module('drakeapp.photoFactory', [])
 .factory('photoFactory', ['$q', '$http', function($q, $http) {
+
+  
   return {
     getPicture: function(options) {
       var q = $q.defer();
@@ -20,7 +24,8 @@ angular.module('drakeapp.photoFactory', [])
         lat: favor.loc.coordinates[1],
         long: favor.loc.coordinates[0]
       };
-      $http.post('http://localhost:3000/api/instagram/', data)
+      
+      $http.post('/api/instagram/', data)
         .success(function(data, status, headers, config) {
           callback(data);
           console.log('got all instagram photos by location ');
