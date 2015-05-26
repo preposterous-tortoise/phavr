@@ -8,11 +8,13 @@ angular.module('drakeApp.requestCreationMap', [])
       mapService.addPlaceChangedListener(map);
     }
 
-    console.log('creation view');
-    _.defer(function(){
-      var input = (document.getElementById('pac-input'));
-      console.log('creation view deferred', input);
-      $scope.init();
-    });
+    $scope.init();
+
+    // console.log('creation view');
+    // _.defer(function(){
+    //   var input = (document.getElementById('pac-input'));
+    //   console.log('creation view deferred', input);
+    //   $scope.init();
+    // });
 
   });

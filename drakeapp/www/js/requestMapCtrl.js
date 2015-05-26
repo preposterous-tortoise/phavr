@@ -185,7 +185,7 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
         });
     }*/
     //initialize();
-    init();
+    // init();
     //google.maps.event.addDomListener(window, 'load', initialize);
 
   });
