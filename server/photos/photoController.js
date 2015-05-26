@@ -11,7 +11,7 @@ module.exports = {
     aws.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});
     var s3 = new aws.S3();
     var fileName = uuid.v1();
-    var params = {Bucket: S3_BUCKET, Body: req.body.image, Key: fileName, ACL: 'public-read', ContentType:'image/jpg'};
+    var params = {Bucket: S3_BUCKET, Body: req.body.image, Key: fileName, ACL: 'public-read'};
     console.log('body',req.body);
     console.log(S3_BUCKET);
     s3.putObject(params, function(err, info) {
