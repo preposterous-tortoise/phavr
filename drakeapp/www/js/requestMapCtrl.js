@@ -1,5 +1,5 @@
 angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
-  .controller('requestMapCtrl', function($scope, $location, $http, uiGmapGoogleMapApi, Favors) {
+  .controller('requestMapCtrl', function($scope, $location, $http, uiGmapGoogleMapApi, Favors, mapService) {
 
     var markerMap = {};
     var initialized = false;
@@ -126,6 +126,7 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
           }
 	        //Favors.saveRequest(favor);
           $scope.favor = favor;
+          mapService.favor = favor;
           if ($scope.marker) {
             $scope.marker.setMap(null);
           }
