@@ -73,6 +73,6 @@ angular.module('drakeApp.home', [])
   };
 
   $scope.testVar = true;
-
+  $scope.updateFavors();
 });
 
