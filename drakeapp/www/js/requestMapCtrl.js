@@ -25,12 +25,20 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
       }
     }
 
+    function getFavorLocation(favor) {
+      if (favor.loc) {
+        var coords = favor.loc.coordinates;
+        return {
+          lat: coords[1],
+          lng: coords[0]
+        };
+      } else {
+        return favor.location;
+      }
+    }
+
     function addMarker(favor, map) {
-      var coords = favor.loc.coordinates;
-      var location = {
-        lat: coords[1],
-        lng: coords[0]
-      };
+      var location = getFavorLocation(favor);
       var infowindow = new google.maps.InfoWindow();
       var marker = new google.maps.Marker({
         position: location,
@@ -45,16 +53,19 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
       }));
       marker.setPosition(location);
       marker.setVisible(true);
-      infowindow.setContent('<div><strong>' + favor.description + '</strong><br>');
+      infowindow.setContent('<div>' + favor.description + '</div><div><strong>' + favor.place_name + '</strong><br>');
       infowindow.open(map, marker);
-      google.maps.event.addListener(marker, "click", function() {
-        var favor = getFavorForMarker(this);
-        alert('marker clicked: ' + favor.description);
-      });
-      markerMap[favor._id] = {
-        marker: marker,
-        favor: favor
-      };
+      if (favor._id) {
+        google.maps.event.addListener(marker, "click", function() {
+          var favor = getFavorForMarker(this);
+          alert('marker clicked: ' + favor.description);
+        });
+        markerMap[favor._id] = {
+          marker: marker,
+          favor: favor
+        };
+      }
+      return marker;
     }
 
     function getBoxForBounds(bounds) {
@@ -107,11 +118,17 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
 	          return;
 	        }
           var favor = {
-            description: place.name,
+            place_name: place.name,
+            address: place.formatted_address,
             location: place.geometry.location,
             icon: place.icon
           }
-	        Favors.saveRequest(favor);
+	        //Favors.saveRequest(favor);
+          $scope.favor = favor;
+          if ($scope.marker) {
+            $scope.marker.setMap(null);
+          }
+          $scope.marker = addMarker(favor, map);
 	        // If the place has a geometry, then present it on a map.
 	        if (place.geometry.viewport) {
 	          map.fitBounds(place.geometry.viewport);
