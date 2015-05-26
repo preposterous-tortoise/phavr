@@ -5,8 +5,8 @@
     <button ng-click="updateFavors()">Test Update!</button>
  -->
     <!-- <img src={{instagramPictures[0].images.standard_resolution.url}}> -->
-<!--     <ion-list ng-repeat="photo in array | orderBy:'-id'" >  <!--ng-click="favorDetails()"-- >
-<!--       <ion-item>
+<!--     <ion-list ng-repeat="photo in array | orderBy:'-id'" > ng-click="favorDetails()"
+<ion-item>
         <div class="row">
           <div class="col col-80">
             <ion-item class="wrap"> {{photo.id}}</ion-item>
@@ -22,10 +22,8 @@
   </ion-footer-bar>
 </ion-view>
 
- -->
-
-<!-- <img class="favorDetail" src="{{photo.images.standard_resolution.url}}"> -->
-<!--           <div class="col">
+<img class="favorDetail" src="{{photo.images.standard_resolution.url}}">
+           <div class="col">
             <a ng-click="upVote(selectedFavor)" class="button button-icon icon ion-ios-arrow-up"></a><br>
             <span class="votes">{{selectedFavor.votes}}</span><br>
             <a ng-click="downVote(selectedFavor)" class="button button-icon icon ion-ios-arrow-down"></a>
@@ -33,7 +31,7 @@
         </div> -->
 
 
-        <ion-view title="login">
+<ion-view title="login">
   <ion-content padding="false">
   <h2>{{ selectedFavor.topic }}</h2>
   <h3>{{ selectedFavor.description }}</h3>
