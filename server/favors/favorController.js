@@ -1,16 +1,6 @@
 var Favor = require('../db/favorModel.js');
 var Q = require('q');
 
-var coords = [
-  [
-    [-122.610168, 37.598167],
-    [-122.288818, 37.598167],
-    [-122.288818, 37.845833],
-    [-122.610168, 37.845833],
-    [-122.610168, 37.598167]
-  ]
-];
-
 module.exports = {
   fetchFavors: function(req, res, next) {
   	var box = req.body.box;
@@ -22,7 +12,7 @@ module.exports = {
   	    [box[0][0], box[1][1]],
   	    [box[0][0], box[0][1]]
   	  ]
-  	]
+  	];
 
     var query = Favor.find({
       "loc": {
@@ -46,8 +36,10 @@ module.exports = {
   createFavor: function(req, res, next) {
 
     var favor = new Favor({
-      topic: 'dummy topic',
+      topic: req.body.topic,
       description: req.body.description,
+      place_name: req.body.place_name,
+      address: req.body.address,
       user_id: 1,
       photos: [],
       icon: req.body.icon,
