@@ -14,7 +14,7 @@ module.exports = {
     var params = {Bucket: S3_BUCKET, Body: req.body.image, Key: fileName, ACL: 'public-read'};
     console.log('body',req.body);
     console.log(S3_BUCKET);
-    s3.putObject(params, function(err, info) {
+    s3.upload(params, function(err, info) {
       if(err) {
         console.log(err);
       } else {

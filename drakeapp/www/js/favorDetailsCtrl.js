@@ -1,5 +1,5 @@
 angular.module('drakeApp.favorDetails', [])
-.controller('favorDetailsCtrl', function ($scope, $location, $http, photoFactory, Favors){
+.controller('favorDetailsCtrl', function ($scope, $location, $http, photoFactory, Favors, $cordovaFile){
 
   $scope.takenPhoto;
   $scope.selectedFavor = Favors.selectedFavor;
