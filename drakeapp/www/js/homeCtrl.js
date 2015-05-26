@@ -28,7 +28,7 @@ angular.module('drakeApp.home', [])
       var box = [[spot[1]-radius, spot[0]-radius], [spot[1]+radius, spot[0]+radius]];
 
       Favors.fetchRequests(box, function(data){
-        $scope.favors = $scope.favors.concat(data);
+        $scope.favors = data;
       })
     })
   };
