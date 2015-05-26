@@ -1,6 +1,5 @@
 var ig = require('instagram-node').instagram();
-var igCredentials = require('./instagramCredentials.js');
-
+process.env.instagram_clientID || var igCredentials = require('./instagramCredentials.js');
 
 ig.use({
 	client_id: process.env.instagram_clientID || igCredentials.instagram_client_ID,
