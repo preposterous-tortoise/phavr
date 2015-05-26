@@ -11,9 +11,9 @@ module.exports = {
     aws.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});
     var s3 = new aws.S3();
     var fileName = uuid.v1();
-    var params = {Bucket: S3_BUCKET, Body: req.body.image, Key: fileName, ACL: 'public-read'};
-    console.log('body',req.body);
-    console.log(S3_BUCKET);
+    console.log('body', req.body);
+    var base64data = new Buffer(req.body.image, 'binary').toString('base64');
+    var params = {Bucket: S3_BUCKET, Body: base64data, Key: fileName, ACL: 'public-read'};
     s3.upload(params, function(err, info) {
       if(err) {
         console.log(err);
