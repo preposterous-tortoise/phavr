@@ -4,7 +4,7 @@
 <!--     <button ng-click="updateFavors()">Test Update!</button>
  -->    <ion-list ng-repeat="favor in favors | orderBy:'-votes'">
       <ion-item>
-        <h3>{{favor.description}}</h3>
+        <h3>{{favor.topic}}</h3>
         <div class="row">
           <div class="col col-80">
             <ion-item ng-click="favorDetails(favor)" class="wrap">{{favor.description}}</ion-item>
