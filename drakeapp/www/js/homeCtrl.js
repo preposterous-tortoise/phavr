@@ -1,5 +1,5 @@
 angular.module('drakeApp.home', [])
-.controller('homeCtrl', function ($scope, $location, Favors, photoFactory, geo){
+.controller('homeCtrl', function ($scope, $location, $http, Favors, photoFactory, geo){
  
   //TODO $scope.favors
   $scope.requests = [
@@ -65,6 +65,18 @@ angular.module('drakeApp.home', [])
       targetHeight: 320,
       saveToPhotoAlbum: false
     })
+  };
+
+  $scope.getUserInfo = function() {
+    return $http({
+            method: 'GET',
+            url: '/api/profileID'
+        })
+        .then(function(resp) {
+            console.log('response from getting server', resp);
+            photoFactory.stuff = resp;
+            return resp;
+        });
   };
 
   $scope.testVar = true;

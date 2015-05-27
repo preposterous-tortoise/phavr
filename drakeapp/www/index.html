@@ -64,14 +64,15 @@
 
      <ion-side-menu side="left" ng-controller="navCtrl">
       <ion-header-bar ng-click="toggleLeft()" class="bar-dark">
-        <h1 class="title">Options</h1>
+        <h1 class="title">{{ user.data.name  }}</h1>
       </ion-header-bar>
       <ion-content>
          <ion-list>
-           <ion-item>One</ion-item>
+           <ion-item><img src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal"></ion-item>
            <ion-item>Two</ion-item>
            <ion-item>Three</ion-item>
            <ion-item>Four</ion-item>
+           <ion-item><button ng-click="getUserInfo()">Hello!</button></ion-item>
          </ion-list>
        </ion-content>
      </ion-side-menu>
