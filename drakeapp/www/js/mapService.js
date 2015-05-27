@@ -1,5 +1,5 @@
 angular.module('drakeApp.mapService', [])
-  .factory('mapService', function(Favors) {
+  .factory('mapService', function($location, Favors) {
 
     var myLatlng = new google.maps.LatLng(37.786718, -122.41114199999998);
 
@@ -62,6 +62,8 @@ angular.module('drakeApp.mapService', [])
           google.maps.event.addListener(marker, "click", function() {
             var favor = getFavorForMarker(this, markerMap);
             alert('marker clicked: ' + favor.description);
+            Favors.setFavor(favor);
+            $location.path('/favordetails');
           });
           markerMap[favor._id] = {
             marker: marker,
