@@ -107,16 +107,17 @@ module.exports = function(app, express){
       });
 
       // you must run fs.stat to get the file size for the content-length header (s3 requires this)
-      fs.stat(file.path, function(err, file_info) {
-          var bodyStream = fs.createReadStream("./uploads/asdf.jpg");
+      fs.stat(file.path+".jpg", function(err, file_info) {
+          var bodyStream = fs.createReadStream(filepath+ ".jpg");
           var options = {
               BucketName    : "darrendrakeapp",
-              ObjectName    : 'asdf.j',
+              ObjectName    : file.path,
               ContentLength : req.headers['content-length'],
               Body          : bodyStream
           };
-          console.log("i'm putting objects into s3");
           s3.PutObject(options, function(err, data) {
+            console.log("im in putobject function");
+
               fmt.dump(err, 'err');
               fmt.dump(data, 'data');
           });
