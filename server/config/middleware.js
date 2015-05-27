@@ -72,12 +72,19 @@ module.exports = function(app, express){
     res.send('get /test OK');
   })
 
-  // app.use(multer({ dest: './uploads/'}));
+   app.use(multer({ dest: './uploads/', rename: function(fieldname, filename) {
+    console.log(fieldname, filename);
+      return "asdf";
+   }}));
 
   app.post('/listen/', function(req,res){
     console.log("PHOTO PHOTO");
+    console.log('BOOOOOOOOOOODDDDDDYYYYYYY');
     console.log(req.body);
-    console.log(req.files)
+    console.log("FIIIIIIIILLEEEEEEEEEEES");
+    console.log(req.files);
+    console.log("*********************"));
+  console.log(req);
     res.redirect('/yes');
   });
 
@@ -96,11 +103,11 @@ console.log("I'M IN YES");
     });
 
     // you must run fs.stat to get the file size for the content-length header (s3 requires this)
-    fs.stat("./uploads/191beab5e278c7a60a3ddc5c0d990789.jpg", function(err, file_info) {
-        var bodyStream = fs.createReadStream("./uploads/191beab5e278c7a60a3ddc5c0d990789.jpg");
+    fs.stat("./uploads/asdf.jpg", function(err, file_info) {
+        var bodyStream = fs.createReadStream("./uploads/asdf.jpg");
         var options = {
             BucketName    : "darrendrakeapp",
-            ObjectName    : 'photo.js',
+            ObjectName    : 'asdf.js',
             ContentLength : file_info.size,
             Body          : bodyStream
         };
