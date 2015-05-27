@@ -4,7 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
+
 var multer  = require('multer');
+
+var User = require('../db/userModel.js');
+
 
 //Auth
 var auth = require('../auth/authPassport');
@@ -37,6 +41,16 @@ module.exports = function(app, express){
   app.use('/api/requests', /*auth.authenticate, */favorRouter);
   app.use('/api/photos', /*auth.authenticate,*/ photoRouter);
 
+  app.get('/api/profileID', auth.authenticate, function(req, res){
+      var id = req.session.passport.user.provider_id
+      console.log("THIS IS THE ID!!!! "+id)
+      User.findOne(
+        {$query:{ provider_id: id}}, 
+      function(err, data){
+      res.json(data); 
+    });   
+      // res.json(req.session.passport.user);
+  });
 
   require('../favors/favorRoutes.js')(favorRouter);
   require('../photos/photoRoutes.js')(photoRouter);
