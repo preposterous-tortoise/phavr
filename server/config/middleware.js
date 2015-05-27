@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
+var multer  = require('multer');
 
 //Auth
 var auth = require('../auth/authPassport');
@@ -70,6 +71,8 @@ module.exports = function(app, express){
     console.log('at /test, session: ', req.session);
     res.send('get /test OK');
   })
+
+  app.use(multer({ dest: './uploads/'}));
 
   app.post('/listen', function(req,res){
     console.log("PHOTO PHOTO");

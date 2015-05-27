@@ -48,19 +48,24 @@ angular.module('drakeApp.favorDetails', [])
      
     var retries = 0;
     function onCapturePhoto(fileURI) {
+      console.log("onsuccess");
         var win = function (r) {
+          console.log("win");
             clearCache();
             retries = 0;
             alert('Done!');
         }
      
         var fail = function (error) {
+          console.log("fail");
             if (retries == 0) {
+              console.log("retry", retries);
                 retries ++
                 setTimeout(function() {
                     onCapturePhoto(fileURI)
                 }, 1000)
             } else {
+              console.log("somethign wrong f'ed up");
                 retries = 0;
                 clearCache();
                 alert('Ups. Something wrong happens!');
@@ -73,7 +78,14 @@ angular.module('drakeApp.favorDetails', [])
         options.mimeType = "image/jpeg";
         options.params = {}; // if we need to send parameters to the server request
         var ft = new FileTransfer();
-        ft.upload(fileURI, encodeURI("http://host/upload"), win, fail, options);
+
+        // AWS.config.update({ accessKeyId: 'AKIAIUQEZVPM62OXQ2WQ', secretAccessKey: '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' });
+        // var bucket = new AWS.S3({ params: { Bucket: 'darrendrakeapp' } });
+        options.params = {
+
+          "AWSAccessKeyId": "AKIAIUQEZVPM62OXQ2WQ",
+        };
+        ft.upload(fileURI, encodeURI("https://darrendrakeapp.s3.amazonaws.com/"), win, fail, options);
     }
      
     function capturePhoto() {
@@ -87,6 +99,7 @@ angular.module('drakeApp.favorDetails', [])
         alert('Failed because: ' + message);
     }
 
+console.log("picture fired");
     capturePhoto();
 
       //AWS.config.update({ accessKeyId: 'AKIAIJKJ4NYIQ5ENZ6YA', secretAccessKey: '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' });
