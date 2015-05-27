@@ -50,12 +50,13 @@ angular.module('drakeapp.photoFactory', [])
            
               var options = new FileUploadOptions();
               options.fileKey = "file";
-              options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
+              options.fileName = "fileURI.substr(fileURI.lastIndexOf('/') + 1)";
               options.mimeType = "image/jpeg";
+              options.headers = {'favorID': '111111111111111111111111'};
               options.params = {}; // if we need to send parameters to the server request
               var ft = new FileTransfer();
 
-              ft.upload(fileURI, encodeURI("http://drakeapp.herokuapp.com/photoUploads"), win, fail, options);
+              ft.upload(fileURI, encodeURI("http://drakeapp.herokuapp.com/photoUploads/uploadToS3"), win, fail, options);
           }
            
           function capturePhoto() {

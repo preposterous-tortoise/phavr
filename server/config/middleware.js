@@ -91,7 +91,11 @@ module.exports = function(app, express){
       return "asdf";
    }}));
 
-  app.post('/listen/', function(req,res){
+  app.post('/photoUploads/uploadToServer', function(req,res){
+    console.log("HEADERSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+    console.log(req.headers);
+
+
     console.log("PHOTO PHOTO");
     console.log('BOOOOOOOOOOODDDDDDYYYYYYY');
     console.log(req.body);
@@ -102,17 +106,19 @@ module.exports = function(app, express){
     res.redirect('/yes');
   });
 
-  app.get('/yes/', function(req,res){
+  app.get('/photoUploads/uploadToS3', function(req,res){
+    console.log("HEADERSSSSSSSSSSSSSSSSSSSSSSSSSSSSS--------uploadToS3");
+    console.log(req.headers);
 
-console.log("I'M IN YES");
+    console.log("I'M IN YES");
 
     var fmt = require('fmt');
     var amazonS3 = require('awssum-amazon-s3');
     var fs = require('fs');
 
     var s3 = new amazonS3.S3({
-        'accessKeyId'     : 'AKIAIUQEZVPM62OXQ2WQ',
-        'secretAccessKey' : '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',
+        'accessKeyId'     : process.env.AWS_ACCESS_KEY_DARREN,
+        'secretAccessKey' : process.env.AWS_SECRET_KEY_DARREN,
         'region'          : "us-east-1"
     });
 
