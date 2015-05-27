@@ -47,21 +47,23 @@ angular.module('drakeApp.favorfact', [])
         });
     },
     
-    upVote: function(favorID){
+    upVote: function(favor){
+      favor.votes = 1;
       return $http({
         method: 'POST',
-        url: 'http://drakeapp.herokuapp.com/api/requests/upVote',
-        data: favorID
+        url: '/api/votes/upVote',
+        data: favor
       })
       .then(function(resp){
         console.log(resp);
       })
     },
-    downVote: function(favorID){
+    downVote: function(favor){
+      favor.votes = -1;
       return $http({
         method: 'POST',
-        url: 'http://drakeapp.herokuapp.com/api/requests/downVote',
-        data: favorID
+        url: '/api/votes/upVote',
+        data: favor
       })
       .then(function(resp){
         console.log(resp);
