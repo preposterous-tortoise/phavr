@@ -1,5 +1,5 @@
 angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
-  .controller('requestMapCtrl', function($scope, $timeout, $http, uiGmapGoogleMapApi, Favors, mapService) {
+  .controller('requestMapCtrl', function($scope, $timeout, $location, uiGmapGoogleMapApi, Favors, mapService) {
 
     // Define variables for our Map object
     var areaLat = 37.786718,
@@ -109,8 +109,8 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
             };
             marker.onClick = function(marker, event) {
               console.log('marker clicked: ', marker.model.favor.description);
-              // alert(marker.id);
-              // onMarkerClicked(marker.id);
+              Favors.setFavor(marker.model.favor);
+              $location.path('/favordetails');
             };
             $scope.map.markers.push(marker);
           }
