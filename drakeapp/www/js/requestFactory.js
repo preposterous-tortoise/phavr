@@ -3,7 +3,7 @@ angular.module('drakeApp.favorfact', [])
 
 
   var process = {env: {}};
-  process.env.PRODUCTION = false;
+  process.env.PRODUCTION = true;
   var domain;
   if(process.env.PRODUCTION) {
     domain = "http://drakeapp.herokuapp.com";
