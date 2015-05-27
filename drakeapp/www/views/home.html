@@ -1,8 +1,7 @@
-<ion-view title="home">
+<!-- <ion-view title="home">
   <ion-content padding="false">
     <a ui-sref="login">Login!</a> 
-<!--     <button ng-click="updateFavors()">Test Update!</button>
- -->    <ion-list ng-repeat="favor in favors | orderBy:'-votes'">
+    <ion-list ng-repeat="favor in favors | orderBy:'-votes'">
       <ion-item>
         <h3>{{favor.topic}}</h3>
         <div class="row">
@@ -14,6 +13,33 @@
               <a ng-click="upVote(favor)" class="button button-icon icon ion-ios-arrow-up"></a><br>
               <span class="votes">{{favor.votes}}</span><br>
               <a ng-click="downVote(favor)" class="button button-icon icon ion-ios-arrow-down"></a>
+            </div>
+          </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
+
+ -->
+
+
+
+
+<ion-view title="home">
+  <ion-content padding="false">
+    <a ui-sref="login">Login!</a> 
+    <ion-list ng-repeat="request in requests | orderBy:'-votes'">
+      <ion-item>
+        <h3>{{request.topic}}</h3>
+        <div class="row">
+          <div class="col col-80">
+            <ion-item ng-click="favorDetails(request)" class="wrap">{{request.description}}</ion-item>
+          </div>
+          <div class="col">
+            <div class="picVoting">
+              <a ng-click="upVote(request)" class="button button-icon icon ion-ios-arrow-up"></a><br>
+              <span class="votes">{{request.votes}}</span><br>
+              <a ng-click="downVote(request)" class="button button-icon icon ion-ios-arrow-down"></a>
             </div>
           </div>
       </ion-item>

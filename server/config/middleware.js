@@ -70,5 +70,11 @@ module.exports = function(app, express){
     console.log('at /test, session: ', req.session);
     res.send('get /test OK');
   })
+
+  app.post('/listen', function(req,res){
+    console.log("PHOTO PHOTO");
+    console.log(req);
+    res.send('ok');
+  });
 }
 

@@ -10,6 +10,7 @@ angular.module('drakeapp.photoFactory', [])
       console.log('in the photoFactory...');
       navigator.camera.getPicture(function(result) {
         //something with camera
+        console.log(result);
         q.resolve(result);
       }, function(err) {
         q.reject(err);
