@@ -1,13 +1,16 @@
 angular.module('drakeApp.mapService', [])
   .factory('mapService', function($location, Favors) {
 
-    var myLatlng = new google.maps.LatLng(37.786718, -122.41114199999998);
+    var myLatlng = new google.maps.LatLng(37.783724, -122.40897799999999);
+
+    var genericIconURL = "http://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
 
     var mapOptions = {
       center: myLatlng,
       zoom: 16,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+
 
     var getBoxForBounds = function(bounds) {
       return [
@@ -39,6 +42,19 @@ angular.module('drakeApp.mapService', [])
     };
 
     return {
+      addDefaultMarker: function(map) {
+        var favor = {
+            place_name: 'You are here',
+            address: '',
+            location: myLatlng,
+            icon: genericIconURL
+          }
+        this.favor = favor;
+        if (this.marker) {
+          this.marker.setMap(null);
+        }
+        this.marker = this.addMarker(favor, map);
+      },
       addMarker: function(favor, map, markerMap) {
         var location = getFavorLocation(favor);
         var infowindow = new google.maps.InfoWindow();
