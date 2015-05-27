@@ -97,7 +97,7 @@ angular.module('drakeApp.favorDetails', [])
 console.log("picture fired");
     capturePhoto();
 
-      //AWS.config.update({ accessKeyId: 'AKIAIJKJ4NYIQ5ENZ6YA', secretAccessKey: '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' });
+      //AWS.config.update({ accessKeyId: '', secretAccessKey: '' });
       //var bucket = new AWS.S3({ params: { Bucket: 'drakeapp-photos' } });
    //    console.log('getting picture...');
    //    photoFactory.getPicture().then(function(image){
