@@ -7,17 +7,83 @@ angular.module('drakeapp.photoFactory', [])
   return {
     stuff: {},
     getPicture: function(options) {
-      var q = $q.defer();
-      console.log('in the photoFactory...');
-      navigator.camera.getPicture(function(result) {
-        //something with camera
-        console.log(result);
-        q.resolve(result);
-      }, function(err) {
-        q.reject(err);
-      }, options);
 
-      return q.promise;
+          var pictureSource;   // picture source
+          var destinationType; // sets the format of returned value
+           
+          document.addEventListener("deviceready", onDeviceReady, false);
+           
+          function onDeviceReady() {
+              pictureSource = navigator.camera.PictureSourceType;
+              destinationType = navigator.camera.DestinationType;
+          }
+           
+          function clearCache() {
+              navigator.camera.cleanup();
+          }
+           
+          var retries = 0;
+          function onCapturePhoto(fileURI) {
+            console.log("onsuccess");
+              var win = function (r) {
+                console.log("win");
+                  clearCache();
+                  retries = 0;
+                  alert('Done!');
+              }
+           
+              var fail = function (error) {
+                console.log("fail");
+                  if (retries == 0) {
+                    console.log("retry", retries);
+                      retries ++
+                      setTimeout(function() {
+                          onCapturePhoto(fileURI)
+                      }, 1000)
+                  } else {
+                    console.log("somethign wrong f'ed up");
+                      retries = 0;
+                      clearCache();
+                      alert('Ups. Something wrong happens!');
+                  }
+              }
+           
+              var options = new FileUploadOptions();
+              options.fileKey = "file";
+              options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
+              options.mimeType = "image/jpeg";
+              options.params = {}; // if we need to send parameters to the server request
+              var ft = new FileTransfer();
+
+              ft.upload(fileURI, encodeURI("http://drakeapp.herokuapp.com/photoUploads"), win, fail, options);
+          }
+           
+          function capturePhoto() {
+              navigator.camera.getPicture(onCapturePhoto, onFail, {
+                  quality: 100,
+                  destinationType: destinationType.FILE_URI
+              });
+          }
+           
+          function onFail(message) {
+              alert('Failed because: ' + message);
+          }
+
+
+          capturePhoto();
+
+
+      // var q = $q.defer();
+      // console.log('in the photoFactory...');
+      // navigator.camera.getPicture(function(result) {
+      //   //something with camera
+      //   console.log(result);
+      //   q.resolve(result);
+      // }, function(err) {
+      //   q.reject(err);
+      // }, options);
+
+      // return q.promise;
     },
 
     getInstagramPictures: function(favor, callback){
