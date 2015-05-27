@@ -5,31 +5,10 @@ angular.module('drakeApp.favorDetails', [])
   $scope.selectedFavor = Favors.selectedFavor;
   $scope.instagramPictures = [];
   $scope.arrays = [{id:1}, {id:2}];
+
   //how does this Favors.selectedFavor work (question from darren)
   console.log($scope.selectedFavor);
   
-  $scope.requests = [
-    { 
-          _id: 1,
-          topic: 'LEMME SEE DRAKE',
-          description: 'hey if somebody could take a pic of drake from the front row, that would be rad',
-          photos: ["http://upload.wikimedia.org/wikipedia/en/thumb/0/01/Golden_State_Warriors_logo.svg/838px-Golden_State_Warriors_logo.svg.png"],
-          hasPhotos: false,
-          votes: 0
-        },
-        {
-          _id: 2,
-          topic: 'black tshirt',
-          description: 'take a picture of somebody wearing a black t-shirt plz',
-          photos: ["http://upload.wikimedia.org/wikipedia/en/thumb/0/01/Golden_State_Warriors_logo.svg/838px-Golden_State_Warriors_logo.svg.png"],
-          hasPhotos: false,
-          votes: 0
-        }
-
-
-
-  ];
-
   $scope.getPhoto = function(){
 
     var pictureSource;   // picture source
@@ -94,10 +73,10 @@ angular.module('drakeApp.favorDetails', [])
         alert('Failed because: ' + message);
     }
 
-console.log("picture fired");
+    console.log("picture fired");
     capturePhoto();
 
-      //AWS.config.update({ accessKeyId: 'AKIAIJKJ4NYIQ5ENZ6YA', secretAccessKey: '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' });
+      //AWS.config.update({ accessKeyId: '', secretAccessKey: '' });
       //var bucket = new AWS.S3({ params: { Bucket: 'drakeapp-photos' } });
    //    console.log('getting picture...');
    //    photoFactory.getPicture().then(function(image){
@@ -178,7 +157,7 @@ console.log("picture fired");
   };
 
   //get instagram pictures
-  // $scope.getInstagramPictures();
+  $scope.getInstagramPictures();
 
 
 });

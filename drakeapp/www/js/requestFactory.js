@@ -4,7 +4,7 @@ angular.module('drakeApp.favorfact', [])
     saveRequest: function(request) {
       $http({
         method: 'POST',
-        url: '/api/requests/create',
+        url: 'http://drakeapp.herokuapp.com/api/requests/create',
         data: request
       })
       .success(function(data, status, headers, config) {
@@ -18,7 +18,7 @@ angular.module('drakeApp.favorfact', [])
     fetchRequests: function(box, callback) {
       return $http({
           method: 'POST',
-          url: '/api/requests/',
+          url: 'http://drakeapp.herokuapp.com/api/requests/',
           data: {
             box: box
           }
@@ -37,7 +37,7 @@ angular.module('drakeApp.favorfact', [])
     upVote: function(favorID){
       return $http({
         method: 'POST',
-        url: '/api/requests/upVote',
+        url: 'http://drakeapp.herokuapp.com/api/requests/upVote',
         data: favorID
       })
       .then(function(resp){
@@ -47,7 +47,7 @@ angular.module('drakeApp.favorfact', [])
     downVote: function(favorID){
       return $http({
         method: 'POST',
-        url: '/api/requests/downVote',
+        url: 'http://drakeapp.herokuapp.com/api/requests/downVote',
         data: favorID
       })
       .then(function(resp){
