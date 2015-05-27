@@ -72,12 +72,44 @@ module.exports = function(app, express){
     res.send('get /test OK');
   })
 
-  app.use(multer({ dest: './uploads/'}));
+  // app.use(multer({ dest: './uploads/'}));
 
-  app.post('/listen', function(req,res){
+  app.post('/listen/', function(req,res){
     console.log("PHOTO PHOTO");
     console.log(req);
-    res.send('ok');
+    res.redirect('/yes');
   });
+
+  app.get('/yes/', function(req,res){
+
+console.log("I'M IN YES");
+
+    var fmt = require('fmt');
+    var amazonS3 = require('awssum-amazon-s3');
+    var fs = require('fs');
+
+    var s3 = new amazonS3.S3({
+        'accessKeyId'     : 'AKIAIUQEZVPM62OXQ2WQ',
+        'secretAccessKey' : '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',
+        'region'          : "us-east-1"
+    });
+
+    // you must run fs.stat to get the file size for the content-length header (s3 requires this)
+    fs.stat("./uploads/191beab5e278c7a60a3ddc5c0d990789.jpg", function(err, file_info) {
+        var bodyStream = fs.createReadStream("./uploads/191beab5e278c7a60a3ddc5c0d990789.jpg");
+        var options = {
+            BucketName    : "darrendrakeapp",
+            ObjectName    : 'photo.js',
+            ContentLength : file_info.size,
+            Body          : bodyStream
+        };
+        console.log("i'm putting objects into s3");
+        s3.PutObject(options, function(err, data) {
+            fmt.dump(err, 'err');
+            fmt.dump(data, 'data');
+        });
+    });
+
+  })
 }
 
