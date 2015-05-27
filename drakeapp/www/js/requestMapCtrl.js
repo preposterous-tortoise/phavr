@@ -25,9 +25,9 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
       }
     };
 
-    $scope.onClick = function(a, b, c) {
-      console.log('in scope marker clicked: ', a, b, c);
-    }
+    // $scope.onClick = function(a, b, c) {
+    //   console.log('in scope marker clicked: ', a, b, c);
+    // }
 
     /*  ANGULAR GOOGLE MAPS INITIALIZATION */
     uiGmapGoogleMapApi.then(function(maps) {
@@ -42,15 +42,13 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
         },
         events: {
           bounds_changed: function(map, eventName) {
-            console.log(' NEW BOUNDS: ', getBoxForBounds(map.getBounds()));
+            // console.log(' NEW BOUNDS: ', getBoxForBounds(map.getBounds()));
           }
         }
       };
 
       $timeout(function() {
-        console.log('TIMEOUT FIRED');
         var map = $scope.map.control.getGMap();
-        console.log('actual map: ', map);
         if (map) {
           var markerMap = {};
           //mapService.addBoundsListener(map, markerMap);
@@ -61,9 +59,9 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
         scrollwheel: false
       };
 
-      $scope.$watch("map.bounds", function(newValue, oldValue) {
-        console.log('bounds changed on watch: ', newValue, oldValue);
-      }, true);
+      // $scope.$watch("map.bounds", function(newValue, oldValue) {
+      //   console.log('bounds changed on watch: ', newValue, oldValue);
+      // }, true);
       var bounds = new google.maps.LatLngBounds(); //$scope.map.getBounds();
       var box = getBoxForBounds(bounds);
       box = [
