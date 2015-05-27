@@ -4,8 +4,9 @@ angular.module('drakeApp.requestCreationMap', [])
     $scope.init = function() {
       var markerMap = {};
       var map = mapService.createMap();
-      mapService.addBoundsListener(map, markerMap);
+      //mapService.addBoundsListener(map, markerMap);
       mapService.addPlaceChangedListener(map);
+      mapService.addDefaultMarker(map);
     }
 
     $scope.init();
