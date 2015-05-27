@@ -88,7 +88,7 @@ module.exports = function(app, express){
 
    app.use(multer({ dest: './uploads/',  
 
-    
+
    onFileUploadComplete: function (file, req, res) {
       console.log("**************************");
       console.log(file.fieldname + ' uploaded to  ' + file.path)
@@ -108,11 +108,11 @@ module.exports = function(app, express){
       });
 
       // you must run fs.stat to get the file size for the content-length header (s3 requires this)
-      fs.stat("./" +file.path+".jpg", function(err, file_info) {
-          var bodyStream = fs.createReadStream(file.path+ ".jpg");
+      fs.stat("./" +file.path, function(err, file_info) {
+          var bodyStream = fs.createReadStream(file.path);
           var options = {
               BucketName    : "darrendrakeapp",
-              ObjectName    : file.path,
+              ObjectName    : file.path +".jpg",
               ContentLength : req.headers['content-length'],
               Body          : bodyStream
           };
