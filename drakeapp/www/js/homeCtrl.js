@@ -39,24 +39,26 @@ angular.module('drakeApp.home', [])
   $scope.favorDetails = function(favor){
 
     Favors.setFavor(favor);
+    console.log(Favors.selectedFavor);
     $location.path('/favordetails');
   }
 
   $scope.updateFavors = function(){
-    geo.getLocation(function(spot){
-      console.log('getting location');
+    console.log('attempting to update favors...');
+    //geo.getLocation(function(spot){
+    geo.phoneLocation(function(spot) {
+        console.log('getting location');
 
-      var radius = 0.289855;
-      var box = [[spot[1]-radius, spot[0]-radius], [spot[1]+radius, spot[0]+radius]];
+        var radius = 0.289855;
+        var box = [[spot.coords.longitude-radius, spot.coords.latitude-radius], [spot.coords.longitude+radius, spot.coords.latitude+radius]];
 
-      console.log(box);
+        console.log(box);
 
-      Favors.fetchRequests(box, function(data){
-        console.log('got requests', data);
-        $scope.favors = data;
-        $scope.$apply();
-      })
-    })
+        Favors.fetchRequests(box, function(data){
+          console.log('got requests', data);
+          $scope.favors = data;
+        });
+      });
   };
 
   $scope.getPhoto = function(){
