@@ -93,7 +93,7 @@ angular.module('drakeapp.photoFactory', [])
         long: favor.loc.coordinates[0]
       };
       
-      $http.post('/api/instagram/', data)
+      $http.post('https://drakeapp.herokuapp.com/api/instagram/', data)
         .success(function(data, status, headers, config) {
           callback(data);
           console.log('got all instagram photos by location ');
@@ -116,7 +116,7 @@ angular.module('drakeapp.photoFactory', [])
     upVote: function(photoID){
       return $http({
         method: 'POST',
-        url: '/api/photos/upVote',
+        url: 'http://drakeapp.herokuapp.com/api/photos/upVote',
         data: photoID
       })
       .then(function(resp){
@@ -126,7 +126,7 @@ angular.module('drakeapp.photoFactory', [])
     downVote: function(photoID){
       return $http({
         method: 'POST',
-        url: '/api/photos/downVote',
+        url: 'http://drakeapp.herokuapp.com/api/photos/downVote',
         data: photoID
       })
       .then(function(resp){

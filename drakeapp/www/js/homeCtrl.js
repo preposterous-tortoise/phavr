@@ -1,8 +1,10 @@
 angular.module('drakeApp.home', [])
 .controller('homeCtrl', function ($scope, $location, $http, Favors, photoFactory, geo){
  
-  //TODO $scope.favors
-  $scope.requests = [
+  $scope.favors = [];
+  
+  //hard-coded requests for testing
+  /*$scope.requests = [
 
   { 
       _id: 1,
@@ -19,7 +21,8 @@ angular.module('drakeApp.home', [])
       photos: [],
       hasPhotos: false,
       votes: 0
-    }];
+    }];*/
+
   $scope.selectedFavor = Favors.selectedFavor;
 
   $scope.upVote = function(favor) {
@@ -36,19 +39,26 @@ angular.module('drakeApp.home', [])
   $scope.favorDetails = function(favor){
 
     Favors.setFavor(favor);
+    console.log(Favors.selectedFavor);
     $location.path('/favordetails');
   }
 
   $scope.updateFavors = function(){
-    geo.getLocation(function(spot){
+    console.log('attempting to update favors...');
+    //geo.getLocation(function(spot){
+    geo.phoneLocation(function(spot) {
+        console.log('getting location');
 
-      var radius = 0.289855;
-      var box = [[spot[1]-radius, spot[0]-radius], [spot[1]+radius, spot[0]+radius]];
+        var radius = 0.289855;
+        var box = [[spot.coords.longitude-radius, spot.coords.latitude-radius], [spot.coords.longitude+radius, spot.coords.latitude+radius]];
 
-      Favors.fetchRequests(box, function(data){
-        $scope.favors = data;
-      })
-    })
+        console.log(box);
+
+        Favors.fetchRequests(box, function(data){
+          console.log('got requests', data);
+          $scope.favors = data;
+        });
+      });
   };
 
   $scope.getPhoto = function(){
@@ -80,6 +90,6 @@ angular.module('drakeApp.home', [])
   };
 
   $scope.testVar = true;
-  // TODO $scope.updateFavors();
+  $scope.updateFavors();
 });
 
