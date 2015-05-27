@@ -6,7 +6,7 @@ angular.module('drakeapp.photoFactory', [])
   
   return {
     stuff: {},
-    getPicture: function(options) {
+    getPicture: function(favorID) {
 
           var pictureSource;   // picture source
           var destinationType; // sets the format of returned value
@@ -52,7 +52,7 @@ angular.module('drakeapp.photoFactory', [])
               options.fileKey = "file";
               options.fileName = "fileURI.substr(fileURI.lastIndexOf('/') + 1)";
               options.mimeType = "image/jpeg";
-              options.headers = {'favorID': '111111111111111111111111'};
+              options.headers = {'favorID': favorID};
               options.params = {}; // if we need to send parameters to the server request
               var ft = new FileTransfer();
 

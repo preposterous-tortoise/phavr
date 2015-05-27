@@ -63,7 +63,7 @@ angular.module('drakeApp.home', [])
 
   $scope.getPhoto = function(){
 
-    photoFactory.getPicture();
+    photoFactory.getPicture("1111111111111111111");
 
   	// photoFactory.getPicture().then(function(image){
   	// 	console.log(image);
