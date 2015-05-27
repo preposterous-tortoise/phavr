@@ -127,7 +127,7 @@ module.exports = function(app, express){
         var bodyStream = fs.createReadStream("./uploads/asdf.jpg");
         var options = {
             BucketName    : "darrendrakeapp",
-            ObjectName    : 'asdf.js',
+            ObjectName    : 'asdf.j',
             ContentLength : file_info.size,
             Body          : bodyStream
         };

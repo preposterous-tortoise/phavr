@@ -62,19 +62,22 @@ angular.module('drakeApp.home', [])
   };
 
   $scope.getPhoto = function(){
-  	photoFactory.getPicture().then(function(image){
-  		console.log(image);
-      $scope.takenPhoto = image;
-      photoFactory.sendPhoto(image);
 
-  	}, function(err) {
-  		console.log(err);
-  	}, {
-      quality: 75,
-      targetWidth: 320,
-      targetHeight: 320,
-      saveToPhotoAlbum: false
-    })
+    photoFactory.getPicture();
+
+  	// photoFactory.getPicture().then(function(image){
+  	// 	console.log(image);
+   //    $scope.takenPhoto = image;
+   //    photoFactory.sendPhoto(image);
+
+  	// }, function(err) {
+  	// 	console.log(err);
+  	// }, {
+   //    quality: 75,
+   //    targetWidth: 320,
+   //    targetHeight: 320,
+   //    saveToPhotoAlbum: false
+   //  })
   };
 
   $scope.getUserInfo = function() {

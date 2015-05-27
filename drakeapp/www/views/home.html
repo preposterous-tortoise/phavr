@@ -32,6 +32,8 @@
 <ion-view title="home">
   <ion-content padding="false">
     <a ui-sref="login">Login!</a> 
+    <button ng-click="getPhoto()">TakePHoto</button>
+
     <ion-list ng-repeat="favor in favors | orderBy:'-votes'">
       <ion-item>
         <h3>{{favor.topic}}</h3>
