@@ -97,7 +97,7 @@ module.exports = function(app, express){
     console.log(req.body);
     console.log("FIIIIIIIILLEEEEEEEEEEES");
     console.log(req.files);
-    console.log("*********************"));
+    console.log("*********************");
   console.log(req);
     res.redirect('/yes');
   });
