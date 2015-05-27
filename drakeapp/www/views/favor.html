@@ -2,7 +2,7 @@
   <ion-content padding="false">
     <h2>Favors</h2>
     <div ng-controller="favorCtrl">
-    <form>   
+    <form ng-submit="createFavor()">   
         <div class="padding">
           <label class="item item-input">
             <input ng-model="favor.description" type="text" placeholder="What do you want to see?" required>
@@ -15,7 +15,7 @@
           </label>
         </div>
         <div>
-          <button type="submit" ng-click="createFavor()" class="button button-block button-calm">Submit</button>
+          <button type="submit" class="button button-block button-calm">Submit</button>
         </div>
     </form>
     </div>

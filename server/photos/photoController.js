@@ -13,6 +13,7 @@ module.exports = {
     var fileName = uuid.v1();
     console.log('body', req.body);
     var base64data = new Buffer(req.body.image, 'binary').toString('base64');
+    console.log(base64data);
     var params = {Bucket: S3_BUCKET, Body: base64data, Key: fileName, ACL: 'public-read'};
     s3.upload(params, function(err, info) {
       if(err) {

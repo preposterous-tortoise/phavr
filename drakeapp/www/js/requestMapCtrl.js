@@ -1,5 +1,5 @@
 angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
-  .controller('requestMapCtrl', function($scope, $location, $http, uiGmapGoogleMapApi, Favors) {
+  .controller('requestMapCtrl', function($scope, $location, $http, uiGmapGoogleMapApi, Favors, mapService) {
 
     var markerMap = {};
     var initialized = false;
@@ -15,7 +15,7 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
       $scope.options = { scrollwheel: false };
     });
 
-    function getFavorForMarker(marker) {
+    function getFavorForMarker(marker, markerMap) {
       var value;
       for (var key in markerMap) {
         value = markerMap[key];
@@ -37,7 +37,7 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
       }
     }
 
-    function addMarker(favor, map) {
+    function addMarker(favor, map, markerMap) {
       var location = getFavorLocation(favor);
       var infowindow = new google.maps.InfoWindow();
       var marker = new google.maps.Marker({
@@ -58,7 +58,7 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
       infowindow.open(map, marker);
       if (favor._id) {
         google.maps.event.addListener(marker, "click", function() {
-          var favor = getFavorForMarker(this);
+          var favor = getFavorForMarker(this, markerMap);
           alert('marker clicked: ' + favor.description);
         });
         markerMap[favor._id] = {
@@ -74,6 +74,12 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
         [bounds.getSouthWest().lng(), bounds.getSouthWest().lat()],
         [bounds.getNorthEast().lng(), bounds.getNorthEast().lat()]
       ];
+    }
+
+    function init() {
+      map = mapService.createMap();
+      mapService.addBoundsListener(map, markerMap);
+      mapService.addPlaceChangedListener(map);
     }
 
     function initialize() {
@@ -101,7 +107,7 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
           if (favors) {
             for (var i = 0; i < favors.length; i++) {
               if (!(markerMap[favors[i]._id]))
-                addMarker(favors[i], map);
+                addMarker(favors[i], map, markerMap);
             }
           }
         });
@@ -126,6 +132,7 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
           }
 	        //Favors.saveRequest(favor);
           $scope.favor = favor;
+          mapService.favor = favor;
           if ($scope.marker) {
             $scope.marker.setMap(null);
           }
@@ -177,7 +184,8 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
           return null;
         });
     }*/
-    initialize();
+    //initialize();
+    init();
     //google.maps.event.addDomListener(window, 'load', initialize);
 
   });
