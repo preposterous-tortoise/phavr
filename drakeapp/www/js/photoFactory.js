@@ -5,6 +5,7 @@ angular.module('drakeapp.photoFactory', [])
 
   
   return {
+    stuff: {},
     getPicture: function(options) {
       var q = $q.defer();
       console.log('in the photoFactory...');

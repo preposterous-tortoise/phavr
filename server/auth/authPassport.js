@@ -44,6 +44,8 @@ module.exports = {
       clientSecret: config.facebook.clientSecret,
       callbackURL: '/auth/facebook/callback'
     }, function (accessToken, refreshToken, profile, done) {
+      console.log("THIS iS THE PROFILE "+JSON.stringify(profile));
+      // console.log("THIS IS PROFILE URL "+profile.profileUrl);
       User.findOne({
         provider_id: profile.id
       }, function (err, user) {
@@ -51,13 +53,12 @@ module.exports = {
         if (err) throw (err);
         // console.log('LOGIN no error, user: ', user);
         if (!err && user != null) return done(null, user);
-
+        console.log("Please don't break! "+JSON.stringify(profile));
         var user = new User({
           provider_id: profile.id,
-          // provider: profile.provider,
-          // name: profile.displayName,
-          // screen_name: profile.username,
-          // photo: profile.photos[0].value
+          provider: profile.provider,
+          name: profile.displayName,
+          photo: profile.profileUrl
         });
         user.save(function (err) {
           if (err) console.log('ERROR in user creation on login: ', err);
