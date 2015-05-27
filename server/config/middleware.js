@@ -76,7 +76,8 @@ module.exports = function(app, express){
 
   app.post('/listen/', function(req,res){
     console.log("PHOTO PHOTO");
-    console.log(req);
+    console.log(req.body);
+    console.log(req.files)
     res.redirect('/yes');
   });
 
