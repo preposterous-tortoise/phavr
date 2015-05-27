@@ -1,7 +1,11 @@
 angular.module('drakeApp.favorDetails', [])
 .controller('favorDetailsCtrl', function ($scope, $location, $http, photoFactory, Favors, $cordovaFile){
 
-  photoFactory.getPicture();
+
+  
+  $scope.getPhoto = function(){
+
+    photoFactory.getPicture();
 
       //AWS.config.update({ accessKeyId: '', secretAccessKey: '' });
       //var bucket = new AWS.S3({ params: { Bucket: 'drakeapp-photos' } });

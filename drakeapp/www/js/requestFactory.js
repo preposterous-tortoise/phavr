@@ -1,5 +1,18 @@
 angular.module('drakeApp.favorfact', [])
 .factory('Favors', function ($http, $location){
+
+
+  var process = {env: {}};
+  process.env.PRODUCTION = false;
+  var domain;
+  if(process.env.PRODUCTION) {
+    domain = "http://drakeapp.herokuapp.com";
+  } else {
+    domain = "http://localhost:3000";
+  }
+
+
+
   return {
     saveRequest: function(request) {
       $http({
@@ -18,7 +31,7 @@ angular.module('drakeApp.favorfact', [])
     fetchRequests: function(box, callback) {
       return $http({
           method: 'POST',
-          url: 'http://drakeapp.herokuapp.com/api/requests/',
+          url: domain + '/api/requests/',
           data: {
             box: box
           }
