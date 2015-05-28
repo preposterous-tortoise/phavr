@@ -56,7 +56,7 @@ angular.module('drakeapp.photoFactory', [])
               options.params = {}; // if we need to send parameters to the server request
               var ft = new FileTransfer();
 
-              ft.upload(fileURI, encodeURI("http://drakeapp.herokuapp.com/photoUploads/uploadToS3"), win, fail, options);
+              ft.upload(fileURI, encodeURI("http://drakeapp.herokuapp.com/photoUploads/uploadToServer"), win, fail, options);
           }
            
           function capturePhoto() {

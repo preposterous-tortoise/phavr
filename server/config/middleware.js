@@ -86,48 +86,10 @@ module.exports = function(app, express){
     res.send('get /test OK');
   })
 
-   app.use(multer({ dest: './uploads/',  
-
-
-   onFileUploadComplete: function (file, req, res) {
-      console.log("**************************");
-      console.log(file.fieldname + ' uploaded to  ' + file.path)
-      console.log("HEADERSSSSSSSSSSSSSSSSSSSSSSSSSSSSS--------uploadToS3");
-      console.log(req.headers);
-
-      console.log("I'M IN YES");
-
-      var fmt = require('fmt');
-      var amazonS3 = require('awssum-amazon-s3');
-      var fs = require('fs');
-
-      var s3 = new amazonS3.S3({
-          'accessKeyId'     : process.env.AWS_ACCESS_KEY_DARREN,
-          'secretAccessKey' : process.env.AWS_SECRET_KEY_DARREN,
-          'region'          : "us-east-1"
-      });
-
-      // you must run fs.stat to get the file size for the content-length header (s3 requires this)
-      fs.stat("./" +file.path, function(err, file_info) {
-          var bodyStream = fs.createReadStream(file.path);
-          var options = {
-              BucketName    : "darrendrakeapp",
-              ObjectName    : file.path +".jpg",
-              ContentLength : req.headers['content-length'],
-              Body          : bodyStream
-          };
-          s3.PutObject(options, function(err, data) {
-            console.log("im in putobject function");
-
-              fmt.dump(err, 'err');
-              fmt.dump(data, 'data');
-          });
-      });
-
-    }
-
-
-  }));
+   app.use(multer({ dest: './uploads/', rename: function(fieldname, filename) {
+    console.log(fieldname, filename);
+      return "asdf";
+   }}));
 
   app.post('/photoUploads/uploadToServer', function(req,res){
     console.log("HEADERSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
@@ -140,14 +102,48 @@ module.exports = function(app, express){
     console.log("FIIIIIIIILLEEEEEEEEEEES");
     console.log(req.files);
     console.log("*********************");
-  console.log(req);
+     console.log(req);
     res.redirect('/yes');
   });
 
   app.get('/photoUploads/uploadToS3', function(req,res){
 
+       // console.log("**************************");
+       // console.log(file.fieldname + ' uploaded to  ' + file.path)
+       console.log("HEADERSSSSSSSSSSSSSSSSSSSSSSSSSSSSS--------uploadToS3");
+       console.log(req.headers);
+
+
+       var fmt = require('fmt');
+       var amazonS3 = require('awssum-amazon-s3');
+       var fs = require('fs');
+
+       var s3 = new amazonS3.S3({
+           'accessKeyId'     : process.env.AWS_ACCESS_KEY_DARREN,
+           'secretAccessKey' : process.env.AWS_SECRET_KEY_DARREN,
+           'region'          : "us-east-1"
+       });
+
+       // you must run fs.stat to get the file size for the content-length header (s3 requires this)
+       fs.stat("./uploads/asdf.jpg", function(err, file_info) {
+           var bodyStream = fs.createReadStream("./uploads/asdf.jpg");
+           var options = {
+               BucketName    : "darrendrakeapp",
+               ObjectName    : "newimage.jpg",
+               ContentLength : file_info.size,
+               Body          : bodyStream
+           };
+           s3.PutObject(options, function(err, data) {
+             console.log("im in putobject function");
+
+               fmt.dump(err, 'err');
+               fmt.dump(data, 'data');
+           });
+       });
+
+
     console.log("_____________");
     res.send('upload complete');
-  })
+  });
 }
 

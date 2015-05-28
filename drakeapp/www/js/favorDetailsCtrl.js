@@ -5,7 +5,7 @@ angular.module('drakeApp.favorDetails', [])
   
   $scope.getPhoto = function(){
 
-    photoFactory.getPicture();
+    photoFactory.getPicture("111111");
 
       //AWS.config.update({ accessKeyId: '', secretAccessKey: '' });
       //var bucket = new AWS.S3({ params: { Bucket: 'drakeapp-photos' } });
