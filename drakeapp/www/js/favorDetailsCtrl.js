@@ -10,7 +10,7 @@ angular.module('drakeApp.favorDetails', [])
     var d = new Date();
     var time = d.getTime();
     var favorID = $scope.selectedFavor._id;
-    photoFactory.getPicture("1111111111111111111", time );
+    photoFactory.getPicture(favorID, time );
     photoFactory.sendPicture("https://s3.amazonaws.com/darrendrakeapp/"+time+"___"+favorID +".jpg")
 
   };
