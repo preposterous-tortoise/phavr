@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
+var http = require('http');
 
 var multer  = require('multer');
 
@@ -113,13 +114,13 @@ module.exports = function(app, express){
        console.log(res.body);
 
        var data = { image: "https://s3.amazonaws.com/darrendrakeapp/newimage.jpg", favor_id: "something"};
-       $http.post('https://drakeapp.herokuapp.com/api/photos/create', data)
-         .success(function(data, status, headers, config) {
-           console.log('photo uploaded!');
-         })
-         .error(function(data, status, headers, config) {
-           console.log('error during upload :[');
-         });
+       // http.post('https://drakeapp.herokuapp.com/api/photos/create', data)
+       //   .success(function(data, status, headers, config) {
+       //     console.log('photo uploaded!');
+       //   })
+       //   .error(function(data, status, headers, config) {
+       //     console.log('error during upload :[');
+       //   });
 
        // you must run fs.stat to get the file size for the content-length header (s3 requires this)
        fs.stat("./uploads/asdf.jpg", function(err, file_info) {
