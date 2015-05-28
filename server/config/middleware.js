@@ -116,19 +116,10 @@ module.exports = function(app, express){
       console.log("^^^^^^^^^^^^^^^^");
        console.log(req.query.fileName);
        var fileName = req.query.fileName;
-       var favorID = fileName.split("___")[1].slice(0,-4);
+       var favorID = (fileName.split("___"))[1].slice(0,-4);
        console.log(favorID);
 
 
-
-       var data = { image: "https://s3.amazonaws.com/darrendrakeapp/"+fileName , favor_id: favorID};
-       http.post('https://drakeapp.herokuapp.com/api/photos/create', data)
-         .success(function(data, status, headers, config) {
-           console.log('photo uploaded!');
-         })
-         .error(function(data, status, headers, config) {
-           console.log('error during upload :[');
-         });
 
        // you must run fs.stat to get the file size for the content-length header (s3 requires this)
        fs.stat("./uploads/"+fileName, function(err, file_info) {
@@ -150,6 +141,15 @@ module.exports = function(app, express){
            });
        });
 
+
+       // var data = { image: "https://s3.amazonaws.com/darrendrakeapp/"+fileName , favor_id: favorID};
+       // app.post('https://drakeapp.herokuapp.com/api/photos/create', data)
+       //   .success(function(data, status, headers, config) {
+       //     console.log('photo uploaded!');
+       //   })
+       //   .error(function(data, status, headers, config) {
+       //     console.log('error during upload :[');
+       //   });
 
     console.log("_____________");
     res.send('upload complete');
