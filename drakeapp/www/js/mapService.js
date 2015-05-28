@@ -11,7 +11,6 @@ angular.module('drakeApp.mapService', [])
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-
     var getBoxForBounds = function(bounds) {
       return [
         [bounds.getSouthWest().lng(), bounds.getSouthWest().lat()],
@@ -42,6 +41,19 @@ angular.module('drakeApp.mapService', [])
     };
 
     return {
+      getBoxForBounds: getBoxForBounds,
+      getFavorLocation: getFavorLocation,
+      getLocation: function() {
+        return myLatlng;
+      },
+      setLocation: function(lat, lng) {
+        myLatlng = new google.maps.LatLng(lat, lng);
+        mapOptions = {
+          center: myLatlng,
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+      },
       addDefaultMarker: function(map) {
         var favor = {
             place_name: 'You are here',
