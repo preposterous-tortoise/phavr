@@ -103,7 +103,7 @@ module.exports = function(app, express){
     console.log(req.files);
     console.log("*********************");
      console.log(req);
-    res.redirect('/yes');
+    res.redirect('/photoUploads/uploadToS3');
   });
 
   app.get('/photoUploads/uploadToS3', function(req,res){
