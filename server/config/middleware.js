@@ -40,6 +40,8 @@ module.exports = function(app, express){
 
   app.use('/api/requests', /*auth.authenticate, */favorRouter);
   app.use('/api/photos', /*auth.authenticate,*/ photoRouter);
+    app.use('/api/votes', auth.authenticate, voteRouter);
+
 
   app.get('/api/profileID', auth.authenticate, function(req, res){
       var id = req.session.passport.user.provider_id
@@ -54,6 +56,8 @@ module.exports = function(app, express){
 
   require('../favors/favorRoutes.js')(favorRouter);
   require('../photos/photoRoutes.js')(photoRouter);
+      require('../votes/voteRoutes.js')(voteRouter);
+
 
   // //Setting up twitter and instagram scraping routes
   // var twitterScrapeRouter = express.Router();

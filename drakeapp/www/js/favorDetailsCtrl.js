@@ -5,7 +5,12 @@ angular.module('drakeApp.favorDetails', [])
   
   $scope.getPhoto = function(){
 
-    photoFactory.getPicture("111111");
+    //TODO REPLACE FAVOR ID WITH APPROPRIATE FAVOR ID
+    var d = new Date();
+    var time = d.getTime();
+    var favorID = 1234;
+    photoFactory.getPicture("1111111111111111111", time );
+    photoFactory.sendPicture("https://s3.amazonaws.com/darrendrakeapp/"+time+"___"+favorID +".jpg")
 
       //AWS.config.update({ accessKeyId: '', secretAccessKey: '' });
       //var bucket = new AWS.S3({ params: { Bucket: 'drakeapp-photos' } });

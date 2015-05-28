@@ -2,6 +2,8 @@ angular.module('drakeApp.favorfact', [])
 .factory('Favors', function ($http, $location){
 
 
+  var process = {env: {}};
+  process.env.PRODUCTION = false;
   var domain;
   if($location.host() === 'localhost') {
     domain = "http://localhost:3000";
@@ -43,25 +45,26 @@ angular.module('drakeApp.favorfact', [])
         });
     },
     
-    upVote: function(favor){
-      favor.votes = 1;
+    upVote: function(favor, vote){
+      console.log("inside requestfactory upvote")
       return $http({
         method: 'POST',
         url: domain+'/api/votes/upVote',
-        data: favor
+        data: { favor: favor, vote: vote }
       })
-      .then(function(resp){
+      .then(function(resp){ //response will be -1, 0 or 1
+        favor.votes += +resp.data;
         console.log(resp);
       })
     },
-    downVote: function(favor){
-      favor.votes = -1;
+    downVote: function(favor, vote){
       return $http({
         method: 'POST',
         url: domain+'/api/votes/upVote',
-        data: favor
+        data: { favor: favor, vote: vote }
       })
       .then(function(resp){
+        favor.votes += +resp.data;
         console.log(resp);
       })
       

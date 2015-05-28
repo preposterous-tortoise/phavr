@@ -4,51 +4,96 @@ var Vote = require('../db/voteModel.js');
 
 module.exports = {
   upVote: function(req, res, next) {
-    console.log("THIS IS THE REQUEST "+ JSON.stringify(req.body));
+
+    //FIND THE VOTE that corresponds to the user id and favor id
     Vote.findOne({
       userID: req.session.passport.user.provider_id,
-      favorID: req.body._id
+      favorID: req.body.favor._id
     }, function (err, vote) {
+      
+      console.log("fbId", req.session.passport.user.provider_id);
+      console.log("favorID", req.body.favor._id);
       console.log("THIS IS USER! "+vote);
+      console.log(err);
       // console.log('ERROR in finding user on login: ', err);
       if (err) throw (err);
+
       // console.log('LOGIN no error, user: ', user);
-      if (!err && vote != null) { 
-        if (req.body.votes === 1)  {
-          if (vote.vote === -1) {
-            vote.vote = 1;
-            Favor.findByIdAndUpdate(req.body._id, 
-              {votes: req.body.votes+2 }, 
-              function(err, data){
-              res.send('successfully downvoted');
-            });
-          }
+      
+      // check if there's already a vote by this user...
+      if (!err && vote != null) {
+        console.log('you already voted on that...'); 
+        console.log("req.body.vote", req.body.vote);
+        console.log("vote.vote", vote.vote);
+        if (req.body.vote === 1 && vote.vote ===-1)  { //if sending an upvote, check if there is already a downvote
+
+            console.log('overriding downvote');
+            //override the downvote
+            //vote.vote = 1;
+            Vote.findByIdAndUpdate(vote._id,
+              { vote: 1 },
+              function(err, data) {
+                console.log('succesfully did findbyidandupdate');
+                Favor.findByIdAndUpdate(req.body.favor._id, 
+                { $inc: {votes: 2 } }, 
+                function(err, data){
+                  console.log("AWWWW im in callback")
+                  res.send('2');
+                });
+              });
+
         }
 
-        else if(req.body.votes === -1){
-          if (vote.vote === 1){
-            vote.vote = -1;
-            Favor.findByIdAndUpdate(req.body._id, 
-              {votes: req.body.votes-2 }, 
-              function(err, data){
-              res.send('successfully downvoted');
+        else if(req.body.vote === -1 && vote.vote === 1){
+
+            //vote.vote = -1;
+            Vote.findByIdAndUpdate(vote._id,
+              { vote: -1 },
+              function(err, data) {
+                Favor.findByIdAndUpdate(req.body.favor._id, 
+                  { $inc: {votes: -2} }, 
+                  function(err, data){
+                                      console.log("AWWWW im in 2nd callback")
+
+                    res.send('-2');
+                  });
             });
-          }
+          
+        } else { 
+          console.log("AWWW NOOOOOO");
+          res.send('0'); 
         }
-        return;
-      }
+        // //otherwise, you've already voted. send back 0
+      } else {
       
       var vote = new Vote({
         userID: req.session.passport.user.provider_id,
-        favorID: req.body._id,
-        vote: req.body.votes
+        favorID: req.body.favor._id,
+        vote: req.body.vote
       });
       vote.save(function (err) {
         if (err) console.log('ERROR in user creation on login: ', err);
         if (err) throw err;
+
+        if( vote.vote === 1) {
+          Favor.findByIdAndUpdate(req.body.favor._id,
+            { $inc: {votes: 1} },
+            function(err, data) {
+              res.send('1');
+            });
+        } else { 
+          Favor.findByIdAndUpdate(req.body.favor._id,
+          { $inc: {votes: -1} },
+          function(err, data) {
+            console.log('downvoted!!!');
+            res.send('-1'); 
+          });
+        }
         // done(null, user);
       });
+      }
     });
+    
 
   },
 
