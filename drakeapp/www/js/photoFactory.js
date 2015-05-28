@@ -47,10 +47,12 @@ angular.module('drakeapp.photoFactory', [])
                       alert('Ups. Something wrong happens!');
                   }
               }
-           
+              var d = new Date();
               var options = new FileUploadOptions();
               options.fileKey = "file";
-              options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
+              options.fileName = d.getTime()+"___"+favorID+".jpg";
+              // console.log(fileURI.substr(fileURI.lastIndexOf('/') + 1));
+              // options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
               options.mimeType = "image/jpeg";
               // options.headers = {'favorID': favorID};
               options.params = {}; // if we need to send parameters to the server request
