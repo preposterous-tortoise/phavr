@@ -111,7 +111,9 @@ module.exports = function(app, express){
        });
 
       console.log("_________________");
-       console.log(res.body);
+       console.log(req.files);
+       console.log(req.body);
+
 
        var data = { image: "https://s3.amazonaws.com/darrendrakeapp/newimage.jpg", favor_id: "something"};
        // http.post('https://drakeapp.herokuapp.com/api/photos/create', data)
