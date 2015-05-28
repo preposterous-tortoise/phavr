@@ -1,5 +1,5 @@
 angular.module('drakeapp.locationFactory', [])
-.factory('geo', function($cordovaGeolocation) {
+.factory('geo', function($cordovaGeolocation, mapService) {
 
 
 var processing = false;
@@ -21,7 +21,10 @@ var processing = false;
     phoneLocation: function(callback) {
       var posOptions = { timeout: 10000, enableHighAccuracy: false };
       $cordovaGeolocation.getCurrentPosition(posOptions)
-      .then(function(spot) { callback(spot) });
+      .then(function(spot) { 
+        mapService.setLocation(spot.coords.latitude, spot.coords.longitude);
+        callback(spot);
+      });
     }
   }
 });

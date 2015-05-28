@@ -25,16 +25,13 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
       }
     };
 
-    // $scope.onClick = function(a, b, c) {
-    //   console.log('in scope marker clicked: ', a, b, c);
-    // }
-
     /*  ANGULAR GOOGLE MAPS INITIALIZATION */
     uiGmapGoogleMapApi.then(function(maps) {
+      var location = mapService.getLocation();
       $scope.map = {
         center: {
-          latitude: areaLat,
-          longitude: areaLng
+          latitude: location.lat(),
+          longitude: location.lng()
         },
         zoom: areaZoom,
         control: {
