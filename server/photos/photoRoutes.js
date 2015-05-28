@@ -4,6 +4,12 @@ module.exports = function (app) {
   app.route('/create')
     .post(photoController.createPhoto);
 
+  app.route('/create-dummy')
+    .post(photoController.createDummyPhoto);
+
+  app.route('/fetch')
+    .post(photoController.fetchPhotosForFavor);
+
   app.route('/update')
     .post(photoController.updatePhoto);
 

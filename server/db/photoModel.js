@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+ var mongoose = require('mongoose');
 
 /* photos taken by users to fulfill requests/favors.
  * photos are attached to a user and a request.
@@ -6,8 +6,8 @@ var mongoose = require('mongoose');
 
 var PhotoSchema = new mongoose.Schema({
   url: String,
-  request_id: Number,
-  user_id: Number,
+  request_id: String,
+  user_id: String,
   votes: { type: Number, default: 0 },
   loc: {
    'type': {type: String, enum: "Point", default: "Point"},

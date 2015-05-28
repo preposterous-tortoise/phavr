@@ -35,7 +35,10 @@
   <ion-content padding="false">
   <h2>{{ selectedFavor.topic }}</h2>
   <h3>{{ selectedFavor.description }}</h3>
-    <ion-list ng-repeat="request in requests | orderBy:'-votes'" ng-click="favorDetails()">
+  <ion-list>
+    <ion-item ng-repeat="photo in selectedFavor.photos" class="wrap"><img class="favorDetail" ng-src="{{photo.url}}"></ion-item
+  </ion-list>
+    <!-- <ion-list ng-repeat="request in requests | orderBy:'-votes'" ng-click="favorDetails()">
       <ion-item>
         <div class="row">
           <div class="col col-80">
@@ -48,7 +51,7 @@
           </div> 
         </div>
       </ion-item>
-    </ion-list>
+    </ion-list> -->
   </ion-content>
   <ion-footer-bar class="bar-calm">  
   <button class="button cambutton button-icon icon ion-camera" ng-click="getPhoto()"></button>    

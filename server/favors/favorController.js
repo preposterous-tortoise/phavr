@@ -1,4 +1,5 @@
 var Favor = require('../db/favorModel.js');
+var Photo = require('../db/photoModel.js');
 var Q = require('q');
 
 module.exports = {
