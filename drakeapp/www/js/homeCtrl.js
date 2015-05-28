@@ -27,13 +27,11 @@ angular.module('drakeApp.home', [])
 
   $scope.upVote = function(favor) {
     console.log("THIS IS FAVOR "+JSON.stringify(favor));
-    favor.votes++;
-    Favors.upVote(favor);
+    Favors.upVote(favor, 1);
   }; 
 
   $scope.downVote = function(favor) {
-    favor.votes--;
-    Favors.downVote(favor);
+    Favors.downVote(favor, -1);
   };
 
 
