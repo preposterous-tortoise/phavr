@@ -48,7 +48,7 @@ module.exports = {
 
             //vote.vote = -1;
             Vote.findByIdAndUpdate(vote._id,
-              { $inc: {votes: -1 } },
+              { $inc: {vote: -1 } },
               function(err, data) {
                 Favor.findByIdAndUpdate(req.body.favor._id, 
                   { $inc: {votes: -1} }, 
