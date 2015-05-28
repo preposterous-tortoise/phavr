@@ -95,7 +95,9 @@ module.exports = function(app, express){
  }));
 
   app.post('/photoUploads/uploadToServer', function(req,res){
-    res.redirect('/photoUploads/uploadToS3');
+    console.log("_________________");
+     console.log(req.files);
+    res.redirect('/photoUploads/uploadToS3/?fileName' + req.files.file.originalname);
   });
 
   app.get('/photoUploads/uploadToS3', function(req,res){
@@ -110,9 +112,9 @@ module.exports = function(app, express){
            'region'          : "us-east-1"
        });
 
-      console.log("_________________");
-       console.log(req.files);
-       console.log(req.body);
+      console.log("^^^^^^^^^^^^^^^^");
+       console.log(req.query.fileName);
+
 
 
        var data = { image: "https://s3.amazonaws.com/darrendrakeapp/newimage.jpg", favor_id: "something"};
@@ -125,24 +127,24 @@ module.exports = function(app, express){
        //   });
 
        // you must run fs.stat to get the file size for the content-length header (s3 requires this)
-       fs.stat("./uploads/asdf.jpg", function(err, file_info) {
-          console.log("{}{}{}{}{}{}{}{}{}{}}");
-          console.log(req.files);
-           var bodyStream = fs.createReadStream("./uploads/asdf.jpg");
-           var options = {
-               BucketName    : "darrendrakeapp",
-               ObjectName    : "newimage.jpg",
-               ContentLength : file_info.size,
-               Body          : bodyStream
-           };
-           s3.PutObject(options, function(err, data) {
-             console.log("im in putobject function");
+       // fs.stat("./uploads/asdf.jpg", function(err, file_info) {
+       //    console.log("{}{}{}{}{}{}{}{}{}{}}");
+       //    console.log(req.files);
+       //     var bodyStream = fs.createReadStream("./uploads/asdf.jpg");
+       //     var options = {
+       //         BucketName    : "darrendrakeapp",
+       //         ObjectName    : "newimage.jpg",
+       //         ContentLength : file_info.size,
+       //         Body          : bodyStream
+       //     };
+       //     s3.PutObject(options, function(err, data) {
+       //       console.log("im in putobject function");
 
 
-               fmt.dump(err, 'err');
-               fmt.dump(data, 'data');
-           });
-       });
+       //         fmt.dump(err, 'err');
+       //         fmt.dump(data, 'data');
+       //     });
+       // });
 
 
     console.log("_____________");
