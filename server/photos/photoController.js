@@ -46,7 +46,6 @@ module.exports = {
       request_id: req.body.favor_id
     });
     query.exec(function(err, docs) {
-      console.log('fetchPhotosForFavor, query: ' + req.body.favor_id, ', ', docs);
       res.json(docs);
       if (err) {
         console.log('ERROR in fetchPhotosForFavor ', err)
