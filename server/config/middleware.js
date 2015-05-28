@@ -112,7 +112,7 @@ module.exports = function(app, express){
       console.log("_________________");
        console.log(res.body);
 
-       var data = { image: "https://s3.amazonaws.com/darrendrakeapp/newimage.jpg", favor_id: favorID };
+       var data = { image: "https://s3.amazonaws.com/darrendrakeapp/newimage.jpg", favor_id: "something"};
        $http.post('https://drakeapp.herokuapp.com/api/photos/create', data)
          .success(function(data, status, headers, config) {
            console.log('photo uploaded!');
