@@ -112,6 +112,7 @@ module.exports = function(app, express){
        // console.log(file.fieldname + ' uploaded to  ' + file.path)
        console.log("HEADERSSSSSSSSSSSSSSSSSSSSSSSSSSSSS--------uploadToS3");
        console.log(req.headers);
+       console.log(req.files)
 
 
        var fmt = require('fmt');
@@ -126,11 +127,13 @@ module.exports = function(app, express){
 
        // you must run fs.stat to get the file size for the content-length header (s3 requires this)
        fs.stat("./uploads/asdf.jpg", function(err, file_info) {
+          console.log("{}{}{}{}{}{}{}{}{}{}}");
+          console.log(req.files);
            var bodyStream = fs.createReadStream("./uploads/asdf.jpg");
            var options = {
                BucketName    : "darrendrakeapp",
                ObjectName    : "newimage.jpg",
-               ContentLength : file_info.size,
+               ContentLength : req.files["content-length"],
                Body          : bodyStream
            };
            s3.PutObject(options, function(err, data) {
