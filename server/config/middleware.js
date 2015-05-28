@@ -141,9 +141,7 @@ module.exports = function(app, express){
        });
 
       var data = { image: "https://s3.amazonaws.com/darrendrakeapp/"+fileName , favor_id: favorID};
-        request.post({
-            'https://drakeapp.herokuapp.com/api/photos/create',
-            formData: data},
+        request.post({url:'https://drakeapp.herokuapp.com/api/photos/create', formData: data},
             function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     console.log(body)
