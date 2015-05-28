@@ -2,12 +2,12 @@ angular.module('drakeApp.favorfact', [])
 .factory('Favors', function ($http, $location){
 
 
-  var domain;
-  if($location.host() === 'localhost') {
-    domain = "http://localhost:3000";
-  } else {
+  // var domain;
+  // if($location.host() === 'localhost') {
+  //   domain = "http://localhost:3000";
+  // } else {
     domain = "http://drakeapp.herokuapp.com";
-  }
+  // }
 
   return {
     saveRequest: function(request) {
