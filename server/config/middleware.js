@@ -116,7 +116,7 @@ module.exports = function(app, express){
       console.log("^^^^^^^^^^^^^^^^");
        console.log(req.query.fileName);
        var fileName = req.query.fileName;
-       var favorID = fileName.split("___")[1].pop().pop().pop().pop();
+       var favorID = fileName.split("___");
        console.log(favorID);
 
 
