@@ -29,6 +29,7 @@ module.exports = function(app, express){
 
   var photoRouter = express.Router();
   var favorRouter = express.Router();
+  var voteRouter = express.Router();
 
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({extended: true}));
