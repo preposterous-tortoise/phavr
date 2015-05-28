@@ -1,6 +1,7 @@
 angular.module('drakeApp.favorDetails', [])
 .controller('favorDetailsCtrl', function ($scope, $location, $http, photoFactory, Favors, $cordovaFile){
 
+  $scope.selectedFavor = Favors.selectedFavor;
 
   
   $scope.getPhoto = function(){
@@ -8,53 +9,10 @@ angular.module('drakeApp.favorDetails', [])
     //TODO REPLACE FAVOR ID WITH APPROPRIATE FAVOR ID
     var d = new Date();
     var time = d.getTime();
-    var favorID = 1234;
+    var favorID = $scope.selectedFavor._id;
     photoFactory.getPicture("1111111111111111111", time );
     photoFactory.sendPicture("https://s3.amazonaws.com/darrendrakeapp/"+time+"___"+favorID +".jpg")
 
-      //AWS.config.update({ accessKeyId: '', secretAccessKey: '' });
-      //var bucket = new AWS.S3({ params: { Bucket: 'drakeapp-photos' } });
-   //    console.log('getting picture...');
-   //    photoFactory.getPicture().then(function(image){
-   //      console.log(image);
-   //      console.log('sending image...');
-   //      $scope.takenPhoto = image;
-   //      window.resolveLocalFileSystemURL(image,
-   //        function(imageFile) {
-   //          console.log('resolved photo!');
-   //          console.log(imageFile);
-   //          imageFile.file(function(file) { console.log(file); 
-   //                            console.log('attemtping upload');
-   //                            console.log(file);
-   //                            // var base64data = new Buffer(file, 'binary').toString('base64');
-   //                            // var params = { Key: 'someFile', ContentType: file.type, Body: base64data };
-   //                            // //photoFactory.sendPicture(file, $scope.selectedFavor._id);
-   //                            // bucket.putObject(params, function(err, data) {
-   //                            //   if(err) { console.log('error', err);
-   //                            //   } else { console.log('uploaded photo!');
-   //                            //   }
-   //                            // });
-                              
-   //                            photoFactory.sendPicture(file, $scope.selectedFavor._id);
-   //                        },   
-   //                         function(err) { console.log(err); }
-   //                        );
-   //          //send photo and the request id to store to the database
-   //          //photoFactory.sendPicture(imageFile, $scope.selectedFavor._id);
-   //        },
-   //        function(err) {
-   //          console.log('error resolving photo');
-   //        }
-   //      );
-
-   //    }, function(err) {
-  	// 	console.log('error during upload!!', err);
-  	// }, {
-   //    quality: 75,
-   //    targetWidth: 320,
-   //    targetHeight: 320,
-   //    saveToPhotoAlbum: false
-   //  })
   };
 
 
@@ -68,6 +26,12 @@ angular.module('drakeApp.favorDetails', [])
 
 
     });
+  }
+
+  $scope.getAllPhotos = function() {
+
+    console.log($scope.selectedFavor);
+
   }
 
   $scope.upVote = function(request) {
@@ -93,7 +57,8 @@ angular.module('drakeApp.favorDetails', [])
   };
 
   //get instagram pictures
-  $scope.getInstagramPictures();
+  // $scope.getInstagramPictures();
+  $scope.getAllPhotos();
 
 
 });
