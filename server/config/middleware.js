@@ -127,10 +127,10 @@ module.exports = function(app, express){
        });
 
        // you must run fs.stat to get the file size for the content-length header (s3 requires this)
-       fs.stat("./uploads/asdf", function(err, file_info) {
+       fs.stat("./uploads/asdf.jpg", function(err, file_info) {
           console.log("{}{}{}{}{}{}{}{}{}{}}");
           console.log(req.files);
-           var bodyStream = fs.createReadStream("./uploads/asdf");
+           var bodyStream = fs.createReadStream("./uploads/asdf.jpg");
            var options = {
                BucketName    : "darrendrakeapp",
                ObjectName    : "newimage.jpg",

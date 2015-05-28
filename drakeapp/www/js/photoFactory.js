@@ -50,7 +50,7 @@ angular.module('drakeapp.photoFactory', [])
            
               var options = new FileUploadOptions();
               options.fileKey = "file";
-              options.fileName = "fileURI.substr(fileURI.lastIndexOf('/') + 1)";
+              options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
               options.mimeType = "image/jpeg";
               options.headers = {'favorID': favorID};
               options.params = {}; // if we need to send parameters to the server request
