@@ -3,7 +3,13 @@
 angular.module('drakeapp.photoFactory', [])
 .factory('photoFactory', ['$q', '$http', function($q, $http) {
 
-  
+  var domain;
+  if($location.host() === 'localhost') {
+    domain = "http://localhost:3000";
+  } else {
+    domain = "http://drakeapp.herokuapp.com";
+  }
+
   return {
     stuff: {},
     getPicture: function(favorID, time) {
@@ -116,13 +122,14 @@ angular.module('drakeapp.photoFactory', [])
           console.log('error during upload :[');
         });
     },
-    upVote: function(photoID){
+    upVote: function(photo, vote){
       return $http({
         method: 'POST',
-        url: 'http://drakeapp.herokuapp.com/api/photos/upVote',
-        data: photoID
+        url: domain+'/api/votes/upVotePhoto',
+        data: {photo: photo, vote: vote}
       })
       .then(function(resp){
+        photo.votes += +resp.data;
         console.log(resp);
       })
     },

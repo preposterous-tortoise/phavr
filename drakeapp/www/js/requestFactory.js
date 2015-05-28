@@ -2,8 +2,6 @@ angular.module('drakeApp.favorfact', [])
 .factory('Favors', function ($http, $location){
 
 
-  var process = {env: {}};
-  process.env.PRODUCTION = false;
   var domain;
   if($location.host() === 'localhost') {
     domain = "http://localhost:3000";
