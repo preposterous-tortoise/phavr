@@ -116,39 +116,39 @@ module.exports = function(app, express){
       console.log("^^^^^^^^^^^^^^^^");
        console.log(req.query.fileName);
        var fileName = req.query.fileName;
-       var favorID = fileName.split("___");
+       var favorID = fileName.split("___")[1].slice(0,-4);
        console.log(favorID);
 
 
 
-       var data = { image: "https://s3.amazonaws.com/darrendrakeapp/newimage.jpg", favor_id: "something"};
-       // http.post('https://drakeapp.herokuapp.com/api/photos/create', data)
-       //   .success(function(data, status, headers, config) {
-       //     console.log('photo uploaded!');
-       //   })
-       //   .error(function(data, status, headers, config) {
-       //     console.log('error during upload :[');
-       //   });
+       var data = { image: "https://s3.amazonaws.com/darrendrakeapp/"+fileName , favor_id: favorID};
+       http.post('https://drakeapp.herokuapp.com/api/photos/create', data)
+         .success(function(data, status, headers, config) {
+           console.log('photo uploaded!');
+         })
+         .error(function(data, status, headers, config) {
+           console.log('error during upload :[');
+         });
 
        // you must run fs.stat to get the file size for the content-length header (s3 requires this)
-       // fs.stat("./uploads/asdf.jpg", function(err, file_info) {
-       //    console.log("{}{}{}{}{}{}{}{}{}{}}");
-       //    console.log(req.files);
-       //     var bodyStream = fs.createReadStream("./uploads/asdf.jpg");
-       //     var options = {
-       //         BucketName    : "darrendrakeapp",
-       //         ObjectName    : "newimage.jpg",
-       //         ContentLength : file_info.size,
-       //         Body          : bodyStream
-       //     };
-       //     s3.PutObject(options, function(err, data) {
-       //       console.log("im in putobject function");
+       fs.stat("./uploads/"+fileName, function(err, file_info) {
+          console.log("{}{}{}{}{}{}{}{}{}{}}");
+          console.log(req.files);
+           var bodyStream = fs.createReadStream("./uploads/"+fileName);
+           var options = {
+               BucketName    : "darrendrakeapp",
+               ObjectName    : "./uploads/"+fileName,
+               ContentLength : file_info.size,
+               Body          : bodyStream
+           };
+           s3.PutObject(options, function(err, data) {
+             console.log("im in putobject function");
 
 
-       //         fmt.dump(err, 'err');
-       //         fmt.dump(data, 'data');
-       //     });
-       // });
+               fmt.dump(err, 'err');
+               fmt.dump(data, 'data');
+           });
+       });
 
 
     console.log("_____________");
