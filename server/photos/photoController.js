@@ -35,7 +35,7 @@ module.exports = {
           photo.save(function (err) {
             if(err) { console.log(err); }
             res.status(201).send('Photo saved at https://drakeapp-photos.s3.amazonaws.com/'+fileName+'.jpg');
-
+          });
   },
 
   //for upvotes/downvotes
