@@ -25,37 +25,37 @@ module.exports = {
         console.log('you already voted on that...'); 
         console.log("req.body.vote", req.body.vote);
         console.log("vote.vote", vote.vote);
-        if (req.body.vote === 1 && vote.vote ===-1)  { //if sending an upvote, check if there is already a downvote
+        if (req.body.vote === 1 && (vote.vote ===-1 || vote.vote ===0))  { //if sending an upvote, check if there is already a downvote
 
             console.log('overriding downvote');
             //override the downvote
             //vote.vote = 1;
             Vote.findByIdAndUpdate(vote._id,
-              { vote: 1 },
+              { $inc: {vote: 1 } },
               function(err, data) {
                 console.log('succesfully did findbyidandupdate');
                 Favor.findByIdAndUpdate(req.body.favor._id, 
-                { $inc: {votes: 2 } }, 
+                { $inc: {votes: 1 } }, 
                 function(err, data){
                   console.log("AWWWW im in callback")
-                  res.send('2');
+                  res.send('1');
                 });
               });
 
         }
 
-        else if(req.body.vote === -1 && vote.vote === 1){
+        else if(req.body.vote === -1 && (vote.vote === 1|| vote.vote ===0)){
 
             //vote.vote = -1;
             Vote.findByIdAndUpdate(vote._id,
-              { vote: -1 },
+              { $inc: {votes: -1 } },
               function(err, data) {
                 Favor.findByIdAndUpdate(req.body.favor._id, 
-                  { $inc: {votes: -2} }, 
+                  { $inc: {votes: -1} }, 
                   function(err, data){
                                       console.log("AWWWW im in 2nd callback")
 
-                    res.send('-2');
+                    res.send('-1');
                   });
             });
           
