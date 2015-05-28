@@ -88,19 +88,20 @@ module.exports = function(app, express){
   })
 
    app.use(multer({ dest: './uploads/'
-   //  , rename: function(fieldname, filename) {
-   //    console.log(filename);
-   //    return "asdf";
-   // }
+    , rename: function(fieldname, filename) {
+      console.log(fieldname);
+      console.log(filename);
+      return filename;
+   }
  }));
 
   app.post('/photoUploads/uploadToServer', function(req,res){
     console.log("_________________");
      console.log(req.files);
-    res.redirect('/photoUploads/uploadToS3/?fileName' + req.files.file.originalname);
+    res.redirect('/photoUploads/uploadToS3/?fileName=' + req.files.file.originalname);
   });
 
-  app.get('/photoUploads/uploadToS3', function(req,res){
+  app.get('/photoUploads/uploadToS3/', function(req,res){
 
        var fmt = require('fmt');
        var amazonS3 = require('awssum-amazon-s3');
@@ -114,6 +115,9 @@ module.exports = function(app, express){
 
       console.log("^^^^^^^^^^^^^^^^");
        console.log(req.query.fileName);
+       var fileName = req.query.fileName;
+       var favorID = fileName.split("___")[1].pop().pop().pop().pop();
+       console.log(favorID);
 
 
 
