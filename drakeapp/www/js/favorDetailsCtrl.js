@@ -56,6 +56,16 @@ angular.module('drakeApp.favorDetails', [])
 
   };
 
+  //   $scope.upVote = function(favor) {
+  //   console.log("THIS IS FAVOR "+JSON.stringify(favor));
+  //   Favors.upVote(favor, 1);
+  // }; 
+
+  // $scope.downVote = function(favor) {
+  //   Favors.downVote(favor, -1);
+  // };
+
+
   //get instagram pictures
   // $scope.getInstagramPictures();
   $scope.getAllPhotos();
