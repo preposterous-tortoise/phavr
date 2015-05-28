@@ -41,6 +41,8 @@ angular.module('drakeApp.mapService', [])
     };
 
     return {
+      getBoxForBounds: getBoxForBounds,
+      getFavorLocation: getFavorLocation,
       getLocation: function() {
         return myLatlng;
       },

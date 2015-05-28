@@ -6,7 +6,7 @@ angular.module('drakeApp.favorfact', [])
   process.env.PRODUCTION = true;
   var domain;
   if(process.env.PRODUCTION) {
-    domain = "http://drakeapp.herokuapp.com";
+    domain = "http://localhost:3000";
   } else {
     domain = "http://localhost:3000";
   }
@@ -17,7 +17,7 @@ angular.module('drakeApp.favorfact', [])
     saveRequest: function(request) {
       $http({
         method: 'POST',
-        url: 'http://drakeapp.herokuapp.com/api/requests/create',
+        url: 'http://localhost:3000/api/requests/create',
         data: request
       })
       .success(function(data, status, headers, config) {
@@ -50,7 +50,7 @@ angular.module('drakeApp.favorfact', [])
     upVote: function(favorID){
       return $http({
         method: 'POST',
-        url: 'http://drakeapp.herokuapp.com/api/requests/upVote',
+        url: 'http://localhost:3000/api/requests/upVote',
         data: favorID
       })
       .then(function(resp){
@@ -60,7 +60,7 @@ angular.module('drakeApp.favorfact', [])
     downVote: function(favorID){
       return $http({
         method: 'POST',
-        url: 'http://drakeapp.herokuapp.com/api/requests/downVote',
+        url: 'http://localhost:3000/api/requests/downVote',
         data: favorID
       })
       .then(function(resp){
