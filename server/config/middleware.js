@@ -29,7 +29,8 @@ module.exports = function(app, express){
 
   var photoRouter = express.Router();
   var favorRouter = express.Router();
-
+  var voteRouter = express.Router();
+  
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
@@ -40,20 +41,22 @@ module.exports = function(app, express){
 
   app.use('/api/requests', /*auth.authenticate, */favorRouter);
   app.use('/api/photos', /*auth.authenticate,*/ photoRouter);
+  app.use('/api/votes', auth.authenticate, voteRouter); 
 
   app.get('/api/profileID', auth.authenticate, function(req, res){
-      var id = req.session.passport.user.provider_id
-      console.log("THIS IS THE ID!!!! "+id)
-      User.findOne(
-        {$query:{ provider_id: id}}, 
-      function(err, data){
-      res.json(data); 
-    });   
-      // res.json(req.session.passport.user);
+    //   var id = req.session.passport.user.provider_id
+    //   console.log("THIS IS THE ID!!!! "+id)
+    //   User.findOne(
+    //     {$query:{ provider_id: id}}, 
+    //   function(err, data){
+    //   res.json(data); 
+    // });   
+      res.json(req.session.passport.user);
   });
 
   require('../favors/favorRoutes.js')(favorRouter);
   require('../photos/photoRoutes.js')(photoRouter);
+  require('../votes/voteRoutes.js')(voteRouter);
 
   // //Setting up twitter and instagram scraping routes
   // var twitterScrapeRouter = express.Router();
