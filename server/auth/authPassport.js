@@ -44,7 +44,7 @@ module.exports = {
       clientSecret: config.facebook.clientSecret,
       callbackURL: '/auth/facebook/callback'
     }, function (accessToken, refreshToken, profile, done) {
-      console.log("THIS iS THE PROFILE "+JSON.stringify(profile));
+      // console.log("THIS iS THE PROFILE "+JSON.stringify(profile));
       // console.log("THIS IS PROFILE URL "+profile.profileUrl);
       User.findOne({
         provider_id: profile.id
@@ -52,7 +52,9 @@ module.exports = {
         // console.log('ERROR in finding user on login: ', err);
         if (err) throw (err);
         // console.log('LOGIN no error, user: ', user);
-        if (!err && user != null) return done(null, user);
+        if (!err && user != null) {
+          return done(null, user);
+        }
         console.log("Please don't break! "+JSON.stringify(profile));
         var user = new User({
           provider_id: profile.id,
@@ -79,7 +81,7 @@ module.exports = {
     if (authenticated(req)) {
       return next();
     } else {
-      return res.send(401);
+      return res.sendStatus(401);
     }
   },
 
