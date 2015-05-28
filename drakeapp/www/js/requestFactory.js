@@ -17,7 +17,7 @@ angular.module('drakeApp.favorfact', [])
     saveRequest: function(request) {
       $http({
         method: 'POST',
-        url: 'http://drakeapp.herokuapp.com/api/requests/create',
+        url: '/api/requests/create',
         data: request
       })
       .success(function(data, status, headers, config) {
@@ -31,7 +31,7 @@ angular.module('drakeApp.favorfact', [])
     fetchRequests: function(box, callback) {
       return $http({
           method: 'POST',
-          url: domain + '/api/requests/',
+          url:'/api/requests/',
           data: {
             box: box
           }
