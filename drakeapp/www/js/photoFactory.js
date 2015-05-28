@@ -1,14 +1,14 @@
 
 
 angular.module('drakeapp.photoFactory', [])
-.factory('photoFactory', ['$q', '$http', function($q, $http) {
+.factory('photoFactory', ['$q', '$http', function($q, $http, $location) {
 
-  // var domain;
-  // if($location.host() === 'localhost') {
-  //   domain = "http://localhost:3000";
-  // } else {
+  /*var domain;
+  if($location.host() === 'localhost') {
+    domain = "http://localhost:3000";
+  } else {
     domain = "http://drakeapp.herokuapp.com";
-  // }
+  }*/
 
   return {
     stuff: {},
@@ -114,6 +114,7 @@ angular.module('drakeapp.photoFactory', [])
 
     sendPicture: function(imageURI, favorID) {
       var data = { image: imageURI, favor_id: favorID };
+      console.log('inside sendPicture');
       $http.post('https://drakeapp.herokuapp.com/api/photos/create', data)
         .success(function(data, status, headers, config) {
           console.log('photo uploaded!');
