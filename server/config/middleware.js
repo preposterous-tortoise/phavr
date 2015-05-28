@@ -4,8 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
-var http = require('http');
-
+var request = require('request');
 var multer  = require('multer');
 
 var User = require('../db/userModel.js');
@@ -128,7 +127,7 @@ module.exports = function(app, express){
            var bodyStream = fs.createReadStream("./uploads/"+fileName);
            var options = {
                BucketName    : "darrendrakeapp",
-               ObjectName    : "./uploads/"+fileName,
+               ObjectName    : fileName,
                ContentLength : file_info.size,
                Body          : bodyStream
            };
@@ -141,8 +140,18 @@ module.exports = function(app, express){
            });
        });
 
+      var data = { image: "https://s3.amazonaws.com/darrendrakeapp/"+fileName , favor_id: favorID};
+        request.post({
+            'https://drakeapp.herokuapp.com/api/photos/create',
+            formData: data},
+            function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log(body)
+                }
+            }
+        );
 
-       // var data = { image: "https://s3.amazonaws.com/darrendrakeapp/"+fileName , favor_id: favorID};
+       // 
        // app.post('https://drakeapp.herokuapp.com/api/photos/create', data)
        //   .success(function(data, status, headers, config) {
        //     console.log('photo uploaded!');
