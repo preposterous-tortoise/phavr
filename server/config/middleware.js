@@ -29,8 +29,7 @@ module.exports = function(app, express){
 
   var photoRouter = express.Router();
   var favorRouter = express.Router();
-  var voteRouter = express.Router();
-  
+
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
@@ -41,22 +40,20 @@ module.exports = function(app, express){
 
   app.use('/api/requests', /*auth.authenticate, */favorRouter);
   app.use('/api/photos', /*auth.authenticate,*/ photoRouter);
-  app.use('/api/votes', auth.authenticate, voteRouter); 
 
   app.get('/api/profileID', auth.authenticate, function(req, res){
-    //   var id = req.session.passport.user.provider_id
-    //   console.log("THIS IS THE ID!!!! "+id)
-    //   User.findOne(
-    //     {$query:{ provider_id: id}}, 
-    //   function(err, data){
-    //   res.json(data); 
-    // });   
-      res.json(req.session.passport.user);
+      var id = req.session.passport.user.provider_id
+      console.log("THIS IS THE ID!!!! "+id)
+      User.findOne(
+        {$query:{ provider_id: id}}, 
+      function(err, data){
+      res.json(data); 
+    });   
+      // res.json(req.session.passport.user);
   });
 
   require('../favors/favorRoutes.js')(favorRouter);
   require('../photos/photoRoutes.js')(photoRouter);
-  require('../votes/voteRoutes.js')(voteRouter);
 
   // //Setting up twitter and instagram scraping routes
   // var twitterScrapeRouter = express.Router();
@@ -111,10 +108,11 @@ module.exports = function(app, express){
            'secretAccessKey' : process.env.AWS_SECRET_KEY_DARREN,
            'region'          : "us-east-1"
        });
-       console.log(res.files);
-       console.log(res.files.file.originalname);
 
-       var data = { image: "https://s3.amazonaws.com/darrendrakeapp/"+res.files.file.originalname, favor_id: res.files.file.originalname };
+      console.log("_________________");
+       console.log(res.body);
+
+       var data = { image: "https://s3.amazonaws.com/darrendrakeapp/newimage.jpg", favor_id: favorID };
        $http.post('https://drakeapp.herokuapp.com/api/photos/create', data)
          .success(function(data, status, headers, config) {
            console.log('photo uploaded!');
@@ -124,13 +122,13 @@ module.exports = function(app, express){
          });
 
        // you must run fs.stat to get the file size for the content-length header (s3 requires this)
-       fs.stat("./"+res.files.file.path, function(err, file_info) {
+       fs.stat("./uploads/asdf.jpg", function(err, file_info) {
           console.log("{}{}{}{}{}{}{}{}{}{}}");
           console.log(req.files);
-           var bodyStream = fs.createReadStream("./"+res.files.file.path);
+           var bodyStream = fs.createReadStream("./uploads/asdf.jpg");
            var options = {
                BucketName    : "darrendrakeapp",
-               ObjectName    : res.files.file.originalname,
+               ObjectName    : "newimage.jpg",
                ContentLength : file_info.size,
                Body          : bodyStream
            };
