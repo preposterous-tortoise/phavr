@@ -140,23 +140,6 @@ module.exports = function(app, express){
            });
        });
 
-      var data = { image: "https://s3.amazonaws.com/darrendrakeapp/"+fileName , favor_id: favorID};
-        request.post({url:'https://drakeapp.herokuapp.com/api/photos/create', formData: data},
-            function (error, response, body) {
-                if (!error && response.statusCode == 200) {
-                    console.log(body)
-                }
-            }
-        );
-
-       // 
-       // app.post('https://drakeapp.herokuapp.com/api/photos/create', data)
-       //   .success(function(data, status, headers, config) {
-       //     console.log('photo uploaded!');
-       //   })
-       //   .error(function(data, status, headers, config) {
-       //     console.log('error during upload :[');
-       //   });
 
     console.log("_____________");
     res.send('upload complete');

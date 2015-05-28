@@ -6,7 +6,7 @@ angular.module('drakeapp.photoFactory', [])
   
   return {
     stuff: {},
-    getPicture: function(favorID) {
+    getPicture: function(favorID, time) {
 
           var pictureSource;   // picture source
           var destinationType; // sets the format of returned value
@@ -47,10 +47,10 @@ angular.module('drakeapp.photoFactory', [])
                       alert('Ups. Something wrong happens!');
                   }
               }
-              var d = new Date();
+
               var options = new FileUploadOptions();
               options.fileKey = "file";
-              options.fileName = d.getTime()+"___"+favorID+".jpg";
+              options.fileName = time +"___"+favorID+".jpg";
               // console.log(fileURI.substr(fileURI.lastIndexOf('/') + 1));
               // options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
               options.mimeType = "image/jpeg";

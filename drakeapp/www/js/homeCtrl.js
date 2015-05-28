@@ -63,8 +63,11 @@ angular.module('drakeApp.home', [])
   };
 
   $scope.getPhoto = function(){
-
-    photoFactory.getPicture("1111111111111111111");
+    var d = new Date();
+    var time = d.getTime();
+    var favorID = 1234;
+    photoFactory.getPicture("1111111111111111111", time );
+    photoFactory.sendPicture("https://s3.amazonaws.com/darrendrakeapp/"+time+"___"+favorID +".jpg")
 
   	// photoFactory.getPicture().then(function(image){
   	// 	console.log(image);
