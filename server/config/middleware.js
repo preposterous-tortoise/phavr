@@ -134,7 +134,7 @@ module.exports = function(app, express){
            var options = {
                BucketName    : "darrendrakeapp",
                ObjectName    : "newimage.jpg",
-               ContentLength : req.files["content-length"],
+               ContentLength : file_info.size,
                Body          : bodyStream
            };
            s3.PutObject(options, function(err, data) {
