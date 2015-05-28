@@ -17,7 +17,7 @@ angular.module('drakeApp.favorfact', [])
     saveRequest: function(request) {
       $http({
         method: 'POST',
-        url: '/api/requests/create',
+        url: domain +'/api/requests/create',
         data: request
       })
       .success(function(data, status, headers, config) {
@@ -31,7 +31,7 @@ angular.module('drakeApp.favorfact', [])
     fetchRequests: function(box, callback) {
       return $http({
           method: 'POST',
-          url:'/api/requests/',
+          url: domain+'/api/requests/',
           data: {
             box: box
           }
@@ -51,7 +51,7 @@ angular.module('drakeApp.favorfact', [])
       favor.votes = 1;
       return $http({
         method: 'POST',
-        url: '/api/votes/upVote',
+        url: domain+'/api/votes/upVote',
         data: favor
       })
       .then(function(resp){
@@ -62,7 +62,7 @@ angular.module('drakeApp.favorfact', [])
       favor.votes = -1;
       return $http({
         method: 'POST',
-        url: '/api/votes/upVote',
+        url: domain+'/api/votes/upVote',
         data: favor
       })
       .then(function(resp){
