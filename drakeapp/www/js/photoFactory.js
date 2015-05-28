@@ -3,12 +3,12 @@
 angular.module('drakeapp.photoFactory', [])
 .factory('photoFactory', ['$q', '$http', function($q, $http) {
 
-  var domain;
-  if($location.host() === 'localhost') {
-    domain = "http://localhost:3000";
-  } else {
+  // var domain;
+  // if($location.host() === 'localhost') {
+  //   domain = "http://localhost:3000";
+  // } else {
     domain = "http://drakeapp.herokuapp.com";
-  }
+  // }
 
   return {
     stuff: {},
