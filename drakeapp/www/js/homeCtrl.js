@@ -26,6 +26,7 @@ angular.module('drakeApp.home', [])
   $scope.selectedFavor = Favors.selectedFavor;
 
   $scope.upVote = function(favor) {
+    console.log("THIS IS FAVOR "+JSON.stringify(favor));
     favor.votes++;
     Favors.upVote(favor);
   }; 
