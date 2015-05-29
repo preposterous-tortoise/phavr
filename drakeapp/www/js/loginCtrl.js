@@ -34,23 +34,19 @@ angular.module('drakeApp.login', [])
         Auth.setAccessToken(result.access_token);
 
         //testing...
-        $http.post('/auth/facebook/token?access_token'+Auth.accessToken, result)
+        $http.post('http://drakeapp.herokuapp.com/auth/facebook/token?access_token='+Auth.accessToken)
           .success(function(data){
             console.log(data);
-        })
+          })
          .error(function(data){
             console.log('error!')
-        }); 
-    }, function(error) {
-      alert("There was a problem getting your profile.  Check the logs for details.");
-      console.log(error);
-  });
-        
-      },
-      function(error) {
-           console.log('error logging in!')
-           console.log(error);
+        });
+
+      }, function(error) {
+          alert("There was a problem getting your profile.  Check the logs for details.");
+          console.log(error);
       });
+        
   };
 
 });
