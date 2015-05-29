@@ -12,7 +12,7 @@ var User = require('../db/userModel.js');
 
 //Auth
 var auth = require('../auth/authPassport');
-var fbAuth = require('../auth/newAuthPassport');
+var fbAuth = require('../auth/newAuthPassport')(passport);
 // var FacebookStrategy = require('passport-facebook').Strategy;
 //var  FacebookTokenStrategy = require('passport-facebook-token');
 
