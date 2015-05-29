@@ -1,5 +1,5 @@
 angular.module('drakeApp.nav', [])
-.controller('navCtrl', function($scope, $location, $http, $ionicSideMenuDelegate, photoFactory){ 
+.controller('navCtrl', function($scope, $location, $http, $ionicSideMenuDelegate, photoFactory, Auth){ 
   $scope.toggleLeft = function() {
     $ionicSideMenuDelegate.toggleLeft();
   };
@@ -9,7 +9,7 @@ angular.module('drakeApp.nav', [])
   $scope.getUserInfo = function() {
     return $http({
             method: 'GET',
-            url: '/api/profileID'
+            url: 'http://drakeapp.herokuapp.com/api/profileID?access_token='+Auth.accessToken
         })
         .then(function(resp) {
             console.log('response from getting server', resp);
