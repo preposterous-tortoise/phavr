@@ -36,7 +36,19 @@
   <h2>{{ selectedFavor.topic }}</h2>
   <h3>{{ selectedFavor.description }}</h3>
   <ion-list>
-    <ion-item ng-repeat="photo in selectedFavor.photos" class="wrap"><img class="favorDetail" ng-src="{{photo.url}}"></ion-item
+  <div class="row">
+    <div class="col col-80">
+
+    <ion-item ng-repeat="photo in selectedFavor.photos" class="wrap"><img class="favorDetail" ng-src="{{photo.url}}">
+ </div>
+    <div class="col">
+      <div class="picVoting">
+        <a ng-click="upVote(photo)" class="button button-icon icon ion-ios-arrow-up"></a><br>
+        <span class="votes">{{photo.votes}}</span><br>
+        <a ng-click="downVote(photo)" class="button button-icon icon ion-ios-arrow-down"></a>
+      </div>
+    </div>
+    </ion-item>
   </ion-list>
     <!-- <ion-list ng-repeat="request in requests | orderBy:'-votes'" ng-click="favorDetails()">
       <ion-item>
