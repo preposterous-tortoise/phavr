@@ -1,7 +1,6 @@
 var  FacebookTokenStrategy = require('passport-facebook-token');
 var request = require("request");
-var db = require('../db');
-var configAuth = require('./auth.js');
+var configAuth = require('./AuthConfig.js');
 
 
 /**
@@ -11,12 +10,12 @@ var configAuth = require('./auth.js');
  */
 module.exports = function(passport) {
 
-	passport.use(new FacebookTokenStrategy({
+	passport.use( new FacebookTokenStrategy({
 		//set clientID and clientSecret (from facebook app settings)
 		clientID : process.env.ClientID || configAuth.facebookAuth.clientID,
 		clientSecret : process.env.ClientSecret || configAuth.facebookAuth.clientSecret
 	}, function(accessToken, refereshToken, profile, done) {
-
+		console.log("WE ARE INSIDE THE NEW FB")
 		//find or create user who just logged in
 		db.User.findOrCreate({where: {fbID: profile.id, fbName: profile.displayName, fbEmail: profile.emails[0].value, fbPicture: profile.photos[0].value }})
 			.then(function(user){
