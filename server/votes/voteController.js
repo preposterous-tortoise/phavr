@@ -8,14 +8,14 @@ module.exports = {
     //TODO: simply user req.user!!!
     //FIND THE VOTE that corresponds to the user id and favor id
     Vote.findOne({
-      userID: req.session.passport.user.provider_id,
+      userID: req.user.provider_id,
       favorID: req.body.favor._id
     }, function (err, vote) {
       
-      console.log("fbId", req.session.passport.user.provider_id);
       console.log("favorID", req.body.favor._id);
-      console.log("THIS IS USER! "+vote);
+      console.log("THIS IS USER VOTE! "+vote);
       console.log(err);
+      
       // console.log('ERROR in finding user on login: ', err);
       if (err) throw (err);
 
@@ -68,7 +68,7 @@ module.exports = {
       } else {
       
       var vote = new Vote({
-        userID: req.session.passport.user.provider_id,
+        userID: req.user.provider_id,
         favorID: req.body.favor._id,
         vote: req.body.vote
       });
