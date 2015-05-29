@@ -33,9 +33,6 @@ angular.module('drakeApp.favorDetails', [])
     photoFactory.getPhotosForFavor(Favors.selectedFavor, function(data) {
       $scope.selectedFavor.photos = data;
     });
-
-    console.log($scope.selectedFavor);
-
   };
 
   $scope.upVote = function(request) {

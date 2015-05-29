@@ -55,7 +55,7 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
         events: {
           bounds_changed: function(map, eventName) {
             // console.log(' NEW BOUNDS: ', JSON.stringify(mapService.getBoxForBounds(map.getBounds())));
-            updateMarkers(map.getBounds());
+            //updateMarkers(map.getBounds());
           }
         }
       };
@@ -64,8 +64,7 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
       $timeout(function() {
         var map = $scope.map.control.getGMap();
         if (map) {
-          var markerMap = {};
-          //mapService.addBoundsListener(map, markerMap);
+          mapService.addBoundsListener(map, markerMap);
         }
       });
 

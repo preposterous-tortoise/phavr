@@ -1,5 +1,5 @@
 angular.module('drakeApp.mapService', [])
-  .factory('mapService', function($location, Favors) {
+  .factory('mapService', function($window, $location, Favors) {
 
     var myLatlng = new google.maps.LatLng(37.783724, -122.40897799999999);
 
@@ -89,9 +89,10 @@ angular.module('drakeApp.mapService', [])
         if (favor._id) {
           google.maps.event.addListener(marker, "click", function() {
             var favor = getFavorForMarker(this, markerMap);
-            alert('marker clicked: ' + favor.description);
-            Favors.setFavor(favor);
-            $location.path('/favordetails');
+            if (favor._id) {
+              Favors.setFavor(favor);
+              $window.location.assign('#/favordetails');
+            }
           });
           markerMap[favor._id] = {
             marker: marker,
