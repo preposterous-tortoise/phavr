@@ -34,6 +34,7 @@
     "npm": "^2.10.1",
     "passport": "^0.2.1",
     "passport-facebook": "^2.0.0",
+    "passport-facebook-token": "^2.0.0",
     "q": "^1.4.1",
     "request": "^2.55.0",
     "twitter": "^1.2.5",

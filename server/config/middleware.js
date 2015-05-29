@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
-var request = require('request');
+//var request = require('request');
 var multer  = require('multer');
 
 var User = require('../db/userModel.js');
