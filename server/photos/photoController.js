@@ -29,6 +29,8 @@ module.exports = {
           });
       }
     });*/
+    
+    //TODO: get user id from req.user and attach it to the photo
     var photo = new Photo({ url: req.body.image, 
                                   request_id: req.body.favor_id
                                 });

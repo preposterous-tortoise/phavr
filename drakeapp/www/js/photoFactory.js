@@ -1,7 +1,7 @@
 
 
 angular.module('drakeapp.photoFactory', [])
-.factory('photoFactory', ['$location', '$q', '$http', function($location, $q, $http) {
+.factory('photoFactory', ['$location', '$q', '$http', function($location, $q, $http, Auth) {
 
   var domain;
   if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || 
@@ -126,7 +126,7 @@ angular.module('drakeapp.photoFactory', [])
     sendPicture: function(imageURI, favorID) {
       var data = { image: imageURI, favor_id: favorID };
       console.log('inside sendPicture');
-      $http.post('https://drakeapp.herokuapp.com/api/photos/create', data)
+      $http.post('https://drakeapp.herokuapp.com/api/photos/create?access_token'+Auth.accessToken, data)
         .success(function(data, status, headers, config) {
           console.log('photo uploaded!');
         })
@@ -137,7 +137,7 @@ angular.module('drakeapp.photoFactory', [])
     upVote: function(photo, vote){
       return $http({
         method: 'POST',
-        url: domain+'/api/votes/upVotePhoto',
+        url: domain+'/api/votes/upVotePhoto?access_token'+Auth.accessToken,
         data: {photo: photo, vote: vote}
       })
       .then(function(resp){
@@ -148,7 +148,7 @@ angular.module('drakeapp.photoFactory', [])
     downVote: function(photoID){
       return $http({
         method: 'POST',
-        url: 'http://drakeapp.herokuapp.com/api/photos/downVote',
+        url: 'http://drakeapp.herokuapp.com/api/photos/downVote?access_token'+Auth.accessToken,
         data: photoID
       })
       .then(function(resp){

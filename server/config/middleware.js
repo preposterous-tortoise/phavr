@@ -12,8 +12,11 @@ var User = require('../db/userModel.js');
 
 //Auth
 var auth = require('../auth/authPassport');
+var fbAuth = require('../auth/newAuthPassport');
 // var FacebookStrategy = require('passport-facebook').Strategy;
-var  FacebookTokenStrategy = require('passport-facebook-token');
+//var  FacebookTokenStrategy = require('passport-facebook-token');
+
+    
 /**
  * Core Middleware
  *
@@ -42,7 +45,7 @@ module.exports = function(app, express){
 
   app.use('/api/requests', /*auth.authenticate, */favorRouter);
   app.use('/api/photos', /*auth.authenticate,*/ photoRouter);
-  app.use('/api/votes', auth.authenticate, voteRouter);
+  app.use('/api/votes', passport.authenticate('facebook-token'), voteRouter);
 
 
 
@@ -83,20 +86,12 @@ module.exports = function(app, express){
     res.redirect('/signin.html');
   });
 
-
-
   // app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends']} ));
   // app.get('/auth/facebook/callback', passport.authenticate('facebook',
   //   { successRedirect: '/', failureRedirect: '/login' }
   // ));
 
-
-
-
-
-
-
-User.findOrCreate({where: {fbID: profile.id, fbName: profile.displayName, fbEmail: profile.emails[0].value, fbPicture: profile.photos[0].value }})
+/*User.findOrCreate({where: {fbID: profile.id, fbName: profile.displayName, fbEmail: profile.emails[0].value, fbPicture: profile.photos[0].value }})
       .then(function(user){
 
         user[0].updateAttributes({fbToken: accessToken})
@@ -107,22 +102,23 @@ User.findOrCreate({where: {fbID: profile.id, fbName: profile.displayName, fbEmai
           })
       });
 
-
 passport.use( new FacebookTokenStrategy({
   //set clientID and clientSecret (from facebook app settings)
   clientID : process.env.ClientID || configAuth.facebookAuth.clientID,
   clientSecret : process.env.ClientSecret || configAuth.facebookAuth.clientSecret
-},  function(accessToken, refereshToken, profile, done) {
+  }, function(accessToken, refereshToken, profile, done) {
     console.log("WE ARE INSIDE THE NEW FB "+ profile)
+  }));
+ */
 
-  };
-
-  app.post('auth/facebook/token',
-    passport.authentication('facebook-token'),
-      function (req,res) {
-        res.send(req.user? 200 : 401)
-      }
-    );
+app.post('auth/facebook/token',
+  passport.authenticate('facebook-token'),
+    function (req,res) {
+      console.log('authorized user!');
+      console.log(req.user);
+      res.send(req.user? 200 : 401)
+    }
+  );
 
 
   // app.get('/auth/facebook/token', passport.authenticate('facebook-token', { scope: ['user_friends']} ));
