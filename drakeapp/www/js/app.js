@@ -6,7 +6,7 @@
 angular.module('drakeApp', ['ionic', 'ngCordova', 'drakeApp.home', 'drakeApp.nav', 'drakeApp.favor',
                               'drakeApp.login', 'drakeApp.requestMap', 'drakeApp.favorDetails',
                               'drakeapp.photoFactory', 'drakeApp.favorfact', 'drakeapp.locationFactory',
-                              'uiGmapgoogle-maps','drakeApp.mapService', 'drakeApp.requestCreationMap', 'drakeapp.authFactory'])
+                              'uiGmapgoogle-maps','drakeApp.mapService', 'drakeApp.requestCreationMap', 'drakeapp.authFactory', 'drakeApp.navfact'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -32,7 +32,7 @@ angular.module('drakeApp', ['ionic', 'ngCordova', 'drakeApp.home', 'drakeApp.nav
   
   //home template
   $stateProvider.state('home', {
-    url: '/',
+    url: '/home',
     templateUrl: 'views/home.html',
     controller: 'homeCtrl'
   })
@@ -44,7 +44,7 @@ angular.module('drakeApp', ['ionic', 'ngCordova', 'drakeApp.home', 'drakeApp.nav
   })
 
   $stateProvider.state('login', {
-    url: '/login',
+    url: '/',
     templateUrl: './views/login.html',
     controller: 'loginCtrl'
   })

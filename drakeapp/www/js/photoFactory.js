@@ -1,7 +1,7 @@
 
 
 angular.module('drakeapp.photoFactory', [])
-.factory('photoFactory', ['$location', '$q', '$http', function($location, $q, $http, Auth) {
+.factory('photoFactory', ['$location', '$q', '$http', 'Auth', function($location, $q, $http, Auth) {
 
   var domain;
   if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || 

@@ -1,11 +1,12 @@
 angular.module('drakeApp.nav', [])
-.controller('navCtrl', function($scope, $location, $http, $ionicSideMenuDelegate, photoFactory, Auth){ 
+.controller('navCtrl', function($scope, $location, $http, $ionicSideMenuDelegate, photoFactory, Auth, Nav){ 
   $scope.toggleLeft = function() {
     $ionicSideMenuDelegate.toggleLeft();
   };
 
   $scope.user
-  
+  $scope.navBar = Nav.navBar;
+
   $scope.getUserInfo = function() {
     return $http({
             method: 'GET',

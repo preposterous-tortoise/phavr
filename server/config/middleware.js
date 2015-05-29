@@ -58,8 +58,8 @@ module.exports = function(app, express){
   });
 
 
-  app.use('/api/requests', /*auth.authenticate, */favorRouter);
-  app.use('/api/photos', /*auth.authenticate,*/ photoRouter);
+  app.use('/api/requests', passport.authenticate('facebook-token'), favorRouter);
+  app.use('/api/photos', passport.authenticate('facebook-token'), photoRouter);
   app.use('/api/votes', passport.authenticate('facebook-token'), voteRouter);
 
 
