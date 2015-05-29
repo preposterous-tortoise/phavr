@@ -1,5 +1,5 @@
 angular.module('drakeApp.favorfact', [])
-.factory('Favors', function ($http, $location){
+.factory('Favors', function ($http, $location, Auth){
 
 
   var domain;
@@ -14,7 +14,7 @@ angular.module('drakeApp.favorfact', [])
     saveRequest: function(request) {
       $http({
         method: 'POST',
-        url: domain +'/api/requests/create',
+        url: domain +'/api/requests/create?access_token'+Auth.accessToken,
         data: request
       })
       .success(function(data, status, headers, config) {
@@ -48,7 +48,7 @@ angular.module('drakeApp.favorfact', [])
       console.log("inside requestfactory upvote")
       return $http({
         method: 'POST',
-        url: domain+'/api/votes/upVote',
+        url: domain+'/api/votes/upVote?access_token'+Auth.accessToken,
         data: { favor: favor, vote: vote }
       })
       .then(function(resp){ //response will be -1, 0 or 1
@@ -59,7 +59,7 @@ angular.module('drakeApp.favorfact', [])
     downVote: function(favor, vote){
       return $http({
         method: 'POST',
-        url: domain+'/api/votes/upVote',
+        url: domain+'/api/votes/upVote?access_token'+Auth.accessToken,
         data: { favor: favor, vote: vote }
       })
       .then(function(resp){
