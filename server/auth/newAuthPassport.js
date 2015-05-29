@@ -13,37 +13,30 @@ module.exports = function(passport) {
 
   passport.use( new FacebookTokenStrategy({
   //set clientID and clientSecret (from facebook app settings)
-  clientID : process.env.ClientID || configAuth.facebookAuth.clientID,
-  clientSecret : process.env.ClientSecret || configAuth.facebookAuth.clientSecret
+  clientID : process.env.ClientID || configAuth.facebook.clientID,
+  clientSecret : process.env.ClientSecret || configAuth.facebook.clientSecret
   }, function(accessToken, refereshToken, profile, done) {
     console.log("WE ARE INSIDE THE NEW FB ", profile)
     
-    //create dummy user
-    var user = new User({ name: 'Test User',
-                          screen_name: 'test',
-                          provider: 'facebook',
-                          provider_id: 413
+    User.findOne( { provider_id: profile.id },
+      function(err, user) {
+        if(!user) {
+          var user = new User({ name: profile.displayName,
+                          provider: profile.provider,
+                          provider_id: profile.id
                         });
 
-    user.save(function (err) {
-      if (err) {
-        console.log('error!');
-      }
+          user.save(function (err) {
+            if (err) {
+              console.log('error!');
+            }
       
-      User.findById(user, function(err, newUser) {
-        if (err) {
-          console.log('error!');
-        }
+            return done(err, user);
+          });
+        } else { return done(err, user); }
 
-        return done(err, newUser);
       });
 
-    //TODO: find/create user in db
-    // attaches user to req (use this in controllers)
-    });
-
   }));
-
-
 }
 
