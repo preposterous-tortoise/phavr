@@ -117,7 +117,6 @@ angular.module('drakeapp.photoFactory', [])
       $http.post(domain + '/api/photos/fetch', { favor_id: favor._id })
         .success(function(data, status, headers, config) {
           callback(data);
-          console.log('got photos for favor ');
         })
         .error(function(data, status, headers, config) {
           console.log('error getting photos for favor');
