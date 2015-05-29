@@ -117,7 +117,7 @@ module.exports = {
 
 
     // req.body.favor = { _id: req.body.favor_id };
-    Photo.findOne({
+    Vote.findOne({
       userID: req.user.provider_id,
       photoID: req.body.photo._id
     }, function (err, vote) {
