@@ -6,16 +6,17 @@
     <h3>{{ selectedFavor.description }}</h3>
     <ion-list ng-repeat="photo in selectedFavor.photos" class="wrap">
       <div class="row">
-      <div class="col col-80">
-        <ion-item ><img class="favorDetail" ng-src="{{photo.url}}"></ion-item>
-      </div>
+        <div class="col col-80">
+          <ion-item ><img class="favorDetail" ng-src="{{photo.url}}"></ion-item>
+        </div>
 
-      <div class="col">
-        <div class="picVoting">
-          <a ng-click="upVotePhoto(photo)" class="button button-icon icon ion-ios-arrow-up"></a><br>
-          <span class="votes">{{photo.votes}}</span><br>
-          <a ng-click="downVotePhoto(photo)" class="button button-icon icon ion-ios-arrow-down"></a>
-       </div>
+        <div class="col">
+          <div class="picVoting">
+            <a ng-click="upVotePhoto(photo)" class="button button-icon icon ion-ios-arrow-up"></a><br>
+            <span class="votes">{{photo.votes}}</span><br>
+            <a ng-click="downVotePhoto(photo)" class="button button-icon icon ion-ios-arrow-down"></a>
+         </div>
+        </div>
       </div>
 
     </ion-list>
@@ -23,6 +24,6 @@
   <ion-footer-bar class="bar-calm">  
     <button class="button cambutton button-icon icon ion-camera" ng-click="getPhoto()"></button>    
   </ion-footer-bar>
-  
+
   </ion-content>
 </ion-view>
