@@ -5,8 +5,9 @@ var Vote = require('../db/voteModel.js');
 module.exports = {
   upVote: function(req, res, next) {
     
-    //TODO: simply user req.user!!!
     //FIND THE VOTE that corresponds to the user id and favor id
+    console.log(req.body);
+    req.body.favor = { _id: req.body.favor_id };
     Vote.findOne({
       userID: req.user.provider_id,
       favorID: req.body.favor._id
