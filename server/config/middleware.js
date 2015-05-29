@@ -42,6 +42,12 @@ module.exports = function(app, express){
   app.use('/index.html', auth.signInIfNotAuthenticated);
   app.use(express.static(path.join(__dirname,'/../../drakeapp/www')));
 
+  app.use('/', function(req,res,next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With, access_token");
+    next();
+  });
+
 
   app.use('/api/requests', /*auth.authenticate, */favorRouter);
   app.use('/api/photos', /*auth.authenticate,*/ photoRouter);

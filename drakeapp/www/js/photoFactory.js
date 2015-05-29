@@ -14,6 +14,7 @@ angular.module('drakeapp.photoFactory', [])
   return {
     stuff: {},
     getPicture: function(favorID, time) {
+          console.log('get picture time', time);
 
           var pictureSource;   // picture source
           var destinationType; // sets the format of returned value
@@ -126,7 +127,7 @@ angular.module('drakeapp.photoFactory', [])
     sendPicture: function(imageURI, favorID) {
       var data = { image: imageURI, favor_id: favorID };
       console.log('inside sendPicture');
-      $http.post('https://drakeapp.herokuapp.com/api/photos/create?access_token'+Auth.accessToken, data)
+      $http.post('https://drakeapp.herokuapp.com/api/photos/create'/*?access_token'+Auth.accessToken*/, data)
         .success(function(data, status, headers, config) {
           console.log('photo uploaded!');
         })
