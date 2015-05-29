@@ -4,10 +4,11 @@ angular.module('drakeapp.photoFactory', [])
 .factory('photoFactory', ['$location', '$q', '$http', function($location, $q, $http) {
 
   var domain;
-  if($location.host() === 'localhost') {
-    domain = "http://localhost:3000";
-  } else {
+  if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || 
+    $location.host() === 'drakeapp.herokuapp.com') {
     domain = "http://drakeapp.herokuapp.com";
+  } else {
+    domain = "http://localhost:3000";
   }
 
   return {
@@ -125,6 +126,7 @@ angular.module('drakeapp.photoFactory', [])
 
     sendPicture: function(imageURI, favorID) {
       var data = { image: imageURI, favor_id: favorID };
+      console.log('inside sendPicture');
       $http.post('https://drakeapp.herokuapp.com/api/photos/create', data)
         .success(function(data, status, headers, config) {
           console.log('photo uploaded!');

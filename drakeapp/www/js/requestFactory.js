@@ -3,10 +3,11 @@ angular.module('drakeApp.favorfact', [])
 
 
   var domain;
-  if($location.host() === 'localhost') {
-    domain = "http://localhost:3000";
-  } else {
+  if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || 
+    $location.host() === 'drakeapp.herokuapp.com') {
     domain = "http://drakeapp.herokuapp.com";
+  } else {
+    domain = "http://localhost:3000";
   }
 
   return {

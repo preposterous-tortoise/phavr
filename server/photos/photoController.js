@@ -8,7 +8,7 @@ var S3_BUCKET = process.env.S3_BUCKET;
 
 module.exports = {
   createPhoto: function(req, res, next) {
-    aws.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});
+   /*aws.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});
     var s3 = new aws.S3();
     var fileName = uuid.v1();
     console.log('body', req.body);
@@ -28,7 +28,14 @@ module.exports = {
             res.status(201).send('Photo saved at https://drakeapp-photos.s3.amazonaws.com/'+fileName+'.jpg');
           });
       }
-    });
+    });*/
+    var photo = new Photo({ url: req.body.image, 
+                                  request_id: req.body.favor_id
+                                });
+          photo.save(function (err) {
+            if(err) { console.log(err); }
+            res.status(201).send('Photo saved at https://drakeapp-photos.s3.amazonaws.com/'+fileName+'.jpg');
+          });
   },
 
   createDummyPhoto: function(req, res, next) {
