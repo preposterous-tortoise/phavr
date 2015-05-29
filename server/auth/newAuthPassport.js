@@ -1,5 +1,5 @@
 var  FacebookTokenStrategy = require('passport-facebook-token');
-var request = require("request");
+//var request = require("request");
 var configAuth = require('./AuthConfig.js');
 var User = require('../db/userModel.js');
 
@@ -36,10 +36,12 @@ module.exports = function(passport) {
         }
 
         return done(err, newUser);
-      }
+      });
 
     //TODO: find/create user in db
     // attaches user to req (use this in controllers)
+    });
+
   }));
 
 
