@@ -1,6 +1,7 @@
 angular.module('drakeApp.requestCreationMap', [])
-  .controller('requestCreationMapCtrl', function($scope, Favors, mapService) {
+  .controller('requestCreationMapCtrl', function($scope, Favors, mapService, Nav) {
 
+    Nav.navBar = true;
     $scope.init = function() {
       var markerMap = {};
       var map = mapService.createMap();

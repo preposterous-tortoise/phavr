@@ -1,6 +1,7 @@
 angular.module('drakeApp.home', [])
-.controller('homeCtrl', function ($scope, $location, $http, Favors, photoFactory, geo){
+.controller('homeCtrl', function ($scope, $location, $http, Favors, photoFactory, geo, Nav){
  
+  Nav.setBar();
   $scope.favors = [];
   
   //hard-coded requests for testing

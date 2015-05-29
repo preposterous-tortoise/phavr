@@ -28,7 +28,7 @@ angular.module('drakeApp.favorfact', [])
     fetchRequests: function(box, callback) {
       return $http({
           method: 'POST',
-          url: domain+'/api/requests/',
+          url: domain+'/api/requests?access_token='+Auth.accessToken,
           data: {
             box: box
           }

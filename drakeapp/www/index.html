@@ -40,6 +40,7 @@
     <script src="js/requestCreationMapCtrl.js"></script>
     <script src="js/favorCtrl.js"></script>
     <script src="js/loginCtrl.js"></script>
+    <script src="js/navFactory.js"></script>
     <script src="js/favorDetailsCtrl.js"></script>
     <!-- google maps javascript -->
     <!--  EITHER IMPORT GOOGLE MAPS HERE (not using Angular Google Maps or 
@@ -50,12 +51,12 @@
     <ion-side-menus>
      <ion-side-menu-content ng-controller="navCtrl">
        <ion-pane>
-         <ion-header-bar class="bar-stable bar-calm">
+         <ion-header-bar class="bar-stable bar-calm" >
            <div class="button-bar">  
-             <a ng-click="toggleLeft()" class="button button-icon icon ion-navicon"></a>
-             <a ui-sref="requestmap" class ="button button-icon icon ion-earth"></a>
-             <a ui-sref="home" class="button button-icon icon ion-home"></a>
-             <a ui-sref="favor" class="button button-icon icon ion-paper-airplane"></a>
+             <a ng-show="navBar" ng-click="toggleLeft()" class="button button-icon icon ion-navicon"></a>
+             <a ui-sref="requestmap" ng-show="navBar" class ="button button-icon icon ion-earth"></a>
+             <a ui-sref="home" ng-show="navBar" class="button button-icon icon ion-home"></a>
+             <a ui-sref="favor" ng-show="navBar" class="button button-icon icon ion-paper-airplane"></a>
            </div>  
          </ion-header-bar>
 

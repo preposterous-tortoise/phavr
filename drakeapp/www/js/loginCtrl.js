@@ -1,5 +1,5 @@
 angular.module('drakeApp.login', [])
-.controller('loginCtrl', function ($scope, $location, $cordovaOauth, Auth, $http){
+.controller('loginCtrl', function ($scope, $location, $cordovaOauth, Auth, $http, Nav){
   
   $scope.information = [$scope.username, $scope.password];
   $scope.letsGo = function(){
@@ -9,6 +9,8 @@ angular.module('drakeApp.login', [])
       data: $scope.information
     })
   };
+
+  Nav.navBar = false;
 
   $scope.fbLogin = function() {
     /*return $http({
@@ -37,6 +39,7 @@ angular.module('drakeApp.login', [])
         $http.post('http://drakeapp.herokuapp.com/auth/facebook/token?access_token='+Auth.accessToken)
           .success(function(data){
             console.log(data);
+            $location.path('/home');
           })
          .error(function(data){
             console.log('error!')

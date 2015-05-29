@@ -1,8 +1,9 @@
 angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
-  .controller('requestMapCtrl', function($scope, $timeout, $location, uiGmapGoogleMapApi, Favors, mapService) {
+  .controller('requestMapCtrl', function($scope, $timeout, $location, uiGmapGoogleMapApi, Favors, mapService, Nav) {
 
     var areaZoom = 16;
     var markerMap = {};
+    Nav.navBar = true;
 
     var updateMarkers = function(bounds) {
       var box = mapService.getBoxForBounds(bounds);
