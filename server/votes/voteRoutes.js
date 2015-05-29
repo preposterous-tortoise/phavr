@@ -9,8 +9,6 @@ module.exports = function (app) {
     .post(voteController.downVote);
 
   app.route('/upVotePhoto')
-  	.post(votePhotoController.upVote);
+  	.post(voteController.upVotePhoto);
 
-  app.route('/downVotePhoto')
-  	.post(votePhotoController.downVote);
 };
