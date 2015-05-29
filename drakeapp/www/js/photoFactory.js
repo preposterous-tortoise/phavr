@@ -138,7 +138,7 @@ angular.module('drakeapp.photoFactory', [])
     upVote: function(photo, vote){
       return $http({
         method: 'POST',
-        url: domain+'/api/votes/upVotePhoto?access_token'+Auth.accessToken,
+        url: domain+'/api/votes/upVotePhoto?access_token='+"CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU",
         data: {photo: photo, vote: vote}
       })
       .then(function(resp){
@@ -149,7 +149,7 @@ angular.module('drakeapp.photoFactory', [])
     downVote: function(photoID){
       return $http({
         method: 'POST',
-        url: 'http://drakeapp.herokuapp.com/api/photos/downVote?access_token'+Auth.accessToken,
+        url: 'http://drakeapp.herokuapp.com/api/photos/downVote?access_token='+Auth.accessToken,
         data: photoID
       })
       .then(function(resp){

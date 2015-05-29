@@ -38,23 +38,23 @@ angular.module('drakeApp.favorDetails', [])
   };
 
   $scope.upVote = function(request) {
-    request.votes++;
+    photoFactory.downVote(photo, 1);
     // Favors.upVote(favorID);
   };
 
   $scope.downVote = function(request) {
-    request.votes--;
+    photoFactory.downVote(photo, -1);
     // Favors.downVote(favorID);
 
   };
 
   $scope.upVotePhoto = function(photo) {
-    request.votes++;
+    photoFactory.downVote(photo, 1);
     // photoFactory.upVote(photo.ID);
   };
 
   $scope.downVotePhoto = function(photo) {
-    request.votes--;
+    photoFactory.downVote(photo, -1);
     // photoFactory.downVote(photo.ID);
 
   };
