@@ -27,6 +27,15 @@ var fbAuth = require('../auth/newAuthPassport')(passport);
  * @api public
  */
 module.exports = function(app, express){
+  // Passport initialization
+  auth.init(passport);
+  app.use(passport.initialize());
+  app.use(passport.session());
+  // Passport Routes 
+  app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/signin.html');
+  });
   app.use(cookieParser('add a secret here'));
   app.use(session({ secret: 'xyz-qwrty', resave: false, saveUninitialized: true }));
 
@@ -65,7 +74,7 @@ module.exports = function(app, express){
       res.json(data); 
       }); */
 
-      res.json(req.user.provider_id);
+      res.send(req.user);
   });
 
   require('../favors/favorRoutes.js')(favorRouter);
@@ -84,16 +93,7 @@ module.exports = function(app, express){
   //require("../webScraping/instagramRoutes.js")(instagramScrapeRouter);
 
 
-  // Passport initialization
-  auth.init(passport);
-  app.use(passport.initialize());
-  app.use(passport.session());
-  // Passport Routes 
-  app.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/signin.html');
-  });
-
+ 
   // app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends']} ));
   // app.get('/auth/facebook/callback', passport.authenticate('facebook',
   //   { successRedirect: '/', failureRedirect: '/login' }
