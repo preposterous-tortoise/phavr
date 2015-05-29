@@ -31,14 +31,14 @@ angular.module('drakeApp.login', [])
       .then(function(result) {
         console.log('success!');
         console.log(result);
-        $scope.accessToken = result.access_token;
-        $http.post('/auth/facebook/token', result)
+        Auth.setAccessToken(result.access_token);
+        /*$http.post('/auth/facebook/token?access_token'+$scope.accessToken, result)
           .success(function(data){
           return data;
         })
          .error(function(data){
           return data;
-        }); 
+        });*/ 
     }, function(error) {
       alert("There was a problem getting your profile.  Check the logs for details.");
       console.log(error);

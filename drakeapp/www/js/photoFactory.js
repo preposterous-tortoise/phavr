@@ -126,7 +126,7 @@ angular.module('drakeapp.photoFactory', [])
     sendPicture: function(imageURI, favorID) {
       var data = { image: imageURI, favor_id: favorID };
       console.log('inside sendPicture');
-      $http.post('https://drakeapp.herokuapp.com/api/photos/create', data)
+      $http.post('https://drakeapp.herokuapp.com/api/photos/create?access_token'+Auth.accessToken, data)
         .success(function(data, status, headers, config) {
           console.log('photo uploaded!');
         })
