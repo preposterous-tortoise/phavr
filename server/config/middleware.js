@@ -55,15 +55,17 @@ module.exports = function(app, express){
 
 
 
-  app.get('/api/profileID', auth.authenticate, function(req, res){
-      var id = req.session.passport.user.provider_id
+  app.get('/api/profileID', passport.authenticate('facebook-token'), 
+    function(req, res){
+      /*var id = req.session.passport.user.provider_id
       console.log("THIS IS THE ID!!!! "+id)
       User.findOne(
         {$query:{ provider_id: id}}, 
       function(err, data){
       res.json(data); 
-    });   
-      // res.json(req.session.passport.user);
+      }); */
+
+      res.json(req.user.provider_id);
   });
 
   require('../favors/favorRoutes.js')(favorRouter);
@@ -117,7 +119,7 @@ passport.use( new FacebookTokenStrategy({
   }));
  */
 
-app.post('auth/facebook/token',
+app.post('/auth/facebook/token',
   passport.authenticate('facebook-token'),
     function (req,res) {
       console.log('authorized user!');
