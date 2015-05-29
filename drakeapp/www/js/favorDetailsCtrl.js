@@ -27,13 +27,16 @@ angular.module('drakeApp.favorDetails', [])
 
 
     });
-  }
+  };
 
   $scope.getAllPhotos = function() {
+    photoFactory.getPhotosForFavor(Favors.selectedFavor, function(data) {
+      $scope.selectedFavor.photos = data;
+    });
 
     console.log($scope.selectedFavor);
 
-  }
+  };
 
   $scope.upVote = function(request) {
     request.votes++;

@@ -1,0 +1,38 @@
+{ "_id" : { "$oid" : "5567170ed54e5bcb1c5f188d" }, "topic" : "Nerds", "description" : "Marcus", "place_name" : "Hack Reactor", "address" : "944 Market Street #8, San Francisco, CA 94102, United States", "user_id" : 1, "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png", "votes" : 0, "isPrivate" : false, "createdAt" : { "$date" : "2015-05-28T06:24:30.503-0700" }, "loc" : { "coordinates" : [ -122.408978, 37.783724 ], "type" : "Point" }, "__v" : 0 }
+{ "_id" : { "$oid" : "5567174dd54e5bcb1c5f188e" }, "topic" : "food", "description" : "How long is the line?", "place_name" : "Swan Oyster Depot", "address" : "1517 Polk Street, San Francisco, CA 94109, United States", "user_id" : 1, "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png", "votes" : 0, "isPrivate" : false, "createdAt" : { "$date" : "2015-05-28T06:25:33.454-0700" }, "loc" : { "coordinates" : [ -122.421018, 37.790948 ], "type" : "Point" }, "__v" : 0 }
+{ "_id" : { "$oid" : "5567859ddfa4d17413ffc30a" }, "topic" : "sights", "description" : "Tourists", "place_name" : "Union Square", "address" : "Union Square, San Francisco, CA 94108, USA", "user_id" : 1, "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png", "votes" : 0, "isPrivate" : false, "createdAt" : { "$date" : "2015-05-28T14:16:13.888-0700" }, "loc" : { "coordinates" : [ -122.4074374, 37.7879938 ], "type" : "Point" }, "__v" : 0 }
+
+
+curl -H "Content-Type: application/json" -X POST -d '{"url":"https://hrhq.squarespace.com/assets/images/school-lecture@2x.jpg","favor_id":"5567170ed54e5bcb1c5f188d"}' http://localhost:3000/api/photos/create-dummy
+
+
+curl -H "Content-Type: application/json" -X POST -d '{"url":"http://ebmedia.eventbrite.com/s3-build/images/3904503/44251867806/1/logo.png","favor_id":"5567170ed54e5bcb1c5f188d"}' http://localhost:3000/api/photos/create-dummy
+
+"5567170ed54e5bcb1c5f188d"
+HR: https://hrhq.squarespace.com/assets/images/school-lecture@2x.jpg
+
+
+http://ebmedia.eventbrite.com/s3-build/images/3904503/44251867806/1/logo.png
+
+
+
+Union Square: 
+"5567859ddfa4d17413ffc30a"
+
+curl -H "Content-Type: application/json" -X POST -d '{"url":"http://images2.trippy.com/555cc3a5e4b0c050d882b87c_pm9.jpg","favor_id":"5567859ddfa4d17413ffc30a"}' http://localhost:3000/api/photos/create-dummy
+
+curl -H "Content-Type: application/json" -X POST -d '{"url":"http://cdn.funcheap.com/wp-content/uploads/2012/06/IMG_34461.jpg","favor_id":"5567859ddfa4d17413ffc30a"}' http://localhost:3000/api/photos/create-dummy
+
+
+
+http://images2.trippy.com/555cc3a5e4b0c050d882b87c_pm9.jpg
+
+http://cdn.funcheap.com/wp-content/uploads/2012/06/IMG_34461.jpg
+
+
+{ "_id" : ObjectId("55678cc920e6bba7232bcee5"), "url" : "https://hrhq.squarespace.com/assets/images/school-lecture@2x.jpg", "createdAt" : ISODate("2015-05-28T21:46:49.097Z"), "loc" : { "coordinates" : [ 0, 0 ], "type" : "Point" }, "votes" : 0, "__v" : 0 }
+
+curl -H "Content-Type: application/json" -X POST -d '{"favor_id":"5567859ddfa4d17413ffc30a"}' http://localhost:3000/api/photos/fetch
+
+
+[{"_id":"55678ebb8ce20c3926d30063","url":"http://images2.trippy.com/555cc3a5e4b0c050d882b87c_pm9.jpg","request_id":"5567859ddfa4d17413ffc30a","__v":0,"createdAt":"2015-05-28T21:55:07.443Z","loc":{"coordinates":[0,0],"type":"Point"},"votes":0},{"_id":"55678ec48ce20c3926d30064","url":"http://cdn.funcheap.com/wp-content/uploads/2012/06/IMG_34461.jpg","request_id":"5567859ddfa4d17413ffc30a","__v":0,"createdAt":"2015-05-28T21:55:16.246Z","loc":{"coordinates":[0,0],"type":"Point"},"votes":0}]

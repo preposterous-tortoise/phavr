@@ -38,6 +38,29 @@ module.exports = {
           });
   },
 
+  createDummyPhoto: function(req, res, next) {
+    var photo = new Photo({ url: req.body.url, 
+                            request_id: req.body.favor_id
+                          });
+    photo.save(function (err) {
+      if(err) { console.log(err); }
+      res.status(201).send('photo saved: ' + req.body.url);
+    });
+
+  },
+  fetchPhotosForFavor: function(req, res, next) {
+    var query = Photo.find({
+      request_id: req.body.favor_id
+    });
+    query.exec(function(err, docs) {
+      res.json(docs);
+      if (err) {
+        console.log('ERROR in fetchPhotosForFavor ', err)
+        res.send('ERROR in fetchPhotosForFavor ' + err)
+      }
+    });
+  },
+
   //for upvotes/downvotes
   updatePhoto: function(req, res, next) {
     res.send('updatePhoto called with body: ' + JSON.stringify(req.body));

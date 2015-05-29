@@ -1,14 +1,15 @@
 
 
 angular.module('drakeapp.photoFactory', [])
-.factory('photoFactory', ['$q', '$http', function($q, $http, $location) {
+.factory('photoFactory', ['$location', '$q', '$http', function($location, $q, $http) {
 
-  /*var domain;
-  if($location.host() === 'localhost') {
-    domain = "http://localhost:3000";
-  } else {
+  var domain;
+  if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || 
+    $location.host() === 'drakeapp.herokuapp.com') {
     domain = "http://drakeapp.herokuapp.com";
-  }*/
+  } else {
+    domain = "http://localhost:3000";
+  }
 
   return {
     stuff: {},
@@ -109,6 +110,17 @@ angular.module('drakeapp.photoFactory', [])
         })
         .error(function(data, status, headers, config) {
           console.log('error getting instagram photos');
+        });
+    },
+
+    getPhotosForFavor: function(favor, callback){
+      $http.post(domain + '/api/photos/fetch', { favor_id: favor._id })
+        .success(function(data, status, headers, config) {
+          callback(data);
+          console.log('got photos for favor ');
+        })
+        .error(function(data, status, headers, config) {
+          console.log('error getting photos for favor');
         });
     },
 
