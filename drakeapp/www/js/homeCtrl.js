@@ -56,6 +56,7 @@ angular.module('drakeApp.home', [])
         Favors.fetchRequests(box, function(data){
           console.log('got requests', data);
           $scope.favors = data;
+          console.log($scope.favors);
         });
       });
   };

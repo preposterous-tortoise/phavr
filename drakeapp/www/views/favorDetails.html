@@ -4,7 +4,7 @@
   <ion-content padding="false">
     <h2>{{ selectedFavor.topic }}</h2>
     <h3>{{ selectedFavor.description }}</h3>
-    <ion-list ng-repeat="photo in selectedFavor.photos " class="wrap">
+    <ion-list ng-repeat="photo in selectedFavor.photos | orderBy:'-votes'" class="wrap">
       <div class="row">
         <div class="col col-80">
           <ion-item ><img class="favorDetail" ng-src="{{photo.url}}"></ion-item>
