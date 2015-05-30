@@ -3,7 +3,7 @@ angular.module('drakeApp.mapService', [])
 
     var myLatlng = new google.maps.LatLng(37.783724, -122.40897799999999);
 
-    var genericIconURL = "http://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
+    var genericIconURL = "http://frit-talk.com/mobile/2/endirect.png"
 
     var mapOptions = {
       center: myLatlng,
@@ -65,9 +65,9 @@ angular.module('drakeApp.mapService', [])
         if (this.marker) {
           this.marker.setMap(null);
         }
-        this.marker = this.addMarker(favor, map);
+        this.marker = this.addMarker(favor, map, null, true);
       },
-      addMarker: function(favor, map, markerMap) {
+      addMarker: function(favor, map, markerMap, addInfoWindow) {
         var location = getFavorLocation(favor);
         var infowindow = new google.maps.InfoWindow();
         var marker = new google.maps.Marker({
@@ -75,7 +75,7 @@ angular.module('drakeApp.mapService', [])
           map: map
         });
         marker.setIcon( /** @type {google.maps.Icon} */ ({
-          url: favor.icon,
+          url: genericIconURL, //favor.icon,
           size: new google.maps.Size(71, 71),
           origin: new google.maps.Point(0, 0),
           anchor: new google.maps.Point(17, 34),
@@ -84,8 +84,10 @@ angular.module('drakeApp.mapService', [])
         marker.setPosition(location);
         marker.setVisible(true);
         var description = favor.description || "";
-        infowindow.setContent('<div>' + description + '</div><div><strong>' + favor.place_name + '</strong><br>');
-        infowindow.open(map, marker);
+        if (addInfoWindow) {
+          infowindow.setContent('<div>' + description + '</div><div><strong>' + favor.place_name + '</strong><br>');
+          infowindow.open(map, marker);
+        }
         if (favor._id) {
           google.maps.event.addListener(marker, "click", function() {
             var favor = getFavorForMarker(this, markerMap);
@@ -139,7 +141,7 @@ angular.module('drakeApp.mapService', [])
                 place_name: place.name,
                 address: place.formatted_address,
                 location: place.geometry.location,
-                icon: place.icon
+                icon: genericIconURL //place.icon
               }
             context.favor = favor;
             if (context.marker) {
