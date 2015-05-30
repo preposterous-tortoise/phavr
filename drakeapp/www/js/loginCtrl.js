@@ -1,6 +1,7 @@
 angular.module('drakeApp.login', [])
-.controller('loginCtrl', function ($scope, $location, $cordovaOauth, Auth, $http, Nav){
-  
+.controller('loginCtrl', function ($scope, $rootScope, $location, $cordovaOauth, Auth, $http, Nav){
+    $rootScope.login = false;
+
   $scope.information = [$scope.username, $scope.password];
   $scope.letsGo = function(){
   	return $http({
@@ -10,7 +11,7 @@ angular.module('drakeApp.login', [])
     })
   };
 
-  Nav.navBar = false;
+
 
   $scope.fbLogin = function() {
     /*return $http({
