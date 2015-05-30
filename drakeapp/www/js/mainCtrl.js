@@ -5,7 +5,6 @@ angular.module('drakeApp.nav', [])
   };
 
   $scope.user
-  $scope.navBar = Nav.navBar;
 
   $scope.getUserInfo = function() {
     return $http({

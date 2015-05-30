@@ -3,10 +3,10 @@ angular.module('drakeApp.navfact', [])
 
   return {
 
-    navBar: false,
+    navBar: true,
 
-    setBar: function() {
-      this.navBar = !this.navBar;
+    setBar: function(bool) {
+      this.navBar = bool;
     }
 
   }
