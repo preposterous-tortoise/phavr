@@ -1,7 +1,9 @@
 angular.module('drakeApp.home', [])
 .controller('homeCtrl', function ($scope, $rootScope, $location, $http, Favors, photoFactory, geo, Nav){
  
+
   $rootScope.login = true;
+
 
   $scope.favors = [];
   

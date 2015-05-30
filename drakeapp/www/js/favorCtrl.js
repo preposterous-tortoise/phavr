@@ -1,7 +1,6 @@
 angular.module('drakeApp.favor', [])
 .controller('favorCtrl', function ($scope, $window, $location, Favors, mapService, Nav){
 
-  Nav.navBar = true;
 	$scope.createFavor = function() {
 		var mapFavor = mapService.favor; //$scope.$$nextSibling.favor;
 		if (mapFavor) {

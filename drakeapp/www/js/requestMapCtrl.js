@@ -3,7 +3,6 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
 
     var areaZoom = 16;
     var markerMap = {};
-    Nav.navBar = true;
 
     var updateMarkers = function(bounds) {
       var box = mapService.getBoxForBounds(bounds);

@@ -12,7 +12,6 @@ angular.module('drakeApp.login', [])
   };
 
 
-
   $scope.fbLogin = function() {
     /*return $http({
       method: 'GET',
