@@ -10,7 +10,7 @@ angular.module('drakeApp.favor', [])
 			$scope.favor.icon = mapFavor.icon;
 	  }
 		Favors.saveRequest($scope.favor);
-		$location.path('/');
+		$location.path('/home');
 	};
 
 });
