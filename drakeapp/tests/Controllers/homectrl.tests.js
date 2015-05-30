@@ -1,7 +1,26 @@
 describe('homeCtrl', function() {
   var scope;
+  // var google;
 
-  beforeEach(module('drakeApp.home'));
+  beforeEach(function() {
+  	/*google = {
+	    maps : {
+	        LatLng : function () {
+	        },
+	        Marker : function () {
+	        },
+	        InfoWindow : function () {
+	        }
+	    }
+	  };*/
+  	module('drakeApp.favorfact')
+  	module('drakeApp.home');
+  	module('drakeapp.photoFactory');
+  	module('drakeapp.locationFactory');
+  	module('ngCordovaMocks');
+  	module('drakeApp.mapService');
+
+  });
 
   beforeEach(inject(function($rootScope, $controller) {
     scope = $rootScope.$new();

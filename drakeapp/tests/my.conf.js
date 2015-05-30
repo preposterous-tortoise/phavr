@@ -15,9 +15,13 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'http://maps.googleapis.com/maps/api/js?sensor=false&language=en',  
       '../www/lib/angular/angular.js',
       '../www/js/*.js',
       '../www/lib/angular-mocks/angular-mocks.js',
+      '../www/lib/ionic/js/ionic.bundle.js',
+      '../www/lib/ngCordova/dist/ng-cordova-mocks.js',
+      '../www/lib/angular-google-maps/dist/angular-google-maps.js',
       '**/*tests.js'
     ],
 
