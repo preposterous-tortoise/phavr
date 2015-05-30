@@ -10,8 +10,6 @@ angular.module('drakeApp.login', [])
     })
   };
 
-  Nav.navBar = false;
-
   $scope.fbLogin = function() {
     /*return $http({
       method: 'GET',

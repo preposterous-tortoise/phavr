@@ -2,7 +2,6 @@ angular.module('drakeApp.favorDetails', [])
 .controller('favorDetailsCtrl', function ($scope, $location, $http, photoFactory, Favors, $cordovaFile, Nav){
 
   $scope.selectedFavor = Favors.selectedFavor;
-  Nav.navBar = true;
   
   $scope.getPhoto = function(){
 

@@ -1,5 +1,3 @@
-
-
 angular.module('drakeapp.photoFactory', [])
 .factory('photoFactory', ['$location', '$q', '$http', 'Auth', function($location, $q, $http, Auth) {
 
@@ -115,7 +113,7 @@ angular.module('drakeapp.photoFactory', [])
     },
 
     getPhotosForFavor: function(favor, callback){
-      $http.post(domain + '/api/photos/fetch', { favor_id: favor._id })
+      $http.post(domain + '/api/photos/fetch?access_token='+Auth.accessToken, { favor_id: favor._id })
         .success(function(data, status, headers, config) {
           callback(data);
         })
@@ -127,7 +125,7 @@ angular.module('drakeapp.photoFactory', [])
     sendPicture: function(imageURI, favorID) {
       var data = { image: imageURI, favor_id: favorID };
       console.log('inside sendPicture');
-      $http.post('https://drakeapp.herokuapp.com/api/photos/create'/*?access_token'+Auth.accessToken*/, data)
+      $http.post('https://drakeapp.herokuapp.com/api/photos/create?access_token='+Auth.accessToken, data)
         .success(function(data, status, headers, config) {
           console.log('photo uploaded!');
         })
