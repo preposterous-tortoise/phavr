@@ -7,19 +7,31 @@ module.exports = function(grunt) {
       dev: {
         script: './server/server.js'
       }
+    },   
+    // configure karma
+    karma: {
+      options: {
+        configFile: './drakeapp/tests/my.conf.js',
+      },
+      // Single-run configuration for development
+      single: {
+        singleRun: true,
+      }
     },
+
+
   });
 
+  grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-karma');
 
   grunt.loadNpmTasks('grunt-shell');
-  grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-docco');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-concurrent');
-  grunt.loadNpmTasks('grunt-webpack');
+
 
 
 
@@ -41,6 +53,7 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('default', ['nodemon']);
+  grunt.registerTask('test',['karma']);
 
 
 };
