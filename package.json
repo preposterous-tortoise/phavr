@@ -25,7 +25,6 @@
     "express-session": "^1.11.2",
     "fmt": "^0.5.0",
     "fs": "0.0.2",
-    "grunt": "^0.4.5",
     "http": "0.0.0",
     "instagram-node": "^0.5.7",
     "install": "^0.1.8",
@@ -41,11 +40,8 @@
     "twitter": "^1.2.5",
     "uuid": "^2.0.1"
   },
-  "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install",
-    "test": "grunt test"
-  },
-  "devDependencies": {
+  "devDependencies": {    
+    "grunt": "^0.4.5",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-karma": "^0.11.0",
@@ -56,5 +52,9 @@
     "karma-jasmine": "^0.3.5",
     "karma-phantomjs-launcher": "^0.2.0",
     "phantomjs": "^1.9.17"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install",
+    "test": "grunt test"
   }
 }
