@@ -134,7 +134,7 @@ app.post('/auth/facebook/token',
   //Sending photos to S3
   app.get('/photoUploads/uploadToS3/', function(req,res){
 
-      console.log("THIS IS THE UPLOAD S3 BODY!"+req.body);
+      console.log("THIS IS THE UPLOAD S3 BODY!"+JSON.stringify(req.body));
 
        var fmt = require('fmt');
        var amazonS3 = require('awssum-amazon-s3');
