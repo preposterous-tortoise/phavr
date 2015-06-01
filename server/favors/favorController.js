@@ -36,6 +36,8 @@ module.exports = {
   
   createFavor: function(req, res, next) {
 
+    console.log("THIS IS WHAT CREATE FAVOR WANTS!!!! "+JSON.stringify(req.body));
+
     //TODO: get user id from req.user
     var favor = new Favor({
       topic: req.body.topic,
@@ -51,12 +53,12 @@ module.exports = {
       votes: 0,
       isPrivate: false
     });
-    favor.save(function(err) {
+    favor.save(function(err, favor) {
       if (err) console.log('ERROR in favor creation: ', err);
       if (err) throw err;
       //done(null, user);
+      res.send(favor);
     });
-    res.send('createFavor called with body: ' + JSON.stringify(req.body));
   },
   updateFavor: function(req, res, next) {
     // var userObj = req.session.passport.user;

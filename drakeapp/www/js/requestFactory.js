@@ -19,6 +19,7 @@ angular.module('drakeApp.favorfact', [])
       })
       .success(function(data, status, headers, config) {
         return data;
+        console.log("THIS IS WHAT IS INSIDE A REQUEST "+request);
       })
       .error(function(data, status, headers, config) {
         console.log('saveRequest error, ', data, status, headers, config);

@@ -6,7 +6,7 @@ var Vote = require('../db/voteModel.js');
 
 module.exports = {
   upVote: function(req, res, next) {
-    
+    console.log("I NEED THIS PROVIDER ID BRUH "+req.user.provider_id)
 
 
     //Query the Vote table for entries with a certain userID and favorID
