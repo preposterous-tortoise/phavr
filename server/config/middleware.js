@@ -105,15 +105,15 @@ app.post('/auth/facebook/token',
     function (req,res) {
       console.log('authorized user!');
       console.log(req.user);
-      res.send(req.user? 200 : 401)
+      res.send(req.user? 201 : 401)
     }
   );
 
 
   // app.get('/auth/facebook/token', passport.authenticate('facebook-token', { scope: ['user_friends']} ));
-  app.get('/auth/facebook/callback', passport.authenticate('facebook-token',
-    { successRedirect: '/', failureRedirect: '/login' }
-  ));
+  // app.get('/auth/facebook/callback', passport.authenticate('facebook-token',
+  //   { successRedirect: '/', failureRedirect: '/login' }
+  // ));
 
   //Multer is an NPM module used to upload multi-part data
   app.use(multer({ dest: './uploads/', 
@@ -133,6 +133,8 @@ app.post('/auth/facebook/token',
   
   //Sending photos to S3
   app.get('/photoUploads/uploadToS3/', function(req,res){
+
+      console.log("THIS IS THE UPLOAD S3 BODY!"+req.body);
 
        var fmt = require('fmt');
        var amazonS3 = require('awssum-amazon-s3');
