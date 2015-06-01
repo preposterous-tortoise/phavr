@@ -7,7 +7,7 @@ angular.module('drakeApp', ['ionic', 'ngCordova', 'drakeApp.home', 'drakeApp.nav
                               'drakeApp.login', 'drakeApp.requestMap', 'drakeApp.favorDetails',
                               'drakeapp.photoFactory', 'drakeApp.favorfact', 'drakeapp.locationFactory',
                               'uiGmapgoogle-maps','drakeApp.mapService', 'drakeApp.requestCreationMap', 
-                              'drakeapp.authFactory', 'drakeApp.navfact'])
+                              'drakeapp.authFactory', 'drakeApp.navfact', 'drakeApp.nav'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

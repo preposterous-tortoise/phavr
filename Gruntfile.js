@@ -1,10 +1,13 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json')
+    pkg: grunt.file.readJSON('package.json'),
 
-
-
+    nodemon: {
+      dev: {
+        script: './server/server.js'
+      }
+    },
   });
 
 
@@ -37,25 +40,7 @@ module.exports = function(grunt) {
   // Main grunt tasks
   ////////////////////////////////////////////////////
 
-grunt.registerTask('default', [
-    'concurrent:target'
-  ]);
-
-  grunt.registerTask('test', ['karma'
-  ]);
-
-  grunt.registerTask('build', []);
-
-  grunt.registerTask('upload', function(n) {
-    if(grunt.option('prod')) {
-      // add your production server task here
-    } else {
-      grunt.task.run([ 'server-dev' ]);
-    }
-  });
-
-  grunt.registerTask('deploy', [
-  ]);
+  grunt.registerTask('default', ['nodemon']);
 
 
 };
