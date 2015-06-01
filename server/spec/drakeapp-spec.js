@@ -4,7 +4,9 @@ var frisby = require("frisby");
 
 //test might fail due to expired token, check on that.
 
-describe("My First Test!", function () {
+var favor
+
+describe("Authentication!", function () {
 
 	frisby.create('Authentication')
 	  .post("http://localhost:3000/auth/facebook/token?access_token=CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU")
@@ -12,6 +14,22 @@ describe("My First Test!", function () {
 	.toss();
   
 }); 
+
+describe("Create A Favor!", function () {
+
+	frisby.create('Make A Favor')
+	  .post("http://localhost:3000/api/requests/create?access_token=CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU",
+	    {"topic":"lol4", "tags": "lol4", "description":"lol4","place_name":"Hack Reactor","address":"944 Market Street #8, San Francisco, CA 94102, United States","icon":"http://frit-talk.com/mobile/2/endirect.png","location":{"A": 37.783724, "F": -122.40897799999999}}
+	  	)
+	  .expectStatus(200)
+	  .expectHeader('Content-Type', 'application/json; charset=utf-8')
+	  .afterJSON(function (body) {
+	          console.log("THIS IS INSIDE BODY DOG! "+JSON.stringify(body));
+	          favor = JSON.stringify(body);
+	        })
+	.toss();
+  
+});
 
 describe("Testing an upVote", function () {
 
@@ -41,6 +59,17 @@ describe("Testing a downVote", function () {
 	          //changed values
 	          expect(body).toMatch(0);
 	        })
+	.toss();
+  
+});
+
+describe("Testing Photo", function () {
+
+	frisby.create('Dummy Photo')
+	  .post("http://localhost:3000/api/photos/create-dummy?access_token=CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU",
+	  	{"favor_id":"556ca405e30393ac1cc6148f", "url":"www/example.com"}
+	  	)
+	  .expectStatus(201)
 	.toss();
   
 });
