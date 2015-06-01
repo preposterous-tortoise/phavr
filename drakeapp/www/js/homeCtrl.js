@@ -65,6 +65,10 @@ angular.module('drakeApp.home', [])
       });
   };
 
+  $scope.enableTracking = function(){
+    geo.enableTracking();
+  }
+
   $scope.testVar = true;
   $scope.updateFavors();
 });

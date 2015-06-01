@@ -1,6 +1,7 @@
 
 <ion-view title="home">
   <ion-content padding="false">
+           <span> <p  ng-click="enableTracking()"> CLICK HERE FOR TRACKING</p></span>
 
     <ion-list ng-repeat="favor in favors | orderBy:'-votes'">
       <ion-item>
@@ -18,5 +19,11 @@
           </div>
       </ion-item>
     </ion-list>
+
+
   </ion-content>
+
+
+
+
 </ion-view>
