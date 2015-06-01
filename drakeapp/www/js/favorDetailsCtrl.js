@@ -5,7 +5,6 @@ angular.module('drakeApp.favorDetails', [])
   
   $scope.getPhoto = function(){
 
-    //TODO REPLACE FAVOR ID WITH APPROPRIATE FAVOR ID
     var d = new Date();
     var time = d.getTime();
     var favorID = $scope.selectedFavor._id;
