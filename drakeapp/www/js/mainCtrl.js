@@ -4,8 +4,7 @@ angular.module('drakeApp.nav', [])
     $ionicSideMenuDelegate.toggleLeft();
   };
 
-  $scope.user
-
+  $scope.user;
   $scope.getUserInfo = function() {
     return $http({
             method: 'GET',

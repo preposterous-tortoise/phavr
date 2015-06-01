@@ -65,40 +65,6 @@ angular.module('drakeApp.home', [])
       });
   };
 
-  $scope.getPhoto = function(){
-    var d = new Date();
-    var time = d.getTime();
-    var favorID = 1234;
-    photoFactory.getPicture("1111111111111111111", time );
-    photoFactory.sendPicture("https://s3.amazonaws.com/darrendrakeapp/"+time+"___"+favorID +".jpg")
-
-  	// photoFactory.getPicture().then(function(image){
-  	// 	console.log(image);
-   //    $scope.takenPhoto = image;
-   //    photoFactory.sendPhoto(image);
-
-  	// }, function(err) {
-  	// 	console.log(err);
-  	// }, {
-   //    quality: 75,
-   //    targetWidth: 320,
-   //    targetHeight: 320,
-   //    saveToPhotoAlbum: false
-   //  })
-  };
-
-  $scope.getUserInfo = function() {
-    return $http({
-            method: 'GET',
-            url: '/api/profileID'
-        })
-        .then(function(resp) {
-            console.log('response from getting server', resp);
-            photoFactory.stuff = resp;
-            return resp;
-        });
-  };
-
   $scope.testVar = true;
   $scope.updateFavors();
 });
