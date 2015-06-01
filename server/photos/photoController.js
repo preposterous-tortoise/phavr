@@ -31,6 +31,8 @@ module.exports = {
     });*/
     
     //TODO: get user id from req.user and attach it to the photo
+
+    //Create a new Photo and Save it
     var photo = new Photo({ url: req.body.image, 
                                   request_id: req.body.favor_id
                                 });
@@ -50,6 +52,8 @@ module.exports = {
     });
 
   },
+
+  //Query the Photo table for photos from a certain favor
   fetchPhotosForFavor: function(req, res, next) {
     var query = Photo.find({
       request_id: req.body.favor_id
@@ -63,7 +67,7 @@ module.exports = {
     });
   },
 
-  //for upvotes/downvotes
+  
   updatePhoto: function(req, res, next) {
     res.send('updatePhoto called with body: ' + JSON.stringify(req.body));
   },
