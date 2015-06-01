@@ -9,7 +9,7 @@ module.exports = {
     
 
 
-    // req.body.favor = { _id: req.body.favor_id };
+    //Query the Vote table for entries with a certain userID and favorID
     Vote.findOne({
       userID: req.user.provider_id,
       favorID: req.body.favor._id
@@ -29,11 +29,12 @@ module.exports = {
         console.log('you already voted on that...'); 
         console.log("req.body.vote", req.body.vote);
         console.log("vote.vote", vote.vote);
-        if (req.body.vote === 1 && (vote.vote ===-1 || vote.vote ===0))  { //if sending an upvote, check if there is already a downvote
 
-            console.log('overriding downvote');
-            //override the downvote
-            //vote.vote = 1;
+        //If req.body.vote = 1, upvote; 0, nuetral; -1, downvote
+        //If sending an upvote, check if there is already a downvote
+        if (req.body.vote === 1 && (vote.vote ===-1 || vote.vote ===0))  { 
+
+            //Increase the votes by 1 in both the votes and favors tables
             Vote.findByIdAndUpdate(vote._id,
               { $inc: {vote: 1 } },
               function(err, data) {
@@ -50,7 +51,7 @@ module.exports = {
 
         else if(req.body.vote === -1 && (vote.vote === 1|| vote.vote ===0)){
 
-            //vote.vote = -1;
+            //Decrease a specific entry in both the favor and vote table by 1
             Vote.findByIdAndUpdate(vote._id,
               { $inc: {vote: -1 } },
               function(err, data) {
@@ -70,6 +71,7 @@ module.exports = {
         // //otherwise, you've already voted. send back 0
       } else {
       
+      //Create a new vote entry and save it
       var vote = new Vote({
         userID: req.user.provider_id,
         favorID: req.body.favor._id,
@@ -116,7 +118,7 @@ module.exports = {
     
 
 
-    // req.body.favor = { _id: req.body.favor_id };
+    //Query the Vote table for a specific entry with a certain photo/userID
     Vote.findOne({
       userID: req.user.provider_id,
       photoID: req.body.photo._id

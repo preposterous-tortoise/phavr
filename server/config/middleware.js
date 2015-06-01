@@ -1,3 +1,4 @@
+//Different NPM Modules
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var path = require('path');
@@ -7,6 +8,7 @@ var passport = require('passport');
 //var request = require('request');
 var multer  = require('multer');
 
+//User Model Schema
 var User = require('../db/userModel.js');
 
 
@@ -43,27 +45,32 @@ module.exports = function(app, express){
   var favorRouter = express.Router();
   var voteRouter = express.Router();
 
-
+  //Used for logging request details
   app.use(morgan('dev'));
+
+  //Allows the use of req.body
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
   // app.get('/', auth.signInIfNotAuthenticated);
   app.use('/index.html', auth.signInIfNotAuthenticated);
+
+  //Serve the static files from the Front-End
   app.use(express.static(path.join(__dirname,'/../../drakeapp/www')));
 
+  //On every subsequent http request from the Front-End, it will attach these headers to the response
   app.use('/', function(req,res,next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With, access_token");
     next();
   });
 
-
+  //Routes from Front-End $http requests to their respective routers; authenticated
   app.use('/api/requests', passport.authenticate('facebook-token'), favorRouter);
   app.use('/api/photos', passport.authenticate('facebook-token'), photoRouter);
   app.use('/api/votes', passport.authenticate('facebook-token'), voteRouter);
 
 
-
+  //Used to grab user information from the user proprty of request. Provides FB info for name and profile picture
   app.get('/api/profileID', passport.authenticate('facebook-token'), 
     function(req, res){
       /*var id = req.session.passport.user.provider_id
@@ -77,6 +84,7 @@ module.exports = function(app, express){
       res.send(req.user);
   });
 
+  //Adding routes
   require('../favors/favorRoutes.js')(favorRouter);
   require('../photos/photoRoutes.js')(photoRouter);
   require('../votes/voteRoutes.js')(voteRouter);
@@ -92,74 +100,47 @@ module.exports = function(app, express){
   //app.use('/api/instagram', /*auth.athenticate*/ instagramScrapeRouter);
   //require("../webScraping/instagramRoutes.js")(instagramScrapeRouter);
 
-
- 
-  // app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends']} ));
-  // app.get('/auth/facebook/callback', passport.authenticate('facebook',
-  //   { successRedirect: '/', failureRedirect: '/login' }
-  // ));
-
-/*User.findOrCreate({where: {fbID: profile.id, fbName: profile.displayName, fbEmail: profile.emails[0].value, fbPicture: profile.photos[0].value }})
-      .then(function(user){
-
-        user[0].updateAttributes({fbToken: accessToken})
-        // db.User.update({fbToken: accessToken}, {where:{fbID: profile.id}})
-          .then( function(){
-
-            return done(null, user);
-          })
-      });
-
-passport.use( new FacebookTokenStrategy({
-  //set clientID and clientSecret (from facebook app settings)
-  clientID : process.env.ClientID || configAuth.facebookAuth.clientID,
-  clientSecret : process.env.ClientSecret || configAuth.facebookAuth.clientSecret
-  }, function(accessToken, refereshToken, profile, done) {
-    console.log("WE ARE INSIDE THE NEW FB "+ profile)
-  }));
- */
-
 app.post('/auth/facebook/token',
   passport.authenticate('facebook-token'),
     function (req,res) {
       console.log('authorized user!');
       console.log(req.user);
-      res.send(req.user? 200 : 401)
+      res.send(req.user? 201 : 401)
     }
   );
 
 
   // app.get('/auth/facebook/token', passport.authenticate('facebook-token', { scope: ['user_friends']} ));
-  app.get('/auth/facebook/callback', passport.authenticate('facebook-token',
-    { successRedirect: '/', failureRedirect: '/login' }
-  ));
+  // app.get('/auth/facebook/callback', passport.authenticate('facebook-token',
+  //   { successRedirect: '/', failureRedirect: '/login' }
+  // ));
 
+  //Multer is an NPM module used to upload multi-part data
+  app.use(multer({ dest: './uploads/', 
+    rename: function(fieldname, filename) {
+              console.log(fieldname);
+              console.log(filename);
+              return filename;
+              }
+  }));
 
-  app.get('/test', function(req, res){
-    console.log('at /test, session: ', req.session);
-    res.send('get /test OK');
-  })
-
-   app.use(multer({ dest: './uploads/'
-    , rename: function(fieldname, filename) {
-      console.log(fieldname);
-      console.log(filename);
-      return filename;
-   }
- }));
-
+  //Used to chunk the photos into one coherent file before uploading them to S3
   app.post('/photoUploads/uploadToServer', function(req,res){
     console.log("_________________");
      console.log(req.files);
     res.redirect('/photoUploads/uploadToS3/?fileName=' + req.files.file.originalname);
   });
-
+  
+  //Sending photos to S3
   app.get('/photoUploads/uploadToS3/', function(req,res){
+
+      console.log("THIS IS THE UPLOAD S3 BODY!"+req.body);
 
        var fmt = require('fmt');
        var amazonS3 = require('awssum-amazon-s3');
        var fs = require('fs');
 
+       //Setting up access keys
        var s3 = new amazonS3.S3({
            'accessKeyId'     : process.env.AWS_ACCESS_KEY_DARREN,
            'secretAccessKey' : process.env.AWS_SECRET_KEY_DARREN,
@@ -185,6 +166,8 @@ app.post('/auth/facebook/token',
                ContentLength : file_info.size,
                Body          : bodyStream
            };
+
+           //Actually sends data to S3
            s3.PutObject(options, function(err, data) {
              console.log("im in putobject function");
 
