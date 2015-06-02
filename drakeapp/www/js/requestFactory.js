@@ -53,6 +53,8 @@ angular.module('drakeApp.favorfact', [])
         data: { favor: favor, vote: vote }
       })
       .then(function(resp){ //response will be -1, 0 or 1
+        console.log('votes',favor.votes);
+        console.log(resp.data);
         favor.votes += +resp.data;
         console.log(JSON.stringify(resp.data));
       })
