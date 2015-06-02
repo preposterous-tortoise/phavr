@@ -5,9 +5,10 @@
     <h2>{{ selectedFavor.topic }}</h2>
     <h3>{{ selectedFavor.description }}</h3>
     <ion-list ng-repeat="photo in selectedFavor.photos | orderBy:'-votes'" class="wrap">
+      <div class="list card">
       <div class="row">
         <div class="col col-80">
-          <ion-item ><img class="favorDetail" ng-src="{{photo.url}}"></ion-item>
+          <div class="item item-image"><img class="favorDetail" ng-src="{{photo.url}}"></div>
         </div>
 
         <div class="col">
@@ -18,6 +19,7 @@
          </div>
         </div>
       </div>
+    </div>
 
     </ion-list>
   </ion-content>

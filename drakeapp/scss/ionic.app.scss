@@ -17,7 +17,7 @@ $dark:                            #444 !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
-$calm: #008080 !default;
+$calm: #199696 !default;
 
 @mixin centerer {
   position: absolute;
@@ -75,8 +75,8 @@ h2, h3 {
 }
 
 .picVoting {
-	top: 50%;
-	left: 50%;
+  top: 50%;
+  left: 50%;
 }
 
 .bottom-detail {
