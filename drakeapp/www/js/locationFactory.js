@@ -10,11 +10,13 @@ var watchID = null;
     	if(processing) return;
     	processing = true;
         var lat ;
-        var longi 
+        var longi
+        console.log(navigator); 
     	navigator.geolocation.getCurrentPosition( function(position){
     		processing = false;
             lat = position.coords.latitude;
             longi = position.coords.longitude;
+            console.log('got location');
             callback([lat, longi]);
     	});
     },

@@ -73,14 +73,7 @@ module.exports = function(app, express){
   //Used to grab user information from the user proprty of request. Provides FB info for name and profile picture
   app.get('/api/profileID', passport.authenticate('facebook-token'), 
     function(req, res){
-      /*var id = req.session.passport.user.provider_id
-      console.log("THIS IS THE ID!!!! "+id)
-      User.findOne(
-        {$query:{ provider_id: id}}, 
-      function(err, data){
-      res.json(data); 
-      }); */
-
+    
       res.send(req.user);
   });
 
@@ -109,11 +102,6 @@ app.post('/auth/facebook/token',
     }
   );
 
-
-  // app.get('/auth/facebook/token', passport.authenticate('facebook-token', { scope: ['user_friends']} ));
-  // app.get('/auth/facebook/callback', passport.authenticate('facebook-token',
-  //   { successRedirect: '/', failureRedirect: '/login' }
-  // ));
 
   //Multer is an NPM module used to upload multi-part data
   app.use(multer({ dest: './uploads/', 

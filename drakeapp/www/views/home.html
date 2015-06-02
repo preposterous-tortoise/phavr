@@ -1,7 +1,7 @@
 
 <ion-view title="home">
-  <ion-content padding="false">
-           <span> <p  ng-click="enableTracking()"> CLICK HERE FOR TRACKING</p></span>
+  <ion-content>
+  <span> <p ng-click="enableTracking()"> CLICK HERE FOR TRACKING</p></span>
 
     <ion-list ng-repeat="favor in favors | orderBy:'-votes'">
       <ion-item>
@@ -17,13 +17,16 @@
               <a ng-click="downVote(favor)" class="button button-icon icon ion-ios-arrow-down"></a>
             </div>
           </div>
+        </div>
       </ion-item>
     </ion-list>
-
-
   </ion-content>
-
-
-
-
+  
+  <ion-footer-bar class="camera-footer bar-calm">
+    <div class="button-bar">
+        <button class="button button-outline button-light padding-left">Hot</button>
+        <a class="button button-icon icon ion-search"></a>
+        <button class="button button-outline button-light padding-right">New</button>
+    </div>
+  </ion-footer-bar>  
 </ion-view>
