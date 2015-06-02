@@ -8,30 +8,6 @@ var S3_BUCKET = process.env.S3_BUCKET;
 
 module.exports = {
   createPhoto: function(req, res, next) {
-   /*aws.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});
-    var s3 = new aws.S3();
-    var fileName = uuid.v1();
-    console.log('body', req.body);
-    var base64data = new Buffer(req.body.image, 'binary').toString('base64');
-    console.log(base64data);
-    var params = {Bucket: S3_BUCKET, Body: base64data, Key: fileName, ACL: 'public-read'};
-    s3.upload(params, function(err, info) {
-      if(err) {
-        console.log(err);
-      } else {
-          //create a new photo object for db
-          var photo = new Photo({ url: 'https://drakeapp-photos.s3.amazonaws.com/'+fileName+'.jpg', 
-                                  request_id: req.body.favor_id
-                                });
-          photo.save(function (err) {
-            if(err) { console.log(err); }
-            res.status(201).send('Photo saved at https://drakeapp-photos.s3.amazonaws.com/'+fileName+'.jpg');
-          });
-      }
-    });*/
-    
-    //TODO: get user id from req.user and attach it to the photo
-
     //Create a new Photo and Save it
     var photo = new Photo({ url: req.body.image, 
                                   request_id: req.body.favor_id
@@ -46,9 +22,9 @@ module.exports = {
     var photo = new Photo({ url: req.body.url, 
                             request_id: req.body.favor_id
                           });
-    photo.save(function (err) {
+    photo.save(function (err, photo) {
       if(err) { console.log(err); }
-      res.status(201).send('photo saved: ' + req.body.url);
+      res.status(201).send(photo);
     });
 
   },
@@ -73,30 +49,10 @@ module.exports = {
   },
 
   upVotePhoto: function(req, res, next) {
-    // var userObj = req.session.passport.user;
-    // var create, newPortfolio;
-
-    // Photo.findAndModify({
-    //   query: { _id: req.body.photoID }, 
-    //   update: { $inc: { votes: 1} }, 
-    //   },
-    //   function(err, doc){
-    //       console.log('There was an error with the upPhotoVotes!!!!!');
-    //   });
-    // res.status(201).send('updateFavor called with body: ' + JSON.stringify(req.body));
+    
   },
 
   downVotePhoto: function(req, res, next) {
-    // var userObj = req.session.passport.user;
-    // var create, newPortfolio;
-
-  //   Photo.findAndModify({
-  //     query: { _id: req.body.photoID }, 
-  //     update: { $inc: { votes: -1} }, 
-  //     },
-  //     function(err, doc){
-  //         console.log('There was an error with the downPhotoVotes!!!!!');
-  //     });
-  //   res.send('updateFavor called with body: ' + JSON.stringify(req.body));
+   
   }
 }

@@ -114,6 +114,69 @@ describe("Testing Photo", function () {
 	  	{"favor_id":"556ca405e30393ac1cc6148f", "url":"www/example.com"}
 	  	)
 	  .expectStatus(201)
+	  .afterJSON(function (body) {
+	          //changed values
+	          console.log("THIS IS FOR DUMMY PHOTO!!!! "+JSON.stringify(body));
+	        })
+	.toss();
+  
+});
+
+describe("Photo Upload", function () {
+
+	frisby.create('Dummy Photo')
+	  .get("http://localhost:3000/photoUploads/uploadToS3/",
+	  	{ query:{"fileName":"yoyo.jpg"}}
+	  	)
+	  .expectStatus(500)
+	.toss();
+  
+});
+
+describe("Testing a downVote Photo", function () {
+
+	frisby.create('Dummy Photo')
+	  .post("http://localhost:3000/api/photos/create-dummy?access_token=CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU",
+	  	{"favor_id":"556ca405e30393ac1cc6148f", "url":"www/example.com"}
+	  	)
+	  .expectStatus(201)
+	  .afterJSON(function (body) {
+	  		frisby.create('Downvote')
+	  		  .post("http://localhost:3000/api/votes/upVotePhoto?access_token=CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU",
+	  		  	{ photo: {"_id": body._id}, vote: -1 }
+	  		  	)
+	  		  .expectStatus(200)
+	  		  .afterJSON(function (body) {
+	  		          //changed values
+	  		          expect(body).toMatch(-1);
+	  		        })
+	  		.toss();
+	          
+	        })
+	.toss();
+  
+});
+
+describe("Testing an UpVote Photo", function () {
+
+	frisby.create('Dummy Photo')
+	  .post("http://localhost:3000/api/photos/create-dummy?access_token=CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU",
+	  	{"favor_id":"556ca405e30393ac1cc6148f", "url":"www/example.com"}
+	  	)
+	  .expectStatus(201)
+	  .afterJSON(function (body) {
+	  		frisby.create('Downvote')
+	  		  .post("http://localhost:3000/api/votes/upVotePhoto?access_token=CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU",
+	  		  	{ photo: {"_id": body._id}, vote: 1 }
+	  		  	)
+	  		  .expectStatus(200)
+	  		  .afterJSON(function (body) {
+	  		          //changed values
+	  		          expect(body).toMatch(1);
+	  		        })
+	  		.toss();
+	          
+	        })
 	.toss();
   
 });
