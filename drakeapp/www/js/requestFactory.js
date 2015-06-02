@@ -1,6 +1,7 @@
 angular.module('drakeApp.favorfact', [])
 .factory('Favors', function ($http, $location, Auth){
 
+  var lol
 
   var domain;
   if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || 
@@ -11,6 +12,19 @@ angular.module('drakeApp.favorfact', [])
   }
 
   return {
+    getUserInfo: function() {
+      var lol;
+      return $http({
+              method: 'GET',
+              url: 'http://drakeapp.herokuapp.com/api/profileID?access_token='+Auth.accessToken
+          })
+          .then(function(resp) {
+              lol = resp;
+              console.log('response from getting server', resp);
+              return resp;
+          });
+    },
+
     saveRequest: function(request) {
       $http({
         method: 'POST',

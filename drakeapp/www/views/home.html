@@ -3,7 +3,7 @@
   <ion-content>
   <span> <p ng-click="enableTracking()"> CLICK HERE FOR TRACKING</p></span>
 
-    <ion-list ng-repeat="favor in favors | orderBy:'-votes'">
+    <ion-list ng-repeat="favor in favors | orderBy: filter ">
       <ion-item>
         <h3>{{favor.topic}}</h3>
         <div class="row">
@@ -24,9 +24,9 @@
   
   <ion-footer-bar class="camera-footer bar-calm">
     <div class="button-bar">
-        <button class="button button-outline button-light padding-left">Hot</button>
+        <button class="button button-outline button-light padding-left" ng-click="hot()">Hot</button>
         <a class="button button-icon icon ion-search"></a>
-        <button class="button button-outline button-light padding-right">New</button>
+        <button class="button button-outline button-light padding-right" ng-click="new()">New</button>
     </div>
   </ion-footer-bar>  
 </ion-view>

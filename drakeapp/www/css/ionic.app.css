@@ -15,8 +15,13 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
-h2, h3 {
-  color: silver; }
+h2 {
+  color: silver !important; 
+}
+
+h3 {
+  color: silver !important;
+}
 
 .item.wrap, .item-content.wrap {
   white-space: normal; }
@@ -31,7 +36,9 @@ h2, h3 {
 
 .picVoting {
   top: 50%;
-  left: 50%; }
+  left: 50%; 
+  position: relative;
+}
 
 .bottom-detail {
   border: none; }
