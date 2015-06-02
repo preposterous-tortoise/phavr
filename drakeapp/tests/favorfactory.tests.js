@@ -13,4 +13,5 @@ describe('favorFactory', function() {
     module('drakeApp.navfact');
 
   });
+});
 
