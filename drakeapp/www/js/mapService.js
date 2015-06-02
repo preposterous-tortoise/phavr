@@ -143,6 +143,7 @@ angular.module('drakeApp.mapService', [])
       	var context = this;
         var input = (document.getElementById('pac-input'));
         if(isRequestMap) {
+          input = (document.getElementById('req-input'));
           map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         }
         if (input) {
