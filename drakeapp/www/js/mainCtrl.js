@@ -15,6 +15,10 @@ angular.module('drakeApp.nav', [])
     
   };
 
+  $scope.profile = function() {
+    $location.path('/profile');
+  }
+
   
    
 
