@@ -30,7 +30,6 @@ h2, h3 {
 .map-search {
   position: absolute;
   top: 60px;
-  right: 0;
   display: block;
   width: 100%; }
 
@@ -42,10 +41,34 @@ h2, h3 {
   .searchbar input {
     width: 100%; }
 
+.go {
+  display: block;
+  position: absolute;
+  top: 110px;
+  width: 100%; }
+
+.go2 {
+  width: 80%;
+  margin: 0 auto; }
+
+.gobutton {
+  width: 100% !important;
+  margin: 0 auto !important; }
+
 #req-input, #feed-input {
   margin: 0 auto;
   border-radius: 5px;
   width: 80%; }
+
+.logo {
+  top: 100px;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%); }
 
 .hiddenmap {
   display: none !important; }
@@ -63,7 +86,7 @@ h2, h3 {
   margin-left: 12px; }
 
 .favorDetail {
-  height: 300px; }
+  max-width: 100%; }
 
 .picVoting {
   top: 50%;
