@@ -1,0 +1,41 @@
+<ion-view title="profile">
+  <ion-content>
+  
+    <h2>{{ user.data.name }}</h2>
+
+    <img src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal">
+
+    <h3>Your Favors!</h3>
+
+    <ion-list ng-repeat="favor in favors | orderBy: filter ">
+      <ion-item>
+        <h3>{{favor.topic}}</h3>
+        <h4>Distance: {{favor.distance}}</h4>
+        <div class="row">
+          <div class="col col-80">
+            <ion-item ng-click="favorDetails(favor)" class="wrap">{{favor.description}}</ion-item>
+          </div>
+          <div class="col">
+            <div class="picVoting">
+              <a ng-click="upVote(favor)" class="button button-icon icon ion-ios-arrow-up"></a><br>
+              <span class="votes">{{favor.votes}}</span><br>
+              <a ng-click="downVote(favor)" class="button button-icon icon ion-ios-arrow-down"></a>
+            </div>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+   <ion-footer-bar ng-class="{'tall-footer': toggle}" class="camera-footer map-footer bar-calm">    
+    <div class="button-bar searchbar">
+      <button class="button button-outline set-height button-light padding-left lolol" ng-click="hot()">Hot</button>
+      <a ng-click="setToggle()" class="button button-icon icon ion-search set-height"></a>
+      <button class="button button-outline button-light padding-right set-height lolol" ng-click="new()">New</button>
+    </div>
+    <br>
+    <div class="map-search">  
+      <input id="feed-input" type="text" placeholder="Change location">
+    </div>
+  </ion-footer-bar> 
+</ion-view>
