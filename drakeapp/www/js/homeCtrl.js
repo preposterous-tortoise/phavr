@@ -47,8 +47,9 @@ angular.module('drakeApp.home', [])
           $scope.favors.forEach(function(favor){
             favor.distance = $scope.getDistance(favor.loc);
           });
-
-
+          
+          console.log($scope.favors);
+          $scope.getTopPhotos();
         });
       });
     } else { 
@@ -57,6 +58,7 @@ angular.module('drakeApp.home', [])
           console.log('got requests', data);
           $scope.favors = data;
           console.log($scope.favors);
+          $scope.getTopPhotos();
         });
     }
         
@@ -67,6 +69,33 @@ angular.module('drakeApp.home', [])
     console.log(distance);
     return distance;
   }
+  
+  $scope.getTopPhotos = function(requests) {
+    //for each fetched request, display the top photo
+    console.log('getting top photos...');
+    for(var i = 0; i < $scope.favors.length; i++) {
+      console.log($scope.favors[i]);
+      //fetch the photos for this request
+      var currentFavor = $scope.favors[i];
+      photoFactory.getPhotosForFavor($scope.favors[i], function(photos) {
+        //find the photo with the most votes
+        console.log(photos);
+        var topVotes = Number.NEGATIVE_INFINITY;
+        var topPhoto = null;
+        for(var j = 0; j < photos.length; j++) {
+          if(photos[j].votes > topVotes) {
+            topVotes = photos[j].votes;
+            topPhoto = photos[j];
+          }
+        }
+        console.log(currentFavor);
+        currentFavor.topPhoto = topPhoto.url;
+        console.log('top photo', currentFavor.topPhoto);
+        console.log($scope.favors);
+      });
+    }
+
+  };
 
   $scope.enableTracking = function(){
     geo.enableTracking();
@@ -91,6 +120,7 @@ angular.module('drakeApp.home', [])
 
   $scope.testVar = true;
   $scope.updateFavors();
+
 
   $scope.toggle = false;
   $scope.setToggle = function() {
