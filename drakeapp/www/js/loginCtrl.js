@@ -22,8 +22,8 @@ angular.module('drakeApp.login', [])
   $scope.useBrowser = function() {
   //for browswer deployment use
 
-Auth.setAccessToken("CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU");
-        $location.path('/home');
+    Auth.setAccessToken("CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU");
+    $location.path('/home');
 
  }
 
@@ -39,11 +39,9 @@ Auth.setAccessToken("CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwa
 
         //set access token for the session
         Auth.setAccessToken(result.access_token);
-        
-
 
         //testing...
-        $http.post('http://drakeapp.herokuapp.com/auth/facebook/token?access_token='+Auth.accessToken)
+        $http.post('http://drakeapp.herokuapp.com/auth/facebook/token')
           .success(function(data){
             console.log(data);
             $location.path('/home');

@@ -8,6 +8,7 @@ angular.module('drakeapp.authFactory',[])
     accessToken:null,
     setAccessToken: function(token) {
       this.accessToken = token;
+      window.localStorage.setItem("token", token);
       console.log("access token set");
     }
   }

@@ -16,7 +16,7 @@ angular.module('drakeApp.favorfact', [])
       var lol;
       return $http({
               method: 'GET',
-              url: 'http://drakeapp.herokuapp.com/api/profileID?access_token='+Auth.accessToken
+              url: 'http://drakeapp.herokuapp.com/api/profileID'
           })
           .then(function(resp) {
               lol = resp;
@@ -28,7 +28,7 @@ angular.module('drakeApp.favorfact', [])
     saveRequest: function(request) {
       $http({
         method: 'POST',
-        url: domain +'/api/requests/create?access_token='+Auth.accessToken,
+        url: domain +'/api/requests/create',
         data: request
       })
       .success(function(data, status, headers, config) {
@@ -41,14 +41,9 @@ angular.module('drakeApp.favorfact', [])
     },
     //  fetch requests in the specified box: [[sw.lng, sw.lat], [ne.lng, ne.lat]]
     fetchRequests: function(box, callback) {
-
-
       return $http({
           method: 'POST',
-          url: domain+'/api/requests?access_token=',
-          headers: {
-            'access_token': Auth.accessToken
-          },
+          url: domain+'/api/requests',
           data: {
             box: box
           }
@@ -68,7 +63,7 @@ angular.module('drakeApp.favorfact', [])
       console.log("inside requestfactory upvote")
       return $http({
         method: 'POST',
-        url: domain+'/api/votes/upVote?access_token='+Auth.accessToken,
+        url: domain+'/api/votes/upVote',
         data: { favor: favor, vote: vote }
       })
       .then(function(resp){ //response will be -1, 0 or 1
@@ -81,7 +76,7 @@ angular.module('drakeApp.favorfact', [])
     downVote: function(favor, vote){
       return $http({
         method: 'POST',
-        url: domain+'/api/votes/upVote?access_token='+Auth.accessToken,
+        url: domain+'/api/votes/upVote',
         data: { favor: favor, vote: vote }
       })
       .then(function(resp){

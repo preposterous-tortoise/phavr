@@ -62,28 +62,19 @@ angular.module('drakeApp', ['ionic', 'ngCordova', 'drakeApp.home', 'drakeApp.nav
     controller: 'favorDetailsCtrl'
   })
 
-  //we add our $httpIntereceptor into the array of interceptors.
-  // $httpProvider.interceptors.push('AttachTokens');
-})
-// .factory('AttachTokens', function ($window){
-//   //middlewear to insert token for all outgoing requests
-//   var attach = {
-//     request: function(object) {
-//       // console.log(Auth.accessToken);
-//       if(1) {
-//         object.headers['access_token'] = 1;
-//       }
-//       return object;
-//     }
-//   };
-//   return attach;
-// });
-// .config(['$httpProvider',function($httpProvider, Auth){
-//   $httpProvider.interceptors.push(function(Auth){
-//     return {
-//       request: function(){
 
-//       }
-//     }
-//   })
-// }])
+  //we add our $httpIntereceptor into the array of interceptors.
+  $httpProvider.interceptors.push('AttachTokens');
+})
+.factory('AttachTokens', function ($window){
+  //middlewear to insert token for all outgoing requests
+  var attach = {
+    request: function(object) {
+      if(localStorage.getItem('token')) {
+        object.headers['access_token'] = localStorage.getItem('token');
+      }
+      return object;
+    }
+  };
+  return attach;
+});

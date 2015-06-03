@@ -113,7 +113,7 @@ angular.module('drakeapp.photoFactory', [])
     },
 
     getPhotosForFavor: function(favor, callback){
-      $http.post(domain + '/api/photos/fetch?access_token='+Auth.accessToken, { favor_id: favor._id })
+      $http.post(domain + '/api/photos/fetch', { favor_id: favor._id })
         .success(function(data, status, headers, config) {
           callback(data);
         })
@@ -125,7 +125,7 @@ angular.module('drakeapp.photoFactory', [])
     sendPicture: function(imageURI, favorID) {
       var data = { image: imageURI, favor_id: favorID };
       console.log('inside sendPicture');
-      $http.post(domain+'/api/photos/create?access_token='+Auth.accessToken, data)
+      $http.post(domain+'/api/photos/create', data)
         .success(function(data, status, headers, config) {
           console.log('photo uploaded!');
         })
@@ -137,7 +137,7 @@ angular.module('drakeapp.photoFactory', [])
       console.log('auth',Auth)
       return $http({
         method: 'POST',
-        url: domain+'/api/votes/upVotePhoto?access_token='+Auth.accessToken,
+        url: domain+'/api/votes/upVotePhoto',
         data: {photo: photo, vote: vote}
       })
       .then(function(resp){
@@ -148,7 +148,7 @@ angular.module('drakeapp.photoFactory', [])
     downVote: function(photoID){
       return $http({
         method: 'POST',
-        url: 'http://drakeapp.herokuapp.com/api/photos/downVote?access_token='+Auth.accessToken,
+        url: 'http://drakeapp.herokuapp.com/api/photos/downVote',
         data: photoID
       })
       .then(function(resp){
