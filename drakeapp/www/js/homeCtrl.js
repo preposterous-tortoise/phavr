@@ -1,5 +1,5 @@
 angular.module('drakeApp.home', [])
-.controller('homeCtrl', function ($scope, $rootScope, $location, $http, Favors, photoFactory, geo, Nav, mapService){
+.controller('homeCtrl', function ($scope, $rootScope, $location, $http, Favors, photoFactory, geo, Nav, mapService, uiGmapGoogleMapApi, $timeout){
  
 
   $rootScope.login = true;
@@ -81,5 +81,51 @@ angular.module('drakeApp.home', [])
 
   $scope.testVar = true;
   $scope.updateFavors();
+
+  $scope.toggle = false;
+  $scope.setToggle = function() {
+    $scope.toggle = !$scope.toggle;
+  }
+
+  var areaZoom = 16;
+  var markerMap = {};
+
+  uiGmapGoogleMapApi.then(function(maps) {
+      console.log('initializing the feed map...');
+      var location = mapService.getLocation();
+      $scope.map = {
+        center: {
+          latitude: location.lat(),
+          longitude: location.lng()
+        },
+        zoom: areaZoom,
+        control: {
+          getGMap: function() {}
+        },
+        events: {
+          bounds_changed: function(map, eventName) {
+            // console.log(' NEW BOUNDS: ', JSON.stringify(mapService.getBoxForBounds(map.getBounds())));
+            //updateMarkers(map.getBounds());
+          }
+        }
+      };
+      markerMap = {};
+
+      $timeout(function() {
+        var map = $scope.map.control.getGMap();
+        if (map) {
+          //mapService.addBoundsListener(map, markerMap);
+          mapService.addPlaceChangedListener(map, 'feedMap');
+        }
+      });
+
+      $scope.options = {
+        scrollwheel: false
+      };
+
+      $scope.map.markers = [];
+    });
+
+
 });
 
