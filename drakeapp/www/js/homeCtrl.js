@@ -54,16 +54,26 @@ angular.module('drakeApp.home', [])
 
         var radius = 0.289855;
         var box = [[spot.coords.longitude-radius, spot.coords.latitude-radius], [spot.coords.longitude+radius, spot.coords.latitude+radius]];
-
+        $scope.currentLong = spot.coords.longitude;
+        $scope.currentLat = spot.coords.latitude;
         console.log(box);
 
         Favors.fetchRequests(box, function(data){
-          console.log('got requests', data);
           $scope.favors = data;
-          console.log($scope.favors);
+          $scope.favors.forEach(function(favor){
+            favor.distance = $scope.getDistance(favor.loc);
+          });
+
+
         });
       });
   };
+
+  $scope.getDistance = function(locationObject) {
+    var distance = geo.calculateDistance(locationObject.coordinates[1], locationObject.coordinates[0], $scope.currentLat, $scope.currentLong );
+    console.log(distance);
+    return distance;
+  }
 
   $scope.enableTracking = function(){
     geo.enableTracking();

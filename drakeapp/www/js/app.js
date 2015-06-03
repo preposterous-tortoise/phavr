@@ -28,7 +28,7 @@ angular.module('drakeApp', ['ionic', 'ngCordova', 'drakeApp.home', 'drakeApp.nav
     libraries: 'places'
   });
 })
-.config(function($stateProvider, $urlRouterProvider){
+.config(function($stateProvider, $urlRouterProvider, $httpProvider){
   $urlRouterProvider.otherwise('/')
   
   //home template
@@ -62,5 +62,28 @@ angular.module('drakeApp', ['ionic', 'ngCordova', 'drakeApp.home', 'drakeApp.nav
     controller: 'favorDetailsCtrl'
   })
 
-  
+  //we add our $httpIntereceptor into the array of interceptors.
+  // $httpProvider.interceptors.push('AttachTokens');
 })
+// .factory('AttachTokens', function ($window){
+//   //middlewear to insert token for all outgoing requests
+//   var attach = {
+//     request: function(object) {
+//       // console.log(Auth.accessToken);
+//       if(1) {
+//         object.headers['access_token'] = 1;
+//       }
+//       return object;
+//     }
+//   };
+//   return attach;
+// });
+// .config(['$httpProvider',function($httpProvider, Auth){
+//   $httpProvider.interceptors.push(function(Auth){
+//     return {
+//       request: function(){
+
+//       }
+//     }
+//   })
+// }])

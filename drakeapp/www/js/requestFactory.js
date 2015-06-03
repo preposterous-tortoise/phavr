@@ -27,9 +27,14 @@ angular.module('drakeApp.favorfact', [])
     },
     //  fetch requests in the specified box: [[sw.lng, sw.lat], [ne.lng, ne.lat]]
     fetchRequests: function(box, callback) {
+
+
       return $http({
           method: 'POST',
-          url: domain+'/api/requests?access_token='+Auth.accessToken,
+          url: domain+'/api/requests?access_token=',
+          headers: {
+            'access_token': Auth.accessToken
+          },
           data: {
             box: box
           }

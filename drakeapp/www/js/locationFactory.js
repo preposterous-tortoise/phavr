@@ -30,7 +30,7 @@ var watchID = null;
       });
     },
 
-    calculateDistance: function(lat1, lon1, lat2, lon2, b, callback){
+    calculateDistance: function(lat1, lon1, lat2, lon2, callback){
 
       function deg2rad(deg) {
         return deg * (Math.PI/180)
