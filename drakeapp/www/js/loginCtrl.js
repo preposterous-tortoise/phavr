@@ -11,8 +11,15 @@ angular.module('drakeApp.login', [])
     })
   };
 
+  $scope.toggle = false;
 
- $scope.useBrowser = function() {
+  $scope.setToggle = function() {
+    console.log('clicked!');
+    $scope.toggle = !$scope.toggle;
+    console.log($scope.toggle);
+  }
+
+  $scope.useBrowser = function() {
   //for browswer deployment use
 
 Auth.setAccessToken("CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU");

@@ -76,6 +76,9 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
       $scope.map.markers = [];
     });
 
-
+    $scope.toggle = false;
+    $scope.setToggle = function() {
+      $scope.toggle = !$scope.toggle;
+    }
 
   });

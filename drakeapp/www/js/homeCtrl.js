@@ -81,5 +81,11 @@ angular.module('drakeApp.home', [])
 
   $scope.testVar = true;
   $scope.updateFavors();
+
+  $scope.toggle = false;
+  $scope.setToggle = function() {
+    $scope.toggle = !$scope.toggle;
+  }
+
 });
 

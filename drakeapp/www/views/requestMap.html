@@ -11,13 +11,16 @@
 <!--       <ui-gmap-markers models="map.markers" coords="'self'" icon="'icon'" fit='true' modelsbyref="false" click="onClick">
       </ui-gmap-markers> -->
     </ui-gmap-google-map>
-    <input id="req-input" type="text" placeholder="Change location">
   </ion-content>
-  <ion-footer-bar class="camera-footer bar-calm">
-    <div class="button-bar">
-        <button class="button button-outline button-light padding-left lolol">Hot</button>
-        <a class="button button-icon icon ion-search"></a>
-        <button class="button button-outline button-light padding-right">New</button>
+  <ion-footer-bar ng-class="{'tall-footer': toggle}" class="camera-footer map-footer bar-calm">    
+    <div class="button-bar searchbar">
+      <button class="button button-outline set-height button-light padding-left lolol">Hot</button>
+      <a ng-click="setToggle()" class="button button-icon icon ion-search set-height"></a>
+      <button class="button button-outline button-light padding-right set-height lolol">New</button>
+    </div>
+    <br>
+    <div class="map-search">  
+      <input id="req-input" type="text" placeholder="Change location">
     </div>
   </ion-footer-bar>  
 

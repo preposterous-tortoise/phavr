@@ -144,7 +144,7 @@ angular.module('drakeApp.mapService', [])
         var input = (document.getElementById('pac-input'));
         if(isRequestMap) {
           input = (document.getElementById('req-input'));
-          map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+          //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         }
         if (input) {
           var autocomplete = new google.maps.places.Autocomplete(input);

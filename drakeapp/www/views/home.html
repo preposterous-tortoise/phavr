@@ -23,11 +23,10 @@
     </ion-list>
   </ion-content>
   
-  <ion-footer-bar class="camera-footer bar-calm">
-    <div class="button-bar">
-        <button class="button button-outline button-light padding-left lolol" ng-click="hot()">Hot</button>
-        <a class="button button-icon icon ion-search"></a>
-        <button class="button button-outline button-light padding-right" ng-click="new()">New</button>
+    <ion-footer-bar ng-class="{'tall-footer': toggle}" class="bar-calm"><div class="camera-footer button-bar">
+        <button class="button lolol set-height button-outline button-light padding-left lolol" ng-click="hot()">Hot</button>
+        <a ng-click="setToggle()" class="button set-height button-icon icon ion-search"></a>
+        <button class="button set-height button-outline button-light padding-right lolol" ng-click="new()">New</button>
     </div>
   </ion-footer-bar>  
 </ion-view>
