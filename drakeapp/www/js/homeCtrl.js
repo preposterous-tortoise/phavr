@@ -38,8 +38,8 @@ angular.module('drakeApp.home', [])
 
         var radius = 0.289855;
         var box = [[spot.coords.longitude-radius, spot.coords.latitude-radius], [spot.coords.longitude+radius, spot.coords.latitude+radius]];
-        window.localStorage.setItem('longitude') = spot.coords.longitude;
-        window.localStorage.setItem('latitude') = spot.coords.latitude;
+        window.localStorage.setItem('longitude', spot.coords.longitude.toString());
+        window.localStorage.setItem('latitude', spot.coords.latitude.toString());
         console.log(box);
 
         Favors.fetchRequests(box, function(data){
@@ -65,7 +65,7 @@ angular.module('drakeApp.home', [])
   };
 
   $scope.getDistance = function(locationObject) {
-    var distance = geo.calculateDistance(locationObject.coordinates[1], locationObject.coordinates[0], window.localStorage.getItem('latitude'), window.localStorage.getItem('longitude') );
+    var distance = geo.calculateDistance(locationObject.coordinates[1], locationObject.coordinates[0], +window.localStorage.getItem('latitude'), +window.localStorage.getItem('longitude') );
     console.log(distance);
     return distance;
   }
