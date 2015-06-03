@@ -1,9 +1,10 @@
 angular.module('drakeApp.home', [])
-.controller('homeCtrl', function ($scope, $rootScope, $location, $http, Favors, photoFactory, geo, Nav){
+.controller('homeCtrl', function ($scope, $rootScope, $location, $http, Favors, photoFactory, geo, Nav, mapService){
  
 
   $rootScope.login = true;
 
+  $scope.mapBounds = mapService.mapBounds;
 
   $scope.favors = [];
 
@@ -29,7 +30,10 @@ angular.module('drakeApp.home', [])
   $scope.updateFavors = function(){
     console.log('attempting to update favors...');
     //geo.getLocation(function(spot){
-    geo.phoneLocation(function(spot) {
+    console.log('map bounds', mapService.mapBounds);
+    if(mapService.mapBounds === null) {
+      console.log('mapBounds was null, getting user location...');
+      geo.phoneLocation(function(spot) {
         console.log('getting location');
 
         var radius = 0.289855;
@@ -43,6 +47,15 @@ angular.module('drakeApp.home', [])
           console.log($scope.favors);
         });
       });
+    } else { 
+        console.log('mapBounds was defined! Getting requests in those map bounds...');
+        Favors.fetchRequests(mapService.mapBounds, function(data){
+          console.log('got requests', data);
+          $scope.favors = data;
+          console.log($scope.favors);
+        });
+    }
+        
   };
 
   $scope.enableTracking = function(){

@@ -42,10 +42,15 @@ angular.module('drakeApp.mapService', [])
 
     return {
       getBoxForBounds: getBoxForBounds,
+
+      mapBounds: null, //these mapBounds are shared b/w the request map and home feed
+
       getFavorLocation: getFavorLocation,
+      
       getLocation: function() {
         return myLatlng;
       },
+
       setLocation: function(lat, lng) {
         myLatlng = new google.maps.LatLng(lat, lng);
         mapOptions = {
@@ -54,6 +59,7 @@ angular.module('drakeApp.mapService', [])
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
       },
+
       addDefaultMarker: function(map) {
         var favor = {
             place_name: 'You are here',
@@ -67,6 +73,7 @@ angular.module('drakeApp.mapService', [])
         }
         this.marker = this.addMarker(favor, map, null, true);
       },
+
       addMarker: function(favor, map, markerMap, addInfoWindow) {
         var location = getFavorLocation(favor);
         var infowindow = new google.maps.InfoWindow();
@@ -103,17 +110,21 @@ angular.module('drakeApp.mapService', [])
         }
         return marker;
       },
+
       createMap: function() {
         return new google.maps.Map(document.getElementById("map"), mapOptions);
       },
+
       addBoundsListener: function(map, markerMap) {
       	var context = this;
         google.maps.event.addListener(map, "bounds_changed", function() {
           var box = getBoxForBounds(map.getBounds());
+
           if (box[0][0] === box[1][0]) {
             console.log('EMPTY BOUNDS from google maps.');
             return;
           }
+
           Favors.fetchRequests(box, function(favors) {
             if (favors) {
               for (var i = 0; i < favors.length; i++) {
@@ -122,12 +133,19 @@ angular.module('drakeApp.mapService', [])
               }
             }
           });
+          context.mapBounds = box;
+          console.log('mapBounds set!');
+          console.log(context.mapBounds);
         });
       },
-      addPlaceChangedListener: function(map) {
+
+      addPlaceChangedListener: function(map, isRequestMap) {
       	var context = this;
         var input = (document.getElementById('pac-input'));
-        // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        if(isRequestMap) {
+          input = (document.getElementById('req-input'));
+          map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        }
         if (input) {
           var autocomplete = new google.maps.places.Autocomplete(input);
           autocomplete.bindTo('bounds', map);
@@ -147,7 +165,9 @@ angular.module('drakeApp.mapService', [])
             if (context.marker) {
               context.marker.setMap(null);
             }
-            context.marker = context.addMarker(favor, map);
+            if(!isRequestMap) {
+              context.marker = context.addMarker(favor, map);
+            }
             // If the place has a geometry, then present it on a map.
             if (place.geometry.viewport) {
               map.fitBounds(place.geometry.viewport);

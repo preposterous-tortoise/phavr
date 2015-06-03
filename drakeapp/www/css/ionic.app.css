@@ -31,9 +31,7 @@ h2, h3 {
 
 .picVoting {
   top: 50%;
-  left: 50%; 
-  position: relative;
-}
+  left: 50%; }
 
 .lolol {
   border-right: solid 1px !important;

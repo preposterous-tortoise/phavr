@@ -65,6 +65,7 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
         var map = $scope.map.control.getGMap();
         if (map) {
           mapService.addBoundsListener(map, markerMap);
+          mapService.addPlaceChangedListener(map, true);
         }
       });
 
