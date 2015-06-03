@@ -1,7 +1,8 @@
 <ion-view title="login">
-  <ion-content padding="false">
-    <h2 class="title welcome">Welcome!</h2>
-    <form ng-submit="letsGo()">
+  <ion-content>
+  <h2 class="title welcome">Welcome!</h2>
+  <span> <p  ng-click="useBrowser()"> CLICK HERE FOR BROWSER</p></span>
+    <!--<form ng-submit="letsGo()">
 	    <div class="list list-inset">
 	      <label class="item item-input">
 	        <input ng-model="username" type="text" placeholder="Username">
@@ -16,10 +17,13 @@
       	  <span> <img class="oauth_button" ng-click="fbLogin()" src="http://i.stack.imgur.com/pZzc4.png" /></span><br />
 
         </div>
-      </form> 
+      </form>--> 
 
-      <span><img class="oauth_button" ng-click="fbLogin()" src="http://i.stack.imgur.com/pZzc4.png" /></span>
-      <br />
+    <img class="oauth_button" ng-click="fbLogin()" src="http://i.stack.imgur.com/pZzc4.png" />
 
   </ion-content>
+  <ion-footer-bar ng-click="setToggle()" ng-class="{'tall-footer': toggle}" class="bar-calm">
+    <h1 class="title">footer</h1>
+    <br /><h1 class="secret">secret footer</h1>
+  </ion-footer-bar>
 </ion-view>

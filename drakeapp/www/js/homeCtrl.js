@@ -1,31 +1,12 @@
 angular.module('drakeApp.home', [])
-.controller('homeCtrl', function ($scope, $rootScope, $location, $http, Favors, photoFactory, geo, Nav){
+.controller('homeCtrl', function ($scope, $rootScope, $location, $http, Favors, photoFactory, geo, Nav, mapService, uiGmapGoogleMapApi, $timeout){
  
 
   $rootScope.login = true;
 
+  $scope.mapBounds = mapService.mapBounds;
 
   $scope.favors = [];
-  
-  //hard-coded requests for testing
-  /*$scope.requests = [
-
-  { 
-      _id: 1,
-      topic: 'LEMME SEE DRAKE',
-      description: 'hey if somebody could take a pic of drake from the front row, that would be rad',
-      photos: ["http://upload.wikimedia.org/wikipedia/en/thumb/0/01/Golden_State_Warriors_logo.svg/838px-Golden_State_Warriors_logo.svg.png"],
-      hasPhotos: false,
-      votes: 0
-    },
-    {
-      _id: 2,
-      topic: 'black tshirt',
-      description: 'take a picture of somebody wearing a black t-shirt plz',
-      photos: [],
-      hasPhotos: false,
-      votes: 0
-    }];*/
 
   $scope.selectedFavor = Favors.selectedFavor;
 
@@ -49,7 +30,10 @@ angular.module('drakeApp.home', [])
   $scope.updateFavors = function(){
     console.log('attempting to update favors...');
     //geo.getLocation(function(spot){
-    geo.phoneLocation(function(spot) {
+    console.log('map bounds', mapService.mapBounds);
+    if(mapService.mapBounds === null) {
+      console.log('mapBounds was null, getting user location...');
+      geo.phoneLocation(function(spot) {
         console.log('getting location');
 
         var radius = 0.289855;
@@ -67,6 +51,15 @@ angular.module('drakeApp.home', [])
 
         });
       });
+    } else { 
+        console.log('mapBounds was defined! Getting requests in those map bounds...');
+        Favors.fetchRequests(mapService.mapBounds, function(data){
+          console.log('got requests', data);
+          $scope.favors = data;
+          console.log($scope.favors);
+        });
+    }
+        
   };
 
   $scope.getDistance = function(locationObject) {
@@ -77,9 +70,72 @@ angular.module('drakeApp.home', [])
 
   $scope.enableTracking = function(){
     geo.enableTracking();
+  };
+
+  $scope.filter = '-createdAt';
+
+  $scope.hot = function(){
+    $scope.filter = '-votes';
+  };
+
+  $scope.new = function() {
+    $scope.filter = '-createdAt';
+  };
+
+  $scope.getPic = function() {
+    console.log("YO GET PIC IS HAPPENING!")
+    Favors.getUserInfo();
   }
+
+  $scope.getPic();
 
   $scope.testVar = true;
   $scope.updateFavors();
+
+  $scope.toggle = false;
+  $scope.setToggle = function() {
+    $scope.toggle = !$scope.toggle;
+  }
+
+  var areaZoom = 16;
+  var markerMap = {};
+
+  uiGmapGoogleMapApi.then(function(maps) {
+      console.log('initializing the feed map...');
+      var location = mapService.getLocation();
+      $scope.map = {
+        center: {
+          latitude: location.lat(),
+          longitude: location.lng()
+        },
+        zoom: areaZoom,
+        control: {
+          getGMap: function() {}
+        },
+        events: {
+          bounds_changed: function(map, eventName) {
+            // console.log(' NEW BOUNDS: ', JSON.stringify(mapService.getBoxForBounds(map.getBounds())));
+            //updateMarkers(map.getBounds());
+          }
+        }
+      };
+      markerMap = {};
+
+      $timeout(function() {
+        var map = $scope.map.control.getGMap();
+        if (map) {
+          //mapService.addBoundsListener(map, markerMap);
+          mapService.addPlaceChangedListener(map, 'feedMap');
+        }
+      });
+
+      $scope.options = {
+        scrollwheel: false
+      };
+
+      $scope.map.markers = [];
+    });
+
+
 });
 

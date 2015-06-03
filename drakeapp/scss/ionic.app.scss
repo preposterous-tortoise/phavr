@@ -57,7 +57,53 @@ $calm: #199696 !default;
 
 
 h2, h3 {
-  color: silver;
+  color: silver !important;
+}
+
+.tall-footer {
+  height: 200px !important;
+
+  -webkit-transition: height 0.8s !important;
+  -moz-transition: height 0.8s !important;
+  transition: height 0.8s !important;
+  
+}
+
+.set-height {
+  max-height: 40px !important;
+}
+
+.map-search {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  display: block;
+  width: 100%;
+}
+
+.searchbar {
+  position: absolute;
+  display: block;
+  width: 100%;
+  max-height: 40px !important;
+  input {
+    width: 100%;
+  }
+}
+
+#req-input, #feed-input {
+  margin: 0 auto;
+  border-radius: 5px; 
+  width: 80%;
+}
+
+.hiddenmap {
+  display: none !important;
+}
+
+.secret {
+  position: relative !important;
+  margin-top: 100px !important;
 }
 
 .item.wrap, .item-content.wrap {
@@ -132,6 +178,12 @@ h2, h3 {
   max-width: 100%;
   @include centre(y);
 }
+
+.lolol {
+  border-right: solid 1px !important;
+  color: white !important;
+}
+
 
 /*
 #pac-input {
