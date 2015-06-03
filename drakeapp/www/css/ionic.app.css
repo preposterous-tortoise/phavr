@@ -67,7 +67,8 @@ h2, h3 {
 
 .picVoting {
   top: 50%;
-  left: 50%; }
+  left: 50%;
+  position: relative !important; }
 
 .bottom-detail {
   border: none; }
