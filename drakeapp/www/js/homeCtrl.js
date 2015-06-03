@@ -78,7 +78,7 @@ angular.module('drakeApp.home', [])
       //fetch the photos for this request
       var currentFavor = $scope.favors[i];
       
-      (function(currentFavor)
+      (function(currentFavor) {
         photoFactory.getPhotosForFavor(currentFavor, function(photos) {
           //find the photo with the most votes
           console.log(photos);
@@ -97,7 +97,7 @@ angular.module('drakeApp.home', [])
         });
 
 
-      )( $scope.favors[i]);
+      })( $scope.favors[i]);
 
     }
 
