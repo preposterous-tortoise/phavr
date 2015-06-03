@@ -42,6 +42,7 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
 
     /*  ANGULAR GOOGLE MAPS INITIALIZATION */
     uiGmapGoogleMapApi.then(function(maps) {
+      console.log('initializing the request map...');
       var location = mapService.getLocation();
       $scope.map = {
         center: {
@@ -65,7 +66,7 @@ angular.module('drakeApp.requestMap', ['ionic', 'uiGmapgoogle-maps'])
         var map = $scope.map.control.getGMap();
         if (map) {
           mapService.addBoundsListener(map, markerMap);
-          mapService.addPlaceChangedListener(map, true);
+          mapService.addPlaceChangedListener(map, 'requestMap');
         }
       });
 

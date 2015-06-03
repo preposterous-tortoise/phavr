@@ -139,19 +139,35 @@ angular.module('drakeApp.mapService', [])
         });
       },
 
-      addPlaceChangedListener: function(map, isRequestMap) {
+      addPlaceChangedListener: function(map, mapName) {
       	var context = this;
         var input = (document.getElementById('pac-input'));
-        if(isRequestMap) {
+        if(mapName === 'requestMap') {
           input = (document.getElementById('req-input'));
           //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         }
+        if(mapName === 'feedMap') {
+          console.log('feedMAP');
+          input = (document.getElementById('feed-input'));
+        }
+
         if (input) {
           var autocomplete = new google.maps.places.Autocomplete(input);
           autocomplete.bindTo('bounds', map);
 
           google.maps.event.addListener(autocomplete, 'place_changed', function() {
+            console.log('place changed!');
             var place = autocomplete.getPlace();
+            console.log(place);
+            
+            //set bounds based on place location
+            console.log(place.geometry.location);
+            var radius = 0.289855;
+            var box = [[place.geometry.location.F-radius, place.geometry.location.A-radius], [place.geometry.location.F+radius, place.geometry.location.A+radius]];
+            context.mapBounds = box;
+            console.log('mapBounds set!');
+            console.log(context.mapBounds);
+
             if (!place.geometry) {
               return;
             }
@@ -165,7 +181,7 @@ angular.module('drakeApp.mapService', [])
             if (context.marker) {
               context.marker.setMap(null);
             }
-            if(!isRequestMap) {
+            if(mapName !== 'requestMap') {
               context.marker = context.addMarker(favor, map);
             }
             // If the place has a geometry, then present it on a map.

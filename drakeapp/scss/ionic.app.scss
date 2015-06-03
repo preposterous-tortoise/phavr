@@ -91,10 +91,14 @@ h2, h3 {
   }
 }
 
-#req-input {
+#req-input, #feed-input {
   margin: 0 auto;
   border-radius: 5px; 
   width: 80%;
+}
+
+.hiddenmap {
+  display: none !important;
 }
 
 .secret {
