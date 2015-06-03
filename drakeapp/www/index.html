@@ -39,6 +39,7 @@
     <script src="js/loginCtrl.js"></script>
     <script src="js/navFactory.js"></script>
     <script src="js/favorDetailsCtrl.js"></script>
+    <script src="js/profileCtrl.js"></script>
     <!-- google maps javascript -->
     <!--  EITHER IMPORT GOOGLE MAPS HERE (not using Angular Google Maps or 
        IMPORT using config in app.js-->
@@ -71,7 +72,7 @@
       <ion-content>
          <ion-list>
            <ion-item><img src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal"></ion-item>
-           <ion-item>Two</ion-item>
+           <ion-item><button ui-sref="profile">Profile</button></ion-item>
            <ion-item>Three</ion-item>
            <ion-item>Four</ion-item>
            <ion-item><button ng-click="getUserInfo()">Hello!</button></ion-item>

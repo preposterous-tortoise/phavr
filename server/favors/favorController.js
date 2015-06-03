@@ -44,7 +44,7 @@ module.exports = {
       description: req.body.description,
       place_name: req.body.place_name,
       address: req.body.address,
-      user_id: 1,
+      user_id: req.user.provider_id,
       photos: [],
       icon: req.body.icon,
       loc: {
@@ -84,6 +84,15 @@ module.exports = {
       {votes: req.body.votes-1 }, 
       function(err, data){
       res.send('successfully downvoted');
+    });
+  },
+
+  grabFavor: function(req, res, next) {
+    console.log("I'M INSIDE GRAB FAVOR!!!"+req.user)
+    Favor.find(
+      {user_id : req.user.provider_id},  
+      function(err, data){
+        res.json(data);
     });
   }
 }

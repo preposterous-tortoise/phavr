@@ -58,6 +58,21 @@ angular.module('drakeApp.favorfact', [])
           return null;
         });
     },
+
+    profileFavors: function(user) {
+      return $http({
+          method: 'POST',
+          url: domain+'/api/requests/grabFavor',
+          data: user
+        })
+        .success(function(requests, status, headers, config) {
+          return requests;
+        })
+        .error(function(data, status, headers, config) {
+          console.log('fetchRequests error: ', data, status, headers, config);
+          return null;
+        });
+    },
     
     upVote: function(favor, vote){
       console.log("inside requestfactory upvote")

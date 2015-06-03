@@ -15,4 +15,7 @@ module.exports = function (app) {
 
   app.route('/downVote')
     .post(favorController.downVoteFavor);
+
+  app.route('/grabFavor')
+    .post(favorController.grabFavor);
 };
