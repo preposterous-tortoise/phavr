@@ -77,22 +77,28 @@ angular.module('drakeApp.home', [])
       console.log($scope.favors[i]);
       //fetch the photos for this request
       var currentFavor = $scope.favors[i];
-      photoFactory.getPhotosForFavor($scope.favors[i], function(photos) {
-        //find the photo with the most votes
-        console.log(photos);
-        var topVotes = Number.NEGATIVE_INFINITY;
-        var topPhoto = null;
-        for(var j = 0; j < photos.length; j++) {
-          if(photos[j].votes > topVotes) {
-            topVotes = photos[j].votes;
-            topPhoto = photos[j];
+      
+      (function(currentFavor)
+        photoFactory.getPhotosForFavor(currentFavor, function(photos) {
+          //find the photo with the most votes
+          console.log(photos);
+          var topVotes = Number.NEGATIVE_INFINITY;
+          var topPhoto = null;
+          for(var j = 0; j < photos.length; j++) {
+            if(photos[j].votes > topVotes) {
+              topVotes = photos[j].votes;
+              topPhoto = photos[j];
+            }
           }
-        }
-        console.log(currentFavor);
-        currentFavor.topPhoto = topPhoto.url;
-        console.log('top photo', currentFavor.topPhoto);
-        console.log($scope.favors);
-      });
+          console.log(currentFavor);
+          currentFavor.topPhoto = topPhoto.url;
+          console.log('top photo', currentFavor.topPhoto);
+          console.log($scope.favors);
+        });
+
+
+      )( $scope.favors[i]);
+
     }
 
   };
