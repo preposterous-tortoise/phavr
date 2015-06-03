@@ -9,10 +9,10 @@
     <ion-list ng-repeat="favor in favors | orderBy: filter ">
       <ion-item>
         <h3>{{favor.topic}}</h3>
-
         <h4>Distance: {{favor.distance}}</h4>
+        <img class="favorDetail" ng-src="{{favor.topPhoto}}">
         <div class="row">
-          <div class="col col-80">
+          <div class="col col-90">
             <ion-item ng-click="favorDetails(favor)" class="wrap">{{favor.description}}</ion-item>
           </div>
           <div class="col">
@@ -48,6 +48,12 @@
     <br>
     <div class="map-search">  
       <input id="feed-input" type="text" placeholder="Change location">
+    </div>
+    <div class="go">
+      <div class="go2">
+      <button class="button button-outline set-height button-light lolol gobutton" ng-click="updateFavors()">
+        Go!</button>
+    </div>
     </div>
   </ion-footer-bar>   
 </ion-view>

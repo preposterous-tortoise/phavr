@@ -76,7 +76,6 @@ h2, h3 {
 .map-search {
   position: absolute;
   top: 60px;
-  right: 0;
   display: block;
   width: 100%;
 }
@@ -91,10 +90,32 @@ h2, h3 {
   }
 }
 
+.go {
+  display: block;
+  position: absolute;
+  top: 110px;
+  width: 100%;
+}
+
+.go2 {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.gobutton {
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
 #req-input, #feed-input {
   margin: 0 auto;
   border-radius: 5px; 
   width: 80%;
+}
+
+.logo {
+  top: 100px;
+  @include centre(x);
 }
 
 .hiddenmap {
@@ -117,7 +138,7 @@ h2, h3 {
 }
 
 .favorDetail {
-	height:300px;
+  max-width: 100%;
 }
 
 .picVoting {
