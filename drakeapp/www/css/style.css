@@ -9,6 +9,10 @@ h2, h3 {
   white-space: normal;
 }
 
+.lolol {
+  border-right: solid 1px !important;
+}
+
 .votes {
   position: relative;
   color: teal;
