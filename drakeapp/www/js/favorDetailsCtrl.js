@@ -1,8 +1,9 @@
 angular.module('drakeApp.favorDetails', [])
-.controller('favorDetailsCtrl', function ($scope, $location, $http, photoFactory, Favors, $cordovaFile, Nav){
+.controller('favorDetailsCtrl', function ($scope, $location, $http, photoFactory, Favors, $cordovaFile, Nav, $timeout){
 
   $scope.selectedFavor = Favors.selectedFavor;
-  
+
+  $scope.selectedFavor.photos;   
   $scope.getPhoto = function(){
 
     var d = new Date();
@@ -32,6 +33,7 @@ angular.module('drakeApp.favorDetails', [])
   $scope.getAllPhotos = function() {
     photoFactory.getPhotosForFavor(Favors.selectedFavor, function(data) {
       $scope.selectedFavor.photos = data;
+      $scope.$broadcast('scroll.refreshComplete');
     });
   };
 

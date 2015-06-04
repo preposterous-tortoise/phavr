@@ -72,10 +72,10 @@
       <ion-content>
          <ion-list>
            <ion-item><img src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal"></ion-item>
-           <ion-item><button ui-sref="profile">Profile</button></ion-item>
+           <ion-item><a ng-click="toggleLeft()" ui-sref="profile">Profile</a></ion-item>
            <ion-item>Three</ion-item>
            <ion-item>Four</ion-item>
-           <ion-item><button ng-click="getUserInfo()">Hello!</button></ion-item>
+           <ion-item><a ng-click="getUserInfo()">Hello!</a></ion-item>
          </ion-list>
        </ion-content>
      </ion-side-menu>
