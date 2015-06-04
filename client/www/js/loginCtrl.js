@@ -1,4 +1,4 @@
-angular.module('drakeApp.login', [])
+angular.module('phavr.login', [])
 .controller('loginCtrl', function ($scope, $rootScope, $location, $cordovaOauth, Auth, $http, Nav, Favors, PushFactory){
     $rootScope.login = false;
   
@@ -48,7 +48,7 @@ angular.module('drakeApp.login', [])
           });
 
         //testing...
-        $http.post('http://drakeapp.herokuapp.com/auth/facebook/token')
+        $http.post('http://phavr.herokuapp.com/auth/facebook/token')
           .success(function(data){
             console.log(data);
             $location.path('/home');

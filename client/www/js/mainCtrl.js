@@ -1,4 +1,4 @@
-angular.module('drakeApp.nav', [])
+angular.module('phavr.nav', [])
 .controller('navCtrl', function($scope, $location, $http, $ionicSideMenuDelegate, photoFactory, Auth, Nav, Favors, PushFactory){ 
   $scope.user;
   $scope.getUserInfo = function(callback) {

@@ -1,10 +1,10 @@
-angular.module('drakeapp.photoFactory', [])
+angular.module('phavr.photoFactory', [])
 .factory('photoFactory', ['$location', '$q', '$http', 'Auth', function($location, $q, $http, Auth) {
 
   var domain;
   if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || 
-    $location.host() === 'drakeapp.herokuapp.com') {
-    domain = "http://drakeapp.herokuapp.com";
+    $location.host() === 'phavr.herokuapp.com') {
+    domain = "http://phavr.herokuapp.com";
   } else {
     domain = "http://localhost:3000";
   }
@@ -64,7 +64,7 @@ angular.module('drakeapp.photoFactory', [])
               options.params = {}; // if we need to send parameters to the server request
               var ft = new FileTransfer();
 
-              ft.upload(fileURI, encodeURI("http://drakeapp.herokuapp.com/photoUploads/uploadToServer"), win, fail, options);
+              ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/photoUploads/uploadToServer"), win, fail, options);
           }
            
           function capturePhoto() {
@@ -102,7 +102,7 @@ angular.module('drakeapp.photoFactory', [])
         long: favor.loc.coordinates[0]
       };
       
-      $http.post('https://drakeapp.herokuapp.com/api/instagram/', data)
+      $http.post('https://phavr.herokuapp.com/api/instagram/', data)
         .success(function(data, status, headers, config) {
           callback(data);
           console.log('got all instagram photos by location ');
@@ -148,7 +148,7 @@ angular.module('drakeapp.photoFactory', [])
     downVote: function(photoID){
       return $http({
         method: 'POST',
-        url: 'http://drakeapp.herokuapp.com/api/photos/downVote',
+        url: 'http://phavr.herokuapp.com/api/photos/downVote',
         data: photoID
       })
       .then(function(resp){

@@ -1,4 +1,4 @@
-angular.module('drakeApp.push', [])
+angular.module('phavr.push', [])
   .controller('pushCtrl', function($scope, $cordovaPush, $cordovaDialogs, $cordovaMedia, $cordovaToast, ionPlatform, $http) {
     $scope.notifications = [];
 

@@ -1,4 +1,4 @@
-angular.module('drakeApp.mapService', [])
+angular.module('phavr.mapService', [])
   .factory('mapService', function($window, $location, Favors) {
 
     var myLatlng = new google.maps.LatLng(37.783724, -122.40897799999999);

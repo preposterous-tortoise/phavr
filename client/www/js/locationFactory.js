@@ -1,4 +1,4 @@
-angular.module('drakeapp.locationFactory', [])
+angular.module('phavr.locationFactory', [])
 .factory('geo', function($cordovaGeolocation, mapService, Favors) {
 
 

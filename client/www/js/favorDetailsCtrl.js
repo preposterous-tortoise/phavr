@@ -14,7 +14,7 @@ angular.module('phavr.favorDetails', [])
       photoFactory.getPicture(favorID, time );
       console.log('sending picture url...');
       console.log('time before sendPicture', time);
-      photoFactory.sendPicture("https://s3.amazonaws.com/darrendrakeapp/"+time+"___"+favorID +".jpg", favorID);
+      photoFactory.sendPicture("https://s3.amazonaws.com/darrenphavr/"+time+"___"+favorID +".jpg", favorID);
     } else {
       photoFactory.sendPicture("http://images2.trippy.com/555cc3a5e4b0c050d882b87c_pm9.jpg", favorID);
     }

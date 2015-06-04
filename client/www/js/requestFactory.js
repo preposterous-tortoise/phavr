@@ -1,12 +1,12 @@
-angular.module('drakeApp.favorfact', [])
+angular.module('phavr.favorfact', [])
 .factory('Favors', function ($http, $location, Auth){
 
   var lol
 
   var domain;
   if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || 
-    $location.host() === 'drakeapp.herokuapp.com') {
-    domain = "http://drakeapp.herokuapp.com";
+    $location.host() === 'phavr.herokuapp.com') {
+    domain = "http://phavr.herokuapp.com";
   } else {
     domain = "http://localhost:3000";
   }
@@ -16,7 +16,7 @@ angular.module('drakeApp.favorfact', [])
       var lol;
       return $http({
               method: 'GET',
-              url: 'http://drakeapp.herokuapp.com/api/profileID'
+              url: 'http://phavr.herokuapp.com/api/profileID'
           })
           .then(function(resp) {
               lol = resp;

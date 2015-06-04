@@ -1,4 +1,4 @@
-angular.module('drakeApp.navfact', [])
+angular.module('phavr.navfact', [])
 .factory('Nav', function ($http, $location){
 
   return {

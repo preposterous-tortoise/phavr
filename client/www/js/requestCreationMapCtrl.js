@@ -1,4 +1,4 @@
-angular.module('drakeApp.requestCreationMap', [])
+angular.module('phavr.requestCreationMap', [])
   .controller('requestCreationMapCtrl', function($scope, Favors, mapService, Nav) {
 
     $scope.init = function() {
