@@ -4,9 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('phavr', ['ionic', 'ngCordova', 'phavr.home', 'phavr.profile', 'phavr.nav', 'phavr.favor',
-                              'phavr.login', 'phavr.requestMap', 'phavr.favorDetails',
+                              'phavr.login', 'phavr.favorMap', 'phavr.favorDetails',
                               'phavr.photoFactory', 'phavr.favorfact', 'phavr.locationFactory',
-                              'uiGmapgoogle-maps','phavr.mapService', 'phavr.requestCreationMap', 
+                              'uiGmapgoogle-maps','phavr.mapService', 'phavr.favorCreationMap', 
                               'phavr.authFactory', 'phavr.navfact', 'phavr.nav',
                               'phavr.push', 'phavr.pushfact'])
 .run(function($ionicPlatform) {
@@ -39,10 +39,10 @@ angular.module('phavr', ['ionic', 'ngCordova', 'phavr.home', 'phavr.profile', 'p
     controller: 'homeCtrl'
   })
 
-  $stateProvider.state('requestmap', {
-    url: '/requestmap',
-    templateUrl: './views/requestMap.html',
-    controller: 'requestMapCtrl'
+  $stateProvider.state('favormap', {
+    url: '/favormap',
+    templateUrl: './views/favorMap.html',
+    controller: 'FavorMapCtrl'
   })
 
   $stateProvider.state('login', {

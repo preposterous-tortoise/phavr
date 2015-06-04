@@ -1,4 +1,4 @@
-angular.module('phavr.requestCreationMap', [])
+angular.module('phavr.favorCreationMap', [])
   .controller('FavorCreationMapCtrl', function($scope, Favors, mapService, Nav) {
 
     $scope.init = function() {
