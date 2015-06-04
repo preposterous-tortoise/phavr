@@ -1,9 +1,10 @@
 
 <ion-view title="home">
   <ion-content>
-
+  <ion-refresher on-refresh="updateFavors()">
+  </ion-refresher>
   <span> <p ng-click="enableTracking()"> CLICK HERE FOR TRACKING</p></span>
-  <button class="button" ng-click="updateFavors()">UPDATE FAVORS</button>
+  <!--<button class="button" ng-click="updateFavors()">UPDATE FAVORS</button>-->
 
 
     <ion-list ng-repeat="favor in favors | orderBy: filter ">
