@@ -1,10 +1,9 @@
 angular.module('drakeApp.favorDetails', [])
-.controller('favorDetailsCtrl', function ($scope, $location, $http, photoFactory, Favors, $cordovaFile, Nav){
+.controller('favorDetailsCtrl', function ($scope, $location, $http, photoFactory, Favors, $cordovaFile, Nav, $timeout){
 
   $scope.selectedFavor = Favors.selectedFavor;
 
-  $scope.selectedFavor.photos = [{url: 'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG', votes: 0}, {url: 'https://pbs.twimg.com/profile_images/458794430200152064/XdQULww6.png', votes: 0}, {url: 'http://img2.wikia.nocookie.net/__cb20070412005925/uncyclopedia/images/1/17/331px-Longcat.jpg', votes: 0}];
-  
+  $scope.selectedFavor.photos;   
   $scope.getPhoto = function(){
 
     var d = new Date();
@@ -34,6 +33,7 @@ angular.module('drakeApp.favorDetails', [])
   $scope.getAllPhotos = function() {
     photoFactory.getPhotosForFavor(Favors.selectedFavor, function(data) {
       $scope.selectedFavor.photos = data;
+      $scope.$broadcast('scroll.refreshComplete');
     });
   };
 
@@ -71,7 +71,7 @@ angular.module('drakeApp.favorDetails', [])
 
   //get instagram pictures
   // $scope.getInstagramPictures();
-  //$scope.getAllPhotos();
+  $scope.getAllPhotos();
 
 
 });

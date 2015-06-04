@@ -5,6 +5,9 @@
       <h2 class="title">{{ selectedFavor.topic }}</h2>
     </div>
   <ion-content class="has-subheader" padding="false">
+  <ion-content>
+  <ion-refresher on-refresh="getAllPhotos()">
+  </ion-refresher>
   <h3>{{ selectedFavor.description }}</h3>
     <ion-list ng-repeat="photo in selectedFavor.photos | orderBy:'-votes'" class="wrap">
       <div class="list card">

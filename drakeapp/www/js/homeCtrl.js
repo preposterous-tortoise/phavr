@@ -39,8 +39,7 @@ angular.module('drakeApp.home', [])
 
   $scope.mapBounds = mapService.mapBounds;
 
-  $scope.favors = [{_id: 1, topic: 'req1', description: 'blah', votes: 0},
-                    {_id: 2, topic: 'req2', description: 'blah', votes: 0}];
+  $scope.favors = [];
 
   $scope.selectedFavor = Favors.selectedFavor;
 
@@ -164,7 +163,7 @@ angular.module('drakeApp.home', [])
   $scope.getPic();
 
   $scope.testVar = true;
-  //$scope.updateFavors();
+  $scope.updateFavors();
 
 
   $scope.toggle = false;
