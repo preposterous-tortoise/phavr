@@ -1,5 +1,5 @@
 angular.module('drakeApp.login', [])
-.controller('loginCtrl', function ($scope, $rootScope, $location, $cordovaOauth, Auth, $http, Nav){
+.controller('loginCtrl', function ($scope, $rootScope, $location, $cordovaOauth, Auth, $http, Nav, Favors, PushFactory){
     $rootScope.login = false;
   
   $scope.information = [$scope.username, $scope.password];
@@ -40,6 +40,12 @@ angular.module('drakeApp.login', [])
 
         //set access token for the session
         Auth.setAccessToken(result.access_token);
+
+        Favors.getUserInfo()
+          .then(function(data){
+            PushFactory.init(data.data.provider_id);
+            console.log('Authenticated provider id: ', data.data.provider_id);
+          });
 
         //testing...
         $http.post('http://drakeapp.herokuapp.com/auth/facebook/token')

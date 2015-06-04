@@ -7,7 +7,7 @@ var sendMessage = function(user_profile_id, message) {
   console.log('sending message to frank-push for id: ', user_profile_id);
   var data = {
     //users: [user_profile_id],
-    users: ["user5271475"],
+    users: [user_profile_id],
     android: {
       data: {
         message: message

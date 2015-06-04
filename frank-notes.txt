@@ -52,4 +52,12 @@ cordova plugin add cordova-plugin-file-transfer
 cordova plugin add cordova-plugin-geolocation 
 cordova plugin add cordova-plugin-splashscreen
 cordova plugin add cordova-plugin-whitelist
-cordova plugin add org.apache.cordova.inappbrowser 
+cordova plugin add org.apache.cordova.inappbrowser
+ionic plugin add org.apache.cordova.console
+ionic plugin add org.apache.cordova.device
+ionic plugin add org.apache.cordova.dialogs    
+ionic plugin add org.apache.cordova.file
+ionic plugin add org.apache.cordova.media
+ionic plugin add https://github.com/phonegap-build/PushPlugin
+ionic plugin add https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git
+
