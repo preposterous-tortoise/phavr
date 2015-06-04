@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 angular.module('drakeApp.home', [])
 .controller('homeCtrl', function ($scope, $rootScope, $location, $http, Favors, photoFactory, geo, Nav, mapService, uiGmapGoogleMapApi, $timeout){
 
@@ -30,39 +29,6 @@ angular.module('drakeApp.home', [])
 
   $scope.updateFavors = function(){
     console.log('attempting to update favors...');
-=======
-angular.module('drakeApp.home', [])
-.controller('homeCtrl', function ($scope, $rootScope, $location, $http, Favors, photoFactory, geo, Nav, mapService, uiGmapGoogleMapApi, $timeout){
- 
-
-  $rootScope.login = true;
-
-  $scope.mapBounds = mapService.mapBounds;
-
-  $scope.favors = [];
-
-  $scope.selectedFavor = Favors.selectedFavor;
-
-  $scope.upVote = function(favor) {
-    console.log("THIS IS FAVOR "+JSON.stringify(favor));
-    Favors.upVote(favor, 1);
-  }; 
-
-  $scope.downVote = function(favor) {
-    Favors.downVote(favor, -1);
-  };
-
-
-  $scope.favorDetails = function(favor){
-
-    Favors.setFavor(favor);
-    console.log(Favors.selectedFavor);
-    $location.path('/favordetails');
-  }
-
-  $scope.updateFavors = function(){
-    console.log('attempting to update favors...');
->>>>>>> change styles, add pull-to-refresh
     //geo.getLocation(function(spot){
     console.log('map bounds', mapService.mapBounds);
     if(mapService.mapBounds === null) {
