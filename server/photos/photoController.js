@@ -10,7 +10,8 @@ module.exports = {
   createPhoto: function(req, res, next) {
     //Create a new Photo and Save it
     var photo = new Photo({ url: req.body.image, 
-                                  request_id: req.body.favor_id
+                            request_id: req.body.favor_id,
+                            user_id: req.user.provider_id
                                 });
           photo.save(function (err) {
             if(err) { console.log(err); }

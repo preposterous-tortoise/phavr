@@ -46,6 +46,7 @@ angular.module('drakeApp.home', [])
           $scope.favors = data;
           $scope.favors.forEach(function(favor){
             favor.distance = $scope.getDistance(favor.loc);
+            favor.camera = favor.distance < 5;
           });
           
           console.log($scope.favors);
@@ -97,7 +98,9 @@ angular.module('drakeApp.home', [])
         });
 
 
+
       })( $scope.favors[i]);
+
 
     }
 
