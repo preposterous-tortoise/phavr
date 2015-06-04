@@ -35,6 +35,13 @@ angular.module('drakeApp.profile', [])
     $scope.filter = '-createdAt';
   };
 
+  $scope.favorDetails = function(favor){
+
+    Favors.setFavor(favor);
+    console.log(Favors.selectedFavor);
+    $location.path('/favordetails');
+  }
+  
   $scope.getFavors();
 
 });
