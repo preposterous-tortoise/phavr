@@ -1,5 +1,5 @@
 angular.module('phavr.requestMap', ['ionic', 'uiGmapgoogle-maps'])
-  .controller('RequestMapCtrl', function($scope, $timeout, $location, uiGmapGoogleMapApi, Favors, mapService, Nav) {
+  .controller('FavorMapCtrl', function($scope, $timeout, $location, uiGmapGoogleMapApi, Favors, mapService, Nav) {
 
     var areaZoom = 16;
     var markerMap = {};

@@ -1,5 +1,5 @@
 angular.module('phavr.requestCreationMap', [])
-  .controller('requestCreationMapCtrl', function($scope, Favors, mapService, Nav) {
+  .controller('FavorCreationMapCtrl', function($scope, Favors, mapService, Nav) {
 
     $scope.init = function() {
       var markerMap = {};

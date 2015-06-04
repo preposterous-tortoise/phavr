@@ -6,6 +6,7 @@ angular.module('phavr.nav', [])
     Favors.getUserInfo()
       .then(function(data){
         $scope.user = data;
+        //TODO - addback
         PushFactory.init(data.data.provider_id);
 
         console.log("THIS IS DATA "+data)
