@@ -1,4 +1,4 @@
-angular.module('drakeApp.favor', [])
+angular.module('phavr.favor', [])
 .controller('favorCtrl', function ($scope, $window, $location, Favors, mapService, Nav){
 
   $scope.createFavor = function() {

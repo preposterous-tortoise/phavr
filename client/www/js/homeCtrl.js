@@ -1,4 +1,4 @@
-angular.module('drakeApp.home', [])
+angular.module('phavr.home', [])
 .controller('homeCtrl', function ($scope, $rootScope, $location, $http, Favors, photoFactory, geo, Nav, mapService, uiGmapGoogleMapApi, $timeout){
 
 

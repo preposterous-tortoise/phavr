@@ -1,5 +1,5 @@
 node_modules
 server/node_modules
 server/auth/authConfig.js
-drakeapp/www/lib
+phavr/www/lib
 server/npm-debug.log

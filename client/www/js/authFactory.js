@@ -1,4 +1,4 @@
-angular.module('drakeapp.authFactory',[])
+angular.module('phavr.authFactory',[])
 .factory('Auth',function($location, $q, $http) {
   return {
     "clientID": "1443792965917018",
