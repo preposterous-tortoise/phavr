@@ -1,5 +1,5 @@
 angular.module('drakeApp.pushfact', [])
-.factory('PushFactory', function ($cordovaPush, $cordovaDialogs, $cordovaMedia, $cordovaToast, ionPlatform, $http){
+.factory('PushFactory', function ($cordovaPush, $cordovaDialogs, $cordovaMedia, $cordovaToast, /*ionPlatform,*/ $http){
 
     // call to register automatically upon device ready
     // ionPlatform.ready.then(function (device) {

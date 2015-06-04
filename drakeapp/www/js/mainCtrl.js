@@ -1,11 +1,13 @@
 angular.module('drakeApp.nav', [])
-.controller('navCtrl', function($scope, $location, $http, $ionicSideMenuDelegate, photoFactory, Auth, Nav, Favors){ 
+.controller('navCtrl', function($scope, $location, $http, $ionicSideMenuDelegate, photoFactory, Auth, Nav, Favors, PushFactory){ 
   $scope.user;
   $scope.getUserInfo = function(callback) {
     console.log("YOLO!");
     Favors.getUserInfo()
       .then(function(data){
         $scope.user = data;
+        PushFactory.init(data.data.provider_id);
+
         console.log("THIS IS DATA "+data)
         callback();
       })
