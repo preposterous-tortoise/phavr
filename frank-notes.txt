@@ -1,0 +1,55 @@
+
+
+How to get user name in client:
+
+
+Favors.getUserInfo  calls api/profileID  // does not save the result!!
+
+middleware.js:
+app.get('/api/profileID', passport.authenticate('facebook-token'), 
+    function(req, res){
+    
+      res.send(req.user);
+  });
+  -------------
+
+ navCtrl === mainCtrl.js
+ $scope.getUserInfo = function(callback) {
+    console.log("YOLO!");
+    Favors.getUserInfo()
+      .then(function(data){
+       **** $scope.user = data; ***
+
+-----------------
+app.post('/auth/facebook/token',
+  passport.authenticate('facebook-token'),
+    function (req,res) {
+      console.log('authorized user!');
+      console.log(req.user);
+      res.send(req.user? 201 : 401)
+    }
+  );
+  -------------------------
+
+  !!!!! voteController.UpVote  req.user.provider_id is set by passport not sent explicitly 
+  from the client
+
+  ====================
+Take a photo that satisfies a request
+
+
+
+
+
+
+
+cordova plugin add com.ionic.keyboard 
+cordova plugin add cordova-plugin-camera 
+cordova plugin add cordova-plugin-console 
+cordova plugin add cordova-plugin-device 
+cordova plugin add cordova-plugin-file 
+cordova plugin add cordova-plugin-file-transfer 
+cordova plugin add cordova-plugin-geolocation 
+cordova plugin add cordova-plugin-splashscreen
+cordova plugin add cordova-plugin-whitelist
+cordova plugin add org.apache.cordova.inappbrowser 
