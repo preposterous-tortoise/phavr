@@ -1,4 +1,5 @@
 var Photo = require('../db/photoModel.js');
+var Notifier = require('../push/pushNotify.js');
 // var Q = require('q');
 var aws = require('aws-sdk');
 var uuid = require('uuid');
@@ -15,6 +16,10 @@ module.exports = {
                                 });
           photo.save(function (err) {
             if(err) { console.log(err); }
+            // A photo was taken for your favor "description" at PLACE_NAME
+            // need to fetch favor from database
+            // notification.newPhoto send 
+            Notifier.notifyNewPhoto(req.body.favor_id);
             res.status(201).send('Photo saved at https://drakeapp-photos.s3.amazonaws.com/.jpg');
           });
   },

@@ -38,7 +38,6 @@ module.exports = {
 
     console.log("THIS IS WHAT CREATE FAVOR WANTS!!!! "+JSON.stringify(req.body));
 
-    //TODO: get user id from req.user
     var favor = new Favor({
       topic: req.body.topic,
       description: req.body.description,

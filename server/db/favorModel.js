@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 var FavorSchema = new mongoose.Schema({
   topic: String,
   description: String,
-  user_id: Number,
+  user_id: Number,  // provider_id
   icon: String,
   place_name: String,
   address: String,

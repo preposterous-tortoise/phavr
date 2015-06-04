@@ -25,9 +25,23 @@
     "cordova-plugin-console",
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
-    "com.ionic.keyboard"
+    "com.ionic.keyboard",
+    "org.apache.cordova.console",
+    "org.apache.cordova.device",
+    "org.apache.cordova.dialogs",
+    "org.apache.cordova.file",
+    "org.apache.cordova.media",
+    {
+      "locator": "https://github.com/phonegap-build/PushPlugin",
+      "id": "com.phonegap.plugins.PushPlugin"
+    },
+    {
+      "locator": "https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git",
+      "id": "nl.x-services.plugins.toast"
+    }
   ],
   "cordovaPlatforms": [
-    "ios"
+    "ios",
+    "android"
   ]
 }
