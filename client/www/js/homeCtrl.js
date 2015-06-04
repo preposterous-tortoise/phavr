@@ -1,5 +1,5 @@
 angular.module('phavr.home', [])
-.controller('homeCtrl', function ($scope, $rootScope, $location, $http, Favors, photoFactory, geo, Nav, mapService, uiGmapGoogleMapApi, $timeout){
+.controller('homeCtrl', function ($scope, $rootScope, $location, $http, Favors, Photos, geo, Nav, mapService, uiGmapGoogleMapApi, $timeout){
 
 
   $rootScope.login = true;
@@ -82,7 +82,7 @@ angular.module('phavr.home', [])
 
       (function(currentFavor) {
 
-      photoFactory.getPhotosForFavor(currentFavor, function(photos) {
+      Photos.getPhotosForFavor(currentFavor, function(photos) {
         //find the photo with the most votes
         console.log(photos);
         console.log(currentFavor);

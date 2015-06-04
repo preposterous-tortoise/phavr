@@ -1,5 +1,5 @@
 angular.module('phavr.nav', [])
-.controller('navCtrl', function($scope, $location, $http, $ionicSideMenuDelegate, photoFactory, Auth, Nav, Favors, PushFactory){ 
+.controller('navCtrl', function($scope, $location, $http, $ionicSideMenuDelegate, Auth, Nav, Favors, PushFactory){ 
   $scope.user;
   $scope.getUserInfo = function(callback) {
     console.log("YOLO!");

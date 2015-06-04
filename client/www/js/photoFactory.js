@@ -1,5 +1,5 @@
 angular.module('phavr.photoFactory', [])
-.factory('photoFactory', ['$location', '$q', '$http', 'Auth', function($location, $q, $http, Auth) {
+.factory('Photos', ['$location', '$q', '$http', 'Auth', function($location, $q, $http, Auth) {
 
   var domain;
   if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || 
