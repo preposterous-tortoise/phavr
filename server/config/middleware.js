@@ -55,7 +55,7 @@ module.exports = function(app, express){
   app.use('/index.html', auth.signInIfNotAuthenticated);
 
   //Serve the static files from the Front-End
-  app.use(express.static(path.join(__dirname,'/../../drakeapp/www')));
+  app.use(express.static(path.join(__dirname,'/../../client/www')));
 
   //On every subsequent http request from the Front-End, it will attach these headers to the response
   app.use('/', function(req,res,next) {

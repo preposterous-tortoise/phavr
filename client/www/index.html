@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.31.min.js"></script>
+
+    <!-- compiled css output -->
+    <link href="css/ionic.app.css" rel="stylesheet">
+
+    <!-- ionic/angularjs js -->
+    <script type="text/javascript" src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- angular-google-maps --> 
+    <script src="lib/lodash/dist/lodash.min.js"></script>
+
+    <script src="lib/angular-google-maps/dist/angular-google-maps.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) + ngCordova -->
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="cordova.js"></script>
+    
+    <meta http-equiv="Content-Security-Policy" content="script-src &apos;self&apos; https://maps.googleapis.com/ https://maps.gstatic.com/ https://mts0.googleapis.com/ &apos;unsafe-inline&apos; &apos;unsafe-eval&apos;">
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/pushFactory.js"></script>
+    <script src="js/homeCtrl.js"></script>
+    <script src="js/mainCtrl.js"></script>
+    <script src="js/mapService.js"></script>
+    <script src="js/photoFactory.js"></script>
+    <script src="js/requestFactory.js"></script>
+    <script src="js/locationFactory.js"></script>
+    <script src="js/authFactory.js"></script>
+    <script src="js/requestMapCtrl.js"></script>
+    <script src="js/requestCreationMapCtrl.js"></script>
+    <script src="js/favorCtrl.js"></script>
+    <script src="js/loginCtrl.js"></script>
+    <script src="js/navFactory.js"></script>
+    <script src="js/favorDetailsCtrl.js"></script>
+    <script src="js/profileCtrl.js"></script>
+    <script src="js/pushCtrl.js"></script>
+    <!-- google maps javascript -->
+    <!--  EITHER IMPORT GOOGLE MAPS HERE (not using Angular Google Maps or 
+       IMPORT using config in app.js-->
+  </head>
+  <body ng-app="drakeApp">
+
+    <ion-side-menus>
+     <ion-side-menu-content ng-controller="navCtrl">
+       <ion-pane>
+       <ion-header-bar class="bar-stable bar-calm">
+           <div class="button-bar">  
+
+             <a ng-click="toggleLeft()" ng-show="login" class="button button-icon icon ion-navicon"></a>
+             <a ui-sref="requestmap" ng-show="login" class="button button-icon icon ion-earth"></a>
+             <a ui-sref="home" ng-show="login" class="button button-icon icon ion-home"></a>
+             <a ui-sref="favor" ng-show="login" class="button button-icon icon ion-paper-airplane"></a>
+           </div>  
+         </ion-header-bar>
+
+         <!-- <ion-content> -->
+           <ion-nav-view></ion-nav-view>
+         <!-- </ion-content> -->
+       </ion-pane>
+     </ion-side-menu-content>
+
+     <ion-side-menu side="left" ng-controller="navCtrl">
+      <ion-header-bar ng-click="toggleLeft()" class="bar-calm">
+        <h1 class="title">{{ user.data.name  }}</h1>
+      </ion-header-bar>
+      <ion-content>
+         <ion-list>
+           <ion-item><img src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal"></ion-item>
+           <ion-item><a ng-click="toggleLeft()" ui-sref="profile">Profile</a></ion-item>
+           <ion-item>Three</ion-item>
+           <ion-item>Four</ion-item>
+           <ion-item><a ng-click="getUserInfo()">Hello!</a></ion-item>
+         </ion-list>
+       </ion-content>
+     </ion-side-menu>
+      
+    </ion-side-menus>
+  </body>
+</html>

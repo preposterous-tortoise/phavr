@@ -1,0 +1,237 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+$calm: #199696 !default;
+
+@mixin centerer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin centre($axis: "both"){
+    position:absolute;
+    @if $axis == "y"{
+        top:50%;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+    @if $axis == "x"{
+        left:50%;
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
+        transform: translateX(-50%);
+    }
+    @if $axis == "both"{
+        top:50%;
+        left:50%;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }   
+}
+
+
+h2, h3 {
+  color: silver !important;
+}
+
+<<<<<<< HEAD
+.distance {
+  display: inline-block !important;
+=======
+.requestHead {
+>>>>>>> change styles, add pull-to-refresh
+}
+
+.tall-footer {
+  height: 200px !important;
+
+  -webkit-transition: height 0.8s !important;
+  -moz-transition: height 0.8s !important;
+  transition: height 0.8s !important;
+  
+}
+
+.set-height {
+  max-height: 40px !important;
+}
+
+.map-search {
+  position: absolute;
+  top: 60px;
+  display: block;
+  width: 100%;
+}
+
+.searchbar {
+  position: absolute;
+  display: block;
+  width: 100%;
+  max-height: 40px !important;
+  input {
+    width: 100%;
+  }
+}
+
+.go {
+  display: block;
+  position: absolute;
+  top: 110px;
+  width: 100%;
+}
+
+.go2 {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.gobutton {
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+#req-input, #feed-input {
+  margin: 0 auto;
+  border-radius: 5px; 
+  width: 80%;
+}
+
+.logo {
+  top: 100px;
+  @include centre(x);
+}
+
+.hiddenmap {
+  display: none !important;
+}
+
+.secret {
+  position: relative !important;
+  margin-top: 100px !important;
+}
+
+.item.wrap, .item-content.wrap {
+  white-space: normal;
+}
+
+.votes {
+  position: relative;
+  color: teal;
+  margin-left: 12px;
+}
+
+.favorDetail {
+  max-width: 100%;
+}
+
+.picVoting {
+  top: 50%;
+  left: 50%;
+  position: relative !important;
+}
+
+.bottom-detail {
+	border: none;
+
+}
+
+.camera-footer {
+  position: relative;
+}
+
+.cambutton {
+  @include centerer;
+}
+
+// Google Maps
+
+#map {
+  width: 100%; 
+  height: 100%;
+}
+
+.scroll {
+  height: 100%;
+}
+
+.controls {
+  margin-top: 16px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.angular-google-map-container {
+  width: 100%; 
+  height: 100%;
+}
+
+.angular-google-map {
+  width: 100%; 
+  height: 100%;
+}
+
+.welcome {
+  @include centre(x);
+}
+
+.oauth_button {
+  max-width: 100%;
+  @include centre(y);
+}
+
+.lolol {
+  border-right: solid 1px !important;
+  color: white !important;
+}
+
+
+/*
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}*/
+
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+
