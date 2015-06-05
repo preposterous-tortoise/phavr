@@ -29,6 +29,19 @@ var fbAuth = require('../auth/newAuthPassport')(passport);
  * @api public
  */
 module.exports = function(app, express){
+
+
+
+  app.get('/location', function(req,res){
+    console.log(req);
+    console.log("_________________________________________________");
+    console.log(req.body);
+    console.log("*************************************************");
+
+    res.send(200);
+  })
+
+
   // Passport initialization
   auth.init(passport);
   app.use(passport.initialize());

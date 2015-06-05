@@ -48,7 +48,7 @@ angular.module('phavr.locationFactory', [])
 
 
       bgGeo.configure(callbackFn, failureFn, {
-        url: 'http://localhost:3000/location',
+        url: 'http://phavr.herokuapp.com/location',
         desiredAccuracy: 10,
         stationaryRadius: 20,
         distanceFilter: 30,
