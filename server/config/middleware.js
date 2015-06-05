@@ -78,25 +78,23 @@ module.exports = function(app, express){
 
 
 
-  app.post('/location', passport.authenticate('facebook-token'), function(req,res){
+  app.use('/location', passport.authenticate('facebook-token'), function(req,res){
 
     console.log("_________________________________________________");
     req.body.longitude = req.body.location.longitude;
     req.body.latitude = req.body.location.latitude;
     req.body.timeStamp = req.body.location.recorded_at;
     console.log("*************************************************");
-    res.redirect('/test');
+    
 
   });
 
-  app.get('/test', function(req,res) {
+  app.post('/location', function(req,res) {
     console.log("_________________________________________________");
-    req.body.longitude = req.body.location.longitude;
-    req.body.latitude = req.body.location.latitude;
-    req.body.timeStamp = req.body.location.recorded_at;
     console.log(req.body.longitude);
     console.log(req.user);
     console.log("*************************************************");
+    res.send(200);
   })
 
 
