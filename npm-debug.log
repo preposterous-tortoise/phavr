@@ -1,0 +1,202 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'c:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install' ]
+2 info using npm@2.5.1
+3 info using node@v0.12.0
+4 verbose node symlink c:\Program Files\nodejs\\node.exe
+5 warn package.json Dependency 'grunt' exists in both dependencies and devDependencies, using 'grunt@^0.4.5' from dependencies
+6 verbose install where, deps [ 'c:\\Users\\Kaivon\\Documents\\phavr1\\phavr',
+6 verbose install   [ 'aws-sdk',
+6 verbose install     'awssum-amazon-s3',
+6 verbose install     'body-parser',
+6 verbose install     'bower',
+6 verbose install     'cookie-parser',
+6 verbose install     'cordova',
+6 verbose install     'data-uri-to-buffer',
+6 verbose install     'express',
+6 verbose install     'express-session',
+6 verbose install     'fmt',
+6 verbose install     'frisby',
+6 verbose install     'fs',
+6 verbose install     'grunt',
+6 verbose install     'http',
+6 verbose install     'instagram-node',
+6 verbose install     'install',
+6 verbose install     'jasmine-node',
+6 verbose install     'mongoose',
+6 verbose install     'morgan',
+6 verbose install     'multer',
+6 verbose install     'npm',
+6 verbose install     'passport',
+6 verbose install     'passport-facebook',
+6 verbose install     'passport-facebook-token',
+6 verbose install     'q',
+6 verbose install     'request',
+6 verbose install     'twitter',
+6 verbose install     'uuid',
+6 verbose install     'grunt-cli',
+6 verbose install     'grunt-contrib-concat',
+6 verbose install     'grunt-contrib-watch',
+6 verbose install     'grunt-karma',
+6 verbose install     'grunt-nodemon',
+6 verbose install     'jasmine-core',
+6 verbose install     'karma',
+6 verbose install     'karma-chrome-launcher',
+6 verbose install     'karma-jasmine',
+6 verbose install     'karma-phantomjs-launcher',
+6 verbose install     'phantomjs' ] ]
+7 verbose install where, peers [ 'c:\\Users\\Kaivon\\Documents\\phavr1\\phavr', [] ]
+8 info preinstall phavr@1.0.0
+9 warn package.json fs@0.0.2 fs is also the name of a node core module.
+10 warn package.json fs@0.0.2 No description
+11 warn package.json fs@0.0.2 No repository field.
+12 warn package.json http@0.0.0 http is also the name of a node core module.
+13 warn package.json http@0.0.0 No description
+14 warn package.json http@0.0.0 No repository field.
+15 verbose already installed skipping fs@0.0.2 c:\Users\Kaivon\Documents\phavr1\phavr
+16 verbose already installed skipping grunt@^0.4.5 c:\Users\Kaivon\Documents\phavr1\phavr
+17 verbose already installed skipping http@0.0.0 c:\Users\Kaivon\Documents\phavr1\phavr
+18 verbose already installed skipping instagram-node@^0.5.7 c:\Users\Kaivon\Documents\phavr1\phavr
+19 verbose already installed skipping install@^0.1.8 c:\Users\Kaivon\Documents\phavr1\phavr
+20 verbose already installed skipping jasmine-node@^1.14.5 c:\Users\Kaivon\Documents\phavr1\phavr
+21 verbose already installed skipping mongoose@^4.0.3 c:\Users\Kaivon\Documents\phavr1\phavr
+22 verbose already installed skipping morgan@^1.5.3 c:\Users\Kaivon\Documents\phavr1\phavr
+23 verbose already installed skipping multer@^0.1.8 c:\Users\Kaivon\Documents\phavr1\phavr
+24 verbose already installed skipping npm@^2.10.1 c:\Users\Kaivon\Documents\phavr1\phavr
+25 verbose already installed skipping passport@^0.2.1 c:\Users\Kaivon\Documents\phavr1\phavr
+26 verbose already installed skipping passport-facebook@^2.0.0 c:\Users\Kaivon\Documents\phavr1\phavr
+27 verbose already installed skipping passport-facebook-token@^2.0.0 c:\Users\Kaivon\Documents\phavr1\phavr
+28 verbose already installed skipping q@^1.4.1 c:\Users\Kaivon\Documents\phavr1\phavr
+29 verbose already installed skipping request@^2.55.0 c:\Users\Kaivon\Documents\phavr1\phavr
+30 verbose already installed skipping twitter@^1.2.5 c:\Users\Kaivon\Documents\phavr1\phavr
+31 verbose already installed skipping uuid@^2.0.1 c:\Users\Kaivon\Documents\phavr1\phavr
+32 verbose already installed skipping grunt-cli@^0.1.13 c:\Users\Kaivon\Documents\phavr1\phavr
+33 verbose already installed skipping grunt-contrib-concat@^0.5.1 c:\Users\Kaivon\Documents\phavr1\phavr
+34 verbose already installed skipping grunt-contrib-watch@^0.6.1 c:\Users\Kaivon\Documents\phavr1\phavr
+35 verbose already installed skipping grunt-karma@^0.11.0 c:\Users\Kaivon\Documents\phavr1\phavr
+36 verbose already installed skipping grunt-nodemon@^0.4.0 c:\Users\Kaivon\Documents\phavr1\phavr
+37 verbose already installed skipping jasmine-core@^2.3.4 c:\Users\Kaivon\Documents\phavr1\phavr
+38 verbose already installed skipping karma@^0.12.35 c:\Users\Kaivon\Documents\phavr1\phavr
+39 verbose already installed skipping karma-chrome-launcher@^0.1.12 c:\Users\Kaivon\Documents\phavr1\phavr
+40 verbose already installed skipping karma-jasmine@^0.3.5 c:\Users\Kaivon\Documents\phavr1\phavr
+41 verbose already installed skipping karma-phantomjs-launcher@^0.2.0 c:\Users\Kaivon\Documents\phavr1\phavr
+42 verbose already installed skipping phantomjs@^1.9.17 c:\Users\Kaivon\Documents\phavr1\phavr
+43 verbose already installed skipping aws-sdk@^2.1.31 c:\Users\Kaivon\Documents\phavr1\phavr
+44 verbose already installed skipping awssum-amazon-s3@^1.5.0 c:\Users\Kaivon\Documents\phavr1\phavr
+45 verbose already installed skipping body-parser@^1.12.4 c:\Users\Kaivon\Documents\phavr1\phavr
+46 verbose already installed skipping bower@^1.4.1 c:\Users\Kaivon\Documents\phavr1\phavr
+47 verbose already installed skipping cookie-parser@^1.3.5 c:\Users\Kaivon\Documents\phavr1\phavr
+48 verbose already installed skipping cordova@^5.0.0 c:\Users\Kaivon\Documents\phavr1\phavr
+49 verbose already installed skipping data-uri-to-buffer@0.0.3 c:\Users\Kaivon\Documents\phavr1\phavr
+50 verbose already installed skipping express@^4.12.4 c:\Users\Kaivon\Documents\phavr1\phavr
+51 verbose already installed skipping express-session@^1.11.2 c:\Users\Kaivon\Documents\phavr1\phavr
+52 verbose already installed skipping fmt@^0.5.0 c:\Users\Kaivon\Documents\phavr1\phavr
+53 verbose already installed skipping frisby@^0.8.5 c:\Users\Kaivon\Documents\phavr1\phavr
+54 silly install resolved []
+55 info build c:\Users\Kaivon\Documents\phavr1\phavr
+56 verbose linkStuff [ false, false, false, 'c:\\Users\\Kaivon\\Documents\\phavr1' ]
+57 info linkStuff phavr@1.0.0
+58 verbose linkBins phavr@1.0.0
+59 verbose linkMans phavr@1.0.0
+60 verbose rebuildBundles phavr@1.0.0
+61 verbose rebuildBundles [ '.bin',
+61 verbose rebuildBundles   'aws-sdk',
+61 verbose rebuildBundles   'awssum',
+61 verbose rebuildBundles   'awssum-amazon',
+61 verbose rebuildBundles   'awssum-amazon-s3',
+61 verbose rebuildBundles   'body-parser',
+61 verbose rebuildBundles   'bower',
+61 verbose rebuildBundles   'cookie-parser',
+61 verbose rebuildBundles   'cordova',
+61 verbose rebuildBundles   'data-uri-to-buffer',
+61 verbose rebuildBundles   'express',
+61 verbose rebuildBundles   'express-session',
+61 verbose rebuildBundles   'fmt',
+61 verbose rebuildBundles   'frisby',
+61 verbose rebuildBundles   'fs',
+61 verbose rebuildBundles   'grunt',
+61 verbose rebuildBundles   'grunt-cli',
+61 verbose rebuildBundles   'grunt-contrib-concat',
+61 verbose rebuildBundles   'grunt-contrib-watch',
+61 verbose rebuildBundles   'grunt-karma',
+61 verbose rebuildBundles   'grunt-nodemon',
+61 verbose rebuildBundles   'http',
+61 verbose rebuildBundles   'instagram-node',
+61 verbose rebuildBundles   'install',
+61 verbose rebuildBundles   'jasmine-core',
+61 verbose rebuildBundles   'jasmine-node',
+61 verbose rebuildBundles   'karma',
+61 verbose rebuildBundles   'karma-chrome-launcher',
+61 verbose rebuildBundles   'karma-jasmine',
+61 verbose rebuildBundles   'karma-phantomjs-launcher',
+61 verbose rebuildBundles   'mongoose',
+61 verbose rebuildBundles   'morgan',
+61 verbose rebuildBundles   'multer',
+61 verbose rebuildBundles   'npm',
+61 verbose rebuildBundles   'passport',
+61 verbose rebuildBundles   'passport-facebook',
+61 verbose rebuildBundles   'passport-facebook-token',
+61 verbose rebuildBundles   'phantomjs',
+61 verbose rebuildBundles   'q',
+61 verbose rebuildBundles   'request',
+61 verbose rebuildBundles   'twitter',
+61 verbose rebuildBundles   'uuid' ]
+62 verbose rebuild bundle c:\Users\Kaivon\Documents\phavr1\phavr\node_modules\awssum
+63 info build c:\Users\Kaivon\Documents\phavr1\phavr\node_modules\awssum
+64 info preinstall awssum@1.2.0
+65 verbose linkStuff [ false,
+65 verbose linkStuff   false,
+65 verbose linkStuff   false,
+65 verbose linkStuff   'c:\\Users\\Kaivon\\Documents\\phavr1\\phavr\\node_modules' ]
+66 info linkStuff awssum@1.2.0
+67 verbose linkBins awssum@1.2.0
+68 verbose linkMans awssum@1.2.0
+69 verbose rebuildBundles awssum@1.2.0
+70 verbose rebuildBundles [ 'underscore', 'xml2js' ]
+71 info install awssum@1.2.0
+72 info postinstall awssum@1.2.0
+73 verbose rebuild bundle c:\Users\Kaivon\Documents\phavr1\phavr\node_modules\awssum-amazon
+74 info build c:\Users\Kaivon\Documents\phavr1\phavr\node_modules\awssum-amazon
+75 info preinstall awssum-amazon@1.4.0
+76 verbose linkStuff [ false,
+76 verbose linkStuff   false,
+76 verbose linkStuff   false,
+76 verbose linkStuff   'c:\\Users\\Kaivon\\Documents\\phavr1\\phavr\\node_modules' ]
+77 info linkStuff awssum-amazon@1.4.0
+78 verbose linkBins awssum-amazon@1.4.0
+79 verbose linkMans awssum-amazon@1.4.0
+80 verbose rebuildBundles awssum-amazon@1.4.0
+81 verbose rebuildBundles [ 'dateformat', 'underscore' ]
+82 info install awssum-amazon@1.4.0
+83 info postinstall awssum-amazon@1.4.0
+84 info install phavr@1.0.0
+85 info postinstall phavr@1.0.0
+86 verbose unsafe-perm in lifecycle true
+87 info phavr@1.0.0 Failed to exec postinstall script
+88 verbose stack Error: phavr@1.0.0 postinstall: `./node_modules/bower/bin/bower install`
+88 verbose stack Exit status 1
+88 verbose stack     at EventEmitter.<anonymous> (c:\Program Files\nodejs\node_modules\npm\lib\utils\lifecycle.js:213:16)
+88 verbose stack     at EventEmitter.emit (events.js:110:17)
+88 verbose stack     at ChildProcess.<anonymous> (c:\Program Files\nodejs\node_modules\npm\lib\utils\spawn.js:14:12)
+88 verbose stack     at ChildProcess.emit (events.js:110:17)
+88 verbose stack     at maybeClose (child_process.js:1008:16)
+88 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:1080:5)
+89 verbose pkgid phavr@1.0.0
+90 verbose cwd c:\Users\Kaivon\Documents\phavr1\phavr
+91 error Windows_NT 6.3.9600
+92 error argv "c:\\Program Files\\nodejs\\\\node.exe" "c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
+93 error node v0.12.0
+94 error npm  v2.5.1
+95 error code ELIFECYCLE
+96 error phavr@1.0.0 postinstall: `./node_modules/bower/bin/bower install`
+96 error Exit status 1
+97 error Failed at the phavr@1.0.0 postinstall script './node_modules/bower/bin/bower install'.
+97 error This is most likely a problem with the phavr package,
+97 error not with npm itself.
+97 error Tell the author that this fails on your system:
+97 error     ./node_modules/bower/bin/bower install
+97 error You can get their info via:
+97 error     npm owner ls phavr
+97 error There is likely additional logging output above.
+98 verbose exit [ 1, true ]

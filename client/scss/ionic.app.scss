@@ -141,6 +141,15 @@ h2, h3, h4 {
   width: 100%;
 }
 
+.login {
+  background-image: url("http://i.giphy.com/j94zatfSSZ440.gif") !important;
+  background-size: cover !important;
+  min-height: 20% !important
+  width: 3% !important;
+  height: 110% !important;
+  background-repeat: none !important;
+}
+
 .go2 {
   width: 80%;
   margin: 0 auto;
@@ -153,8 +162,15 @@ h2, h3, h4 {
 
 #req-input, #feed-input {
   margin: 0 auto;
-  border-radius: 5px; 
+  border-radius: 5px;
   width: 80%;
+  text-align: center;}
+
+.favorTitle {
+  margin-top: 5px !important;
+  text-align: center !important;
+  margin-bottom: 5px !important;
+
 }
 
 .logo {

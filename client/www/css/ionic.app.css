@@ -35,9 +35,34 @@ h2, h3, h4 {
   border-color: #66CDAA !important;
   border-width: 1px !important; }
 
+
 .upvote {
   height: 10px !important;
   color: gray !important; }
+
+.tagline {
+  color: white !important;
+  top: 19% !important;
+  position: relative !important;
+  left: 23% !important;
+}
+
+.login {
+  background-image: url("http://i.giphy.com/j94zatfSSZ440.gif") !important;
+  background-size: cover !important;
+  min-height: 20% !important
+  width: 3% !important;
+  height: 110% !important;
+  background-repeat: none !important;
+}
+
+.oauth_button {
+  height:50px !important;
+  top: 68% !important;
+  left: 43% !important;
+  border-radius: 50% !important;
+  opacity: 0.5 !important;
+}
 
 .downvote {
   color: gray !important; }
@@ -89,10 +114,18 @@ h2, h3, h4 {
   width: 100% !important;
   margin: 0 auto !important; }
 
+.favorTitle {
+  margin-top: 5px !important;
+  text-align: center !important;
+  margin-bottom: 5px !important;
+
+}
+
 #req-input, #feed-input {
   margin: 0 auto;
   border-radius: 5px;
-  width: 80%; }
+  width: 80%;
+  text-align: center;}
 
 .logo {
   top: 100px;
@@ -191,7 +224,7 @@ h2, h3, h4 {
   transform: translateY(-50%); }
 
 .lolol {
-  border-right: solid 1px !important;
+  border: none 1px !important;
   color: white !important; }
 
 /*
