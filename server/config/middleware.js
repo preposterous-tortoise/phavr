@@ -32,14 +32,7 @@ module.exports = function(app, express){
 
 
 
-  app.get('/location', function(req,res){
-    console.log(req);
-    console.log("_________________________________________________");
-    console.log(req.body);
-    console.log("*************************************************");
 
-    res.send(200);
-  })
 
 
   // Passport initialization
@@ -82,6 +75,14 @@ module.exports = function(app, express){
   app.use('/api/photos', passport.authenticate('facebook-token'), photoRouter);
   app.use('/api/votes', passport.authenticate('facebook-token'), voteRouter);
 
+
+  app.post('/location', function(req,res){
+    console.log(req);
+    console.log("_________________________________________________");
+    console.log(req.body);
+    console.log("*************************************************");
+    res.send(200);
+  })
 
   //Used to grab user information from the user proprty of request. Provides FB info for name and profile picture
   app.get('/api/profileID', passport.authenticate('facebook-token'), 

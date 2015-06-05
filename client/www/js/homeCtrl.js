@@ -11,6 +11,7 @@ angular.module('phavr.home', [])
   */
 
   $scope.updateFavors = function(){
+    console.log("updating favors");
 
     if(mapService.mapBounds === null) {
       geo.phoneLocation(function(spot) {
@@ -23,6 +24,8 @@ angular.module('phavr.home', [])
                   [spot.coords.longitude+radius, spot.coords.latitude+radius]];
         window.localStorage.setItem('longitude', spot.coords.longitude.toString());
         window.localStorage.setItem('latitude', spot.coords.latitude.toString());
+
+
 
         Favors.fetchRequests(box, function(data){
           //for each favor attach distance to current location
@@ -166,7 +169,8 @@ angular.module('phavr.home', [])
     });
 
   $scope.enableTracking = function(){
-    geo.enableTracking();
+    // geo.enableTracking();
+    geo.backgroundTracking();
   };
 
   /*

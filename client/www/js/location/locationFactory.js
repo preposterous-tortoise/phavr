@@ -17,7 +17,6 @@ angular.module('phavr.locationFactory', [])
         callback([lat, longi]);
     	});
 
-      this.backgroundTracking();
     },
 
     backgroundTracking: function(){
@@ -49,6 +48,9 @@ angular.module('phavr.locationFactory', [])
 
       bgGeo.configure(callbackFn, failureFn, {
         url: 'http://phavr.herokuapp.com/location',
+        headers: {
+          access_token: window.localStorage.getItem("token")
+        },
         desiredAccuracy: 10,
         stationaryRadius: 20,
         distanceFilter: 30,
@@ -59,6 +61,7 @@ angular.module('phavr.locationFactory', [])
         stopOnTerminal: false
       });
 
+      console.log("bg geo started");
       bgGeo.start();
     },
 
@@ -73,6 +76,7 @@ angular.module('phavr.locationFactory', [])
       $cordovaGeolocation.getCurrentPosition(posOptions)
       .then(function(spot) { 
         mapService.setLocation(spot.coords.latitude, spot.coords.longitude);
+        this.backgroundTracking();
         callback(spot);
       });
     },
