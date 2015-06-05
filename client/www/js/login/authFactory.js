@@ -10,6 +10,16 @@ angular.module('phavr.authFactory',[])
       this.accessToken = token;
       window.localStorage.setItem("token", token);
       console.log("access token set");
+    },
+    getUserInfo: function() {
+      return $http({
+              method: 'GET',
+              url: 'http://phavr.herokuapp.com/api/profileID'
+          })
+          .then(function(resp) {
+              console.log('response from getting server', resp);
+              return resp;
+          });
     }
   }
 });

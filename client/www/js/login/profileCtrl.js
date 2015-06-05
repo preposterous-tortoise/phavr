@@ -18,7 +18,7 @@
   
   $scope.getUserInfo = function() {
     console.log("YOLO!");
-    Favors.getUserInfo()
+    Auth.getUserInfo()
       .then(function(data){
         $scope.user = data;
         console.log("HELLO! THIS IS USER "+JSON.stringify($scope.user));

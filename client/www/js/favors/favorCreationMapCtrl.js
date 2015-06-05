@@ -11,11 +11,4 @@ angular.module('phavr.favorCreationMap', [])
 
     $scope.init();
 
-    // console.log('creation view');
-    // _.defer(function(){
-    //   var input = (document.getElementById('pac-input'));
-    //   console.log('creation view deferred', input);
-    //   $scope.init();
-    // });
-
   });

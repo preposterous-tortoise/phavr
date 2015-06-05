@@ -1,7 +1,7 @@
 angular.module('phavr.favorfact', [])
 .factory('Favors', function ($http, $location, Auth){
 
-  var lol
+
 
   var domain;
   if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || 
@@ -12,18 +12,7 @@ angular.module('phavr.favorfact', [])
   }
 
   return {
-    getUserInfo: function() {
-      var lol;
-      return $http({
-              method: 'GET',
-              url: 'http://phavr.herokuapp.com/api/profileID'
-          })
-          .then(function(resp) {
-              lol = resp;
-              console.log('response from getting server', resp);
-              return resp;
-          });
-    },
+
 
     saveRequest: function(request) {
       $http({

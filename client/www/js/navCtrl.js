@@ -3,7 +3,7 @@ angular.module('phavr.nav', [])
   $scope.user;
   $scope.getUserInfo = function(callback) {
 
-    Favors.getUserInfo()
+    Auth.getUserInfo()
       .then(function(data){
         $scope.user = data;
         callback();
