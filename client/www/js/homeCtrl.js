@@ -3,15 +3,19 @@ angular.module('phavr.home', [])
 
   //this is needed so that header bar can be ngshown
   $rootScope.login = true;
-  $scope.favors = [];
-
 
   /**
   * Methods related to Favors
   */
 
+  $scope.favors = [{_id: 1, topic: 'nyancat', description: 'send me ur nyans', topPhoto: 'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG', votes: 2, distance: 0.256, camera: true}, {_id: 1, topic: 'meowmeowmeow', description: 'mirror mirror on the wall, who is the longest cat of all', topPhoto: 'http://www.autofish.net/mirrors/images/animals/cats/long_cat.jpg', votes: 2, distance: 0.256, camera: true}];
+
+  $scope.selectedFavor = Favors.selectedFavor;
+
   $scope.updateFavors = function(){
-    console.log("updating favors");
+    console.log('attempting to update favors...');
+    //geo.getLocation(function(spot){
+    console.log('map bounds', mapService.mapBounds);
 
     if(mapService.mapBounds === null) {
       geo.phoneLocation(function(spot) {

@@ -17,7 +17,10 @@ $dark:                            #444 !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
-$calm: #199696 !default;
+$calm: #66CDAA !default;
+
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,300);
+$roboto-condensed: 'Roboto Condensed', sans-serif;
 
 @mixin centerer {
   position: absolute;
@@ -56,18 +59,45 @@ $calm: #199696 !default;
 }
 
 
-h2, h3 {
-  color: silver !important;
+body {
+  font-family: $roboto-condensed !important;
+  font-weight: normal !important;
 }
 
+.font {
+  font-family: $roboto-condensed !important;
+  font-weight: normal !important;
+}
+
+h2, h3, h4 {
+  color: silver !important;
+  font-family: $roboto-condensed !important;
+  font-weight: normal !important;
+
+}
+
+.description {
+  border-color: $calm !important;
+  border-width: 1px !important;
+}
+
+.upvote {
+  height: 10px !important;
+  color: gray !important;
+
+}
+
+.downvote {
+  color: gray !important;
+}
 
 .distance {
   display: inline-block !important;
-
+  margin: 0 0 0 0 !important;
 }
 
 .favorHead {
-
+  color: black !important;
 }
 
 .tall-footer {
@@ -77,6 +107,10 @@ h2, h3 {
   -moz-transition: height 0.8s !important;
   transition: height 0.8s !important;
   
+}
+
+.margin {
+  margin-bottom: 5px !important;
 }
 
 .set-height {
@@ -143,18 +177,27 @@ h2, h3 {
 
 .votes {
   position: relative;
-  color: teal;
+  color: $calm;
   margin-left: 12px;
 }
 
 .favorDetail {
-  max-width: 100%;
+  width: 100%;
+  /*max-width: 100%;*/
 }
 
 .picVoting {
-  top: 50%;
-  left: 50%;
+  /*top: 50%;*/
+  /*left: 50%;*/
   position: relative !important;
+}
+
+.feedView {
+  padding: 0 !important;
+}
+
+.noPadding {
+  padding: 0 !important;
 }
 
 .bottom-detail {
