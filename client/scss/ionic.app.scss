@@ -275,6 +275,15 @@ h2, h3, h4 {
   color: white !important;
 }
 
+.profileHead {
+  @include centre(x);
+}
+
+.profilePic {
+  @include centre(x);
+  height: 100px !important;
+}
+
 
 /*
 #pac-input {

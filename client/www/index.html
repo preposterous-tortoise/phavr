@@ -68,16 +68,20 @@
      </ion-side-menu-content>
 
      <ion-side-menu side="left" ng-controller="NavCtrl">
-      <ion-header-bar ng-click="toggleLeft()" class="bar-calm">
+      <ion-header-bar ng-click="toggleLeft()" class="bar-dark">
         <h1 class="title">{{ user.data.name  }}</h1>
       </ion-header-bar>
       <ion-content>
          <ion-list>
-           <ion-item><img src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal"></ion-item>
-           <ion-item><a ng-click="toggleLeft()" ui-sref="profile">Profile</a></ion-item>
-           <ion-item>Three</ion-item>
-           <ion-item>Four</ion-item>
-           <ion-item><a ng-click="getUserInfo()">Hello!</a></ion-item>
+          <ion-item ng-click="toggleLeft()" ui-sref="profile">
+            <div class="item-avatar">
+              <img src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal">
+              <span>Profile</span>
+            </div>
+          </ion-item>
+          <ion-item>Notifications</ion-item>
+          <ion-item>Settings</ion-item>
+          <ion-item ng-click="getUserInfo()">Hello!</ion-item>
          </ion-list>
        </ion-content>
      </ion-side-menu>
