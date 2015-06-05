@@ -1,5 +1,5 @@
 angular.module('phavr.home', [])
-.controller('homeCtrl', function ($scope, $rootScope, $location, $http, Favors, Photos, geo, Nav, mapService, uiGmapGoogleMapApi, $timeout){
+.controller('homeCtrl', function ($scope, $rootScope, $location, $http, Favors, Photos, geo, mapService, uiGmapGoogleMapApi, $timeout){
 
   //this is needed so that header bar can be ngshown
   $rootScope.login = true;
