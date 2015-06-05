@@ -1,5 +1,5 @@
 angular.module('phavr.favor', [])
-.controller('favorCtrl', function ($scope, $window, $location, Favors, mapService, Nav){
+.controller('favorCtrl', function ($scope, $window, $location, Favors, mapService){
 
   $scope.createFavor = function() {
     var mapFavor = mapService.favor;

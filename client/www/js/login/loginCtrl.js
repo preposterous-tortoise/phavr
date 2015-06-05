@@ -1,5 +1,5 @@
 angular.module('phavr.login', [])
-.controller('loginCtrl', function ($scope, $rootScope, $location, $cordovaOauth, Auth, $http, Nav, Favors, PushFactory, Auth){
+.controller('loginCtrl', function ($scope, $rootScope, $location, $cordovaOauth, Auth, $http, Favors, PushFactory, Auth){
     $rootScope.login = false;
   
   $scope.information = [$scope.username, $scope.password];

@@ -1,5 +1,5 @@
 angular.module('phavr.favorDetails', [])
-.controller('favorDetailsCtrl', function ($scope, $location, $http, Photos, Favors, $cordovaFile, Nav, $timeout){
+.controller('favorDetailsCtrl', function ($scope, $location, $http, Photos, Favors, $cordovaFile, $timeout){
 
   $scope.selectedFavor = Favors.selectedFavor;
 

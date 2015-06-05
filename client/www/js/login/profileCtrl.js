@@ -1,5 +1,5 @@
  angular.module('phavr.profile', [])
-.controller('profileCtrl', function ($scope, $rootScope, Favors, $location, $cordovaOauth, Auth, $http, Nav){
+.controller('profileCtrl', function ($scope, $rootScope, Favors, $location, $cordovaOauth, Auth, $http){
   
   $rootScope.login = true;
 
