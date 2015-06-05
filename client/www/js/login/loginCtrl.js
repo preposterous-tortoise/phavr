@@ -43,8 +43,7 @@ angular.module('phavr.login', [])
 
         Favors.getUserInfo()
           .then(function(data){
-            //TODO -addback
-            // PushFactory.init(data.data.provider_id);
+            PushFactory.init(data.data.provider_id);
             console.log('Authenticated provider id: ', data.data.provider_id);
           });
 

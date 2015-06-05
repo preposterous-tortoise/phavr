@@ -25,6 +25,7 @@ angular.module('phavr.pushfact', [])
     // Register
     var register = function (provider_id) {
         var config = null;
+        user_provider_id = provider_id;
 
         if (ionic.Platform.isAndroid()) {
             config = {
@@ -80,6 +81,7 @@ angular.module('phavr.pushfact', [])
             storeDeviceToken("android");
         }
         else if (notification.event == "message") {
+            console.log("Push Notification Received", JSON.stringify(notification.message, null, '\t'));
             $cordovaDialogs.alert(notification.message, "Push Notification Received");
             /*$scope.$apply(function () {
                 $scope.notifications.push(JSON.stringify(notification.message));
