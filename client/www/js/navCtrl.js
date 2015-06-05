@@ -1,6 +1,6 @@
 angular.module('phavr.nav', [])
 .controller('NavCtrl', function($scope, $location, $http, $ionicSideMenuDelegate, Auth, Nav, Favors, PushFactory){ 
-  $scope.user;
+
   $scope.getUserInfo = function(callback) {
 
     Auth.getUserInfo()
