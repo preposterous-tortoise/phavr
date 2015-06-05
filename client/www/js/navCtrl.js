@@ -11,7 +11,6 @@ angular.module('phavr.nav', [])
   };
   $scope.toggleLeft = function() {
     $scope.getUserInfo(function(){$ionicSideMenuDelegate.toggleLeft();});
-    
   };
 
   $scope.profile = function() {
