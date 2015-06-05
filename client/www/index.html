@@ -26,22 +26,22 @@
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
     <!-- your app's js -->
     <script src="js/app.js"></script>
-    <script src="js/pushFactory.js"></script>
+    <script src="js/push/pushFactory.js"></script>
     <script src="js/homeCtrl.js"></script>
-    <script src="js/mainCtrl.js"></script>
-    <script src="js/mapService.js"></script>
-    <script src="js/photoFactory.js"></script>
-    <script src="js/FavorFactory.js"></script>
-    <script src="js/locationFactory.js"></script>
-    <script src="js/authFactory.js"></script>
-    <script src="js/FavorMapCtrl.js"></script>
-    <script src="js/FavorCreationMapCtrl.js"></script>
-    <script src="js/favorCtrl.js"></script>
-    <script src="js/loginCtrl.js"></script>
-    <script src="js/navFactory.js"></script>
-    <script src="js/favorDetailsCtrl.js"></script>
-    <script src="js/profileCtrl.js"></script>
-    <script src="js/pushCtrl.js"></script>
+    <script src="js/navCtrl.js"></script>
+    <script src="js/location/mapService.js"></script>
+    <script src="js/photos/photoFactory.js"></script>
+    <script src="js/favors/FavorFactory.js"></script>
+    <script src="js/location/locationFactory.js"></script>
+    <script src="js/login/authFactory.js"></script>
+    <script src="js/favors/FavorMapCtrl.js"></script>
+    <script src="js/favors/FavorCreationMapCtrl.js"></script>
+    <script src="js/favors/favorCtrl.js"></script>
+    <script src="js/login/loginCtrl.js"></script>
+    <script src="js/location/navFactory.js"></script>
+    <script src="js/favors/favorDetailsCtrl.js"></script>
+    <script src="js/login/profileCtrl.js"></script>
+    <script src="js/push/pushCtrl.js"></script>
     <!-- google maps javascript -->
     <!--  EITHER IMPORT GOOGLE MAPS HERE (not using Angular Google Maps or 
        IMPORT using config in app.js-->
@@ -49,7 +49,7 @@
   <body ng-app="phavr">
 
     <ion-side-menus>
-     <ion-side-menu-content ng-controller="navCtrl">
+     <ion-side-menu-content ng-controller="NavCtrl">
        <ion-pane>
        <ion-header-bar class="bar-stable bar-calm">
            <div class="button-bar">  
@@ -67,7 +67,7 @@
        </ion-pane>
      </ion-side-menu-content>
 
-     <ion-side-menu side="left" ng-controller="navCtrl">
+     <ion-side-menu side="left" ng-controller="NavCtrl">
       <ion-header-bar ng-click="toggleLeft()" class="bar-calm">
         <h1 class="title">{{ user.data.name  }}</h1>
       </ion-header-bar>
