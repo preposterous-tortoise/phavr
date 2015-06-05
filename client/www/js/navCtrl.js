@@ -15,9 +15,8 @@ angular.module('phavr.nav', [])
 
   $scope.profile = function() {
     $location.path('/profile');
-  }
-
-  
+  } 
    
+  $scope.getUserInfo();
 });
 
