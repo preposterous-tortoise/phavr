@@ -7,12 +7,12 @@
   },
   "resolutions": {
     "angular": ">=1.2.0",
-
+    "lodash": "~2.4.2"
   },
   "dependencies": {
     "angular-google-maps": "~2.1.1",
     "ngCordova": "~0.1.15-alpha",
     "google-map": "~1.0.0",
-
+    "lodash": "~3.9.0"
   }
 }
