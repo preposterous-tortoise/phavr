@@ -10,7 +10,6 @@ angular.module('phavr.photoFactory', [])
   }
 
   return {
-    stuff: {},
     getPicture: function(favorID, time) {
           console.log('get picture time', time);
 
@@ -30,16 +29,12 @@ angular.module('phavr.photoFactory', [])
            
           var retries = 0;
           function onCapturePhoto(fileURI) {
-            console.log("onsuccess");
+
               var win = function (r) {
-                console.log("win");
                   clearCache();
                   retries = 0;
-                  alert('Done!');
               }
-           
               var fail = function (error) {
-                console.log("fail");
                   if (retries == 0) {
                     console.log("retry", retries);
                       retries ++
@@ -47,23 +42,17 @@ angular.module('phavr.photoFactory', [])
                           onCapturePhoto(fileURI)
                       }, 1000)
                   } else {
-                    console.log("somethign wrong f'ed up");
                       retries = 0;
                       clearCache();
-                      alert('Ups. Something wrong happens!');
+                      alert('Whoops. Problem encountered uploading photo! Try again!');
                   }
               }
 
               var options = new FileUploadOptions();
               options.fileKey = "file";
               options.fileName = time +"___"+favorID+".jpg";
-              // console.log(fileURI.substr(fileURI.lastIndexOf('/') + 1));
-              // options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
               options.mimeType = "image/jpeg";
-              // options.headers = {'favorID': favorID};
-              options.params = {}; // if we need to send parameters to the server request
               var ft = new FileTransfer();
-
               ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/photoUploads/uploadToServer"), win, fail, options);
           }
            
@@ -78,38 +67,7 @@ angular.module('phavr.photoFactory', [])
               alert('Failed because: ' + message);
           }
 
-
           capturePhoto();
-
-
-      // var q = $q.defer();
-      // console.log('in the photoFactory...');
-      // navigator.camera.getPicture(function(result) {
-      //   //something with camera
-      //   console.log(result);
-      //   q.resolve(result);
-      // }, function(err) {
-      //   q.reject(err);
-      // }, options);
-
-      // return q.promise;
-    },
-
-    getInstagramPictures: function(favor, callback){
-
-      var data = {
-        lat: favor.loc.coordinates[1],
-        long: favor.loc.coordinates[0]
-      };
-      
-      $http.post('https://phavr.herokuapp.com/api/instagram/', data)
-        .success(function(data, status, headers, config) {
-          callback(data);
-          console.log('got all instagram photos by location ');
-        })
-        .error(function(data, status, headers, config) {
-          console.log('error getting instagram photos');
-        });
     },
 
     getPhotosForFavor: function(favor, callback){
@@ -118,19 +76,14 @@ angular.module('phavr.photoFactory', [])
           callback(data);
         })
         .error(function(data, status, headers, config) {
-          console.log('error getting photos for favor');
         });
     },
-
     sendPicture: function(imageURI, favorID) {
       var data = { image: imageURI, favor_id: favorID };
-      console.log('inside sendPicture');
       $http.post(domain+'/api/photos/create', data)
         .success(function(data, status, headers, config) {
-          console.log('photo uploaded!');
         })
         .error(function(data, status, headers, config) {
-          console.log('error during upload :[');
         });
     },
     upVote: function(photo, vote){
@@ -144,16 +97,19 @@ angular.module('phavr.photoFactory', [])
         photo.votes += +resp.data;
         console.log(resp);
       })
-    },
-    downVote: function(photoID){
-      return $http({
-        method: 'POST',
-        url: 'http://phavr.herokuapp.com/api/photos/downVote',
-        data: photoID
-      })
-      .then(function(resp){
-        console.log(resp);
-      }) 
-    },
+    },   
+    getInstagramPictures: function(favor, callback){
+      var data = {
+        lat: favor.loc.coordinates[1],
+        long: favor.loc.coordinates[0]
+      };
+      
+      $http.post('https://phavr.herokuapp.com/api/instagram/', data)
+        .success(function(data, status, headers, config) {
+          callback(data);
+        })
+        .error(function(data, status, headers, config) {
+        });
+    }
   }
 }]);
