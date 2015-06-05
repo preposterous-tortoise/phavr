@@ -36,7 +36,7 @@ angular.module('phavr.locationFactory', [])
       */
       var callbackFn = function(location) {
 
-        console.log('BackgroundGeoLocation callback:'+ location.latitude +',' + location longitude);
+        console.log('BackgroundGeoLocation callback:'+ location.latitude +',' + location.longitude);
         //HTTP requeset here to Post Location to my server
 
         myAjaxCallback.call(this);
