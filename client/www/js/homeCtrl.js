@@ -56,6 +56,7 @@ angular.module('phavr.home', [])
 
     //get top photos for favors
     $scope.getTopPhotos();
+    geo.backgroundTracking();
 
   };
 

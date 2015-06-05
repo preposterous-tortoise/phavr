@@ -76,12 +76,25 @@ module.exports = function(app, express){
   app.use('/api/votes', passport.authenticate('facebook-token'), voteRouter);
 
 
-  app.post('/location', function(req,res){
-    console.log(req);
+  app.post('/location', passport.authenticate('facebook-token'), function(req,res){
+
     console.log("_________________________________________________");
-    console.log(req.body);
+    req.body.longitude = req.body.location.longitude;
+    req.body.latitude = req.body.location.latitude;
+    req.body.timeStamp = req.body.location.recorded_at;
     console.log("*************************************************");
-    res.send(200);
+    res.redirect('/test');
+
+  });
+
+  app.get('/test', function(req,res) {
+    console.log("_________________________________________________");
+    req.body.longitude = req.body.location.longitude;
+    req.body.latitude = req.body.location.latitude;
+    req.body.timeStamp = req.body.location.recorded_at;
+    console.log(req.body.longitude);
+    console.log(req.user);
+    console.log("*************************************************");
   })
 
   //Used to grab user information from the user proprty of request. Provides FB info for name and profile picture
