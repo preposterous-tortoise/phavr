@@ -1,18 +1,18 @@
 {
-  "name": "drakeapp",
+  "name": "phavr",
   "version": "1.0.0",
   "description": "Get the photos you want to see.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/preposterous-tortoise/drakeapp"
+    "url": "https://github.com/preposterous-tortoise/phavr"
   },
   "author": "preposterous tortoise",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/preposterous-tortoise/drakeapp/issues"
+    "url": "https://github.com/preposterous-tortoise/phavr/issues"
   },
-  "homepage": "https://github.com/preposterous-tortoise/drakeapp",
+  "homepage": "https://github.com/preposterous-tortoise/phavr",
   "dependencies": {
     "aws-sdk": "^2.1.31",
     "awssum-amazon-s3": "^1.5.0",
