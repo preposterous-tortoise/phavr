@@ -1,5 +1,5 @@
 angular.module('phavr.login', [])
-.controller('loginCtrl', function ($scope, $rootScope, $location, $cordovaOauth, Auth, $http, Nav, Favors, PushFactory){
+.controller('loginCtrl', function ($scope, $rootScope, $location, $cordovaOauth, Auth, $http, Nav, Favors, PushFactory, Auth){
     $rootScope.login = false;
   
   $scope.information = [$scope.username, $scope.password];
@@ -41,7 +41,7 @@ angular.module('phavr.login', [])
         //set access token for the session
         Auth.setAccessToken(result.access_token);
 
-        Favors.getUserInfo()
+        Auth.getUserInfo()
           .then(function(data){
             PushFactory.init(data.data.provider_id);
             console.log('Authenticated provider id: ', data.data.provider_id);

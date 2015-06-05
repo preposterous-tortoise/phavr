@@ -7,7 +7,7 @@ angular.module('phavr', ['ionic', 'ngCordova', 'phavr.home', 'phavr.profile', 'p
                               'phavr.login', 'phavr.favorMap', 'phavr.favorDetails',
                               'phavr.photoFactory', 'phavr.favorfact', 'phavr.locationFactory',
                               'uiGmapgoogle-maps','phavr.mapService', 'phavr.favorCreationMap', 
-                              'phavr.authFactory', 'phavr.navfact', 'phavr.nav',
+                              'phavr.authFactory', 'phavr.nav',
                               'phavr.push', 'phavr.pushfact'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
