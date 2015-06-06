@@ -15,6 +15,15 @@ describe("Authentication!", function () {
   
 }); 
 
+describe("Location!", function () {
+
+	frisby.create('Location')
+	  .post("http://localhost:3000/location?access_token=CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU")
+	  .expectStatus(200)
+	.toss();
+  
+});
+
 describe("Create A Favor!", function () {
 
 	frisby.create('Make A Favor')

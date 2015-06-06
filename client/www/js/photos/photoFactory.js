@@ -53,7 +53,7 @@ angular.module('phavr.photoFactory', [])
               options.fileName = time +"___"+favorID+".jpg";
               options.mimeType = "image/jpeg";
               var ft = new FileTransfer();
-              ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/photoUploads/uploadToServer"), win, fail, options);
+              ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/photos/photoUploads/uploadToServer"), win, fail, options);
           }
            
           function capturePhoto() {
