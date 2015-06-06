@@ -34,7 +34,8 @@ angular.module('phavr.photoFactory', [])
               var win = function (r) {
                   clearCache();
                   retries = 0;
-                  Photos.sendPicture("https://s3.amazonaws.com/darrenphavr/"+time+"___"+favorID +".jpg", favorID);
+                  alert('Done!');
+                  Photos.sendPicture("https://s3.amazonaws.com/darrendrakeapp/"+time+"___"+favorID +".jpg", favorID);
               }
               var fail = function (error) {
                   if (retries == 0) {
@@ -55,7 +56,7 @@ angular.module('phavr.photoFactory', [])
               options.fileName = time +"___"+favorID+".jpg";
               options.mimeType = "image/jpeg";
               var ft = new FileTransfer();
-              ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/api/photos/photoUploads/uploadToServer"), win, fail, options);
+              ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/photoUploads/uploadToServer"), win, fail, options);
           }
            
           function capturePhoto() {
