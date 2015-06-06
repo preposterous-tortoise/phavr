@@ -39,7 +39,7 @@ angular.module('phavr.locationFactory', [])
       });
     },
 
-    updateUserLocation: function(lat, lng) {
+    updateUserLocation: function() {
       var provider_id = localStorage.getItem('user_provider_id');
       var lat = localStorage.getItem('latitude');
       var lng = localStorage.getItem('longitude');
