@@ -1,30 +1,36 @@
 var Favor = require('../db/favorModel.js');
 var Photo = require('../db/photoModel.js');
+var Notifier = require('../push/pushNotify.js');
 var Q = require('q');
 
-module.exports = {
-  fetchFavors: function(req, res, next) {
-  	var box = req.body.box;
-  	var polyBox = [  // sw, ne
-  	  [
-  	    [box[0][0], box[0][1]],
-  	    [box[1][0], box[0][1]],
-  	    [box[1][0], box[1][1]],
-  	    [box[0][0], box[1][1]],
-  	    [box[0][0], box[0][1]]
-  	  ]
-  	];
-
-    var query = Favor.find({
-      "loc": {
-        "$geoWithin": {
-          "$geometry": {
-            "type": "Polygon",
-            "coordinates": polyBox
-          }
+var getPolyBoxQuery = function(box) {
+  var polyBox = [  // sw, ne
+    [
+      [box[0][0], box[0][1]],
+      [box[1][0], box[0][1]],
+      [box[1][0], box[1][1]],
+      [box[0][0], box[1][1]],
+      [box[0][0], box[0][1]]
+    ]
+  ];
+  return {
+    "loc": {
+      "$geoWithin": {
+        "$geometry": {
+          "type": "Polygon",
+          "coordinates": polyBox
         }
       }
-    });
+    }
+  }
+};
+
+module.exports = {
+  getPolyBoxQuery: getPolyBoxQuery,
+
+  fetchFavors: function(req, res, next) {
+  	var box = req.body.box;
+    var query = Favor.find(getPolyBoxQuery(box));
     query.exec(function(err, docs) {
       res.json(docs);
       if (err) {
@@ -35,9 +41,6 @@ module.exports = {
   },
   
   createFavor: function(req, res, next) {
-
-    console.log("THIS IS WHAT CREATE FAVOR WANTS!!!! "+JSON.stringify(req.body));
-
     var favor = new Favor({
       topic: req.body.topic,
       description: req.body.description,
@@ -54,7 +57,11 @@ module.exports = {
     });
     favor.save(function(err, favor) {
       if (err) console.log('ERROR in favor creation: ', err);
-      if (err) throw err;
+      if (err) {
+        throw err;
+      } else {
+        Notifier.notifyNewFavor(favor);
+      }
       //done(null, user);
       res.send(favor);
     });
