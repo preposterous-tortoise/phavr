@@ -5,11 +5,10 @@ var request = require('request');
 var Q = require('q');
 
 
-var sendMessage = function(user_profile_id, message) {
+var sendMessage = function(users, message) {
   console.log('sending message to frank-push for id: ', user_profile_id);
   var data = {
-    //users: [user_profile_id],
-    users: [user_profile_id],
+    users: users,
     android: {
       data: {
         message: message
@@ -81,7 +80,7 @@ module.exports = {
           var favor = favors[0];
           var message = "A photo was taken for your favor \"" + favor.description + "\" at " + favor.place_name;
           console.log('message: ', message);
-          sendMessage(favor.user_id, message);
+          sendMessage([favor.user_id], message);
         }
       });
   },
@@ -96,10 +95,12 @@ module.exports = {
         console.log('Error finding users for box:', box, err);
       } else {
         var message = 'There is a new favor requested near you at ' + favor.place_name + ', ' + favor.address;
+        var users = [];
         users.forEach(function(user) {
-          sendMessage(user.provider_id, message);
+          if (user.provider_id !== favor.user_id)
+            user.push(user.provider_id);
         });
-        console.log('Users for box: ', users);
+        sendMessage(users, message);
       }
     });
   }
