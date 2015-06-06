@@ -8,7 +8,7 @@ angular.module('phavr.home', [])
   * Methods related to Favors
   */
 
-  $scope.favors = [{_id: 1, topic: 'nyancat', description: 'send me ur nyans', topPhoto: 'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG', votes: 2, distance: 0.256, camera: true}, {_id: 1, topic: 'meowmeowmeow', description: 'mirror mirror on the wall, who is the longest cat of all', topPhoto: 'http://www.autofish.net/mirrors/images/animals/cats/long_cat.jpg', votes: 2, distance: 0.256, camera: true}];
+  $scope.favors = [];/*[{_id: 1, topic: 'nyancat', description: 'send me ur nyans', topPhoto: 'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG', votes: 2, distance: 0.256, camera: true}, {_id: 1, topic: 'meowmeowmeow', description: 'mirror mirror on the wall, who is the longest cat of all', topPhoto: 'http://www.autofish.net/mirrors/images/animals/cats/long_cat.jpg', votes: 2, distance: 0.256, camera: true}];*/
 
   $scope.selectedFavor = Favors.selectedFavor;
 
@@ -40,6 +40,7 @@ angular.module('phavr.home', [])
           });
           //fetch favors from the dtabase
           $scope.favors = data;
+          $scope.getTopPhotos();
         });
       });
     } else{ 
@@ -51,12 +52,17 @@ angular.module('phavr.home', [])
             //show camera icon if favor distance is less than 5 miles
             favor.camera = favor.distance < 5;
           });
+          $scope.getTopPhotos();
         });
     }
 
     //get top photos for favors
-    $scope.getTopPhotos();
-    geo.backgroundTracking();
+
+    //$scope.getTopPhotos();
+    //geo.backgroundTracking();
+
+    
+
 
   };
 
@@ -85,7 +91,9 @@ angular.module('phavr.home', [])
             topPhoto = photos[j];
           }
         }
-        currentFavor.topPhoto = topPhoto.url;
+        if(topPhoto) {
+          currentFavor.topPhoto = topPhoto.url;
+        }
       });
       })($scope.favors[i]);
     }

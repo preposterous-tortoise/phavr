@@ -1,13 +1,14 @@
+var favorController = require('../favors/favorController.js');
 var Favor = require('../db/favorModel.js');
+var User = require('../db/userModel.js');
 var request = require('request');
 var Q = require('q');
 
 
-var sendMessage = function(user_profile_id, message) {
+var sendMessage = function(users, message) {
   console.log('sending message to frank-push for id: ', user_profile_id);
   var data = {
-    //users: [user_profile_id],
-    users: [user_profile_id],
+    users: users,
     android: {
       data: {
         message: message
@@ -33,6 +34,36 @@ var sendMessage = function(user_profile_id, message) {
   );
 }
 
+var getBoxForLoc = function(coords /* [lng, lat] */) {
+  var miles = 1;
+  var radius = 0.02899*miles;
+  var box = [[coords[0]-radius, coords[1]-radius], //sw
+            [coords[0]+radius, coords[1]+radius]]; //ne
+  return box;
+}
+
+var getPolyBoxQuery = function(box) {
+  var polyBox = [  // sw, ne
+    [
+      [box[0][0], box[0][1]],
+      [box[1][0], box[0][1]],
+      [box[1][0], box[1][1]],
+      [box[0][0], box[1][1]],
+      [box[0][0], box[0][1]]
+    ]
+  ];
+  return {
+    "loc": {
+      "$geoWithin": {
+        "$geometry": {
+          "type": "Polygon",
+          "coordinates": polyBox
+        }
+      }
+    }
+  }
+};
+
 module.exports = {
 
   notifyNewPhoto: function(favor_id) {
@@ -49,9 +80,29 @@ module.exports = {
           var favor = favors[0];
           var message = "A photo was taken for your favor \"" + favor.description + "\" at " + favor.place_name;
           console.log('message: ', message);
-          sendMessage(favor.user_id, message);
+          sendMessage([favor.user_id], message);
         }
       });
+  },
+
+  notifyNewFavor: function(favor) {
+    // console.log("notifyNewFavor: ", favor);
+    // console.log('new favor box: ', getBoxForLoc(favor.loc.coordinates));
+    var box = getBoxForLoc(favor.loc.coordinates);
+    var query = User.find(getPolyBoxQuery(box));
+    query.exec(function(err, users) {
+      if (err) {
+        console.log('Error finding users for box:', box, err);
+      } else {
+        var message = 'There is a new favor requested near you at ' + favor.place_name + ', ' + favor.address;
+        var users = [];
+        users.forEach(function(user) {
+          if (user.provider_id !== favor.user_id)
+            user.push(user.provider_id);
+        });
+        sendMessage(users, message);
+      }
+    });
   }
 
 }
