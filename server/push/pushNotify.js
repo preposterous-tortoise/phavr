@@ -97,9 +97,11 @@ module.exports = {
         var users = [];
         users.forEach(function(user) {
           if (user.provider_id !== favor.user_id)
-            user.push(user.provider_id);
+            users.push(user.provider_id);
         });
-        sendMessage(users, message);
+        if (users.length > 0) {
+          sendMessage(users, message);
+        }
       }
     });
   }
