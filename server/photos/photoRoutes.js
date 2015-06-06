@@ -18,4 +18,10 @@ module.exports = function (app) {
 
   app.route('/downVote')
     .post(photoController.downVotePhoto);
+
+  app.route('/uploadToS3')
+    .get(photoController.uploadToS3);
+
+  app.route('/uploadToServer')
+      .post(photoController.uploadToS3);
 };
