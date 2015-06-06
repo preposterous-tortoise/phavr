@@ -25,6 +25,13 @@ angular.module('phavr.login', [])
     Auth.setAccessToken("CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU");
     $location.path('/home');
     console.log(localStorage.getItem('token'));
+    Auth.getUserInfo()
+      .then(function(data){
+        // PushFactory.init(data.data.provider_id);
+        localStorage.setItem('user_provider_id', data.data.provider_id);
+        // geo.updateUserLocation();
+        console.log('Authenticated provider id: ', data.data.provider_id);
+      });
 
  }
 
@@ -44,6 +51,8 @@ angular.module('phavr.login', [])
         Auth.getUserInfo()
           .then(function(data){
             PushFactory.init(data.data.provider_id);
+            localStorage.setItem('user_provider_id', data.data.provider_id);
+            geo.updateUserLocation();
             console.log('Authenticated provider id: ', data.data.provider_id);
           });
 

@@ -51,6 +51,7 @@ module.exports = function(app, express){
   var photoRouter = express.Router();
   var favorRouter = express.Router();
   var voteRouter = express.Router();
+  var userRouter = express.Router();
 
   //Used for logging request details
   app.use(morgan('dev'));
@@ -75,6 +76,7 @@ module.exports = function(app, express){
   app.use('/api/requests', passport.authenticate('facebook-token'), favorRouter);
   app.use('/api/photos', passport.authenticate('facebook-token'), photoRouter);
   app.use('/api/votes', passport.authenticate('facebook-token'), voteRouter);
+  app.use('/api/users', passport.authenticate('facebook-token'), userRouter);
 
 
 
@@ -111,6 +113,7 @@ module.exports = function(app, express){
   require('../favors/favorRoutes.js')(favorRouter);
   require('../photos/photoRoutes.js')(photoRouter);
   require('../votes/voteRoutes.js')(voteRouter);
+  require('../users/userRoutes.js')(userRouter);
 
 
 

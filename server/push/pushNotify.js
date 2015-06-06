@@ -1,4 +1,6 @@
+var favorController = require('../favors/favorController.js');
 var Favor = require('../db/favorModel.js');
+var User = require('../db/userModel.js');
 var request = require('request');
 var Q = require('q');
 
@@ -33,6 +35,36 @@ var sendMessage = function(user_profile_id, message) {
   );
 }
 
+var getBoxForLoc = function(coords /* [lng, lat] */) {
+  var miles = 1;
+  var radius = 0.02899*miles;
+  var box = [[coords[0]-radius, coords[1]-radius], //sw
+            [coords[0]+radius, coords[1]+radius]]; //ne
+  return box;
+}
+
+var getPolyBoxQuery = function(box) {
+  var polyBox = [  // sw, ne
+    [
+      [box[0][0], box[0][1]],
+      [box[1][0], box[0][1]],
+      [box[1][0], box[1][1]],
+      [box[0][0], box[1][1]],
+      [box[0][0], box[0][1]]
+    ]
+  ];
+  return {
+    "loc": {
+      "$geoWithin": {
+        "$geometry": {
+          "type": "Polygon",
+          "coordinates": polyBox
+        }
+      }
+    }
+  }
+};
+
 module.exports = {
 
   notifyNewPhoto: function(favor_id) {
@@ -52,6 +84,24 @@ module.exports = {
           sendMessage(favor.user_id, message);
         }
       });
+  },
+
+  notifyNewFavor: function(favor) {
+    // console.log("notifyNewFavor: ", favor);
+    // console.log('new favor box: ', getBoxForLoc(favor.loc.coordinates));
+    var box = getBoxForLoc(favor.loc.coordinates);
+    var query = User.find(getPolyBoxQuery(box));
+    query.exec(function(err, users) {
+      if (err) {
+        console.log('Error finding users for box:', box, err);
+      } else {
+        var message = 'There is a new favor requested near you at ' + favor.place_name + ', ' + favor.address;
+        users.forEach(function(user) {
+          sendMessage(user.provider_id, message);
+        });
+        console.log('Users for box: ', users);
+      }
+    });
   }
 
 }

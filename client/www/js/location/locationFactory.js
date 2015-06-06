@@ -1,9 +1,17 @@
 angular.module('phavr.locationFactory', [])
-.factory('geo', function($cordovaGeolocation, mapService, Favors) {
+.factory('geo', function($cordovaGeolocation, mapService, Favors, $location, $http) {
 
   var bgGeo;
   var processing = false;
   var watchID = null;
+
+  var domain;
+  if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || 
+    $location.host() === 'phavr.herokuapp.com') {
+    domain = "http://phavr.herokuapp.com";
+  } else {
+    domain = "http://localhost:3000";
+  }
 
   return {
     getLocation: function(callback) {
@@ -72,12 +80,33 @@ angular.module('phavr.locationFactory', [])
 
 
     phoneLocation: function(callback) {
+      var context = this;
       var posOptions = { timeout: 10000, enableHighAccuracy: false };
       $cordovaGeolocation.getCurrentPosition(posOptions)
       .then(function(spot) { 
         mapService.setLocation(spot.coords.latitude, spot.coords.longitude);
-        //this.backgroundTracking();
+        window.localStorage.setItem('longitude', spot.coords.longitude.toString());
+        window.localStorage.setItem('latitude', spot.coords.latitude.toString());
+        context.updateUserLocation();
         callback(spot);
+      });
+    },
+
+    updateUserLocation: function() {
+      var provider_id = localStorage.getItem('user_provider_id');
+      var lat = localStorage.getItem('latitude');
+      var lng = localStorage.getItem('longitude');
+      console.log('updateUserLocation: ', provider_id, lat, lng);
+      $http({
+        method: 'POST',
+        url: domain +'/api/users/updateloc',
+        data: {lat: lat, lng: lng}
+      })
+      .success(function(data, status, headers, config) {
+        console.log("successfully updated user location");
+      })
+      .error(function(data, status, headers, config) {
+        console.log('error updating user location, ', data, status, headers, config);
       });
     },
 
