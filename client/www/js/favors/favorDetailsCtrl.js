@@ -3,7 +3,7 @@ angular.module('phavr.favorDetails', [])
 
   $scope.selectedFavor = Favors.selectedFavor;
 
-  $scope.selectedFavor.photos = [{votes:0, url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'}, {votes:0, url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'}, {votes:0, url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'}];   
+  /*$scope.selectedFavor.photos = [{votes:0, url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'}, {votes:0, url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'}, {votes:0, url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'}];   */
   $scope.getPhoto = function(){
 
     var d = new Date();
@@ -74,7 +74,7 @@ angular.module('phavr.favorDetails', [])
 
   //get instagram pictures
   // $scope.getInstagramPictures();
-  //$scope.getAllPhotos();
+  $scope.getAllPhotos();
 
 
 });

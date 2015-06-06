@@ -76,7 +76,7 @@ angular.module('phavr.locationFactory', [])
       $cordovaGeolocation.getCurrentPosition(posOptions)
       .then(function(spot) { 
         mapService.setLocation(spot.coords.latitude, spot.coords.longitude);
-        this.backgroundTracking();
+        //this.backgroundTracking();
         callback(spot);
       });
     },
