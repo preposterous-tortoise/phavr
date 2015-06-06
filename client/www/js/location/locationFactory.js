@@ -71,6 +71,7 @@ angular.module('phavr.locationFactory', [])
 
       console.log("**bg geo started**");
       bgGeo.start();
+      console.log("access token is", window.localStorage.getItem("token"));
     },
 
     stopBackGroundTracking: function() {
