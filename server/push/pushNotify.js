@@ -6,7 +6,6 @@ var Q = require('q');
 
 
 var sendMessage = function(users, message) {
-  console.log('sending message to frank-push for id: ', user_profile_id);
   var data = {
     users: users,
     android: {
