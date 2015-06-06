@@ -3,6 +3,9 @@ angular.module('phavr.home', [])
 
   //this is needed so that header bar can be ngshown
   $rootScope.login = true;
+  
+
+
 
   /**
   * Methods related to Favors
@@ -30,7 +33,9 @@ angular.module('phavr.home', [])
         window.localStorage.setItem('latitude', spot.coords.latitude.toString());
 
         //After current location is found, start tracking
+
         //geo.backgroundTracking();
+
 
         Favors.fetchRequests(box, function(data){
           //for each favor attach distance to current location
