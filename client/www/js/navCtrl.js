@@ -6,7 +6,7 @@ angular.module('phavr.nav', [])
     Auth.getUserInfo()
       .then(function(data){
         $scope.user = data;
-        callback();
+        if(callback) callback();
       })
   };
   $scope.toggleLeft = function() {
@@ -15,9 +15,8 @@ angular.module('phavr.nav', [])
 
   $scope.profile = function() {
     $location.path('/profile');
-  }
-
-  
+  } 
    
+  $scope.getUserInfo();
 });
 

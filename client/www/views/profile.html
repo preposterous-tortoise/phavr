@@ -1,18 +1,20 @@
 <ion-view title="profile">
   <ion-content>
   
-    <h2>{{ user.data.name }}</h2>
+    <h2 class="profileHead">{{ user.data.name }}</h2>
 
-    <img src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal">
+    <div class="item item-avatar profilepic">
+      <img src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal">
+    </div>
 
-    <h3>Your Favors!</h3>
+    <h2>Favors by You:</h2>
 
     <ion-list ng-repeat="favor in favors | orderBy: filter ">
       <ion-item>
         <h3>{{favor.topic}}</h3>
         <div class="row">
           <div class="col col-80">
-            <ion-item ng-click="favorDetails(favor)" class="wrap">{{favor.description}}</ion-item>
+            <ion-item ng-click="favorDetails(favor)" class="wrap description">{{favor.description}}</ion-item>
           </div>
           <div class="col">
             <div class="picVoting">

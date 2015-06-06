@@ -3,14 +3,19 @@ angular.module('phavr.home', [])
 
   //this is needed so that header bar can be ngshown
   $rootScope.login = true;
-  $scope.favors = [];
-
 
   /**
   * Methods related to Favors
   */
 
+  $scope.favors = [];/*[{_id: 1, topic: 'nyancat', description: 'send me ur nyans', topPhoto: 'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG', votes: 2, distance: 0.256, camera: true}, {_id: 1, topic: 'meowmeowmeow', description: 'mirror mirror on the wall, who is the longest cat of all', topPhoto: 'http://www.autofish.net/mirrors/images/animals/cats/long_cat.jpg', votes: 2, distance: 0.256, camera: true}];*/
+
+  $scope.selectedFavor = Favors.selectedFavor;
+
   $scope.updateFavors = function(){
+    console.log('attempting to update favors...');
+    //geo.getLocation(function(spot){
+    console.log('map bounds', mapService.mapBounds);
 
     if(mapService.mapBounds === null) {
       geo.phoneLocation(function(spot) {
@@ -24,6 +29,8 @@ angular.module('phavr.home', [])
         window.localStorage.setItem('longitude', spot.coords.longitude.toString());
         window.localStorage.setItem('latitude', spot.coords.latitude.toString());
 
+
+
         Favors.fetchRequests(box, function(data){
           //for each favor attach distance to current location
           data.forEach(function(favor){
@@ -33,6 +40,7 @@ angular.module('phavr.home', [])
           });
           //fetch favors from the dtabase
           $scope.favors = data;
+          $scope.getTopPhotos();
         });
       });
     } else{ 
@@ -44,11 +52,13 @@ angular.module('phavr.home', [])
             //show camera icon if favor distance is less than 5 miles
             favor.camera = favor.distance < 5;
           });
+          $scope.getTopPhotos();
         });
     }
 
     //get top photos for favors
-    $scope.getTopPhotos();
+    //$scope.getTopPhotos();
+    //geo.backgroundTracking();
 
   };
 
@@ -77,7 +87,9 @@ angular.module('phavr.home', [])
             topPhoto = photos[j];
           }
         }
-        currentFavor.topPhoto = topPhoto.url;
+        if(topPhoto) {
+          currentFavor.topPhoto = topPhoto.url;
+        }
       });
       })($scope.favors[i]);
     }
@@ -166,7 +178,8 @@ angular.module('phavr.home', [])
     });
 
   $scope.enableTracking = function(){
-    geo.enableTracking();
+    // geo.enableTracking();
+    geo.backgroundTracking();
   };
 
   /*

@@ -1,7 +1,7 @@
 angular.module('phavr.locationFactory', [])
 .factory('geo', function($cordovaGeolocation, mapService, Favors, $location, $http) {
 
-
+  var bgGeo;
   var processing = false;
   var watchID = null;
 
@@ -24,7 +24,60 @@ angular.module('phavr.locationFactory', [])
         longi = position.coords.longitude;
         callback([lat, longi]);
     	});
+
     },
+
+    backgroundTracking: function(){
+      //start backgroundGeotracking
+      bgGeo = window.plugins.backgroundGeoLocation;
+
+      /**
+      *  This is my callback for ajax-requests after POSTING background geolocation to my server
+      */
+      var myAjaxCallback = function(response) {
+        bgGeo.finish();
+      };
+
+      /**
+      *  This call back will be executed every time a geolocation is recorded in the background.
+      */
+      var callbackFn = function(location) {
+
+        console.log('BackgroundGeoLocation callback:'+ location.latitude +',' + location.longitude);
+        //HTTP requeset here to Post Location to my server
+
+        myAjaxCallback.call(this);
+      }
+
+      var failureFn = function(error) {
+        console.log('BackgroundGeoLocation error');
+      }
+
+
+      bgGeo.configure(callbackFn, failureFn, {
+        url: 'http://phavr.herokuapp.com/location',
+        headers: {
+          access_token: window.localStorage.getItem("token")
+        },
+        desiredAccuracy: 10,
+        stationaryRadius: 20,
+        distanceFilter: 30,
+        notificationTitle: 'Background tracking',
+        notificationText: 'ENABLED',
+        activityType: 'AutomotiveNavigation',
+        debug:true,
+        stopOnTerminal: false
+      });
+
+      console.log("bg geo started");
+      bgGeo.start();
+    },
+
+    stopBackGroundTracking: function() {
+      bgGeo.stop();
+    },
+
+
 
     phoneLocation: function(callback) {
       var context = this;

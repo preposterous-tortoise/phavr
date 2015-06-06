@@ -6,9 +6,10 @@
     <title></title>
 
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.31.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.9.3/lodash.min.js"></script>
     <!-- compiled css output -->
     <link href="css/ionic.app.css" rel="stylesheet">
+
 
     <!-- ionic/angularjs js -->
     <script type="text/javascript" src="lib/ionic/js/ionic.bundle.js"></script>
@@ -50,13 +51,13 @@
     <ion-side-menus>
      <ion-side-menu-content ng-controller="NavCtrl">
        <ion-pane>
-       <ion-header-bar class="bar-stable bar-calm">
+       <ion-header-bar ng-show="login" class="bar-stable bar-calm">
            <div class="button-bar">  
 
              <a ng-click="toggleLeft()" ng-show="login" class="button button-icon icon ion-navicon"></a>
              <a ui-sref="favormap" ng-show="login" class="button button-icon icon ion-earth"></a>
              <a ui-sref="home" ng-show="login" class="button button-icon icon ion-home"></a>
-             <a ui-sref="favor" ng-show="login" class="button button-icon icon ion-paper-airplane"></a>
+             <a ui-sref="favor" ng-show="login" class="button button-icon icon ion-android-add"></a>
            </div>  
          </ion-header-bar>
 
@@ -67,16 +68,20 @@
      </ion-side-menu-content>
 
      <ion-side-menu side="left" ng-controller="NavCtrl">
-      <ion-header-bar ng-click="toggleLeft()" class="bar-calm">
+      <ion-header-bar ng-click="toggleLeft()" class="bar-dark">
         <h1 class="title">{{ user.data.name  }}</h1>
       </ion-header-bar>
       <ion-content>
          <ion-list>
-           <ion-item><img src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal"></ion-item>
-           <ion-item><a ng-click="toggleLeft()" ui-sref="profile">Profile</a></ion-item>
-           <ion-item>Three</ion-item>
-           <ion-item>Four</ion-item>
-           <ion-item><a ng-click="getUserInfo()">Hello!</a></ion-item>
+          <ion-item ng-click="toggleLeft()" ui-sref="profile">
+            <div class="item-avatar">
+              <img src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal">
+              <span>Profile</span>
+            </div>
+          </ion-item>
+          <ion-item>Notifications</ion-item>
+          <ion-item>Settings</ion-item>
+          <ion-item ng-click="getUserInfo()">Hello!</ion-item>
          </ion-list>
        </ion-content>
      </ion-side-menu>

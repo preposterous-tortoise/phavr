@@ -17,7 +17,10 @@ $dark:                            #444 !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
-$calm: #199696 !default;
+$calm: #66CDAA !default;
+
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,300);
+$roboto-condensed: 'Roboto Condensed', sans-serif;
 
 @mixin centerer {
   position: absolute;
@@ -56,18 +59,45 @@ $calm: #199696 !default;
 }
 
 
-h2, h3 {
-  color: silver !important;
+body {
+  font-family: $roboto-condensed !important;
+  font-weight: normal !important;
 }
 
+.font {
+  font-family: $roboto-condensed !important;
+  font-weight: normal !important;
+}
+
+h2, h3, h4 {
+  color: silver !important;
+  font-family: $roboto-condensed !important;
+  font-weight: normal !important;
+
+}
+
+.description {
+  border-color: $calm !important;
+  border-width: 1px !important;
+}
+
+.upvote {
+  height: 10px !important;
+  color: gray !important;
+
+}
+
+.downvote {
+  color: gray !important;
+}
 
 .distance {
   display: inline-block !important;
-
+  margin: 0 0 0 0 !important;
 }
 
 .favorHead {
-
+  color: black !important;
 }
 
 .tall-footer {
@@ -77,6 +107,10 @@ h2, h3 {
   -moz-transition: height 0.8s !important;
   transition: height 0.8s !important;
   
+}
+
+.margin {
+  margin-bottom: 5px !important;
 }
 
 .set-height {
@@ -107,6 +141,15 @@ h2, h3 {
   width: 100%;
 }
 
+.login {
+  background-image: url("http://i.giphy.com/j94zatfSSZ440.gif") !important;
+  background-size: cover !important;
+  min-height: 20% !important
+  width: 3% !important;
+  height: 110% !important;
+  background-repeat: none !important;
+}
+
 .go2 {
   width: 80%;
   margin: 0 auto;
@@ -119,8 +162,15 @@ h2, h3 {
 
 #req-input, #feed-input {
   margin: 0 auto;
-  border-radius: 5px; 
+  border-radius: 5px;
   width: 80%;
+  text-align: center;}
+
+.favorTitle {
+  margin-top: 5px !important;
+  text-align: center !important;
+  margin-bottom: 5px !important;
+
 }
 
 .logo {
@@ -143,18 +193,27 @@ h2, h3 {
 
 .votes {
   position: relative;
-  color: teal;
+  color: $calm;
   margin-left: 12px;
 }
 
 .favorDetail {
-  max-width: 100%;
+  width: 100%;
+  /*max-width: 100%;*/
 }
 
 .picVoting {
-  top: 50%;
-  left: 50%;
+  /*top: 50%;*/
+  /*left: 50%;*/
   position: relative !important;
+}
+
+.feedView {
+  padding: 0 !important;
+}
+
+.noPadding {
+  padding: 0 !important;
 }
 
 .bottom-detail {
@@ -214,6 +273,15 @@ h2, h3 {
 .lolol {
   border-right: solid 1px !important;
   color: white !important;
+}
+
+.profileHead {
+  @include centre(x);
+}
+
+.profilePic {
+  @include centre(x);
+  height: 100px !important;
 }
 
 

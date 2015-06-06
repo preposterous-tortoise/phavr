@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
+
 //var request = require('request');
 var multer  = require('multer');
 
@@ -29,6 +30,12 @@ var fbAuth = require('../auth/newAuthPassport')(passport);
  * @api public
  */
 module.exports = function(app, express){
+
+
+
+
+
+
   // Passport initialization
   auth.init(passport);
   app.use(passport.initialize());
@@ -72,11 +79,33 @@ module.exports = function(app, express){
   app.use('/api/users', passport.authenticate('facebook-token'), userRouter);
 
 
+
+  app.use('/location', passport.authenticate('facebook-token'), function(req,res){
+
+    console.log("_________________________________________________");
+    req.body.longitude = req.body.location.longitude;
+    req.body.latitude = req.body.location.latitude;
+    req.body.timeStamp = req.body.location.recorded_at;
+    console.log("*************************************************");
+    
+
+  });
+
+  app.post('/location', function(req,res) {
+    console.log("_________________________________________________");
+    console.log(req.body.longitude);
+    console.log(req.user);
+    console.log("*************************************************");
+    res.send(200);
+  })
+
+
   //Used to grab user information from the user proprty of request. Provides FB info for name and profile picture
   app.get('/api/profileID', passport.authenticate('facebook-token'), 
     function(req, res){
     
       res.send(req.user);
+
   });
 
   //Adding routes

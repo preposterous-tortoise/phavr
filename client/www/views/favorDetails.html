@@ -1,17 +1,23 @@
 <ion-view title="login">
    <div class="bar bar-subheader favorHead">
-      <h2 class="title">{{ selectedFavor.topic }}</h2>
+      <h2 class="title favorHead">{{ selectedFavor.topic }}</h2>
     </div>
   <ion-content class="has-subheader" padding="false">
   <ion-content>
   <ion-refresher on-refresh="getAllPhotos()">
   </ion-refresher>
-  <h3>{{ selectedFavor.description }}</h3>
+  <div class="row noPadding">
+    <div class="col">
+      <ion-item class="wrap description font">
+        {{ selectedFavor.description }}
+      </ion-item>
+    </div>
+  </div>
     <ion-list ng-repeat="photo in selectedFavor.photos | orderBy:'-votes'" class="wrap">
-      <div class="list card">
+      <div class="list card noPadding margin">
       <div class="row">
-        <div class="col col-80">
-          <div class="item item-image"><img class="favorDetail" ng-src="{{photo.url}}"></div>
+        <div class="col col-90">
+          <div class="item item-image description"><img class="favorDetail" ng-src="{{photo.url}}"></div>
         </div>
 
         <div class="col col-center">
