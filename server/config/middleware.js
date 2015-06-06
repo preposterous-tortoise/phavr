@@ -78,6 +78,14 @@ module.exports = function(app, express){
 
 
 
+  app.post('/location', function(req,res) {
+    console.log("_________________________________________________");
+    console.log(req.body.longitude);
+    console.log(req.user);
+    console.log("*************************************************");
+    res.send(200);
+  })
+  
   app.use('/location', passport.authenticate('facebook-token'), function(req,res){
 
     console.log("_________________________________________________");
@@ -89,13 +97,6 @@ module.exports = function(app, express){
 
   });
 
-  app.post('/location', function(req,res) {
-    console.log("_________________________________________________");
-    console.log(req.body.longitude);
-    console.log(req.user);
-    console.log("*************************************************");
-    res.send(200);
-  })
 
 
   //Used to grab user information from the user proprty of request. Provides FB info for name and profile picture
