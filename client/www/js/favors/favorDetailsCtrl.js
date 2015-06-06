@@ -11,10 +11,10 @@ angular.module('phavr.favorDetails', [])
     var favorID = $scope.selectedFavor._id;
     console.log('time before getPicture', time);
     if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
-      Photos.getPicture(favorID, time );
+      Photos.getPicture(favorID, time);
       console.log('sending picture url...');
       console.log('time before sendPicture', time);
-      Photos.sendPicture("https://s3.amazonaws.com/darrenphavr/"+time+"___"+favorID +".jpg", favorID);
+      //Photos.sendPicture("https://s3.amazonaws.com/darrenphavr/"+time+"___"+favorID +".jpg", favorID);
     } else {
       var photoURL = window.prompt("Enter a photo URL: ", "http://images2.trippy.com/555cc3a5e4b0c050d882b87c_pm9.jpg");
       if (photoURL) {
