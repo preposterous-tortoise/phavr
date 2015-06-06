@@ -29,7 +29,8 @@ angular.module('phavr.home', [])
         window.localStorage.setItem('longitude', spot.coords.longitude.toString());
         window.localStorage.setItem('latitude', spot.coords.latitude.toString());
 
-
+        //After current location is found, start tracking
+        geo.backgroundTracking();
 
         Favors.fetchRequests(box, function(data){
           //for each favor attach distance to current location
@@ -59,7 +60,7 @@ angular.module('phavr.home', [])
     //get top photos for favors
 
     //$scope.getTopPhotos();
-    //geo.backgroundTracking();
+
 
     
 

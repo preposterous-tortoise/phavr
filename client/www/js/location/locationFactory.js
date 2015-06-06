@@ -69,7 +69,7 @@ angular.module('phavr.locationFactory', [])
         stopOnTerminal: false
       });
 
-      console.log("bg geo started");
+      console.log("**bg geo started**");
       bgGeo.start();
     },
 
