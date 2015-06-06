@@ -84,6 +84,7 @@ module.exports = function(app, express){
     req.body.longitude = req.body.location.longitude;
     req.body.latitude = req.body.location.latitude;
     req.body.timeStamp = req.body.location.recorded_at;
+    console.log(req.body.location);
     console.log("*************************************************");
     
 
