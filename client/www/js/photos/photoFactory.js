@@ -11,6 +11,7 @@ angular.module('phavr.photoFactory', [])
 
   return {
     getPicture: function(favorID, time) {
+          var Photos = this;
           console.log('get picture time', time);
 
           var pictureSource;   // picture source
@@ -33,6 +34,7 @@ angular.module('phavr.photoFactory', [])
               var win = function (r) {
                   clearCache();
                   retries = 0;
+                  Photos.sendPicture("https://s3.amazonaws.com/darrenphavr/"+time+"___"+favorID +".jpg", favorID);
               }
               var fail = function (error) {
                   if (retries == 0) {
