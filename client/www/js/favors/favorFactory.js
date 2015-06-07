@@ -68,7 +68,7 @@ angular.module('phavr.favorfact', [])
       console.log("inside requestfactory upvote")
       return $http({
         method: 'POST',
-        url: domain+'/api/votes/upVote',
+        url: 'http://localhost:3000/api/votes/upVote?access_token=CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU',
         data: { favor: favor, vote: vote }
       })
       .then(function(resp){ //response will be -1, 0 or 1
@@ -81,7 +81,7 @@ angular.module('phavr.favorfact', [])
     downVote: function(favor, vote){
       return $http({
         method: 'POST',
-        url: domain+'/api/votes/upVote',
+        url:'http://localhost:3000/api/votes/upVote?access_token=CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU',
         data: { favor: favor, vote: vote }
       })
       .then(function(resp){

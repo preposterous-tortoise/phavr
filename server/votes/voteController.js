@@ -1,12 +1,13 @@
 var Favor = require('../db/favorModel.js');
 var Photo = require('../db/photoModel.js');
+var User = require('../db/userModel.js');
 
 var Q = require('q');
 var Vote = require('../db/voteModel.js');
 
 module.exports = {
   upVote: function(req, res, next) {
-    console.log("I NEED THIS PROVIDER ID BRUH "+req.user.provider_id)
+    console.log("I NEED THIS PROVIDER ID BRUH "+req.user)
 
 
     //Query the Vote table for entries with a certain userID and favorID
@@ -33,7 +34,6 @@ module.exports = {
         //If req.body.vote = 1, upvote; 0, nuetral; -1, downvote
         //If sending an upvote, check if there is already a downvote
         if (req.body.vote === 1 && (vote.vote ===-1 || vote.vote ===0))  { 
-
             //Increase the votes by 1 in both the votes and favors tables
             Vote.findByIdAndUpdate(vote._id,
               { $inc: {vote: 1 } },
@@ -42,10 +42,16 @@ module.exports = {
                 Favor.findByIdAndUpdate(req.body.favor._id, 
                 { $inc: {votes: 1 } }, 
                 function(err, data){
-                  console.log("AWWWW im in callback")
-                  res.send('1');
+                  User.findByIdAndUpdate(req.user._id,
+                    { $inc: {points: 1 } },
+                    function(err, data) {
+                      console.log('succesfully did points!!!!!!!!!!!!!');
+                      res.send('1');
+                    });
+                  // console.log("AWWWW im in callback")
                 });
               });
+
 
         }
 
@@ -55,14 +61,19 @@ module.exports = {
             Vote.findByIdAndUpdate(vote._id,
               { $inc: {vote: -1 } },
               function(err, data) {
+                console.log('succesfully did findbyidandupdate');
                 Favor.findByIdAndUpdate(req.body.favor._id, 
-                  { $inc: {votes: -1} }, 
-                  function(err, data){
-                                      console.log("AWWWW im in 2nd callback")
-
-                    res.send('-1');
-                  });
-            });
+                { $inc: {votes: -1 } }, 
+                function(err, data){
+                  User.findByIdAndUpdate(req.user._id,
+                    { $inc: {points: -1 } },
+                    function(err, data) {
+                      console.log('succesfully did points!!!!!!!!!!!!!');
+                      res.send('-1');
+                    });
+                  // console.log("AWWWW im in callback")
+                });
+              });
           
         } else { 
           console.log("AWWW NOOOOOO");
@@ -150,8 +161,12 @@ module.exports = {
                 Photo.findByIdAndUpdate(req.body.photo._id, 
                 { $inc: {votes: 1 } }, 
                 function(err, data){
-                  console.log("AWWWW im in callback")
-                  res.send('1');
+                  User.findByIdAndUpdate(req.user._id,
+                    { $inc: {points: -1 } },
+                    function(err, data) {
+                      console.log('succesfully did points!!!!!!!!!!!!!');
+                      res.send('1');
+                    });
                 });
               });
 
@@ -163,14 +178,18 @@ module.exports = {
             Vote.findByIdAndUpdate(vote._id,
               { $inc: {vote: -1 } },
               function(err, data) {
+                console.log('succesfully did findbyidandupdate');
                 Photo.findByIdAndUpdate(req.body.photo._id, 
-                  { $inc: {votes: -1} }, 
-                  function(err, data){
-                                      console.log("AWWWW im in 2nd callback")
-
-                    res.send('-1');
-                  });
-            });
+                { $inc: {votes: -1 } }, 
+                function(err, data){
+                  User.findByIdAndUpdate(req.user._id,
+                    { $inc: {points: -1 } },
+                    function(err, data) {
+                      console.log('succesfully did points!!!!!!!!!!!!!');
+                      res.send('1');
+                    });
+                });
+              });
           
         } else { 
           console.log("AWWW NOOOOOO");
