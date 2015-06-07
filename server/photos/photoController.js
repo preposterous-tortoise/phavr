@@ -115,6 +115,6 @@ module.exports = {
   uploadToServer: function(req,res){
     console.log("_________________");
      console.log(req.files);
-    res.redirect('/api/photos/photoUploads/uploadToS3/?fileName=' + req.files.file.originalname);
+    res.redirect('/uploadToS3/?fileName=' + req.files.file.originalname);
   }
 }
