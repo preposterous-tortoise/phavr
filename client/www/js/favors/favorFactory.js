@@ -52,7 +52,7 @@ angular.module('phavr.favorfact', [])
     profileFavors: function(user) {
       return $http({
           method: 'POST',
-          url: domain+'/api/requests/grabFavor',
+          url: 'http://localhost:3000/api/requests/grabFavor',
           data: user
         })
         .success(function(requests, status, headers, config) {

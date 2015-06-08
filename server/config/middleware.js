@@ -43,7 +43,7 @@ module.exports = function(app, express){
   // Passport Routes 
   app.get('/logout', function(req, res) {
     req.logout();
-    res.redirect('/signin.html');
+    res.redirect('/');
   });
   app.use(cookieParser('add a secret here'));
   app.use(session({ secret: 'xyz-qwrty', resave: false, saveUninitialized: true }));
