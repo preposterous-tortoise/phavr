@@ -8,7 +8,7 @@ angular.module('phavr', ['ionic', 'ngCordova', 'phavr.home', 'phavr.profile', 'p
                               'phavr.photoFactory', 'phavr.favorfact', 'phavr.locationFactory',
                               'uiGmapgoogle-maps','phavr.mapService', 'phavr.favorCreationMap', 
                               'phavr.authFactory', 'phavr.nav',
-                              'phavr.push', 'phavr.pushfact'])
+                              'phavr.push', 'phavr.pushfact', 'phavr.notification'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -67,6 +67,12 @@ angular.module('phavr', ['ionic', 'ngCordova', 'phavr.home', 'phavr.profile', 'p
     url: '/profile',
     templateUrl: 'views/profile.html',
     controller: 'profileCtrl'
+  })
+
+  $stateProvider.state('notifications', {
+    url: '/notifications',
+    templateUrl: 'views/notification.html',
+    controller: 'notificationCtrl'
   })
 
 
