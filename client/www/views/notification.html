@@ -1,7 +1,7 @@
 <ion-view title="notifications">
   <ion-content>
     <h2>Notifications</h2>
-    <ion-list ng-repeat="notification in notifications | orderBy: filter ">
+    <ion-list ng-repeat="notification in notifications | orderBy: desc ">
       <ion-item>
         {{notification}}
       </ion-item>

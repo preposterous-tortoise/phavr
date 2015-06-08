@@ -54,6 +54,8 @@ angular.module('phavr.pushfact', [])
       }, function(err) {
         console.log("Register error " + err)
       });
+      notifications = JSON.parse(window.localStorage.getItem("notifications"));
+      notifications = notifications || [];
     }
 
     // Notification Received
@@ -89,6 +91,7 @@ angular.module('phavr.pushfact', [])
         } else {
           notifications.push(notification.message);
         }
+        window.localStorage.setItem("notifications", JSON.stringify(notifications));
         /*$scope.$apply(function () {
             $scope.notifications.push(JSON.stringify(notification.message));
         })*/
