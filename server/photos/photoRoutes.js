@@ -23,5 +23,5 @@ module.exports = function (app) {
     .get(photoController.uploadToS3);
 
   app.route('/uploadToServer')
-      .post(photoController.uploadToServer);
+    .post(photoController.uploadToServer);
 };
