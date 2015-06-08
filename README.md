@@ -1,7 +1,7 @@
 # phavr
 **Get the photos you want to see.**
 
-![phavr](https://files.slack.com/files-pri/T03ETTPSS-F063BHRTN/2015-06-08_19.21.15.png)
+![phavr](http://i.imgur.com/YMIirjf.jpg)
 
 ##Intro
 Phavr is a social media platform that allows users to post requests(favors) to view, and allow other users to shoot photos and fulfill those favors. Users can vote on both the favors and photos -- gaining points when their own content is the one being upvoted. Naturally this causes the best requests and pictures to rise to the top. From concerts to protests, phavr has a plethora of relevant use and promise of fun!.
