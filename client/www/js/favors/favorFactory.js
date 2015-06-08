@@ -2,7 +2,7 @@ angular.module('phavr.favorfact', [])
 .factory('Favors', function ($http, $location, Auth){
 
 
-  var domain = localStorage.getItem("domain");
+  var domain = localStorage.getItem("domain") || "http://phavr.herokuapp.com";
   console.log("domain is: ", domain);
   
   return {
@@ -19,7 +19,6 @@ angular.module('phavr.favorfact', [])
       })
       .success(function(data, status, headers, config) {
         return data;
-        console.log("THIS IS WHAT IS INSIDE A REQUEST "+request);
       })
       .error(function(data, status, headers, config) {
         console.log('saveRequest error, ', data, status, headers, config);
