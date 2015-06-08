@@ -4,6 +4,7 @@ var Notifier = require('../push/pushNotify.js');
 var Q = require('q');
 
 var getPolyBoxQuery = function(box) {
+  console.log("I AM INSIDE THE BOX!!!!!");
   var polyBox = [  // sw, ne
     [
       [box[0][0], box[0][1]],
@@ -29,6 +30,7 @@ module.exports = {
   getPolyBoxQuery: getPolyBoxQuery,
 
   fetchFavors: function(req, res, next) {
+    console.log("I AM INSIDE OF fetchFavors!!!");
   	var box = req.body.box;
     var query = Favor.find(getPolyBoxQuery(box));
     query.exec(function(err, docs) {
@@ -41,6 +43,7 @@ module.exports = {
   },
   
   createFavor: function(req, res, next) {
+    console.log("IM INSIDE CREATE FAVOR "+JSON.stringify(req.body));
     var favor = new Favor({
       topic: req.body.topic,
       description: req.body.description,

@@ -15,7 +15,16 @@ angular.module('phavr.nav', [])
 
   $scope.profile = function() {
     $location.path('/profile');
-  } 
+  }; 
+
+  $scope.logOut = function(){
+    Auth.accessToken = null;
+    return $http({
+          method: 'GET',
+          url: 'http://localhost:3000/logout',
+        })
+        .then($location.path('/'))
+  };
    
   $scope.getUserInfo();
 });

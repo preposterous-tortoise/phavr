@@ -11,7 +11,7 @@ module.exports = function(grunt) {
     // configure karma
     karma: {
       options: {
-        configFile: './drakeapp/tests/my.conf.js',
+        configFile: './client/tests/my.conf.js',
       },
       // Single-run configuration for development
       single: {

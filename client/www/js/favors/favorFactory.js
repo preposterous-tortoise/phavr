@@ -17,7 +17,7 @@ angular.module('phavr.favorfact', [])
     saveRequest: function(request) {
       $http({
         method: 'POST',
-        url: domain +'/api/requests/create',
+        url: 'http://localhost:3000/api/requests/create?access_token=CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU',
         data: request
       })
       .success(function(data, status, headers, config) {
@@ -30,9 +30,10 @@ angular.module('phavr.favorfact', [])
     },
     //  fetch requests in the specified box: [[sw.lng, sw.lat], [ne.lng, ne.lat]]
     fetchRequests: function(box, callback) {
+      console.log("I'M INSIDE THE FETCH REQUESTS!");
       return $http({
           method: 'POST',
-          url: domain+'/api/requests',
+          url: 'http://localhost:3000/api/requests',
           data: {
             box: box
           }
@@ -51,7 +52,7 @@ angular.module('phavr.favorfact', [])
     profileFavors: function(user) {
       return $http({
           method: 'POST',
-          url: domain+'/api/requests/grabFavor',
+          url: 'http://localhost:3000/api/requests/grabFavor',
           data: user
         })
         .success(function(requests, status, headers, config) {
@@ -67,7 +68,7 @@ angular.module('phavr.favorfact', [])
       console.log("inside requestfactory upvote")
       return $http({
         method: 'POST',
-        url: domain+'/api/votes/upVote',
+        url: 'http://localhost:3000/api/votes/upVote?access_token=CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU',
         data: { favor: favor, vote: vote }
       })
       .then(function(resp){ //response will be -1, 0 or 1
@@ -80,7 +81,7 @@ angular.module('phavr.favorfact', [])
     downVote: function(favor, vote){
       return $http({
         method: 'POST',
-        url: domain+'/api/votes/upVote',
+        url:'http://localhost:3000/api/votes/upVote?access_token=CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU',
         data: { favor: favor, vote: vote }
       })
       .then(function(resp){

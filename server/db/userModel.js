@@ -9,6 +9,7 @@ var UserSchema = new Schema({
 	provider: String, // Twitter, Facebook, etc
 	provider_id : {type: String, unique: true}, // id returned by Twitter, Facebook, etc.
 	photo: String, // user's photo or avatar,
+	points: Number,
 	loc: {
    'type': {type: String, enum: "Point", default: "Point"},
    'coordinates': { type: [Number],   default: [0,0]} 
