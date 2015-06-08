@@ -1,4 +1,4 @@
-# drakeapp
+# phavr
 **Get the photos you want to see**
 
 ##Intro
@@ -18,22 +18,38 @@ Phavr is a social media platform that allows users to post what they wish to vie
 
 ##Usage
 
+1. Users can post a favor as text at geographic locations
+2. Other users in proximity of a message can view, vote, and reply with a photo on it
+3. These same users can continue to vote on the photo replies and the favor they are attached to
+4. Messages are automatically destroyed after a set amount of time
+
 ##Requirements
 
 ##Development
 
 ###Setup
 
-###Technical Walkthrough
+1. Fork the repository
+2. Clone a copy of the repository locally
+3. Run npm install
+4. Run bower install
 
-##Technology Stack
+##Technical Walkthrough
+
+### Mobile to Server Communication
+
+###Security
+
+###Database Interactions
+
+###Technology Stack
 
 ###BackEnd
 - *Server Environment* **NodeJS**
 - *Web Framework* **ExpressJS**
 - *Database* **Mongo**
 - *ORM* **Mongoose**
--*Photo Storage* **Amazon/S3**
+- *Photo Storage* **Amazon/S3**
 - *Task Runner* **Gulp/Grunt**
 
 ###FrontEnd
