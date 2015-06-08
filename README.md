@@ -1,5 +1,5 @@
 # phavr
-**Get the photos you want to see**
+**Get the photos you want to see.**
 
 ##Intro
 Phavr is a social media platform that allows users to post what they wish to view, and allow other users to shoot photos and fulfill those requests. Users can vote on both the requests(favors) and photos -- gaining points when their own content is the one being upvoted. Naturally this causes the best requests and pictures to rise to the top. From concerts to protests, phavr has a plethora of relevant use and promise of fun!.
@@ -36,13 +36,16 @@ Phavr is a social media platform that allows users to post what they wish to vie
 
 ##Technical Walkthrough
 
-### Mobile to Server Communication
+### Mobile to Server/S3 Communication
+The Node-Express server lives on phavr.herokuapp.com and acts as an API endpoint for the mobile application. Photos are also served to S3 via the Express server because of validation concerns. 
 
 ###Security
+We use Token Facebook authentication using Passport and Node-Express/ng-Cordova. Upon login all API calls are authenticated and verified each and every time. We used tokens because of their stateless and mobile friendly nature in comparison to a session-based form of authentication.  
 
 ###Database Interactions
+We used Mongoose and Mongo to store out User, Photo, favorVote, photoVote, and Favor tables. Mongo allowed for quicker storage, speedier lookup, and integrated use of location data. 
 
-###Technology Stack
+##Technology Stack
 
 ###BackEnd
 - *Server Environment* **NodeJS**
