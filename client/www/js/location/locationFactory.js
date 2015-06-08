@@ -5,13 +5,8 @@ angular.module('phavr.locationFactory', [])
   var processing = false;
   var watchID = null;
 
-  var domain;
-  if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || 
-    $location.host() === 'phavr.herokuapp.com') {
-    domain = "http://phavr.herokuapp.com";
-  } else {
-    domain = "http://localhost:3000";
-  }
+  var domain = localStorage.getItem("domain");
+  console.log("domain is: ", domain);
 
   return {
     getLocation: function(callback) {

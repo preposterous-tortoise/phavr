@@ -21,7 +21,7 @@ angular.module('phavr.nav', [])
     Auth.accessToken = null;
     return $http({
           method: 'GET',
-          url: 'http://localhost:3000/logout',
+          url: window.localStorage.getItem('domain') + '/logout',
         })
         .then($location.path('/'))
   };
