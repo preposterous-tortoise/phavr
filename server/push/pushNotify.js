@@ -78,6 +78,7 @@ module.exports = {
           // 
           var favor = favors[0];
           var message = "A photo was taken for your favor \"" + favor.description + "\" at " + favor.place_name;
+          message += ", " + new Date();
           console.log('message: ', message);
           sendMessage([favor.user_id], message);
         }
@@ -85,22 +86,27 @@ module.exports = {
   },
 
   notifyNewFavor: function(favor) {
-    // console.log("notifyNewFavor: ", favor);
-    // console.log('new favor box: ', getBoxForLoc(favor.loc.coordinates));
+    console.log("notifyNewFavor: ", favor);
+    console.log('new favor box: ', getBoxForLoc(favor.loc.coordinates));
     var box = getBoxForLoc(favor.loc.coordinates);
     var query = User.find(getPolyBoxQuery(box));
     query.exec(function(err, users) {
+      console.log("notifyNewFavor, nearby user count: ", users ? users.length : 0);
+      console.log("favor user id: ", favor.user_id);
       if (err) {
         console.log('Error finding users for box:', box, err);
       } else {
         var message = 'There is a new favor requested near you at ' + favor.place_name + ', ' + favor.address;
-        var users = [];
+        message += ", " + new Date();
+        var usersToNofify = [];
         users.forEach(function(user) {
-          if (user.provider_id !== favor.user_id)
-            users.push(user.provider_id);
+          console.log('new favor, nearby user: ', user.name );
+          console.log('ids: ', user.provider_id != favor.user_id, user.provider_id, favor.user_id);
+          if (user.provider_id != favor.user_id)
+            usersToNofify.push(user.provider_id);
         });
-        if (users.length > 0) {
-          sendMessage(users, message);
+        if (usersToNofify.length > 0) {
+          sendMessage(usersToNofify, message);
         }
       }
     });

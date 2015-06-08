@@ -16,7 +16,7 @@ module.exports = function(passport) {
   clientID : process.env.ClientID || configAuth.facebook.clientID,
   clientSecret : process.env.ClientSecret || configAuth.facebook.clientSecret
   }, function(accessToken, refereshToken, profile, done) {
-    console.log("WE ARE INSIDE THE NEW FB ", profile)
+    // console.log("WE ARE INSIDE THE NEW FB ", profile)
     
     //Look for user inside the Mongo database by profile id
     User.findOne( { provider_id: profile.id },
