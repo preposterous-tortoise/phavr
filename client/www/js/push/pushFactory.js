@@ -84,10 +84,10 @@ angular.module('phavr.pushfact', [])
         $cordovaDialogs.alert(notification.message, "Push Notification Received");
         if (scope) {
           scope.$apply(function() {
-            scope.notifications.push(JSON.stringify(notification.message));
+            scope.notifications.push(notification.message);
           })
         } else {
-          notifications.push(JSON.stringify(notification.message));
+          notifications.push(notification.message);
         }
         /*$scope.$apply(function () {
             $scope.notifications.push(JSON.stringify(notification.message));
