@@ -66,3 +66,4 @@ We used Mongoose and Mongo to store out User, Photo, favorVote, photoVote, and F
 - *Back-End Test Framework* **Jasmine**
 
 ## Contributing
+Do you want to fix a bug, add some code, or improve documentation? Awesome! Admit pull-requests for possible contributions!
