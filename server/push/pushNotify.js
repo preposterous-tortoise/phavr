@@ -14,9 +14,9 @@ var sendMessage = function(users, message) {
       }
     }
   };
-  console.log('data to be send to frank-push: ', data);
+  console.log('data to be send to phavr-push: ', data);
   request.post({
-      url: 'http://frank-push.herokuapp.com/send',
+      url: 'http://phavr-push.herokuapp.com/send',
       json: true,
       headers: {
         "content-type": "application/json",

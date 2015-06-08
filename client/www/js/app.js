@@ -3,8 +3,8 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('phavr', ['ionic', 'ngCordova', 'phavr.home', 'phavr.profile', 'phavr.nav', 'phavr.favor',
-                              'phavr.login', 'phavr.favorMap', 'phavr.favorDetails',
+angular.module('phavr', ['ionic', 'ngCordova', 'phavr.login', 'phavr.home', 'phavr.profile', 'phavr.nav', 
+                              'phavr.favor', 'phavr.favorMap', 'phavr.favorDetails',
                               'phavr.photoFactory', 'phavr.favorfact', 'phavr.locationFactory',
                               'uiGmapgoogle-maps','phavr.mapService', 'phavr.favorCreationMap', 
                               'phavr.authFactory', 'phavr.nav',

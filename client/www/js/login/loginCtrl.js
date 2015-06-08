@@ -1,6 +1,22 @@
 angular.module('phavr.login', [])
 .controller('loginCtrl', function ($scope, $rootScope, $location, $cordovaOauth, Auth, $http, Favors, PushFactory, Auth){
     $rootScope.login = false;
+
+  window.localStorage.setItem("domain", "");
+  console.log("domain is: ", window.localStorage.getItem("domain"));
+
+  ionic.Platform.ready(function() {
+    var domain;
+    if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || 
+      $location.host() === 'phavr.herokuapp.com') {
+      domain = "http://phavr.herokuapp.com";
+    } else {
+      domain = "http://localhost:3000";
+    }
+    Favors.setDomain(domain);
+    window.localStorage.setItem("domain", domain);
+    console.log('domain is: ', domain);
+  });
   
   $scope.information = [$scope.username, $scope.password];
   $scope.letsGo = function(){

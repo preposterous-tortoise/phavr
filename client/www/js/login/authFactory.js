@@ -14,7 +14,7 @@ angular.module('phavr.authFactory',[])
     getUserInfo: function() {
       return $http({
               method: 'GET',
-              url: 'http://localhost:3000/api/profileID'
+              url: window.localStorage.getItem('domain') + '/api/profileID'
           })
           .then(function(resp) {
               console.log('response from getting server', resp);

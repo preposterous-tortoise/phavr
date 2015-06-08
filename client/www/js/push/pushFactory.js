@@ -145,7 +145,7 @@ angular.module('phavr.pushfact', [])
         token: regId
       };
       console.log("Post token for registered device with data " + JSON.stringify(user));
-      $http.post('http://frank-push.herokuapp.com/subscribe', JSON.stringify(user))
+      $http.post('http://phavr-push.herokuapp.com/subscribe', JSON.stringify(user))
         .success(function(data, status) {
           console.log("Token stored, device is successfully subscribed to receive push notifications.");
         })
@@ -162,7 +162,7 @@ angular.module('phavr.pushfact', [])
       var tkn = {
         "token": regId
       };
-      $http.post('http://frank-push.herokuapp.com/unsubscribe', JSON.stringify(tkn))
+      $http.post('http://phavr-push.herokuapp.com/unsubscribe', JSON.stringify(tkn))
         .success(function(data, status) {
           console.log("Token removed, device is successfully unsubscribed and will not receive push notifications.");
         })
