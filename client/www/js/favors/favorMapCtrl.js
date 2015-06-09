@@ -1,12 +1,14 @@
 angular.module('phavr.favorMap', ['ionic', 'uiGmapgoogle-maps'])
-  .controller('FavorMapCtrl', function($scope, $timeout, $location, uiGmapGoogleMapApi, Favors, mapService) {
+  .controller('FavorMapCtrl', function($scope, $timeout, $location, uiGmapGoogleMapApi, Favors,geo, mapService) {
 
     var areaZoom = 16;
     var markerMap = {};
 
     var updateMarkers = function(bounds) {
+
       var box = mapService.getBoxForBounds(bounds);
       Favors.fetchRequests(box, function(favors) {
+
         if (favors) {
           // console.log('favors retrieved: ', favors.length);
           for (var i = 0; i < favors.length; i++) {

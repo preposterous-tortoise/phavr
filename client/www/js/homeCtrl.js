@@ -47,6 +47,7 @@ angular.module('phavr.home', [])
           //fetch favors from the dtabase
           $scope.favors = data;
           $scope.getTopPhotos();
+          geo.backgroundTracking();
         });
       });
     } else{ 
@@ -59,6 +60,7 @@ angular.module('phavr.home', [])
             favor.camera = favor.distance < 5;
           });
           $scope.getTopPhotos();
+          geo.backgroundTracking();
         });
     }
 
