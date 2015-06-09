@@ -52,7 +52,9 @@ angular.module('phavr.home', [])
             $scope.noFavors = true;
           }
           $scope.getTopPhotos();
-          geo.backgroundTracking();
+
+          console.log("BACKGROUND TRACKING YAY");
+          // geo.backgroundTracking();
         });
       });
     } else{ 
@@ -72,7 +74,7 @@ angular.module('phavr.home', [])
             favor.camera = favor.distance < 5;
           });
           $scope.getTopPhotos();
-          geo.backgroundTracking();
+          // geo.backgroundTracking();
         });
     }
 
