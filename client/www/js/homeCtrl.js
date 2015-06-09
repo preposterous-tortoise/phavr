@@ -32,7 +32,6 @@ angular.module('phavr.home', [])
 
         //After current location is found, start tracking
 
-        //geo.backgroundTracking();
 
 
         Favors.fetchRequests(box, function(data){
@@ -53,8 +52,6 @@ angular.module('phavr.home', [])
           }
           $scope.getTopPhotos();
 
-          console.log("BACKGROUND TRACKING YAY");
-          // geo.backgroundTracking();
         });
       });
     } else{ 
@@ -74,7 +71,7 @@ angular.module('phavr.home', [])
             favor.camera = favor.distance < 5;
           });
           $scope.getTopPhotos();
-          // geo.backgroundTracking();
+
         });
     }
 
@@ -204,7 +201,6 @@ angular.module('phavr.home', [])
     });
 
   $scope.enableTracking = function(){
-    // geo.enableTracking();
     geo.backgroundTracking();
   };
 
