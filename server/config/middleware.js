@@ -88,6 +88,7 @@ module.exports = function(app, express){
     next();
   });
 
+
   app.post('/location', function(req,res) {
     
     console.log("_________________________________________________");
@@ -96,7 +97,6 @@ module.exports = function(app, express){
     console.log("*************************************************");
     res.send(200);
   });
-
 
 
   //Used to grab user information from the user proprty of request. Provides FB info for name and profile picture
