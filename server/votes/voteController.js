@@ -69,10 +69,10 @@ module.exports = {
                       { $inc: {points: -1 } },
                       function(err, data) {
                         if (data.votes < -4) {
-                          // Favor.findOneAndRemove({
-                          //   _id : req.body.favor_id
-                          // })
-                          data.remove()
+                          Favor.findOneAndRemove({
+                            _id : req.body.favor_id
+                          })
+                          // data.remove()
                         } else if (data.votes > -5) {
                         console.log('succesfully did points!!!!!!!!!!!!!');
                         res.send('-1');
