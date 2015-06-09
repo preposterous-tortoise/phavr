@@ -128,11 +128,15 @@ angular.module('phavr.home', [])
   //by default will be most reent
   $scope.filter = '-createdAt';
 
+  $scope.popular = false;
+
   $scope.hot = function(){
+    $scope.popular = true;
     $scope.filter = '-votes';
   };
 
   $scope.new = function() {
+    $scope.popular = false;
     $scope.filter = '-createdAt';
   };
 
