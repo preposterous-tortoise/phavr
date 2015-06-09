@@ -64,21 +64,20 @@ module.exports = {
                 console.log('THIS IS THE DATA DAWG!!!! '+data);
                   Favor.findByIdAndUpdate(req.body.favor._id, 
                   { $inc: {votes: -1 } }, 
-                  function(err, data){
-                    User.findByIdAndUpdate(req.user._id,
-                      { $inc: {points: -1 } },
-                      function(err, data) {
+                    function(err, data){
                         if (data.votes < -4) {
                           Favor.findOneAndRemove({
                             _id : req.body.favor_id
                           })
                           // data.remove()
-                        } else if (data.votes > -5) {
-                        console.log('succesfully did points!!!!!!!!!!!!!');
-                        res.send('-1');
+                        } else if (data.votes > -5){
+                          User.findByIdAndUpdate(req.user._id,
+                            { $inc: {points: -1 } },
+                            function(err, data) {
+                              console.log('succesfully did points!!!!!!!!!!!!!');
+                              res.send('-1');
+                            });
                         }
-                      });
-                    // console.log("AWWWW im in callback")
                   });
               });
           
@@ -188,21 +187,21 @@ module.exports = {
                 console.log('succesfully did findbyidandupdate');
                 Photo.findByIdAndUpdate(req.body.photo._id, 
                 { $inc: {votes: -1 } }, 
-                function(err, data){
-                  if (data.votes < -4) {
-                    // Photo.findOneAndRemove({
-                    //   _id : req.body.photo._id
-                    // })
-                    data.remove()
-                  } else if (data.votes > -5){
-                    User.findByIdAndUpdate(req.user._id,
-                      { $inc: {points: -1 } },
-                      function(err, data) {
-                        console.log('succesfully did points!!!!!!!!!!!!!');
-                        res.send('1');
-                      });
-                  }
-                });
+                  function(err, data){
+                    if (data.votes < -4) {
+                      // Photo.findOneAndRemove({
+                      //   _id : req.body.photo._id
+                      // })
+                      data.remove()
+                    } else if (data.votes > -5){
+                      User.findByIdAndUpdate(req.user._id,
+                        { $inc: {points: -1 } },
+                        function(err, data) {
+                          console.log('succesfully did points!!!!!!!!!!!!!');
+                          res.send('1');
+                        });
+                    }
+                  });
               });
           
         } else { 
