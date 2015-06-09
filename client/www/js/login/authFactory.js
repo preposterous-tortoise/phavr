@@ -14,7 +14,7 @@ angular.module('phavr.authFactory',[])
     getUserInfo: function() {
       return $http({
               method: 'GET',
-              url: window.localStorage.getItem('domain') + '/api/profileID'
+              url: 'http://phavr.herokuapp.com/api/profileID'
           })
           .then(function(resp) {
               console.log('response from getting server', resp);
