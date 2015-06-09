@@ -169,7 +169,7 @@ module.exports = {
                 { $inc: {votes: 1 } }, 
                 function(err, data){
                   User.findByIdAndUpdate(req.user._id,
-                    { $inc: {points: -1 } },
+                    { $inc: {points: 1 } },
                     function(err, data) {
                       console.log('succesfully did points!!!!!!!!!!!!!');
                       res.send('1');
