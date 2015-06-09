@@ -66,6 +66,7 @@ module.exports = {
                   { $inc: {votes: -1 } }, 
                     function(err, data){
                         if (data.votes < -4) {
+                          console.log("DETECTED LESS THAN -4, WILL NOW REMOVE!")
                           Favor.findOneAndRemove({
                             _id : req.body.favor_id
                           })
