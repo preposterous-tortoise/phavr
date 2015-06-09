@@ -108,7 +108,7 @@ h2, h3, h4 {
   width: 100%; }
 
 .login {
-  background-image: url("http://i.giphy.com/j94zatfSSZ440.gif");
+  background-image: url("http://38.media.tumblr.com/40614d640a1355924b2982ef2258be9c/tumblr_n6e8t8xbTu1tv2nyvo1_500.gif");
   background-size: cover;
   background-repeat: none; }
 
@@ -133,15 +133,7 @@ h2, h3, h4 {
 
 .phavr-title {
   position: relative;
-  position: absolute;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  transform: translateX(-50%); }
-
-.logo {
+  bottom: 20%;
   position: absolute;
   left: 50%;
   -webkit-transform: translateX(-50%);
@@ -152,15 +144,8 @@ h2, h3, h4 {
 
 .tagline {
   position: relative;
-  top: 50px;
-  font-color: white;
-  position: absolute;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  transform: translateX(-50%); }
+  top: -20px;
+  color: white; }
 
 .hiddenmap {
   display: none; }
@@ -239,14 +224,15 @@ h2, h3, h4 {
   transform: translateX(-50%); }
 
 .oauth_button {
-  width: 20%;
+  width: 40%;
+  z-index: 3;
   position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%); }
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%); }
 
 .lolol {
   border: none !important;

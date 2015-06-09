@@ -177,7 +177,7 @@ h2, h3, h4 {
 }
 
 .login {
-  background-image: url("http://i.giphy.com/j94zatfSSZ440.gif");
+  background-image: url("http://38.media.tumblr.com/40614d640a1355924b2982ef2258be9c/tumblr_n6e8t8xbTu1tv2nyvo1_500.gif");
   background-size: cover;
   background-repeat: none;
 }
@@ -207,18 +207,17 @@ h2, h3, h4 {
 
 .phavr-title {
   position: relative;
+  bottom: 20%;
   @include centre(x);
 }
 
 .logo {
-  @include centre(x);
 }
 
 .tagline {
   position: relative;
-  top: 50px;
-  font-color: white;
-  @include centre(x);
+  top: -20px;
+  color: white;
 }
 
 .hiddenmap {
@@ -309,8 +308,9 @@ h2, h3, h4 {
 }
 
 .oauth_button {
-  width: 20%;
-  @include centre(y);
+  width: 40%;
+  z-index: 3;
+  @include centre(x);
 }
 
 .lolol {
