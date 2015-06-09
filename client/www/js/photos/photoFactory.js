@@ -1,7 +1,7 @@
 angular.module('phavr.photoFactory', [])
 .factory('Photos', ['$location', '$q', '$http', 'Auth', function($location, $q, $http, Auth) {
 
-  var domain = localStorage.getItem("domain");
+  var domain = localStorage.getItem("domain") || "http://phavr.herokuapp.com";
   console.log("domain is: ", domain);
 
   return {
