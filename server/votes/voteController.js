@@ -68,10 +68,10 @@ module.exports = {
                         console.log("THIS IS DELETE DATA!"+ JSON.stringify(data))
                         if (data.votes <= -4) {
                           console.log("DETECTED LESS THAN -4, WILL NOW REMOVE!")
-                          Favor.findOneAndRemove({
-                            _id : req.body.favor_id
-                          })
-                          // data.remove()
+                          // Favor.findOneAndRemove({
+                          //   _id : req.body.favor_id
+                          // })
+                          data.remove()
                         } else if (data.votes > -5){
                           User.findByIdAndUpdate(req.user._id,
                             { $inc: {points: -1 } },
