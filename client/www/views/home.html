@@ -60,9 +60,9 @@
   
    <ion-footer-bar ng-class="{'tall-footer': toggle}" class="camera-footer map-footer bar-calm">    
     <div class="button-bar searchbar">
-      <button ng-click="hot()" class="button button-outline set-height button-light lolol">Hot</button>
+      <button ng-click="hot()" ng-class="{'highlighted': popular}" class="button button-outline set-height button-light lolol">Hot</button>
       <a ng-click="setToggle()" class="button button-icon icon ion-search set-height"></a>
-      <button ng-click="new()" class="button button-outline button-light set-height lolol">New</button>
+      <button ng-click="new()" ng-class="{'highlighted': !popular}" class="button button-outline button-light set-height lolol highlighted">New</button>
     </div>
     <br>
     <div class="map-search">  
