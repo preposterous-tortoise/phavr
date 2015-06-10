@@ -37,20 +37,23 @@ h2, h3, h4 {
 .kudos {
   display: inline-block !important;
   position: relative !important;
-  left: 183px !important;
+  left: 150px !important;
   font-size: 20px !important;
   top: -10px !important;
   color: silver !important; }
 
 .byYou {
-  margin-top: 5px !important; }
+  position: relative;
+  top: 39px;
+  left: 10px;
+}
 
 .profPic2 {
   border-radius: 50% !important;
   height: 50px !important;
   width: 50px !important;
   position: relative;
-  left: 20px !important; }
+  left: 34px !important; }
 
 .border {
   border-top: none !important !important; }
@@ -240,12 +243,18 @@ h2, h3, h4 {
   border: none !important;
   color: white !important; }
 
+.profilepic {
+  position: relative;
+  top: 52px;
+}
+
 .highlighted {
   background-color: #86e0c2 !important; }
 
 .profileHead {
   position: absolute;
   left: 50%;
+  width: 181px;
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
