@@ -3,10 +3,8 @@ describe('favorFactory', function() {
   var getFavorPhotos;
   var sendingPicture;
   var upVoting;
-
   var auth;
   var photo;
-
   var domain = "http://localhost:3000";
   var access = 'test';
 

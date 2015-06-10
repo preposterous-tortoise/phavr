@@ -1,10 +1,6 @@
 angular.module('phavr.pushfact', [])
-  .factory('PushFactory', function($cordovaPush, $cordovaDialogs, $cordovaMedia, $cordovaToast, /*ionPlatform,*/ $http) {
+  .factory('PushFactory', function($cordovaPush, $cordovaDialogs, $cordovaMedia, $cordovaToast, $http) {
 
-    // call to register automatically upon device ready
-    // ionPlatform.ready.then(function (device) {
-    //     $scope.register();
-    // });
     var regId;
     var user_provider_id;
     var scope;
@@ -28,10 +24,8 @@ angular.module('phavr.pushfact', [])
       }
     };
 
-
-    // Register
     /**
-     * Description
+     * Description: regiester for 
      * @method register
      * @param {} provider_id
      * @return 
@@ -42,7 +36,7 @@ angular.module('phavr.pushfact', [])
 
       if (ionic.Platform.isAndroid()) {
         config = {
-          "senderID": "659702567252", // REPLACE THIS WITH YOURS FROM GCM CONSOLE - also in the project URL like: https://console.developers.google.com/project/434205989073
+          "senderID": "659702567252", // REPLACE THIS WITH YOUR GCM senderID
           'ecb': 'onNotificationGCM'
         };
       } else if (ionic.Platform.isIOS()) {
@@ -54,10 +48,8 @@ angular.module('phavr.pushfact', [])
       }
 
       $cordovaPush.register(config).then(function(result) {
-        console.log("Register success " + result);
 
         $cordovaToast.showShortCenter('Registered for push notifications');
-        // $scope.registerDisabled=true;
         // ** NOTE: Android regid result comes back in the pushNotificationReceived, only iOS returned here
         if (ionic.Platform.isIOS()) {
           regId = result;
@@ -71,19 +63,19 @@ angular.module('phavr.pushfact', [])
     }
 
     // Notification Received
-    /*    $scope.$on('$cordovaPush:notificationReceived', function (event, notification) {
-            console.log("NOTIFICATION RECEIVED.");
-            console.log(JSON.stringify([notification]));
-            if (ionic.Platform.isAndroid()) {
-                handleAndroid(notification);
-            }
-            else if (ionic.Platform.isIOS()) {
-                handleIOS(notification);
-                $scope.$apply(function () {
-                    $scope.notifications.push(JSON.stringify(notification.alert));
-                })
-            }
-        });*/
+    // This is the official documented way, but it does not work
+    /*$scope.$on('$cordovaPush:notificationReceived', function(event, notification) {
+      console.log("NOTIFICATION RECEIVED.");
+      console.log(JSON.stringify([notification]));
+      if (ionic.Platform.isAndroid()) {
+        handleAndroid(notification);
+      } else if (ionic.Platform.isIOS()) {
+        handleIOS(notification);
+        $scope.$apply(function() {
+          $scope.notifications.push(JSON.stringify(notification.alert));
+        })
+      }
+    });*/
 
     // Android Notification Received Handler
     /**
@@ -110,9 +102,6 @@ angular.module('phavr.pushfact', [])
           notifications.push(notification.message);
         }
         window.localStorage.setItem("notifications", JSON.stringify(notifications));
-        /*$scope.$apply(function () {
-            $scope.notifications.push(JSON.stringify(notification.message));
-        })*/
       } else if (notification.event == "error")
         $cordovaDialogs.alert(notification.msg, "Push notification error event");
       else $cordovaDialogs.alert(notification.event, "Push notification handler - Unprocessed Event");
@@ -158,13 +147,10 @@ angular.module('phavr.pushfact', [])
       }
     }
 
-    // Stores the device token in a db using node-pushserver (running locally in this case)
-    //
-    // type:  Platform type (ios, android etc)
     /**
-     * Description
+     * Description: Stores the device token in a db using node-pushserver
      * @method storeDeviceToken
-     * @param {} type
+     * @param {String} type - Platform type (ios, android etc)
      * @return 
      */
     function storeDeviceToken(type) {
@@ -232,7 +218,7 @@ angular.module('phavr.pushfact', [])
       /**
        * Description
        * @method init
-       * @param {} provider_id
+       * @param {Number} provider_id
        * @return 
        */
       init: function(provider_id) {
@@ -242,7 +228,7 @@ angular.module('phavr.pushfact', [])
       /**
        * Description
        * @method setScope
-       * @param {} newScope
+       * @param {Object} newScope
        * @return 
        */
       setScope: function(newScope) {
