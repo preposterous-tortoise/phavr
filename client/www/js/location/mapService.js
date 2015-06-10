@@ -1,14 +1,35 @@
 angular.module('phavr.mapService', [])
-  .factory('mapService', function($window, $location, Favors) {
+  .factory('mapService', function($window, $location, Favors, $cordovaGeolocation) {
 
     var myLatlng = new google.maps.LatLng(37.783724, -122.40897799999999);
 
-    var genericIconURL = "http://frit-talk.com/mobile/2/endirect.png"
+    var genericIconURL = "http://frit-talk.com/mobile/2/endirect.png";
+    var farIconURL = "http://simpleicon.com/wp-content/uploads/map-marker-1.png";
 
     var mapOptions = {
       center: myLatlng,
       zoom: 16,
       mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var calculateDistance = function(lat1, lon1, lat2, lon2, callback){
+
+      function deg2rad(deg) {
+        return deg * (Math.PI/180)
+      }
+      var R = 6371; // Radius of the earth in km
+      var dLat = deg2rad(lat2-lat1);  // deg2rad below
+      var dLon = deg2rad(lon2-lon1); 
+      var a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2)
+        ; 
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      var d = R * c; // Distance in km
+      
+      console.log('calculated distance!!', d*0.621371);
+      return d *0.621371; //distance in miles
     };
 
     var getBoxForBounds = function(bounds) {
@@ -75,19 +96,112 @@ angular.module('phavr.mapService', [])
       },
 
       addMarker: function(favor, map, markerMap, addInfoWindow) {
+        //get favor's location
         var location = getFavorLocation(favor);
+        var isClose = true;
+
+        if(ionic.Platform.isAndroid() || ionic.Platform.isIOS()) {
+          //only change markers if we're on the phone
+          console.log('getting location to place correct marker...');
+
+          //get user's location
+            var posOptions = { timeout: 10000, enableHighAccuracy: false };
+            $cordovaGeolocation.getCurrentPosition(posOptions)
+            .then(function(spot) {//calculate distance
+              var lat1 = spot.coords.latitude;
+              var lon1 = spot.coords.longitude;
+              var lat2 = location.lat;
+              var lon2 = location.lng;
+
+              console.log(lat1, lon1, lat2, lon2);
+
+              console.log('calculating distance...');
+              var dist = calculateDistance(lat1, lon1, lat2, lon2);
+
+              if(dist > 2) { //if the favor is more than two miles away from the user
+                //set the icon
+                console.log('that favor is too far away!');
+                isClose = false;
+              }
+              
+              var infowindow = new google.maps.InfoWindow();
+              var marker = new google.maps.Marker({
+                position: location,
+                map: map
+              });
+
+              //set icon based on distance
+              if(isClose) {
+                console.log('using close icon');
+                marker.setIcon( /** @type {google.maps.Icon} */ ({
+                  url: genericIconURL, //favor.icon,
+                  size: new google.maps.Size(71, 71),
+                  origin: new google.maps.Point(0, 0),
+                  anchor: new google.maps.Point(17, 34),
+                  scaledSize: new google.maps.Size(35, 35)
+                }));
+              } else {
+                console.log('using far icon');
+                marker.setIcon( /** @type {google.maps.Icon} */ ({
+                  url: farIconURL, //favor.icon,
+                  size: new google.maps.Size(71, 71),
+                  origin: new google.maps.Point(0, 0),
+                  anchor: new google.maps.Point(17, 34),
+                  scaledSize: new google.maps.Size(35, 35)
+                }));
+              }
+
+              marker.setPosition(location);
+              marker.setVisible(true);
+              var description = favor.description || "";
+              if (addInfoWindow) {
+                infowindow.setContent('<div>' + description + '</div><div><strong>' + favor.place_name + '</strong><br>');
+                infowindow.open(map, marker);
+              }
+              if (favor._id) {
+                google.maps.event.addListener(marker, "click", function() {
+                  var favor = getFavorForMarker(this, markerMap);
+                  if (favor._id) {
+                    Favors.setFavor(favor);
+                    $window.location.assign('#/favordetails');
+                  }
+                });
+                markerMap[favor._id] = {
+                  marker: marker,
+                  favor: favor
+                };
+              }
+              return marker;
+            });
+        } else {
+
         var infowindow = new google.maps.InfoWindow();
         var marker = new google.maps.Marker({
           position: location,
           map: map
         });
-        marker.setIcon( /** @type {google.maps.Icon} */ ({
-          url: genericIconURL, //favor.icon,
-          size: new google.maps.Size(71, 71),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(17, 34),
-          scaledSize: new google.maps.Size(35, 35)
-        }));
+
+        //set icon based on distance
+        if(isClose) {
+          console.log('using close icon');
+          marker.setIcon( /** @type {google.maps.Icon} */ ({
+            url: genericIconURL, //favor.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(35, 35)
+          }));
+        } else {
+            console.log('using far icon');
+            marker.setIcon( /** @type {google.maps.Icon} */ ({
+              url: farIconURL, //favor.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(35, 35)
+            }));
+        }
+
         marker.setPosition(location);
         marker.setVisible(true);
         var description = favor.description || "";
@@ -109,6 +223,7 @@ angular.module('phavr.mapService', [])
           };
         }
         return marker;
+      }
       },
 
       createMap: function() {
