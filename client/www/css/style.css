@@ -22,7 +22,9 @@ body {
   font-weight: normal !important; }
 
 .favor {
-  margin: 5px !important; }
+  margin: 5px !important; 
+  color: rgba(102, 205, 170, 0.65) !important;
+}
 
 h2, h3, h4 {
   color: silver !important;
@@ -170,7 +172,7 @@ h2, h3, h4 {
 
 .favorDetail {
   width: 100%;
-  /*max-width: 100%;*/ }
+  border-radius: 10px !important; }
 
 .picVoting {
   /*top: 50%;*/
