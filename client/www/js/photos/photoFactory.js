@@ -164,10 +164,10 @@ angular.module('phavr.photoFactory', [])
       })
     },   
     /**
-     * Description
+     * Instagram API call to retrieve photos for a given location 
      * @method getInstagramPictures
-     * @param {} favor
-     * @param {} callback
+     * @param {Favor} favor
+     * @param {Function} callback
      * @return 
      */
     getInstagramPictures: function(favor, callback){
