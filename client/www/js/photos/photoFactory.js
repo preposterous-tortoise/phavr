@@ -1,6 +1,7 @@
 angular.module('phavr.photoFactory', [])
 .factory('Photos', ['$location', '$q', '$http', 'Auth', function($location, $q, $http, Auth) {
 
+  //For production or development purposes
   var domain = localStorage.getItem("domain") || "http://phavr.herokuapp.com";
   console.log("domain is: ", domain);
 
@@ -60,6 +61,7 @@ angular.module('phavr.photoFactory', [])
                   clearCache();
                   retries = 0;
                   alert('Done!');
+                  //Tell sever to save Photo url in photo databse
                   Photos.sendPicture("https://s3.amazonaws.com/darrendrakeapp/"+time+"___"+favorID +".jpg", favorID);
               }
               /**
@@ -70,7 +72,7 @@ angular.module('phavr.photoFactory', [])
                */
               var fail = function (error) {
                   if (retries == 0) {
-                    console.log("retry", retries);
+                      //increment number of retries if failed
                       retries ++
                       setTimeout(function() {
                           onCapturePhoto(fileURI)
@@ -87,6 +89,7 @@ angular.module('phavr.photoFactory', [])
               options.fileName = time +"___"+favorID+".jpg";
               options.mimeType = "image/jpeg";
               var ft = new FileTransfer();
+              //file transfer photo to server
               ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/photoUploads/uploadToServer"), win, fail, options);
           }
            
@@ -96,6 +99,7 @@ angular.module('phavr.photoFactory', [])
            * @return 
            */
           function capturePhoto() {
+              //get photo from phone
               navigator.camera.getPicture(onCapturePhoto, onFail, {
                   quality: 100,
                   destinationType: destinationType.FILE_URI
@@ -112,6 +116,7 @@ angular.module('phavr.photoFactory', [])
               alert('Failed because: ' + message);
           }
 
+          //invoke photo taking
           capturePhoto();
     },
 
