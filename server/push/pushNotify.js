@@ -110,11 +110,12 @@ module.exports = {
         message += ", " + new Date();
         var usersToNofify = [];
         users.forEach(function(user) {
-          console.log('new favor, nearby user: ', user.name );
+          console.log('new favor, nearby user: ', user.name, ', notify_favor: ', user.notify_favor );
           console.log('ids: ', user.provider_id != favor.user_id, user.provider_id, favor.user_id);
-          if (user.provider_id != favor.user_id && user.notify_favor)
+          if ((user.provider_id != favor.user_id) && user.notify_favor)
             usersToNofify.push(user.provider_id);
         });
+        console.log('users to notify for new favor: ', usersToNofify.length);
         if (usersToNofify.length > 0) {
           sendMessage(usersToNofify, message);
         }
