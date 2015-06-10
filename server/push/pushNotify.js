@@ -73,14 +73,24 @@ module.exports = {
         if (err) {
           console.log('Error fetching favor for notification: ', err, favors);
         } else {
-          console.log('New Photo for favor: ', favor_id, favors);
-          // A photo was taken for your favor "description" at PLACE_NAME
-          // 
           var favor = favors[0];
-          var message = "A photo was taken for your favor \"" + favor.description + "\" at " + favor.place_name;
-          message += ", " + new Date();
-          console.log('message: ', message);
-          sendMessage([favor.user_id], message);
+          var query = User.findOne({
+            provider_id: favor.user_id
+          });
+          query.exec(function(err, user) {
+            if (err) {
+              console.log('Error finding user by id:', err);
+            } else {
+              console.log('found user for notifyNewPhoto', JSON.stringify(user, null, '\t'));
+              if (user.notify_photos) {
+                console.log('New Photo for favor: ', favor_id, favors);
+                var message = "A photo was taken for your favor \"" + favor.description + "\" at " + favor.place_name;
+                message += ", " + new Date();
+                console.log('message: ', message);
+                sendMessage([favor.user_id], message);
+              }
+            }
+          });
         }
       });
   },
@@ -102,7 +112,7 @@ module.exports = {
         users.forEach(function(user) {
           console.log('new favor, nearby user: ', user.name );
           console.log('ids: ', user.provider_id != favor.user_id, user.provider_id, favor.user_id);
-          if (user.provider_id != favor.user_id)
+          if (user.provider_id != favor.user_id && user.notify_favor)
             usersToNofify.push(user.provider_id);
         });
         if (usersToNofify.length > 0) {

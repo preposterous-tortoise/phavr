@@ -43,6 +43,7 @@
     <script src="js/favors/favorDetailsCtrl.js"></script>
     <script src="js/login/profileCtrl.js"></script>
     <script src="js/push/notificationCtrl.js"></script>
+    <script src="js/push/settingsCtrl.js"></script>
     <!-- google maps javascript -->
     <!--  EITHER IMPORT GOOGLE MAPS HERE (not using Angular Google Maps or 
        IMPORT using config in app.js-->
@@ -84,7 +85,11 @@
               <span>Notifications</span>
             </div>
           </ion-item>
-          <ion-item>Settings</ion-item>
+          <ion-item ng-click="toggleLeft()" ui-sref="settings">
+            <div>
+              <span>Settings</span>
+            </div>
+          </ion-item>          
           <ion-item ng-click="logOut()">Log Out</ion-item>
          </ion-list>
        </ion-content>
