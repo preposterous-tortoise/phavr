@@ -1,10 +1,13 @@
  angular.module('phavr.profile', [])
 .controller('profileCtrl', function ($scope, $rootScope, Favors, $location, $cordovaOauth, Auth, $http){
   
+  /**
+   * Shows the header bar
+   */
   $rootScope.login = true;
 
   /**
-   * Description
+   * Get the user's info from the req.user in the back-end
    * @method getUserInfo
    * @return 
    */
@@ -17,7 +20,7 @@
 
 
   /**
-   * Description
+   * Grabs the favors from that particular user
    * @method getFavors
    * @return 
    */
@@ -29,7 +32,7 @@
   }
   
   /**
-   * Description
+   * Choose and show the specific details of a particular favor
    * @method favorDetails
    * @param {} favor
    * @return 
@@ -37,7 +40,6 @@
   $scope.favorDetails = function(favor){
 
     Favors.setFavor(favor);
-    console.log(Favors.selectedFavor);
     $location.path('/favordetails');
   }
 
@@ -47,7 +49,7 @@
   $scope.filter = '-createdAt';
 
   /**
-   * Description
+   * Sort favors by the most votes
    * @method hot
    * @return 
    */
@@ -56,7 +58,7 @@
   };
 
   /**
-   * Description
+   * Sort favors by the most recent
    * @method new
    * @return 
    */
