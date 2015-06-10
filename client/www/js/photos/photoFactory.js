@@ -6,10 +6,10 @@ angular.module('phavr.photoFactory', [])
 
   return {
     /**
-     * Description
+     * Uploads picture taken from client's mobile dvice to server
      * @method getPicture
-     * @param {} favorID
-     * @param {} time
+     * @param {Integer} favorID
+     * @param {Integer} time
      * @return 
      */
     getPicture: function(favorID, time) {
@@ -22,7 +22,7 @@ angular.module('phavr.photoFactory', [])
           document.addEventListener("deviceready", onDeviceReady, false);
            
           /**
-           * Description
+           * Function is invoked when device is ready
            * @method onDeviceReady
            * @return 
            */
@@ -32,7 +32,7 @@ angular.module('phavr.photoFactory', [])
           }
            
           /**
-           * Description
+           * Clear's camera cache
            * @method clearCache
            * @return 
            */
@@ -41,8 +41,9 @@ angular.module('phavr.photoFactory', [])
           }
            
           var retries = 0;
-          /**
-           * Description
+
+          /** 
+           *Function is inoved when picture is taken
            * @method onCapturePhoto
            * @param {} fileURI
            * @return 
@@ -50,9 +51,9 @@ angular.module('phavr.photoFactory', [])
           function onCapturePhoto(fileURI) {
 
               /**
-               * Description
+               * Function is called when photo is successfuly sent to server
                * @method win
-               * @param {} r
+               * @param {Integer} r
                * @return 
                */
               var win = function (r) {
@@ -62,9 +63,9 @@ angular.module('phavr.photoFactory', [])
                   Photos.sendPicture("https://s3.amazonaws.com/darrendrakeapp/"+time+"___"+favorID +".jpg", favorID);
               }
               /**
-               * Description
+               * Is called if photo fails to be sent to server
                * @method fail
-               * @param {} error
+               * @param {Object} error
                * @return 
                */
               var fail = function (error) {
@@ -90,7 +91,7 @@ angular.module('phavr.photoFactory', [])
           }
            
           /**
-           * Description
+           * Takes picture from the mobile device
            * @method capturePhoto
            * @return 
            */
@@ -102,9 +103,9 @@ angular.module('phavr.photoFactory', [])
           }
            
           /**
-           * Description
+           * If error occurs when taking a phone with phone
            * @method onFail
-           * @param {} message
+           * @param {String} message
            * @return 
            */
           function onFail(message) {
@@ -115,13 +116,13 @@ angular.module('phavr.photoFactory', [])
     },
 
     /**
-     * Description
+     * Make request for all photos for a given favor id
      * @method getPhotosForFavor
-     * @param {} favor
-     * @param {} callback
+     * @param {Object} favor
+     * @param {Function} callback
      * @return 
      */
-    getPhotosForFavor: function(favor, callback){
+    getPhotosForFavor: function(favor, callback) {
       $http.post(domain + '/api/photos/fetch', { favor_id: favor._id })
         .success(function(data, status, headers, config) {
           callback(data);
@@ -130,10 +131,10 @@ angular.module('phavr.photoFactory', [])
         });
     },
     /**
-     * Description
+     * Tells server to create a new photo has been created by passing the image uri
      * @method sendPicture
-     * @param {} imageURI
-     * @param {} favorID
+     * @param {String} imageURI
+     * @param {Integer} favorID
      * @return 
      */
     sendPicture: function(imageURI, favorID) {
@@ -145,14 +146,14 @@ angular.module('phavr.photoFactory', [])
         });
     },
     /**
-     * Description
+     * Tells server to register new vote for a photo
      * @method upVote
-     * @param {} photo
-     * @param {} vote
+     * @param {Object} photo
+     * @param {Integer} vote
      * @return CallExpression
      */
-    upVote: function(photo, vote){
-      console.log('auth',Auth)
+    upVote: function(photo, vote) {
+
       return $http({
         method: 'POST',
         url: domain+'/api/votes/upVotePhoto',
@@ -160,9 +161,9 @@ angular.module('phavr.photoFactory', [])
       })
       .then(function(resp){
         photo.votes += +resp.data;
-        console.log(resp);
       })
     },   
+
     /**
      * Instagram API call to retrieve photos for a given location 
      * @method getInstagramPictures
