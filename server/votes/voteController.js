@@ -190,7 +190,7 @@ module.exports = {
                 Photo.findByIdAndUpdate(req.body.photo._id, 
                 { $inc: {votes: -1 } }, 
                   function(err, data){
-                    if (data.votes < -4) {
+                    if (data.votes <= -4) {
                       // Photo.findOneAndRemove({
                       //   _id : req.body.photo._id
                       // })
