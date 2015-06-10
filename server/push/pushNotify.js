@@ -82,7 +82,7 @@ module.exports = {
               console.log('Error finding user by id:', err);
             } else {
               console.log('found user for notifyNewPhoto', JSON.stringify(user, null, '\t'));
-              if (user.notify_photos) {
+              if (user && user.notify_photos) {
                 console.log('New Photo for favor: ', favor_id, favors);
                 var message = "A photo was taken for your favor \"" + favor.description + "\" at " + favor.place_name;
                 message += ", " + new Date();
