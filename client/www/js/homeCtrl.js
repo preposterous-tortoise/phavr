@@ -3,9 +3,6 @@ angular.module('phavr.home', [])
 
   //this is needed so that header bar can be ngshown
   $rootScope.login = true;
-  
-
-
 
   /**
   * Methods related to Favors
@@ -14,6 +11,7 @@ angular.module('phavr.home', [])
   $scope.favors = [];/*[{_id: 1, topic: 'Street Fashion', description: 'What are people on Filmore St wearing?', topPhoto: 'https://farm4.staticflickr.com/3875/14660511001_9f7cf7150a_b.jpg', votes: 2, distance: 0.256, camera: true}, {_id: 1, topic: 'meowmeowmeow', description: 'mirror mirror on the wall, who is the longest cat of all', topPhoto: 'http://www.autofish.net/mirrors/images/animals/cats/long_cat.jpg', votes: 2, distance: 0.256, camera: true}];*/
 
   $scope.selectedFavor = Favors.selectedFavor;
+  $scope.noFavors = true;
 
   $scope.updateFavors = function(){
     console.log('attempting to update favors...');
@@ -34,7 +32,6 @@ angular.module('phavr.home', [])
 
         //After current location is found, start tracking
 
-        //geo.backgroundTracking();
 
 
         Favors.fetchRequests(box, function(data){
@@ -46,12 +43,27 @@ angular.module('phavr.home', [])
           });
           //fetch favors from the dtabase
           $scope.favors = data;
+          if ($scope.favors.length !== 0) {
+            console.log('found favors!!!');
+            $scope.noFavors = false;
+          } else { 
+            console.log('no favors...'); 
+            $scope.noFavors = true;
+          }
           $scope.getTopPhotos();
+
         });
       });
     } else{ 
         Favors.fetchRequests(mapService.mapBounds, function(data){
           $scope.favors = data;
+          if ($scope.favors.length !== 0) {
+            console.log('found favors!!!');
+            $scope.noFavors = false;
+          } else { 
+            console.log('no favors...'); 
+            $scope.noFavors = true;
+          }
           //for each favor attach distance to current location
           $scope.favors.forEach(function(favor){
             favor.distance = $scope.getDistance(favor.loc);
@@ -59,6 +71,7 @@ angular.module('phavr.home', [])
             favor.camera = favor.distance < 5;
           });
           $scope.getTopPhotos();
+
         });
     }
 
@@ -115,11 +128,15 @@ angular.module('phavr.home', [])
   //by default will be most reent
   $scope.filter = '-createdAt';
 
+  $scope.popular = false;
+
   $scope.hot = function(){
+    $scope.popular = true;
     $scope.filter = '-votes';
   };
 
   $scope.new = function() {
+    $scope.popular = false;
     $scope.filter = '-createdAt';
   };
 
@@ -188,7 +205,6 @@ angular.module('phavr.home', [])
     });
 
   $scope.enableTracking = function(){
-    // geo.enableTracking();
     geo.backgroundTracking();
   };
 

@@ -65,11 +65,13 @@ module.exports = {
                   Favor.findByIdAndUpdate(req.body.favor._id, 
                   { $inc: {votes: -1 } }, 
                     function(err, data){
-                        if (data.votes < -4) {
-                          Favor.findOneAndRemove({
-                            _id : req.body.favor_id
-                          })
-                          // data.remove()
+                        console.log("THIS IS DELETE DATA!"+ JSON.stringify(data))
+                        if (data.votes <= -4) {
+                          console.log("DETECTED LESS THAN -4, WILL NOW REMOVE!")
+                          // Favor.findOneAndRemove({
+                          //   _id : req.body.favor_id
+                          // })
+                          data.remove()
                         } else if (data.votes > -5){
                           User.findByIdAndUpdate(req.user._id,
                             { $inc: {points: -1 } },
@@ -188,7 +190,7 @@ module.exports = {
                 Photo.findByIdAndUpdate(req.body.photo._id, 
                 { $inc: {votes: -1 } }, 
                   function(err, data){
-                    if (data.votes < -4) {
+                    if (data.votes <= -4) {
                       // Photo.findOneAndRemove({
                       //   _id : req.body.photo._id
                       // })

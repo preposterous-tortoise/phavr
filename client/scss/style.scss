@@ -317,7 +317,11 @@ h2, h3, h4 {
 
 .lolol {
   border: none !important;
-  color: white;
+  color: white !important;
+}
+
+.highlighted {
+  background-color: #86e0c2 !important;
 }
 
 .profileHead {

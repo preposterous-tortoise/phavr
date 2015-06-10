@@ -50,7 +50,7 @@ angular.module('phavr.locationFactory', [])
 
 
       bgGeo.configure(callbackFn, failureFn, {
-        url: 'http://phavr.herokuapp.com/location',
+        url: 'http://phavr.herokuapp.com/api/users/updateloc',
         headers: {
           access_token: window.localStorage.getItem("token")
         },
