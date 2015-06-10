@@ -3,9 +3,13 @@ angular.module('phavr.mapService', [])
 
     var myLatlng = new google.maps.LatLng(37.783724, -122.40897799999999);
 
+    //Icon for the location of a favor
     var genericIconURL = "http://frit-talk.com/mobile/2/endirect.png";
+    
+    //Icon for the location of a favor that is outside the user's allowed area to take photos
     var farIconURL = "http://simpleicon.com/wp-content/uploads/map-marker-1.png";
 
+    //Options for the Google Map API
     var mapOptions = {
       center: myLatlng,
       zoom: 16,
@@ -13,19 +17,18 @@ angular.module('phavr.mapService', [])
     };
 
     /**
-     * Description
+     * This function calculates the distance between two geo-coordinates in miles
      * @method calculateDistance
      * @param {} lat1
      * @param {} lon1
      * @param {} lat2
      * @param {} lon2
-     * @param {} callback
      * @return BinaryExpression
      */
-    var calculateDistance = function(lat1, lon1, lat2, lon2, callback){
+    var calculateDistance = function(lat1, lon1, lat2, lon2){
 
-      /**
-       * Description
+      /*
+       * Inner function that converts degrees to radians
        * @method deg2rad
        * @param {} deg
        * @return BinaryExpression
@@ -48,8 +51,8 @@ angular.module('phavr.mapService', [])
       return d *0.621371; //distance in miles
     };
 
-    /**
-     * Description
+    /*
+     * Get's the box(bounds) for finding favors within the passed location
      * @method getBoxForBounds
      * @param {} bounds
      * @return ArrayExpression
@@ -61,8 +64,8 @@ angular.module('phavr.mapService', [])
       ];
     };
 
-    /**
-     * Description
+    /*
+     * Get the favor corresponding to the marker
      * @method getFavorForMarker
      * @param {} marker
      * @param {} markerMap
@@ -79,7 +82,7 @@ angular.module('phavr.mapService', [])
     };
 
     /**
-     * Description
+     * Get the location date from the favor
      * @method getFavorLocation
      * @param {} favor
      * @return 
@@ -103,8 +106,8 @@ angular.module('phavr.mapService', [])
 
       getFavorLocation: getFavorLocation,
       
-      /**
-       * Description
+      /*
+       * Returns your location
        * @method getLocation
        * @return myLatlng
        */
@@ -113,7 +116,7 @@ angular.module('phavr.mapService', [])
       },
 
       /**
-       * Description
+       * Sets the location of the map
        * @method setLocation
        * @param {} lat
        * @param {} lng
@@ -129,7 +132,7 @@ angular.module('phavr.mapService', [])
       },
 
       /**
-       * Description
+       * Add's a default marker to the map of where you are
        * @method addDefaultMarker
        * @param {} map
        * @return 
@@ -289,7 +292,7 @@ angular.module('phavr.mapService', [])
       },
 
       /**
-       * Description
+       * Adds a Google Map to the DOM
        * @method createMap
        * @return NewExpression
        */
@@ -298,7 +301,7 @@ angular.module('phavr.mapService', [])
       },
 
       /**
-       * Description
+       * This function adds markers and removes markers accordingly as the user moves and zoom in/outs the map
        * @method addBoundsListener
        * @param {} map
        * @param {} markerMap
@@ -329,7 +332,7 @@ angular.module('phavr.mapService', [])
       },
 
       /**
-       * Description
+       * Function thats listens to a place change and updates the map and feed
        * @method addPlaceChangedListener
        * @param {} map
        * @param {} mapName
