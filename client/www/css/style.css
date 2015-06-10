@@ -23,7 +23,6 @@ body {
 
 .favor {
   margin: 5px !important; 
-  color: rgba(102, 205, 170, 0.65) !important;
 }
 
 h2, h3, h4 {
@@ -62,7 +61,7 @@ h2, h3, h4 {
   border-top: none !important !important; }
 
 .description {
-  border-color: #66CDAA !important;
+  border-color: rgba(102, 205, 170, 0.65) !important;
   border-width: 2px !important;
   border-radius: 10px !important;
   /*background-color: #E6F4EF !important;*/ }
