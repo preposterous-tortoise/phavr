@@ -1,14 +1,9 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
 angular.module('phavr', ['ionic', 'ngCordova', 'phavr.login', 'phavr.home', 'phavr.profile', 'phavr.nav', 
-                              'phavr.favor', 'phavr.favorMap', 'phavr.favorDetails',
-                              'phavr.photoFactory', 'phavr.favorfact', 'phavr.locationFactory',
-                              'uiGmapgoogle-maps','phavr.mapService', 'phavr.favorCreationMap', 
-                              'phavr.authFactory', 'phavr.nav',
-                              'phavr.pushfact', 'phavr.notification', 'phavr.settings'])
+                          'phavr.favor', 'phavr.favorMap', 'phavr.favorDetails',
+                          'phavr.photoFactory', 'phavr.favorfact', 'phavr.locationFactory',
+                          'uiGmapgoogle-maps','phavr.mapService', 'phavr.favorCreationMap', 
+                          'phavr.authFactory', 'phavr.nav',
+                          'phavr.pushfact', 'phavr.notification', 'phavr.settings'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -32,7 +27,6 @@ angular.module('phavr', ['ionic', 'ngCordova', 'phavr.login', 'phavr.home', 'pha
 .config(function($stateProvider, $urlRouterProvider, $httpProvider){
   $urlRouterProvider.otherwise('/')
   
-  //home template
   $stateProvider.state('home', {
     url: '/home',
     templateUrl: 'views/home.html',
@@ -80,7 +74,6 @@ angular.module('phavr', ['ionic', 'ngCordova', 'phavr.login', 'phavr.home', 'pha
     templateUrl: 'views/settings.html',
     controller: 'settingsCtrl'
   })
-
 
   //we add our $httpIntereceptor into the array of interceptors.
   $httpProvider.interceptors.push('AttachTokens');
