@@ -1,0 +1,35 @@
+CodeCleanupTodo.txt
+
+middleware: Remove S3 code
+
+userController: remove updateLocation
+
+twitterScrape.js: remove all
+
+voteController: upVotePhoto is too long
+
+REMOVE: uploads/yoyo.jpg
+
+favorController and notify both have getPolyBoxQuery, put it in utils
+
+CLIENT
+==========================
+
+package.json redundancies in "cordova-plugin-device", "org.apache.cordova.device",
+
+
+DOES THE GULPFILE work?
+
+WHAT IS client/test/journal??
+
+WHY ARE THERE two navbar.tests.js
+
+home.html: remove "Oops! There are no requests here!!!""
+
+loginCtrl: remove window.localStorage.setItem("domain", "");
+loginCtrl: $scope.letsGo  // use a better name
+
+homeCtrl: updateFavors sets location on localStorage
+
+in Factories:  user $http.post instead of $http({ method: 'POST'});
+

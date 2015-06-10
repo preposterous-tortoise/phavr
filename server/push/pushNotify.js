@@ -6,10 +6,10 @@ var Q = require('q');
 
 
 /**
- * Description
+ * Description: send a message to the push server
  * @method sendMessage
- * @param {} users
- * @param {} message
+ * @param {Array} users - the provider ids of the recipients
+ * @param {String} message
  * @return 
  */
 var sendMessage = function(users, message) {
@@ -41,12 +41,12 @@ var sendMessage = function(users, message) {
 }
 
 /**
- * Description
+ * Description: given a lng/lat point returns the bounding box for a 1-mile radius
  * @method getBoxForLoc
- * @param {} coords
- * @return box
+ * @param {Array[lng, lat]} coords
+ * @return {Array} box
  */
-var getBoxForLoc = function(coords /* [lng, lat] */) {
+var getBoxForLoc = function(coords) {
   var miles = 1;
   var radius = 0.02899*miles;
   var box = [[coords[0]-radius, coords[1]-radius], //sw
@@ -55,9 +55,9 @@ var getBoxForLoc = function(coords /* [lng, lat] */) {
 }
 
 /**
- * Description
+ * Description: return a polygon box for sw/ne coordinates
  * @method getPolyBoxQuery
- * @param {} box
+ * @param {Array[sw,ne]} box
  * @return ObjectExpression
  */
 var getPolyBoxQuery = function(box) {
@@ -123,7 +123,7 @@ module.exports = {
   /**
    * Description
    * @method notifyNewFavor
-   * @param {} favor
+   * @param {FavorSchema} favor
    * @return 
    */
   notifyNewFavor: function(favor) {

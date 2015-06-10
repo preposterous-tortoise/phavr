@@ -1,16 +1,19 @@
 angular.module('phavr.locationFactory', [])
 .factory('geo', function($cordovaGeolocation, mapService, Favors, $location, $http) {
 
+  //Variable for background geolocation storage
   var bgGeo;
+  //Processing variable to show if the location has already been acquired, starts as null
   var processing = false;
+  //ID for background geotracking
   var watchID = null;
 
   var domain = localStorage.getItem("domain");
-  console.log("domain is: ", domain);
+  // console.log("domain is: ", domain);
 
   return {
     /**
-     * Description
+     * Get's the User's location through the native Geolocation API, sends back the data via a callback with latitude and longitide
      * @method getLocation
      * @param {} callback
      * @return 
@@ -29,16 +32,16 @@ angular.module('phavr.locationFactory', [])
     },
 
     /**
-     * Description
+     * Background location tracking using PhoneGap cordova tracking
      * @method backgroundTracking
      * @return 
      */
-    backgroundTracking: function(){
+    backgroundTracking: function() {
       //start backgroundGeotracking
       bgGeo = window.plugins.backgroundGeoLocation;
 
       /**
-       *  This is my callback for ajax-requests after POSTING background geolocation to my server
+       *  This is my callback for ajax-requests after POSTING background geolocation to my server, stops background tracking
        * @method myAjaxCallback
        * @param {} response
        * @return 
@@ -55,14 +58,14 @@ angular.module('phavr.locationFactory', [])
        */
       var callbackFn = function(location) {
 
-        console.log('BackgroundGeoLocation callback:'+ location.latitude +',' + location.longitude);
+        // console.log('BackgroundGeoLocation callback:'+ location.latitude +',' + location.longitude);
         //HTTP requeset here to Post Location to my server
 
         myAjaxCallback.call(this);
       }
 
       /**
-       * Description
+       * This is invoked when there is a failure with background tracking
        * @method failureFn
        * @param {} error
        * @return 
@@ -71,7 +74,9 @@ angular.module('phavr.locationFactory', [])
         console.log('BackgroundGeoLocation error');
       }
 
-
+      /*
+       * Settings for the background tracking
+       */
       bgGeo.configure(callbackFn, failureFn, {
         url: 'http://phavr.herokuapp.com/api/users/updateloc',
         headers: {
@@ -87,13 +92,12 @@ angular.module('phavr.locationFactory', [])
         stopOnTerminal: false
       });
 
-      console.log("**bg geo started**");
       bgGeo.start();
-      console.log("access token is", window.localStorage.getItem("token"));
+      // console.log("access token is", window.localStorage.getItem("token"));
     },
 
-    /**
-     * Description
+    /*
+     * This stops Background Trcking 
      * @method stopBackGroundTracking
      * @return 
      */
@@ -103,8 +107,9 @@ angular.module('phavr.locationFactory', [])
 
 
 
-    /**
-     * Description
+    /*
+     * Get's the User's location using Cordova/PhoneGap methods, send back data latitude and longitiude with 
+     * a callback. Also saves the data in local storage. 
      * @method phoneLocation
      * @param {} callback
      * @return 
@@ -123,7 +128,7 @@ angular.module('phavr.locationFactory', [])
     },
 
     /**
-     * Description
+     * Updates the User's Location in the database based on their longitude and Latitude stored in Local Storage
      * @method updateUserLocation
      * @return 
      */
@@ -146,19 +151,18 @@ angular.module('phavr.locationFactory', [])
     },
 
     /**
-     * Description
+     * This function calculates the distance between two geo-coordinates in miles
      * @method calculateDistance
      * @param {} lat1
      * @param {} lon1
      * @param {} lat2
      * @param {} lon2
-     * @param {} callback
      * @return BinaryExpression
      */
-    calculateDistance: function(lat1, lon1, lat2, lon2, callback){
+    calculateDistance: function(lat1, lon1, lat2, lon2) {
 
-      /**
-       * Description
+      /*
+       * Inner function that converts degrees to radians
        * @method deg2rad
        * @param {} deg
        * @return BinaryExpression
@@ -180,20 +184,21 @@ angular.module('phavr.locationFactory', [])
     },
 
 
-    /**
-     * Description
+    /*
+     * Enables Geo-Tracking
      * @method enableTracking
-     * @param {} callback
      * @return 
      */
-    enableTracking: function(callback){
+    enableTracking: function() {
       if (watchID != null) {
         navigator.geolocation.clearWatch(watchID);
         watchID = null;
       } else {
-
-
-        // device APIs are available
+        /*
+         * Device APIs for tracking are available
+         * @method enableTracking
+         * @return 
+         */
         (function onDeviceReady() {
             // Throw an error if no update is received every 30 seconds
             var options = {   
@@ -202,34 +207,25 @@ angular.module('phavr.locationFactory', [])
               watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
             }
             )();
-
-        // onSuccess Geolocation
-        //
         /**
-         * Description
+         * On a succesful Geolocation, send a tuple of two locations to the back-end tp fetch for favors
+         * particular to the user's location
          * @method onSuccess
          * @param {} position
          * @return 
          */
         function onSuccess(position) {
-          console.log( 'Latitude: '  + position.coords.latitude      + '<br />' +
-            'Longitude: ' + position.coords.longitude     + '<br />' +
-            '<hr />');
 
           var radius = 0.289855/2; //= 2 miles
           var box = [[position.coords.longitude-radius, position.coords.latitude-radius], [position.coords.longitude+radius, position.coords.latitude+radius]];
 
           Favors.fetchRequests(box, function(data){
-            console.log('got requests');
             console.log(data);
           });
 
         }
-
-        // onError Callback receives a PositionError object
-        //
-        /**
-         * Description
+        /*
+         * Something went wrong with the device's geolocation
          * @method onError
          * @param {} error
          * @return 

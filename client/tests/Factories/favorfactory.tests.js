@@ -3,10 +3,8 @@ describe('favorFactory', function() {
   var savingRequest;
   var sendingRequest;
   var upVoting;
-
   var auth;
   var favor;
-
   var domain = "http://localhost:3000";
   var access = 'test';
 

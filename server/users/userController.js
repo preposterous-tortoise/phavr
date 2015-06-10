@@ -5,9 +5,9 @@ module.exports = {
   /**
    * Description
    * @method updateLocation
-   * @param {} req
-   * @param {} res
-   * @param {} next
+   * @param {Object} req
+   * @param {Object} res
+   * @param {Object} next
    * @return 
    */
   updateLocation: function(req, res, next) {
@@ -36,9 +36,9 @@ module.exports = {
   /**
    * Description
    * @method update
-   * @param {} req
-   * @param {} res
-   * @param {} next
+   * @param {Object} req
+   * @param {Object} res
+   * @param {Function} next
    * @return 
    */
   update: function(req, res, next) {
