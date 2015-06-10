@@ -314,7 +314,7 @@ angular.module('phavr.mapService', [])
             return;
           }
 
-          Favors.fetchRequests(box, function(favors) {
+          Favors.fetchFavors(box, function(favors) {
             if (favors) {
               for (var i = 0; i < favors.length; i++) {
                 if (!(markerMap[favors[i]._id]))

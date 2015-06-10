@@ -1,7 +1,6 @@
 <ion-view title="home">
   <ion-content>
-    <ion-refresher on-refresh="updateFavors()">
-    </ion-refresher>
+    <ion-refresher on-refresh="updateFavors()"></ion-refresher>
     <h3 ng-show="noFavors">Oops! There are no requests here!!!</h3>
     <ion-list ng-repeat="favor in favors | orderBy: filter ">
       <ion-item class="feedView description favor">
@@ -14,11 +13,14 @@
             <h4 ng-show="favor.camera" class="icon ion-ios-camera-outline distance favorHead"></h4>
           </div>
         </div>
+      
         <div class="row noPadding">
           <div class="col col-90 noPadding">
             <div class="row noPadding">
               <div class="col">
-                <ion-item ng-click="favorDetails(favor)" class="wrap description">{{favor.description}}</ion-item>
+                <ion-item ng-click="favorDetails(favor)" class="wrap description">
+                  {{favor.description}}
+                </ion-item>
               </div>
             </div>
             <div class="row noPadding">
@@ -29,34 +31,53 @@
           </div>
           <div class="col noPadding">
             <div class="picVoting">
-              <a ng-click="upVote(favor)" class="button button-icon icon ion-ios-arrow-up upvote"></a>
-              <br>
-              <span class="votes">{{favor.votes}}</span>
-              <br>
+              <a ng-click="upVote(favor)" class="button button-icon icon ion-ios-arrow-up upvote"></a><br>
+              <span class="votes">{{favor.votes}}</span><br>
               <a ng-click="downVote(favor)" class="button button-icon icon ion-ios-arrow-down downvote"></a>
             </div>
           </div>
         </div>
       </ion-item>
     </ion-list>
-    <ui-gmap-google-map class="hiddenmap" center="map.center" options="options" zoom="map.zoom" style="width:100%; height:100%" dragging="map.dragging" bounds="map.bounds" events="map.events" pan="true" control="map.control">
+    
+    <ui-gmap-google-map class="hiddenmap" 
+        center="map.center" 
+        options="options" 
+        zoom="map.zoom" 
+        style="width:100%; height:100%"
+        dragging="map.dragging"
+        bounds="map.bounds"
+        events="map.events"
+        pan="true"
+        control="map.control">
     </ui-gmap-google-map>
   </ion-content>
-  <ion-footer-bar ng-class="{'tall-footer': toggle}" class="camera-footer map-footer bar-calm">
+  <ion-footer-bar ng-class="{'tall-footer': search}" class="camera-footer map-footer bar-calm">    
     <div class="button-bar searchbar">
-      <button ng-click="hot()" ng-class="{'highlighted': popular}" class="button button-outline set-height button-light lolol">Hot</button>
-      <a ng-click="setToggle()" class="button button-icon icon ion-search set-height"></a>
-      <button ng-click="new()" ng-class="{'highlighted': !popular}" class="button button-outline button-light set-height lolol highlighted">New</button>
+      <button ng-click="hot()" ng-class="{'highlighted': popular}" 
+        class="button button-outline set-height button-light lolol">
+        Hot
+      </button>
+      
+      <a ng-click="toggleSearch()" class="button button-icon icon ion-search set-height"></a>
+      
+      <button ng-click="new()" ng-class="{'highlighted': !popular}" 
+        class="button button-outline button-light set-height lolol highlighted">
+        New
+      </button>
     </div>
     <br>
-    <div class="map-search">
+    <div class="map-search">  
       <input id="feed-input" type="text" placeholder="Change location">
     </div>
+    
     <div class="go">
       <div class="go2">
         <button class="button button-outline set-height button-light gobutton" ng-click="updateFavors(); setToggle()">
-          Go!</button>
+          Go!
+        </button>
       </div>
     </div>
-  </ion-footer-bar>
+  </ion-footer-bar>   
 </ion-view>
+

@@ -16,7 +16,7 @@ angular.module('phavr.favor', [])
         $scope.favor.icon = mapFavor.icon;
       }
       
-      Favors.saveRequest($scope.favor);
+      Favors.saveFavor($scope.favor);
       $location.path('/home');
   };
 
