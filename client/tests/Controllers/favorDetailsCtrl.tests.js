@@ -2,27 +2,23 @@ describe('favorDetailsCtrl', function() {
   var scope;
   var favors;
   var photos;
-
   var getPhotos;
   var upVoting;
- 
   var selected;
-
   var domain = "http://localhost:3000";
   var access = 'test';
 
   beforeEach(function() {
-    	module('drakeApp.favorfact');
+    module('drakeApp.favorfact');
   	module('drakeApp.home');
-        module('drakeApp.favorDetails');
+    module('drakeApp.favorDetails');
   	module('drakeapp.photoFactory');
   	module('drakeapp.locationFactory');
   	module('ngCordovaMocks');
-        module('drakeApp.favorfact');
+    module('drakeApp.favorfact');
   	module('drakeApp.mapService');
-        module('drakeapp.authFactory');
-        module('drakeApp.navfact');
-
+    module('drakeapp.authFactory');
+    module('drakeApp.navfact');
   });
 
   beforeEach(inject(function($injector, $rootScope, $controller, Favors, photoFactory, Auth) {
