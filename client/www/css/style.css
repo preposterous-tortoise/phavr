@@ -44,6 +44,7 @@ h2, h3, h4 {
 
 .byYou {
   position: relative;
+  color: white !important;
   top: 39px;
   left: 10px;
 }
