@@ -83,10 +83,11 @@ module.exports = function(app, express){
  
 
 
-  //Used to grab user information from the user proprty of request. Provides FB info for name and profile picture
+  // Used to grab user information from the user property of the request. 
+  // Provides FB info for name and profile picture
   app.get('/api/profileID', passport.authenticate('facebook-token'), 
     function(req, res){
-    
+      console.log('*******************/api/profileID: :', JSON.stringify(req.user, null, '\t'));
       res.send(req.user);
 
   });

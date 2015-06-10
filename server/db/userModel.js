@@ -5,6 +5,8 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
 	name: String, // user name
+	notify_favors: Boolean, // push notify for new nearby favors
+	notify_photos: Boolean, // push notify for photos for my favors
   screen_name : String,
 	provider: String, // Twitter, Facebook, etc
 	provider_id : {type: String, unique: true}, // id returned by Twitter, Facebook, etc.

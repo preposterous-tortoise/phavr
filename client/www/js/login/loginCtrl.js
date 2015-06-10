@@ -1,5 +1,5 @@
 angular.module('phavr.login', [])
-.controller('loginCtrl', function ($scope, $rootScope, $location, $cordovaOauth, Auth, $http, Favors, PushFactory, Auth){
+.controller('loginCtrl', function ($scope, $rootScope, $location, $cordovaOauth, Auth, $http, Favors, PushFactory, Auth, geo){
     $rootScope.login = false;
 
   window.localStorage.setItem("domain", "");
@@ -45,6 +45,8 @@ angular.module('phavr.login', [])
       .then(function(data){
         // PushFactory.init(data.data.provider_id);
         localStorage.setItem('user_provider_id', data.data.provider_id);
+        console.log('user data for authenticated user: ', JSON.stringify(data.data, null, '\t'));
+        localStorage.setItem('user', JSON.stringify(data.data));
         // geo.updateUserLocation();
         console.log('Authenticated provider id: ', data.data.provider_id);
       });
@@ -68,6 +70,8 @@ angular.module('phavr.login', [])
           .then(function(data){
             PushFactory.init(data.data.provider_id);
             localStorage.setItem('user_provider_id', data.data.provider_id);
+            localStorage.setItem('user', JSON.stringify(data.data));
+            console.log('user data for authenticated user: ', JSON.stringify(data.data, null, '\t'));
             geo.updateUserLocation();
             console.log('Authenticated provider id: ', data.data.provider_id);
           });
