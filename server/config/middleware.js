@@ -16,10 +16,7 @@ var User = require('../db/userModel.js');
 //Auth
 var auth = require('../auth/authPassport');
 var fbAuth = require('../auth/newAuthPassport')(passport);
-// var FacebookStrategy = require('passport-facebook').Strategy;
-//var  FacebookTokenStrategy = require('passport-facebook-token');
-
-    
+ 
 /**
  * Core Middleware
  * Sets up top-level routes, authentication, and session initialization
@@ -29,22 +26,19 @@ var fbAuth = require('../auth/newAuthPassport')(passport);
  * @param {Express} express
  * @return 
  */
+
 module.exports = function(app, express){
-
-
-
-
-
-
   // Passport initialization
   auth.init(passport);
   app.use(passport.initialize());
   app.use(passport.session());
+  
   // Passport Routes 
   app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
   });
+
   app.use(cookieParser('add a secret here'));
   app.use(session({ secret: 'xyz-qwrty', resave: false, saveUninitialized: true }));
 
