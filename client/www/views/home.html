@@ -1,12 +1,7 @@
 <ion-view title="home">
   <ion-content>
     <ion-refresher on-refresh="updateFavors()"></ion-refresher>
-<<<<<<< HEAD
-    <h3 ng-show="noFavors">Oops! There are no requests here!!!</h3>
-=======
     <h3 ng-show="noFavors" class="favorTitle">Oops! There are no requests here!!!</h3>
-    
->>>>>>> code cleanup
     <ion-list ng-repeat="favor in favors | orderBy: filter ">
       <ion-item class="feedView description favor">
         <div class="row">
