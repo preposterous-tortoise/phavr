@@ -149,12 +149,12 @@ angular.module('phavr.mapService', [])
       },
 
       /**
-       * Description
+       * This function adds a marker to the map
        * @method addMarker
-       * @param {} favor
-       * @param {} map
-       * @param {} markerMap
-       * @param {} addInfoWindow
+       * @param {Object} favor
+       * @param {Object} map
+       * @param {Object} markerMap
+       * @param {Boolean} addInfoWindow
        * @return 
        */
       addMarker: function(favor, map, markerMap, addInfoWindow) {
@@ -195,6 +195,7 @@ angular.module('phavr.mapService', [])
               //set icon based on distance
               if(isClose) {
                 console.log('using close icon');
+                //set marker properties
                 marker.setIcon( /** @type {google.maps.Icon} */ ({
                   url: genericIconURL, //favor.icon,
                   size: new google.maps.Size(71, 71),
@@ -216,11 +217,14 @@ angular.module('phavr.mapService', [])
               marker.setPosition(location);
               marker.setVisible(true);
               var description = favor.description || "";
+              //for caption purposes
               if (addInfoWindow) {
                 infowindow.setContent('<div>' + description + '</div><div><strong>' + favor.place_name + '</strong><br>');
                 infowindow.open(map, marker);
               }
+
               if (favor._id) {
+                // add click listener, to redirect to favor details page when marker is clicked
                 google.maps.event.addListener(marker, "click", function() {
                   var favor = getFavorForMarker(this, markerMap);
                   if (favor._id) {
@@ -237,6 +241,7 @@ angular.module('phavr.mapService', [])
             });
         } else {
 
+        //for browser do the same thing as phones
         var infowindow = new google.maps.InfoWindow();
         var marker = new google.maps.Marker({
           position: location,

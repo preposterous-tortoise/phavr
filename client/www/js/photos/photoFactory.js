@@ -14,110 +14,111 @@ angular.module('phavr.photoFactory', [])
      * @return 
      */
     getPicture: function(favorID, time) {
-          var Photos = this;
-          console.log('get picture time', time);
+      var Photos = this;
+      console.log('get picture time', time);
 
-          var pictureSource;   // picture source
-          var destinationType; // sets the format of returned value
-           
-          document.addEventListener("deviceready", onDeviceReady, false);
-           
-          /**
-           * Function is invoked when device is ready
-           * @method onDeviceReady
-           * @return 
-           */
-          function onDeviceReady() {
-              pictureSource = navigator.camera.PictureSourceType;
-              destinationType = navigator.camera.DestinationType;
-          }
-           
-          /**
-           * Clear's camera cache
-           * @method clearCache
-           * @return 
-           */
-          function clearCache() {
-              navigator.camera.cleanup();
-          }
-           
-          var retries = 0;
+      var pictureSource;   // picture source
+      var destinationType; // sets the format of returned value
 
-          /** 
-           *Function is inoved when picture is taken
-           * @method onCapturePhoto
-           * @param {} fileURI
-           * @return 
-           */
-          function onCapturePhoto(fileURI) {
+      document.addEventListener("deviceready", onDeviceReady, false);
 
-              /**
-               * Function is called when photo is successfuly sent to server
-               * @method win
-               * @param {Integer} r
-               * @return 
-               */
-              var win = function (r) {
-                  clearCache();
-                  retries = 0;
-                  alert('Done!');
-                  //Tell sever to save Photo url in photo databse
-                  Photos.sendPicture("https://s3.amazonaws.com/darrendrakeapp/"+time+"___"+favorID +".jpg", favorID);
-              }
-              /**
-               * Is called if photo fails to be sent to server
-               * @method fail
-               * @param {Object} error
-               * @return 
-               */
-              var fail = function (error) {
-                  if (retries == 0) {
-                      //increment number of retries if failed
-                      retries ++
-                      setTimeout(function() {
-                          onCapturePhoto(fileURI)
-                      }, 1000)
-                  } else {
-                      retries = 0;
-                      clearCache();
-                      alert('Whoops. Problem encountered uploading photo! Try again!');
-                  }
-              }
+      /**
+       * Function is invoked when device is ready
+       * @method onDeviceReady
+       * @return 
+       */
+      function onDeviceReady() {
+        pictureSource = navigator.camera.PictureSourceType;
+        destinationType = navigator.camera.DestinationType;
+      }
 
-              var options = new FileUploadOptions();
-              options.fileKey = "file";
-              options.fileName = time +"___"+favorID+".jpg";
-              options.mimeType = "image/jpeg";
-              var ft = new FileTransfer();
-              //file transfer photo to server
-              ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/photoUploads/uploadToServer"), win, fail, options);
-          }
-           
-          /**
-           * Takes picture from the mobile device
-           * @method capturePhoto
-           * @return 
-           */
-          function capturePhoto() {
-              //get photo from phone
-              navigator.camera.getPicture(onCapturePhoto, onFail, {
-                  quality: 100,
-                  destinationType: destinationType.FILE_URI
-              });
-          }
-           
-          /**
-           * If error occurs when taking a phone with phone
-           * @method onFail
-           * @param {String} message
-           * @return 
-           */
-          function onFail(message) {
-              alert('Failed because: ' + message);
+      /**
+       * Clear's camera cache
+       * @method clearCache
+       * @return 
+       */
+      function clearCache() {
+        navigator.camera.cleanup();
+      }
+
+      var retries = 0;
+
+      /** 
+       *Function is inoved when picture is taken
+       * @method onCapturePhoto
+       * @param {} fileURI
+       * @return 
+       */
+      function onCapturePhoto(fileURI) {
+
+        /**
+         * Function is called when photo is successfuly sent to server
+         * @method win
+         * @param {Integer} r
+         * @return 
+         */
+        var win = function (r) {
+          clearCache();
+          retries = 0;
+          alert('Done!');
+          //Tell sever to save Photo url in photo databse
+          Photos.sendPicture("https://s3.amazonaws.com/darrendrakeapp/"+time+"___"+favorID +".jpg", favorID);
+        }
+
+        /**
+         * Is called if photo fails to be sent to server
+         * @method fail
+         * @param {Object} error
+         * @return 
+         */
+        var fail = function (error) {
+          if (retries == 0) {
+            //increment number of retries if failed
+            retries ++
+            setTimeout(function() {
+              onCapturePhoto(fileURI)
+            }, 1000)
+          } else {
+              retries = 0;
+              clearCache();
+              alert('Whoops. Problem encountered uploading photo! Try again!');
+            }
           }
 
-          //invoke photo taking
-          capturePhoto();
+        var options = new FileUploadOptions();
+        options.fileKey = "file";
+        options.fileName = time +"___"+favorID+".jpg";
+        options.mimeType = "image/jpeg";
+        var ft = new FileTransfer();
+        //file transfer photo to server
+        ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/photoUploads/uploadToServer"), win, fail, options);
+      }
+
+      /**
+       * Takes picture from the mobile device
+       * @method capturePhoto
+       * @return 
+       */
+      function capturePhoto() {
+        //get photo from phone
+        navigator.camera.getPicture(onCapturePhoto, onFail, {
+          quality: 100,
+          destinationType: destinationType.FILE_URI
+        });
+      }
+
+      /**
+       * If error occurs when taking a phone with phone
+       * @method onFail
+       * @param {String} message
+       * @return 
+       */
+      function onFail(message) {
+        alert('Failed because: ' + message);
+      }
+
+      //invoke photo taking
+      capturePhoto();
     },
 
     /**
@@ -127,13 +128,13 @@ angular.module('phavr.photoFactory', [])
      * @param {Function} callback
      * @return 
      */
-    getPhotosForFavor: function(favor, callback) {
+     getPhotosForFavor: function(favor, callback) {
       $http.post(domain + '/api/photos/fetch', { favor_id: favor._id })
-        .success(function(data, status, headers, config) {
-          callback(data);
-        })
-        .error(function(data, status, headers, config) {
-        });
+      .success(function(data, status, headers, config) {
+        callback(data);
+      })
+      .error(function(data, status, headers, config) {
+      });
     },
     /**
      * Tells server to create a new photo has been created by passing the image uri
@@ -142,13 +143,13 @@ angular.module('phavr.photoFactory', [])
      * @param {Integer} favorID
      * @return 
      */
-    sendPicture: function(imageURI, favorID) {
+     sendPicture: function(imageURI, favorID) {
       var data = { image: imageURI, favor_id: favorID };
       $http.post(domain+'/api/photos/create', data)
-        .success(function(data, status, headers, config) {
-        })
-        .error(function(data, status, headers, config) {
-        });
+      .success(function(data, status, headers, config) {
+      })
+      .error(function(data, status, headers, config) {
+      });
     },
     /**
      * Tells server to register new vote for a photo
@@ -157,7 +158,7 @@ angular.module('phavr.photoFactory', [])
      * @param {Integer} vote
      * @return CallExpression
      */
-    upVote: function(photo, vote) {
+     upVote: function(photo, vote) {
 
       return $http({
         method: 'POST',
@@ -176,18 +177,18 @@ angular.module('phavr.photoFactory', [])
      * @param {Function} callback
      * @return 
      */
-    getInstagramPictures: function(favor, callback){
+     getInstagramPictures: function(favor, callback){
       var data = {
         lat: favor.loc.coordinates[1],
         long: favor.loc.coordinates[0]
       };
       
       $http.post('https://phavr.herokuapp.com/api/instagram/', data)
-        .success(function(data, status, headers, config) {
-          callback(data);
-        })
-        .error(function(data, status, headers, config) {
-        });
+      .success(function(data, status, headers, config) {
+        callback(data);
+      })
+      .error(function(data, status, headers, config) {
+      });
     }
   }
 }]);
