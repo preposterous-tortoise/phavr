@@ -88,7 +88,7 @@ angular.module('phavr.home', [])
         });
       });
     } else { 
-        Favors.fetchRequests(mapService.mapBounds, function(data) {
+        Favors.fetchFavors(mapService.mapBounds, function(data) {
           $scope.favors = data;
 
           if ($scope.favors.length !== 0) {
