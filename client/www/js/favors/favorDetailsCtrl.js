@@ -1,55 +1,72 @@
-angular.module('phavr.favorDetails', [])
-.controller('favorDetailsCtrl', function ($scope, $location, $http, Photos, Favors, $cordovaFile, $timeout){
+/*
+ * Favor Details Controller
+ *
+ * Corresponds to favorDetails.html, displays a single selected favor
+ * Displays title, description, votes and all photos submitted for the favor.
+ *
+ * Users can upvote/downvote photos from this view.
+ *
+ */
 
+angular.module('phavr.favorDetails', [])
+.controller('favorDetailsCtrl', function($scope, $location, $http, Photos, Favors, $cordovaFile, $timeout) {
+
+  //the favor that's being displayed
   $scope.selectedFavor = Favors.selectedFavor;
+  
+  //hard-coded photos, for testing purposes:
+
+  /*$scope.selectedFavor.photos = [
+    { votes:0, 
+      url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'
+    }, 
+    { votes:0, 
+      url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'
+    }, 
+    { votes:0, 
+      url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'
+    }];*/
 
   /**
-   * $scope.selectedFavor.photos = [{votes:0, url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'}, {votes:0, url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'}, {votes:0, url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'}];   
+   * take a photo to upload
    * @method getPhoto
-   * @return 
    */
-  $scope.getPhoto = function(){
 
+  $scope.getPhoto = function() {
     var d = new Date();
     var time = d.getTime();
     var favorID = $scope.selectedFavor._id;
-    console.log('time before getPicture', time);
-    if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
+    
+    if(ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
       Photos.getPicture(favorID, time);
-      console.log('sending picture url...');
-      console.log('time before sendPicture', time);
-      //Photos.sendPicture("https://s3.amazonaws.com/darrenphavr/"+time+"___"+favorID +".jpg", favorID);
     } else {
-      var photoURL = window.prompt("Enter a photo URL: ", "http://images2.trippy.com/555cc3a5e4b0c050d882b87c_pm9.jpg");
-      if (photoURL) {
-        Photos.sendPicture(photoURL, favorID);
+        var photoURL = window.prompt("Enter a photo URL: ", "http://images2.trippy.com/555cc3a5e4b0c050d882b87c_pm9.jpg");
+        if(photoURL) {
+          Photos.sendPicture(photoURL, favorID);
+        }
       }
-    }
   };
 
-
   /**
-   * Description
+   * scrape photos from instagram (currently unused)
    * @method getInstagramPictures
-   * @return 
+   * @return {} photos from instagram
    */
+
   $scope.getInstagramPictures= function() {
 
-    Photos.getInstagramPictures($scope.selectedFavor, function(data){
-
-      $scope.requests = data.map(function(photo){
-        return {photos: photo.images.standard_resolution.url};
+    Photos.getInstagramPictures($scope.selectedFavor, function(data) {
+      $scope.requests = data.map(function(photo) {
+        return { photos: photo.images.standard_resolution.url };
       });
-
-
     });
   };
 
   /**
-   * Description
+   * fetch all photos for the selected favor
    * @method getAllPhotos
-   * @return 
    */
+
   $scope.getAllPhotos = function() {
     Photos.getPhotosForFavor(Favors.selectedFavor, function(data) {
       $scope.selectedFavor.photos = data;
@@ -58,69 +75,29 @@ angular.module('phavr.favorDetails', [])
   };
 
   /**
-   * Description
+   * increase the photo's votes by 1
    * @method upVote
-   * @param {} request
-   * @return 
+   * @param {} photo
    */
-  $scope.upVote = function(request) {
+
+  $scope.upVote = function(photo) {
     Photos.upVote(photo, 1);
-    // Favors.upVote(favorID);
   };
 
   /**
-   * Description
+   * decrease the photo's votes by 1
    * @method downVote
-   * @param {} request
-   * @return 
-   */
-  $scope.downVote = function(request) {
-    Photos.upVote(photo, -1);
-    // Favors.downVote(favorID);
-
-  };
-
-  /**
-   * Description
-   * @method upVotePhoto
    * @param {} photo
-   * @return 
    */
-  $scope.upVotePhoto = function(photo) {
-    Photos.upVote(photo, 1);
-    // Photos.upVote(photo.ID);
-  };
 
-  /**
-   * Description
-   * @method downVotePhoto
-   * @param {} photo
-   * @return 
-   */
-  $scope.downVotePhoto = function(photo) {
+  $scope.downVote = function(photo) {
     Photos.upVote(photo, -1);
-    // Photos.downVote(photo.ID);
-
   };
-
-  //   $scope.upVote = function(favor) {
-  //   console.log("THIS IS FAVOR "+JSON.stringify(favor));
-  //   Favors.upVote(favor, 1);
-  // }; 
-
-  // $scope.downVote = function(favor) {
-  //   Favors.downVote(favor, -1);
-  // };
-
 
   //get instagram pictures
-  // $scope.getInstagramPictures();
+  //$scope.getInstagramPictures();
+  
+  //get photos
   $scope.getAllPhotos();
-
-
 });
-
-
-
-
 

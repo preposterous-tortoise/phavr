@@ -6,7 +6,7 @@
  */
 
 angular.module('phavr.favor', [])
-.controller('favorCtrl', function ($scope, $window, $location, Favors, mapService) {
+.controller('favorCtrl', function($scope, $window, $location, Favors, mapService) {
 
   /**
    * gets form data and submits a new request to server

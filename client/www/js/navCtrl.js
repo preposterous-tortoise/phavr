@@ -1,44 +1,46 @@
 angular.module('phavr.nav', [])
-.controller('NavCtrl', function($scope, $rootScope, $location, $http, $ionicSideMenuDelegate, Auth, Favors, PushFactory,geo){ 
+.controller('NavCtrl', function($scope, $rootScope, $location, $http, $ionicSideMenuDelegate, Auth, Favors, PushFactory,geo) {
 
   /**
-   * Description
+   * fetch user's information
    * @method getUserInfo
    * @param {} callback
-   * @return 
    */
+
   $scope.getUserInfo = function(callback) {
-
     Auth.getUserInfo()
-      .then(function(data){
-        $scope.user = data;
-        if(callback) callback();
-      })
-  };
-  /**
-   * Description
-   * @method toggleLeft
-   * @return 
-   */
-  $scope.toggleLeft = function() {
-    $scope.getUserInfo(function(){$ionicSideMenuDelegate.toggleLeft();});
+    .then(function(data){
+      $scope.user = data;
+      if(callback) callback();
+    });
   };
 
   /**
-   * Description
-   * @method profile
-   * @return 
+   * toggle the side menu
+   * @method toggleLeft
    */
+
+  $scope.toggleLeft = function() {
+    $scope.getUserInfo(function() {
+      $ionicSideMenuDelegate.toggleLeft();
+    });
+  };
+
+  /**
+   * redirect to the user profile
+   * @method profile
+   */
+
   $scope.profile = function() {
     $location.path('/profile');
   }; 
 
   /**
-   * Description
+   * log out user
    * @method logOut
-   * @return CallExpression
    */
-  $scope.logOut = function(){
+
+  $scope.logOut = function() {
     Auth.accessToken = null;
     return $http({
           method: 'GET',
@@ -47,13 +49,13 @@ angular.module('phavr.nav', [])
         .then($location.path('/'))
   };
 
-
   $rootScope.toggleGeo = "Enable";
+
   /**
-   * Description
+   * geo-tracking
    * @method toggleGeotracking
-   * @return 
    */
+
   $scope.toggleGeotracking = function() {
     if($rootScope.toggleGeo === "Enable") {
       $rootScope.toggleGeo = "Disable";
@@ -63,10 +65,7 @@ angular.module('phavr.nav', [])
       geo.stopBackGroundTracking();
     }
   }
-   
+
   $scope.getUserInfo();
-
-
-
 });
 
