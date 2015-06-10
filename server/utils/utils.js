@@ -1,6 +1,3 @@
-
-
-
 /**
  * Description: given a lng/lat point returns the bounding box for a 1-mile radius
  * @method getBoxForLoc
@@ -9,11 +6,13 @@
  */
 var getBoxForLoc = function(coords) {
   var miles = 1;
-  var radius = 0.02899*miles;
-  var box = [[coords[0]-radius, coords[1]-radius], //sw
-            [coords[0]+radius, coords[1]+radius]]; //ne
+  var radius = 0.02899 * miles;
+  var box = [
+    [coords[0] - radius, coords[1] - radius], //sw
+    [coords[0] + radius, coords[1] + radius]
+  ]; //ne
   return box;
-}
+};
 
 /**
  * Description: return a polygon box for sw/ne coordinates
@@ -22,7 +21,7 @@ var getBoxForLoc = function(coords) {
  * @return ObjectExpression
  */
 var getPolyBoxQuery = function(box) {
-  var polyBox = [  // sw, ne
+  var polyBox = [ // sw, ne
     [
       [box[0][0], box[0][1]],
       [box[1][0], box[0][1]],
@@ -44,6 +43,6 @@ var getPolyBoxQuery = function(box) {
 };
 
 module.exports = {
-	getBoxForLoc: getBoxForLoc,
-	getPolyBoxQuery: getPolyBoxQuery
+  getBoxForLoc: getBoxForLoc,
+  getPolyBoxQuery: getPolyBoxQuery
 };
