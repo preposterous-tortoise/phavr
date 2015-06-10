@@ -2,6 +2,14 @@ var User = require('../db/userModel.js');
 var Q = require('q');
 
 module.exports = {
+  /**
+   * Description
+   * @method updateLocation
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   updateLocation: function(req, res, next) {
     console.log('updateLocation: ', req.body);
     User.findOne({
@@ -25,6 +33,14 @@ module.exports = {
       }
     });
   },
+  /**
+   * Description
+   * @method update
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   update: function(req, res, next) {
     console.log('updateLocation: ', req.body);
     User.findOne({

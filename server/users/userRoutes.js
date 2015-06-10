@@ -1,5 +1,11 @@
 var userController = require('./userController.js');
 
+/**
+ * Description
+ * @method exports
+ * @param {} app
+ * @return 
+ */
 module.exports = function (app) {
 
 	app.use('/', function(req,res, next){

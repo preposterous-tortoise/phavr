@@ -5,6 +5,13 @@ var request = require('request');
 var Q = require('q');
 
 
+/**
+ * Description
+ * @method sendMessage
+ * @param {} users
+ * @param {} message
+ * @return 
+ */
 var sendMessage = function(users, message) {
   var data = {
     users: users,
@@ -33,6 +40,12 @@ var sendMessage = function(users, message) {
   );
 }
 
+/**
+ * Description
+ * @method getBoxForLoc
+ * @param {} coords
+ * @return box
+ */
 var getBoxForLoc = function(coords /* [lng, lat] */) {
   var miles = 1;
   var radius = 0.02899*miles;
@@ -41,6 +54,12 @@ var getBoxForLoc = function(coords /* [lng, lat] */) {
   return box;
 }
 
+/**
+ * Description
+ * @method getPolyBoxQuery
+ * @param {} box
+ * @return ObjectExpression
+ */
 var getPolyBoxQuery = function(box) {
   var polyBox = [  // sw, ne
     [
@@ -65,6 +84,12 @@ var getPolyBoxQuery = function(box) {
 
 module.exports = {
 
+  /**
+   * Description
+   * @method notifyNewPhoto
+   * @param {} favor_id
+   * @return 
+   */
   notifyNewPhoto: function(favor_id) {
     Favor.find({
         _id: favor_id
@@ -95,6 +120,12 @@ module.exports = {
       });
   },
 
+  /**
+   * Description
+   * @method notifyNewFavor
+   * @param {} favor
+   * @return 
+   */
   notifyNewFavor: function(favor) {
     console.log("notifyNewFavor: ", favor);
     console.log('new favor box: ', getBoxForLoc(favor.loc.coordinates));

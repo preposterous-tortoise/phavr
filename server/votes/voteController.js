@@ -6,6 +6,14 @@ var Q = require('q');
 var Vote = require('../db/voteModel.js');
 
 module.exports = {
+  /**
+   * Description
+   * @method upVote
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   upVote: function(req, res, next) {
     console.log("I NEED THIS PROVIDER ID BRUH "+req.user)
 
@@ -122,6 +130,14 @@ module.exports = {
 
   },
 
+  /**
+   * Description
+   * @method downVote
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   downVote: function(req, res, next) {
     // var userObj = req.session.passport.user;
     // var create, newPortfolio;
@@ -133,6 +149,14 @@ module.exports = {
     });
   },
 
+  /**
+   * Description
+   * @method upVotePhoto
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   upVotePhoto: function(req, res, next) {
     
 

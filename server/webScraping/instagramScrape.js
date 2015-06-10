@@ -20,6 +20,13 @@ if(process.env.PRODUCTION) {
 
 
 module.exports =  {
+	/**
+	 * Description
+	 * @method getPhotosByLocation
+	 * @param {} req
+	 * @param {} res
+	 * @return 
+	 */
 	getPhotosByLocation: function(req,res){
 
 		// console.log(, req.body.long);

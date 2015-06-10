@@ -12,8 +12,24 @@ angular.module('phavr.mapService', [])
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
+    /**
+     * Description
+     * @method calculateDistance
+     * @param {} lat1
+     * @param {} lon1
+     * @param {} lat2
+     * @param {} lon2
+     * @param {} callback
+     * @return BinaryExpression
+     */
     var calculateDistance = function(lat1, lon1, lat2, lon2, callback){
 
+      /**
+       * Description
+       * @method deg2rad
+       * @param {} deg
+       * @return BinaryExpression
+       */
       function deg2rad(deg) {
         return deg * (Math.PI/180)
       }
@@ -32,6 +48,12 @@ angular.module('phavr.mapService', [])
       return d *0.621371; //distance in miles
     };
 
+    /**
+     * Description
+     * @method getBoxForBounds
+     * @param {} bounds
+     * @return ArrayExpression
+     */
     var getBoxForBounds = function(bounds) {
       return [
         [bounds.getSouthWest().lng(), bounds.getSouthWest().lat()],
@@ -39,6 +61,13 @@ angular.module('phavr.mapService', [])
       ];
     };
 
+    /**
+     * Description
+     * @method getFavorForMarker
+     * @param {} marker
+     * @param {} markerMap
+     * @return 
+     */
     var getFavorForMarker = function(marker, markerMap) {
       var value;
       for (var key in markerMap) {
@@ -49,6 +78,12 @@ angular.module('phavr.mapService', [])
       }
     };
 
+    /**
+     * Description
+     * @method getFavorLocation
+     * @param {} favor
+     * @return 
+     */
     var getFavorLocation = function(favor) {
       if (favor.loc) {
         var coords = favor.loc.coordinates;
@@ -68,10 +103,22 @@ angular.module('phavr.mapService', [])
 
       getFavorLocation: getFavorLocation,
       
+      /**
+       * Description
+       * @method getLocation
+       * @return myLatlng
+       */
       getLocation: function() {
         return myLatlng;
       },
 
+      /**
+       * Description
+       * @method setLocation
+       * @param {} lat
+       * @param {} lng
+       * @return 
+       */
       setLocation: function(lat, lng) {
         myLatlng = new google.maps.LatLng(lat, lng);
         mapOptions = {
@@ -81,6 +128,12 @@ angular.module('phavr.mapService', [])
         };
       },
 
+      /**
+       * Description
+       * @method addDefaultMarker
+       * @param {} map
+       * @return 
+       */
       addDefaultMarker: function(map) {
         var favor = {
             place_name: 'You are here',
@@ -95,6 +148,15 @@ angular.module('phavr.mapService', [])
         this.marker = this.addMarker(favor, map, null, true);
       },
 
+      /**
+       * Description
+       * @method addMarker
+       * @param {} favor
+       * @param {} map
+       * @param {} markerMap
+       * @param {} addInfoWindow
+       * @return 
+       */
       addMarker: function(favor, map, markerMap, addInfoWindow) {
         //get favor's location
         var location = getFavorLocation(favor);
@@ -226,10 +288,22 @@ angular.module('phavr.mapService', [])
       }
       },
 
+      /**
+       * Description
+       * @method createMap
+       * @return NewExpression
+       */
       createMap: function() {
         return new google.maps.Map(document.getElementById("map"), mapOptions);
       },
 
+      /**
+       * Description
+       * @method addBoundsListener
+       * @param {} map
+       * @param {} markerMap
+       * @return 
+       */
       addBoundsListener: function(map, markerMap) {
       	var context = this;
         google.maps.event.addListener(map, "bounds_changed", function() {
@@ -254,6 +328,13 @@ angular.module('phavr.mapService', [])
         });
       },
 
+      /**
+       * Description
+       * @method addPlaceChangedListener
+       * @param {} map
+       * @param {} mapName
+       * @return 
+       */
       addPlaceChangedListener: function(map, mapName) {
       	var context = this;
         var input = (document.getElementById('pac-input'));

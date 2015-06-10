@@ -5,6 +5,11 @@
 
      console.log('settingsCtrl: ', JSON.stringify($scope.user, null, '\t'));
 
+     /**
+      * Description
+      * @method saveSettings
+      * @return 
+      */
      $scope.saveSettings = function() {
        console.log('IN SAVE SETTINGS');
        localStorage.setItem('user', JSON.stringify($scope.user));

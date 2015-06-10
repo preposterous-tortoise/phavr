@@ -1,6 +1,11 @@
 angular.module('phavr.favor', [])
 .controller('favorCtrl', function ($scope, $window, $location, Favors, mapService){
 
+  /**
+   * Description
+   * @method createFavor
+   * @return 
+   */
   $scope.createFavor = function() {
     console.log("I'm INSIDE THE CREATE!")
     var mapFavor = mapService.favor;

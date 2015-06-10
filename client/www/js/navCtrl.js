@@ -1,6 +1,12 @@
 angular.module('phavr.nav', [])
 .controller('NavCtrl', function($scope, $rootScope, $location, $http, $ionicSideMenuDelegate, Auth, Favors, PushFactory,geo){ 
 
+  /**
+   * Description
+   * @method getUserInfo
+   * @param {} callback
+   * @return 
+   */
   $scope.getUserInfo = function(callback) {
 
     Auth.getUserInfo()
@@ -9,14 +15,29 @@ angular.module('phavr.nav', [])
         if(callback) callback();
       })
   };
+  /**
+   * Description
+   * @method toggleLeft
+   * @return 
+   */
   $scope.toggleLeft = function() {
     $scope.getUserInfo(function(){$ionicSideMenuDelegate.toggleLeft();});
   };
 
+  /**
+   * Description
+   * @method profile
+   * @return 
+   */
   $scope.profile = function() {
     $location.path('/profile');
   }; 
 
+  /**
+   * Description
+   * @method logOut
+   * @return CallExpression
+   */
   $scope.logOut = function(){
     Auth.accessToken = null;
     return $http({
@@ -28,6 +49,11 @@ angular.module('phavr.nav', [])
 
 
   $rootScope.toggleGeo = "Enable";
+  /**
+   * Description
+   * @method toggleGeotracking
+   * @return 
+   */
   $scope.toggleGeotracking = function() {
     if($rootScope.toggleGeo === "Enable") {
       $rootScope.toggleGeo = "Disable";

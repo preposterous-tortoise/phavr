@@ -1,5 +1,11 @@
 var favorController = require('./favorController.js');
 
+/**
+ * Description
+ * @method exports
+ * @param {} app
+ * @return 
+ */
 module.exports = function (app) {
   app.route('/')
     .post(favorController.fetchFavors);

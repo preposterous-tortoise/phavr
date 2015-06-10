@@ -8,6 +8,7 @@ var User = require('../db/userModel.js');
  * Passport configuration
  * @method exports
  * @param {} passport
+ * @return 
  */
 module.exports = function(passport) {
 

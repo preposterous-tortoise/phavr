@@ -6,11 +6,22 @@ angular.module('phavr.authFactory',[])
     "callbackURL": "http://localhost:3000/auth/facebook/callback",
 
     accessToken:null,
+    /**
+     * Description
+     * @method setAccessToken
+     * @param {} token
+     * @return 
+     */
     setAccessToken: function(token) {
       this.accessToken = token;
       window.localStorage.setItem("token", token);
       console.log("access token set");
     },
+    /**
+     * Description
+     * @method getUserInfo
+     * @return CallExpression
+     */
     getUserInfo: function() {
       return $http({
               method: 'GET',

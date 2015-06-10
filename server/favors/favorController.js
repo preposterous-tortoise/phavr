@@ -3,6 +3,12 @@ var Photo = require('../db/photoModel.js');
 var Notifier = require('../push/pushNotify.js');
 var Q = require('q');
 
+/**
+ * Description
+ * @method getPolyBoxQuery
+ * @param {} box
+ * @return ObjectExpression
+ */
 var getPolyBoxQuery = function(box) {
   console.log("I AM INSIDE THE BOX!!!!!");
   var polyBox = [  // sw, ne
@@ -29,6 +35,14 @@ var getPolyBoxQuery = function(box) {
 module.exports = {
   getPolyBoxQuery: getPolyBoxQuery,
 
+  /**
+   * Description
+   * @method fetchFavors
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   fetchFavors: function(req, res, next) {
     console.log("I AM INSIDE OF fetchFavors!!!");
   	var box = req.body.box;
@@ -42,6 +56,14 @@ module.exports = {
     });
   },
   
+  /**
+   * Description
+   * @method createFavor
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   createFavor: function(req, res, next) {
     console.log("IM INSIDE CREATE FAVOR "+JSON.stringify(req.body));
     var favor = new Favor({
@@ -69,12 +91,28 @@ module.exports = {
       res.send(favor);
     });
   },
+  /**
+   * Description
+   * @method updateFavor
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   updateFavor: function(req, res, next) {
     // var userObj = req.session.passport.user;
     // var create, newPortfolio;
     res.send('updateFavor called with body: ' + JSON.stringify(req.body));
   },
 
+  /**
+   * Description
+   * @method upVoteFavor
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   upVoteFavor: function(req, res, next) {
   
     Favor.findByIdAndUpdate(req.body._id, 
@@ -85,6 +123,14 @@ module.exports = {
 
   },
 
+  /**
+   * Description
+   * @method downVoteFavor
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   downVoteFavor: function(req, res, next) {
     // var userObj = req.session.passport.user;
     // var create, newPortfolio;
@@ -96,6 +142,14 @@ module.exports = {
     });
   },
 
+  /**
+   * Description
+   * @method grabFavor
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   grabFavor: function(req, res, next) {
     console.log("I'M INSIDE GRAB FAVOR!!!"+req.user)
     Favor.find(

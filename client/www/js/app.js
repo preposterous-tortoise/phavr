@@ -88,6 +88,12 @@ angular.module('phavr', ['ionic', 'ngCordova', 'phavr.login', 'phavr.home', 'pha
 .factory('AttachTokens', function ($window){
   //middlewear to insert token for all outgoing requests
   var attach = {
+    /**
+     * Description
+     * @method request
+     * @param {} object
+     * @return object
+     */
     request: function(object) {
       if(localStorage.getItem('token')) {
         object.headers['access_token'] = localStorage.getItem('token');

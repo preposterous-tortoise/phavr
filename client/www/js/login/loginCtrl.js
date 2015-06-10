@@ -19,6 +19,11 @@ angular.module('phavr.login', [])
   });
   
   $scope.information = [$scope.username, $scope.password];
+  /**
+   * Description
+   * @method letsGo
+   * @return CallExpression
+   */
   $scope.letsGo = function(){
   	return $http({
       method: 'POST',
@@ -29,12 +34,22 @@ angular.module('phavr.login', [])
 
   $scope.toggle = false;
 
+  /**
+   * Description
+   * @method setToggle
+   * @return 
+   */
   $scope.setToggle = function() {
     console.log('clicked!');
     $scope.toggle = !$scope.toggle;
     console.log($scope.toggle);
   }
 
+  /**
+   * Description
+   * @method useBrowser
+   * @return 
+   */
   $scope.useBrowser = function() {
   //for browswer deployment use
 
@@ -53,6 +68,11 @@ angular.module('phavr.login', [])
 
  }
 
+  /**
+   * Description
+   * @method fbLogin
+   * @return 
+   */
   $scope.fbLogin = function() {
     //get user access token
     $cordovaOauth.facebook(Auth.clientID, ['user_friends'])

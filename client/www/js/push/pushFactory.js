@@ -10,6 +10,12 @@ angular.module('phavr.pushfact', [])
     var scope;
     var notifications = [];
 
+    /**
+     * Description
+     * @method onNotificationGCM
+     * @param {} notification
+     * @return 
+     */
     window.onNotificationGCM = function(notification) {
       console.log('onNotificationGCM called: ', notification);
       if (ionic.Platform.isAndroid()) {
@@ -24,6 +30,12 @@ angular.module('phavr.pushfact', [])
 
 
     // Register
+    /**
+     * Description
+     * @method register
+     * @param {} provider_id
+     * @return 
+     */
     var register = function(provider_id) {
       var config = null;
       user_provider_id = provider_id;
@@ -74,6 +86,12 @@ angular.module('phavr.pushfact', [])
         });*/
 
     // Android Notification Received Handler
+    /**
+     * Description
+     * @method handleAndroid
+     * @param {} notification
+     * @return 
+     */
     var handleAndroid = function(notification) {
       // ** NOTE: ** You could add code for when app is in foreground or not, or coming from coldstart here too
       //             via the console fields as shown.
@@ -101,6 +119,12 @@ angular.module('phavr.pushfact', [])
     }
 
     // IOS Notification Received Handler
+    /**
+     * Description
+     * @method handleIOS
+     * @param {} notification
+     * @return 
+     */
     function handleIOS(notification) {
       // The app was already open but we'll still show the alert and sound the tone received this way. If you didn't check
       // for foreground here it would make a sound twice, once when received in background and upon opening it from clicking
@@ -137,6 +161,12 @@ angular.module('phavr.pushfact', [])
     // Stores the device token in a db using node-pushserver (running locally in this case)
     //
     // type:  Platform type (ios, android etc)
+    /**
+     * Description
+     * @method storeDeviceToken
+     * @param {} type
+     * @return 
+     */
     function storeDeviceToken(type) {
       // Create a random userid to store with it
       var user = {
@@ -158,6 +188,11 @@ angular.module('phavr.pushfact', [])
     // If you registered the same device with different userids, *ALL* will be removed. (It's recommended to register each
     // time the app opens which this currently does. However in many cases you will always receive the same device token as
     // previously so multiple userids will be created with the same token unless you add code to check).
+    /**
+     * Description
+     * @method removeDeviceToken
+     * @return 
+     */
     function removeDeviceToken() {
       var tkn = {
         "token": regId
@@ -176,6 +211,11 @@ angular.module('phavr.pushfact', [])
     //                   and https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIApplication_Class/index.html#//apple_ref/occ/instm/UIApplication/unregisterForRemoteNotifications
     //
     // ** Instead, just remove the device token from your db and stop sending notifications **
+    /**
+     * Description
+     * @method unregister
+     * @return 
+     */
     var unregister = function() {
       console.log("Unregister called");
       removeDeviceToken();
@@ -189,10 +229,22 @@ angular.module('phavr.pushfact', [])
     }
 
     return {
+      /**
+       * Description
+       * @method init
+       * @param {} provider_id
+       * @return 
+       */
       init: function(provider_id) {
         register(provider_id);
 
       },
+      /**
+       * Description
+       * @method setScope
+       * @param {} newScope
+       * @return 
+       */
       setScope: function(newScope) {
         scope = newScope;
         scope.notifications = notifications;

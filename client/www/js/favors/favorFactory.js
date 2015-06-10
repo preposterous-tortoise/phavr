@@ -6,11 +6,23 @@ angular.module('phavr.favorfact', [])
   console.log("domain is: ", domain);
   
   return {
+    /**
+     * Description
+     * @method setDomain
+     * @param {} newDomain
+     * @return 
+     */
     setDomain: function(newDomain) {
       domain = newDomain;
       console.log("after setDomain, domain is: ", domain);
     },
 
+    /**
+     * Description
+     * @method saveRequest
+     * @param {} request
+     * @return 
+     */
     saveRequest: function(request) {
       $http({
         method: 'POST',
@@ -25,6 +37,13 @@ angular.module('phavr.favorfact', [])
       });
     },
     //  fetch requests in the specified box: [[sw.lng, sw.lat], [ne.lng, ne.lat]]
+    /**
+     * Description
+     * @method fetchRequests
+     * @param {} box
+     * @param {} callback
+     * @return CallExpression
+     */
     fetchRequests: function(box, callback) {
       console.log("I'M INSIDE THE FETCH REQUESTS!");
       return $http({
@@ -45,6 +64,12 @@ angular.module('phavr.favorfact', [])
         });
     },
 
+    /**
+     * Description
+     * @method profileFavors
+     * @param {} user
+     * @return CallExpression
+     */
     profileFavors: function(user) {
       return $http({
           method: 'POST',
@@ -60,6 +85,13 @@ angular.module('phavr.favorfact', [])
         });
     },
     
+    /**
+     * Description
+     * @method upVote
+     * @param {} favor
+     * @param {} vote
+     * @return CallExpression
+     */
     upVote: function(favor, vote){
       console.log("inside requestfactory upvote")
       return $http({
@@ -74,6 +106,13 @@ angular.module('phavr.favorfact', [])
         console.log(JSON.stringify(resp.data));
       })
     },
+    /**
+     * Description
+     * @method downVote
+     * @param {} favor
+     * @param {} vote
+     * @return CallExpression
+     */
     downVote: function(favor, vote){
       return $http({
         method: 'POST',
@@ -89,6 +128,12 @@ angular.module('phavr.favorfact', [])
     
     selectedFavor: null,
 
+    /**
+     * Description
+     * @method setFavor
+     * @param {} request
+     * @return 
+     */
     setFavor: function(request) {
       this.selectedFavor = request;
     }

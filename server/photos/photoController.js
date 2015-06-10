@@ -8,6 +8,14 @@ var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
 
 module.exports = {
+  /**
+   * Description
+   * @method createPhoto
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   createPhoto: function(req, res, next) {
     //Create a new Photo and Save it
     var photo = new Photo({ url: req.body.image, 
@@ -24,6 +32,14 @@ module.exports = {
           });
   },
 
+  /**
+   * Description
+   * @method createDummyPhoto
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   createDummyPhoto: function(req, res, next) {
     var photo = new Photo({ url: req.body.url, 
                             request_id: req.body.favor_id
@@ -36,6 +52,14 @@ module.exports = {
   },
 
   //Query the Photo table for photos from a certain favor
+  /**
+   * Description
+   * @method fetchPhotosForFavor
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   fetchPhotosForFavor: function(req, res, next) {
     var query = Photo.find({
       request_id: req.body.favor_id
@@ -50,18 +74,49 @@ module.exports = {
   },
 
   
+  /**
+   * Description
+   * @method updatePhoto
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   updatePhoto: function(req, res, next) {
     res.send('updatePhoto called with body: ' + JSON.stringify(req.body));
   },
 
+  /**
+   * Description
+   * @method upVotePhoto
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   upVotePhoto: function(req, res, next) {
     
   },
 
+  /**
+   * Description
+   * @method downVotePhoto
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   downVotePhoto: function(req, res, next) {
    
   },
 
+  /**
+   * Description
+   * @method uploadToS3
+   * @param {} req
+   * @param {} res
+   * @return 
+   */
   uploadToS3: function(req,res){
 
       console.log("THIS IS THE UPLOAD S3 BODY!"+JSON.stringify(req.body));
@@ -112,6 +167,13 @@ module.exports = {
     res.send('upload complete');
   },
 
+  /**
+   * Description
+   * @method uploadToServer
+   * @param {} req
+   * @param {} res
+   * @return 
+   */
   uploadToServer: function(req,res){
     console.log("_________________");
      console.log(req.files);

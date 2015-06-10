@@ -1,6 +1,11 @@
 angular.module('phavr.favorCreationMap', [])
   .controller('FavorCreationMapCtrl', function($scope, Favors, mapService) {
 
+    /**
+     * Description
+     * @method init
+     * @return 
+     */
     $scope.init = function() {
       var markerMap = {};
       var map = mapService.createMap();

@@ -5,6 +5,13 @@ angular.module('phavr.photoFactory', [])
   console.log("domain is: ", domain);
 
   return {
+    /**
+     * Description
+     * @method getPicture
+     * @param {} favorID
+     * @param {} time
+     * @return 
+     */
     getPicture: function(favorID, time) {
           var Photos = this;
           console.log('get picture time', time);
@@ -14,24 +21,52 @@ angular.module('phavr.photoFactory', [])
            
           document.addEventListener("deviceready", onDeviceReady, false);
            
+          /**
+           * Description
+           * @method onDeviceReady
+           * @return 
+           */
           function onDeviceReady() {
               pictureSource = navigator.camera.PictureSourceType;
               destinationType = navigator.camera.DestinationType;
           }
            
+          /**
+           * Description
+           * @method clearCache
+           * @return 
+           */
           function clearCache() {
               navigator.camera.cleanup();
           }
            
           var retries = 0;
+          /**
+           * Description
+           * @method onCapturePhoto
+           * @param {} fileURI
+           * @return 
+           */
           function onCapturePhoto(fileURI) {
 
+              /**
+               * Description
+               * @method win
+               * @param {} r
+               * @return 
+               */
               var win = function (r) {
                   clearCache();
                   retries = 0;
                   alert('Done!');
                   Photos.sendPicture("https://s3.amazonaws.com/darrendrakeapp/"+time+"___"+favorID +".jpg", favorID);
               }
+              /**
+               * Description
+               * @method fail
+               * @param {} error
+               * @return 
+               */
               var fail = function (error) {
                   if (retries == 0) {
                     console.log("retry", retries);
@@ -54,6 +89,11 @@ angular.module('phavr.photoFactory', [])
               ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/photoUploads/uploadToServer"), win, fail, options);
           }
            
+          /**
+           * Description
+           * @method capturePhoto
+           * @return 
+           */
           function capturePhoto() {
               navigator.camera.getPicture(onCapturePhoto, onFail, {
                   quality: 100,
@@ -61,6 +101,12 @@ angular.module('phavr.photoFactory', [])
               });
           }
            
+          /**
+           * Description
+           * @method onFail
+           * @param {} message
+           * @return 
+           */
           function onFail(message) {
               alert('Failed because: ' + message);
           }
@@ -68,6 +114,13 @@ angular.module('phavr.photoFactory', [])
           capturePhoto();
     },
 
+    /**
+     * Description
+     * @method getPhotosForFavor
+     * @param {} favor
+     * @param {} callback
+     * @return 
+     */
     getPhotosForFavor: function(favor, callback){
       $http.post(domain + '/api/photos/fetch', { favor_id: favor._id })
         .success(function(data, status, headers, config) {
@@ -76,6 +129,13 @@ angular.module('phavr.photoFactory', [])
         .error(function(data, status, headers, config) {
         });
     },
+    /**
+     * Description
+     * @method sendPicture
+     * @param {} imageURI
+     * @param {} favorID
+     * @return 
+     */
     sendPicture: function(imageURI, favorID) {
       var data = { image: imageURI, favor_id: favorID };
       $http.post(domain+'/api/photos/create', data)
@@ -84,6 +144,13 @@ angular.module('phavr.photoFactory', [])
         .error(function(data, status, headers, config) {
         });
     },
+    /**
+     * Description
+     * @method upVote
+     * @param {} photo
+     * @param {} vote
+     * @return CallExpression
+     */
     upVote: function(photo, vote){
       console.log('auth',Auth)
       return $http({
@@ -96,6 +163,13 @@ angular.module('phavr.photoFactory', [])
         console.log(resp);
       })
     },   
+    /**
+     * Description
+     * @method getInstagramPictures
+     * @param {} favor
+     * @param {} callback
+     * @return 
+     */
     getInstagramPictures: function(favor, callback){
       var data = {
         lat: favor.loc.coordinates[1],

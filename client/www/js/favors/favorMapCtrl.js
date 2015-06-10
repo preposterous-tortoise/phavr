@@ -4,6 +4,12 @@ angular.module('phavr.favorMap', ['ionic', 'uiGmapgoogle-maps'])
     var areaZoom = 16;
     var markerMap = {};
 
+    /**
+     * Description
+     * @method updateMarkers
+     * @param {} bounds
+     * @return 
+     */
     var updateMarkers = function(bounds) {
 
       var box = mapService.getBoxForBounds(bounds);
@@ -30,6 +36,13 @@ angular.module('phavr.favorMap', ['ionic', 'uiGmapgoogle-maps'])
               favor: favor,
               fit: true
             };
+            /**
+             * Description
+             * @method onClick
+             * @param {} marker
+             * @param {} event
+             * @return 
+             */
             marker.onClick = function(marker, event) {
               console.log('marker clicked: ', marker.model.favor.description);
               Favors.setFavor(marker.model.favor);
@@ -53,9 +66,21 @@ angular.module('phavr.favorMap', ['ionic', 'uiGmapgoogle-maps'])
         },
         zoom: areaZoom,
         control: {
+          /**
+           * Description
+           * @method getGMap
+           * @return 
+           */
           getGMap: function() {}
         },
         events: {
+          /**
+           * Description
+           * @method bounds_changed
+           * @param {} map
+           * @param {} eventName
+           * @return 
+           */
           bounds_changed: function(map, eventName) {
             // console.log(' NEW BOUNDS: ', JSON.stringify(mapService.getBoxForBounds(map.getBounds())));
             //updateMarkers(map.getBounds());
@@ -80,6 +105,11 @@ angular.module('phavr.favorMap', ['ionic', 'uiGmapgoogle-maps'])
     });
 
     $scope.toggle = false;
+    /**
+     * Description
+     * @method setToggle
+     * @return 
+     */
     $scope.setToggle = function() {
       $scope.toggle = !$scope.toggle;
     }

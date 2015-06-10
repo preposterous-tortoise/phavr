@@ -22,12 +22,12 @@ var fbAuth = require('../auth/newAuthPassport')(passport);
     
 /**
  * Core Middleware
- *
  * Sets up top-level routes, authentication, and session initialization
- *
+ * @api public
+ * @method exports
  * @param {Application} app - Express Application
  * @param {Express} express
- * @api public
+ * @return 
  */
 module.exports = function(app, express){
 
@@ -121,6 +121,13 @@ app.post('/auth/facebook/token',
 
   //Multer is an NPM module used to upload multi-part data
   app.use(multer({ dest: './uploads/', 
+    /**
+     * Description
+     * @method rename
+     * @param {} fieldname
+     * @param {} filename
+     * @return filename
+     */
     rename: function(fieldname, filename) {
               console.log(fieldname);
               console.log(filename);

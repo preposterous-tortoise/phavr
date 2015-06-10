@@ -13,6 +13,11 @@ angular.module('phavr.home', [])
   $scope.selectedFavor = Favors.selectedFavor;
   $scope.noFavors = false;
 
+  /**
+   * Description
+   * @method updateFavors
+   * @return 
+   */
   $scope.updateFavors = function(){
     console.log('attempting to update favors...');
     //geo.getLocation(function(spot){
@@ -86,11 +91,23 @@ angular.module('phavr.home', [])
   };
 
   //upon clicking on favors, user will be redirected to favor details page
+  /**
+   * Description
+   * @method favorDetails
+   * @param {} favor
+   * @return 
+   */
   $scope.favorDetails = function(favor){
     Favors.setFavor(favor);
     $location.path('/favordetails');
   }
 
+  /**
+   * Description
+   * @method getTopPhotos
+   * @param {} requests
+   * @return 
+   */
   $scope.getTopPhotos = function(requests) {
     //for each fetched request, display the top photo
 
@@ -130,20 +147,42 @@ angular.module('phavr.home', [])
 
   $scope.popular = false;
 
+  /**
+   * Description
+   * @method hot
+   * @return 
+   */
   $scope.hot = function(){
     $scope.popular = true;
     $scope.filter = '-votes';
   };
 
+  /**
+   * Description
+   * @method new
+   * @return 
+   */
   $scope.new = function() {
     $scope.popular = false;
     $scope.filter = '-createdAt';
   };
 
+  /**
+   * Description
+   * @method upVote
+   * @param {} favor
+   * @return 
+   */
   $scope.upVote = function(favor) {
     Favors.upVote(favor, 1);
   }; 
 
+  /**
+   * Description
+   * @method downVote
+   * @param {} favor
+   * @return 
+   */
   $scope.downVote = function(favor) {
     Favors.downVote(favor, -1);
   };
@@ -153,13 +192,21 @@ angular.module('phavr.home', [])
   *Search bar (location search)
   */  
   $scope.toggle = false;
+  /**
+   * Description
+   * @method setToggle
+   * @return 
+   */
   $scope.setToggle = function() {
     $scope.toggle = !$scope.toggle;
   }
 
-  /*
-  *Methods related to map and location
-  */
+  /**
+   * Methods related to map and location
+   * @method getDistance
+   * @param {} locationObject
+   * @return CallExpression
+   */
   $scope.getDistance = function(locationObject) {
     //calculates the distance between current location and a given location
     return geo.calculateDistance(locationObject.coordinates[1], locationObject.coordinates[0], 
@@ -180,9 +227,21 @@ angular.module('phavr.home', [])
         },
         zoom: areaZoom,
         control: {
+          /**
+           * Description
+           * @method getGMap
+           * @return 
+           */
           getGMap: function() {}
         },
         events: {
+          /**
+           * Description
+           * @method bounds_changed
+           * @param {} map
+           * @param {} eventName
+           * @return 
+           */
           bounds_changed: function(map, eventName) {
           }
         }
@@ -204,6 +263,11 @@ angular.module('phavr.home', [])
       $scope.map.markers = [];
     });
 
+  /**
+   * Description
+   * @method enableTracking
+   * @return 
+   */
   $scope.enableTracking = function(){
     geo.backgroundTracking();
   };

@@ -9,6 +9,12 @@ angular.module('phavr.locationFactory', [])
   console.log("domain is: ", domain);
 
   return {
+    /**
+     * Description
+     * @method getLocation
+     * @param {} callback
+     * @return 
+     */
     getLocation: function(callback) {
     	if(processing) return;
     	processing = true;
@@ -22,20 +28,31 @@ angular.module('phavr.locationFactory', [])
 
     },
 
+    /**
+     * Description
+     * @method backgroundTracking
+     * @return 
+     */
     backgroundTracking: function(){
       //start backgroundGeotracking
       bgGeo = window.plugins.backgroundGeoLocation;
 
       /**
-      *  This is my callback for ajax-requests after POSTING background geolocation to my server
-      */
+       *  This is my callback for ajax-requests after POSTING background geolocation to my server
+       * @method myAjaxCallback
+       * @param {} response
+       * @return 
+       */
       var myAjaxCallback = function(response) {
         bgGeo.finish();
       };
 
       /**
-      *  This call back will be executed every time a geolocation is recorded in the background.
-      */
+       *  This call back will be executed every time a geolocation is recorded in the background.
+       * @method callbackFn
+       * @param {} location
+       * @return 
+       */
       var callbackFn = function(location) {
 
         console.log('BackgroundGeoLocation callback:'+ location.latitude +',' + location.longitude);
@@ -44,6 +61,12 @@ angular.module('phavr.locationFactory', [])
         myAjaxCallback.call(this);
       }
 
+      /**
+       * Description
+       * @method failureFn
+       * @param {} error
+       * @return 
+       */
       var failureFn = function(error) {
         console.log('BackgroundGeoLocation error');
       }
@@ -69,12 +92,23 @@ angular.module('phavr.locationFactory', [])
       console.log("access token is", window.localStorage.getItem("token"));
     },
 
+    /**
+     * Description
+     * @method stopBackGroundTracking
+     * @return 
+     */
     stopBackGroundTracking: function() {
       bgGeo.stop();
     },
 
 
 
+    /**
+     * Description
+     * @method phoneLocation
+     * @param {} callback
+     * @return 
+     */
     phoneLocation: function(callback) {
       var context = this;
       var posOptions = { timeout: 10000, enableHighAccuracy: false };
@@ -88,6 +122,11 @@ angular.module('phavr.locationFactory', [])
       });
     },
 
+    /**
+     * Description
+     * @method updateUserLocation
+     * @return 
+     */
     updateUserLocation: function() {
       var provider_id = localStorage.getItem('user_provider_id');
       var lat = localStorage.getItem('latitude');
@@ -106,8 +145,24 @@ angular.module('phavr.locationFactory', [])
       });
     },
 
+    /**
+     * Description
+     * @method calculateDistance
+     * @param {} lat1
+     * @param {} lon1
+     * @param {} lat2
+     * @param {} lon2
+     * @param {} callback
+     * @return BinaryExpression
+     */
     calculateDistance: function(lat1, lon1, lat2, lon2, callback){
 
+      /**
+       * Description
+       * @method deg2rad
+       * @param {} deg
+       * @return BinaryExpression
+       */
       function deg2rad(deg) {
         return deg * (Math.PI/180)
       }
@@ -125,6 +180,12 @@ angular.module('phavr.locationFactory', [])
     },
 
 
+    /**
+     * Description
+     * @method enableTracking
+     * @param {} callback
+     * @return 
+     */
     enableTracking: function(callback){
       if (watchID != null) {
         navigator.geolocation.clearWatch(watchID);
@@ -144,6 +205,12 @@ angular.module('phavr.locationFactory', [])
 
         // onSuccess Geolocation
         //
+        /**
+         * Description
+         * @method onSuccess
+         * @param {} position
+         * @return 
+         */
         function onSuccess(position) {
           console.log( 'Latitude: '  + position.coords.latitude      + '<br />' +
             'Longitude: ' + position.coords.longitude     + '<br />' +
@@ -161,6 +228,12 @@ angular.module('phavr.locationFactory', [])
 
         // onError Callback receives a PositionError object
         //
+        /**
+         * Description
+         * @method onError
+         * @param {} error
+         * @return 
+         */
         function onError(error) {
           alert('code: '    + error.code    + '\n' +
             'message: ' + error.message + '\n');

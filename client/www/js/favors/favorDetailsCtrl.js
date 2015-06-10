@@ -3,7 +3,11 @@ angular.module('phavr.favorDetails', [])
 
   $scope.selectedFavor = Favors.selectedFavor;
 
-  /*$scope.selectedFavor.photos = [{votes:0, url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'}, {votes:0, url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'}, {votes:0, url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'}];   */
+  /**
+   * $scope.selectedFavor.photos = [{votes:0, url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'}, {votes:0, url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'}, {votes:0, url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'}];   
+   * @method getPhoto
+   * @return 
+   */
   $scope.getPhoto = function(){
 
     var d = new Date();
@@ -24,6 +28,11 @@ angular.module('phavr.favorDetails', [])
   };
 
 
+  /**
+   * Description
+   * @method getInstagramPictures
+   * @return 
+   */
   $scope.getInstagramPictures= function() {
 
     Photos.getInstagramPictures($scope.selectedFavor, function(data){
@@ -36,6 +45,11 @@ angular.module('phavr.favorDetails', [])
     });
   };
 
+  /**
+   * Description
+   * @method getAllPhotos
+   * @return 
+   */
   $scope.getAllPhotos = function() {
     Photos.getPhotosForFavor(Favors.selectedFavor, function(data) {
       $scope.selectedFavor.photos = data;
@@ -43,22 +57,46 @@ angular.module('phavr.favorDetails', [])
     });
   };
 
+  /**
+   * Description
+   * @method upVote
+   * @param {} request
+   * @return 
+   */
   $scope.upVote = function(request) {
     Photos.upVote(photo, 1);
     // Favors.upVote(favorID);
   };
 
+  /**
+   * Description
+   * @method downVote
+   * @param {} request
+   * @return 
+   */
   $scope.downVote = function(request) {
     Photos.upVote(photo, -1);
     // Favors.downVote(favorID);
 
   };
 
+  /**
+   * Description
+   * @method upVotePhoto
+   * @param {} photo
+   * @return 
+   */
   $scope.upVotePhoto = function(photo) {
     Photos.upVote(photo, 1);
     // Photos.upVote(photo.ID);
   };
 
+  /**
+   * Description
+   * @method downVotePhoto
+   * @param {} photo
+   * @return 
+   */
   $scope.downVotePhoto = function(photo) {
     Photos.upVote(photo, -1);
     // Photos.downVote(photo.ID);

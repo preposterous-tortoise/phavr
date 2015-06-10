@@ -3,6 +3,11 @@
   
   $rootScope.login = true;
 
+  /**
+   * Description
+   * @method getUserInfo
+   * @return 
+   */
   $scope.getUserInfo = function() {
     Auth.getUserInfo()
       .then(function(data){
@@ -11,6 +16,11 @@
   };
 
 
+  /**
+   * Description
+   * @method getFavors
+   * @return 
+   */
   $scope.getFavors = function() {
     Favors.profileFavors($scope.user)
       .then(function(data){
@@ -18,6 +28,12 @@
       })
   }
   
+  /**
+   * Description
+   * @method favorDetails
+   * @param {} favor
+   * @return 
+   */
   $scope.favorDetails = function(favor){
 
     Favors.setFavor(favor);
@@ -30,10 +46,20 @@
   */
   $scope.filter = '-createdAt';
 
+  /**
+   * Description
+   * @method hot
+   * @return 
+   */
   $scope.hot = function(){
     $scope.filter = '-votes';
   };
 
+  /**
+   * Description
+   * @method new
+   * @return 
+   */
   $scope.new = function() {
     $scope.filter = '-createdAt';
   };
