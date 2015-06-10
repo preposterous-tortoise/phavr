@@ -1,33 +1,41 @@
+/*
+ * Favor Factory
+ *
+ * This handles all functions relating to favors
+ * Includes fetching favors, saving new favors, and up/down-voting favors
+ *
+ */
 angular.module('phavr.favorfact', [])
-.factory('Favors', function ($http, $location, Auth){
+.factory('Favors', function ($http, $location, Auth) {
 
-
+  //set domain for $http requests
   var domain = localStorage.getItem("domain") || "http://phavr.herokuapp.com";
-  console.log("domain is: ", domain);
   
   return {
     /**
-     * Description
+     * set the domain for $http requests
      * @method setDomain
      * @param {} newDomain
-     * @return 
      */
+
     setDomain: function(newDomain) {
       domain = newDomain;
-      console.log("after setDomain, domain is: ", domain);
     },
 
     /**
-     * Description
-     * @method saveRequest
-     * @param {} request
-     * @return 
+     * save a new favor to the database
+     * @method saveFavor
+     * @param {} favor to save
+     * @return {} the newly created favor
      */
-    saveRequest: function(request) {
+
+    saveFavor: function(favor) {
+      //console.log('saving favor...');
+
       $http({
         method: 'POST',
         url: domain + '/api/requests/create',
-        data: request
+        data: favor
       })
       .success(function(data, status, headers, config) {
         return data;
@@ -36,16 +44,18 @@ angular.module('phavr.favorfact', [])
         console.log('saveRequest error, ', data, status, headers, config);
       });
     },
-    //  fetch requests in the specified box: [[sw.lng, sw.lat], [ne.lng, ne.lat]]
+
     /**
-     * Description
-     * @method fetchRequests
+     * fetch requests in the specified box: [[sw.lng, sw.lat], [ne.lng, ne.lat]]
+     * @method fetchFavors
      * @param {} box
      * @param {} callback
-     * @return CallExpression
+     * @return {} the requests in this location
      */
-    fetchRequests: function(box, callback) {
-      console.log("I'M INSIDE THE FETCH REQUESTS!");
+
+    fetchFavors: function(box, callback) {
+      //console.log("fetching favors from server...");
+      
       return $http({
           method: 'POST',
           url: domain + '/api/requests',
@@ -55,7 +65,7 @@ angular.module('phavr.favorfact', [])
         })
         .success(function(requests, status, headers, config) {
 
-          if (callback) callback(requests)
+          if (callback) { callback(requests) }
           return requests;
         })
         .error(function(data, status, headers, config) {
@@ -65,54 +75,58 @@ angular.module('phavr.favorfact', [])
     },
 
     /**
-     * Description
+     * get all the favors created by the specified user
      * @method profileFavors
      * @param {} user
-     * @return CallExpression
+     * @return {} the favors created by user
      */
+
     profileFavors: function(user) {
+      //console.log('getting this user's favors...');
+
       return $http({
-          method: 'POST',
-          url: domain + '/api/requests/grabFavor',
-          data: user
-        })
-        .success(function(requests, status, headers, config) {
-          return requests;
-        })
-        .error(function(data, status, headers, config) {
-          console.log('fetchRequests error: ', data, status, headers, config);
-          return null;
-        });
+        method: 'POST',
+        url: domain + '/api/requests/grabFavor',
+        data: user
+      })
+      .success(function(requests, status, headers, config) {
+        return requests;
+      })
+      .error(function(data, status, headers, config) {
+        console.log('fetchRequests error: ', data, status, headers, config);
+        return null;
+      });
     },
     
     /**
-     * Description
+     * increase the favor's votes by 1
      * @method upVote
      * @param {} favor
      * @param {} vote
-     * @return CallExpression
+     * @return Number to update the displayed value
      */
-    upVote: function(favor, vote){
-      console.log("inside requestfactory upvote")
+
+    upVote: function(favor, vote) {
+      //console.log('upvoting...')
       return $http({
         method: 'POST',
         url: domain + '/api/votes/upVote',
         data: { favor: favor, vote: vote }
       })
       .then(function(resp){ //response will be -1, 0 or 1
-        console.log('votes',favor.votes);
-        console.log(resp.data);
+        //console.log('vote value', resp);
         favor.votes += +resp.data;
-        console.log(JSON.stringify(resp.data));
       })
     },
+
     /**
-     * Description
+     * decrease the favor's votes by 1
      * @method downVote
      * @param {} favor
      * @param {} vote
-     * @return CallExpression
+     * @return Number to update the displayed value
      */
+
     downVote: function(favor, vote){
       return $http({
         method: 'POST',
@@ -120,22 +134,22 @@ angular.module('phavr.favorfact', [])
         data: { favor: favor, vote: vote }
       })
       .then(function(resp){
+        //console.log('vote value', resp);
         favor.votes += +resp.data;
-        console.log(resp);
       })
-      
     },
     
-    selectedFavor: null,
+    selectedFavor: null, //the favor to display in favordetails view
 
     /**
-     * Description
+     * set selectedFavor
      * @method setFavor
      * @param {} request
-     * @return 
      */
+
     setFavor: function(request) {
       this.selectedFavor = request;
     }
   }
 });
+
