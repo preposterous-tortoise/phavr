@@ -1,40 +1,10 @@
 var Favor = require('../db/favorModel.js');
 var Photo = require('../db/photoModel.js');
 var Notifier = require('../push/pushNotify.js');
+var utils = require('../utils/utils.js');
 var Q = require('q');
 
-/**
- * Description
- * @method getPolyBoxQuery
- * @param {} box
- * @return ObjectExpression
- */
-var getPolyBoxQuery = function(box) {
-  console.log("I AM INSIDE THE BOX!!!!!");
-  var polyBox = [  // sw, ne
-    [
-      [box[0][0], box[0][1]],
-      [box[1][0], box[0][1]],
-      [box[1][0], box[1][1]],
-      [box[0][0], box[1][1]],
-      [box[0][0], box[0][1]]
-    ]
-  ];
-  return {
-    "loc": {
-      "$geoWithin": {
-        "$geometry": {
-          "type": "Polygon",
-          "coordinates": polyBox
-        }
-      }
-    }
-  }
-};
-
 module.exports = {
-  getPolyBoxQuery: getPolyBoxQuery,
-
   /**
    * Description
    * @method fetchFavors
@@ -46,7 +16,7 @@ module.exports = {
   fetchFavors: function(req, res, next) {
     console.log("I AM INSIDE OF fetchFavors!!!");
   	var box = req.body.box;
-    var query = Favor.find(getPolyBoxQuery(box));
+    var query = Favor.find(utils.getPolyBoxQuery(box));
     query.exec(function(err, docs) {
       res.json(docs);
       if (err) {

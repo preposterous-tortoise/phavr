@@ -8,9 +8,9 @@ twitterScrape.js: remove all
 
 voteController: upVotePhoto is too long
 
-REMOVE: uploads/yoyo.jpg
+REMOVE: uploads/yoyo.jpg  // DONE
 
-favorController and notify both have getPolyBoxQuery, put it in utils
+favorController and notify both have getPolyBoxQuery, put it in utils  // DONE
 
 CLIENT
 ==========================
