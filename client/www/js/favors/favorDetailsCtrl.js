@@ -17,14 +17,20 @@ angular.module('phavr.favorDetails', [])
   //hard-coded photos, for testing purposes:
 
   /*$scope.selectedFavor.photos = [
-    { votes:0, 
-      url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'
+    { votes:9, 
+      url:'http://cdn3.dogomedia.com/pictures/7604/content/breakersslideshow_1002174528_Bay_to_Breakers.JPEG-02a2e.JPG?1305661329'
     }, 
-    { votes:0, 
-      url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'
+    { votes:7, 
+      url:'http://static.flickr.com/46/150822933_eca78248f8.jpg'
     }, 
-    { votes:0, 
-      url:'http://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG'
+    { votes:5,
+      url:'https://c1.staticflickr.com/1/18/23707338_2a7bce3aeb_b.jpg'
+    },
+    { votes:-1, 
+      url:'http://www.obsessionwithbutterflies.com/img/butterfly/monarch%20Caterpillar.jpg'
+    },
+    { votes: 6,
+      url: 'http://www.rentcafe.com/blog/wp-content/uploads/2012/05/breakers.jpg'
     }];*/
 
   /**

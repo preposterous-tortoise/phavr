@@ -34,8 +34,8 @@ angular.module('phavr.login', [])
         localStorage.setItem('user', JSON.stringify(data.data));
 
       });
+    //$location.path('/home');
     } 
-    // $location.path('/home');
 
 
 
