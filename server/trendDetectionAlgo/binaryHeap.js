@@ -31,7 +31,7 @@
 		},
 
 
-		removeMin: function() {
+		remove: function() {
 			var minObject = this.content[1];
 			this.content[1] = this.content.pop();
 			this.sink(1);
@@ -74,10 +74,46 @@
 
 
 
-var heap = new BinaryHeap("",[ 0, 3, 1, 5, 9, 2 ]);
+var heap = new BinaryHeap("",[1,2,3,4,5 ]);
 console.log(heap.content);
-debugger;
 
-heap.insert(-2);
+heap.insert(2);
+console.log('1');
+
+
+heap.insert(3);
+console.log('2');
+
+
+heap.remove();
+console.log('3');
+
+
+heap.insert(7);
+heap.insert(4);
+console.log('4');
+
+
+heap.remove();
+console.log('5');
+
+
+heap.remove();
+
+heap.remove();
+heap.insert(1);
+heap.insert(0);
+console.log(heap.content);
+
+
+heap.insert(0);
+heap.insert(1);
+heap.insert(2);
+heap.insert(3);
+heap.insert(4);
+heap.insert(5);
+heap.insert(6);
+heap.insert(7);
+
 console.log(heap.content);
 
