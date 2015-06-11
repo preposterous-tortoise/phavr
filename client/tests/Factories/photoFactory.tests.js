@@ -1,4 +1,4 @@
-describe('favorFactory', function() {
+/*describe('favorFactory', function() {
   var $httpBackend;
   var getFavorPhotos;
   var sendingPicture;
@@ -59,4 +59,4 @@ describe('favorFactory', function() {
     $httpBackend.flush();
   });
   
-});
+});*/

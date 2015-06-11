@@ -207,20 +207,23 @@ h2, h3, h4 {
 }
 
 .phavr-title {
-  position: relative;
+  position: absolute;
   bottom: 20%;
-  @include centre(x);
+  /*@include centre(x);*/
 }
 
 .logo {
+  position: relative;
+  width: 100%;
 }
 
 .tagline {
   position: relative;
   top: -20px;
   max-width: 100%;
-  width: 190px;
+  /*width: 190px;*/
   color: white;
+  text-align: center;
 }
 
 .hiddenmap {
@@ -312,9 +315,11 @@ h2, h3, h4 {
 }
 
 .oauth_button {
-  width: 40%;
+  width: 20% !important;
   z-index: 3;
-  @include centre(x);
+  position: absolute !important;
+  bottom: 10% !important;
+  left: 40% !important;
 }
 
 .lolol {

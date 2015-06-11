@@ -111,8 +111,7 @@ h2, h3, h4 {
   background-image: url("http://i.imgur.com/G1vmHQZ.jpg");
   background-size: cover;
   background-repeat: none;
-  background-position: 50% 50%; 
-}
+  background-position: 50% 50%; }
 
 .go2 {
   width: 80%;
@@ -134,22 +133,21 @@ h2, h3, h4 {
   margin-bottom: 5px; }
 
 .phavr-title {
-  position: relative;
-  bottom: 20%;
   position: absolute;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  transform: translateX(-50%); }
+  bottom: 20%;
+  /*@include centre(x);*/ }
+
+.logo {
+  position: relative;
+  width: 100%; }
 
 .tagline {
   position: relative;
   top: -20px;
   max-width: 100%;
-  width: 190px;
-  color: white; }
+  /*width: 190px;*/
+  color: white;
+  text-align: center; }
 
 .hiddenmap {
   display: none; }
@@ -229,15 +227,11 @@ h2, h3, h4 {
   transform: translateX(-50%); }
 
 .oauth_button {
-  width: 40%;
+  width: 20% !important;
   z-index: 3;
-  position: absolute;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  transform: translateX(-50%); }
+  position: absolute !important;
+  bottom: 10% !important;
+  left: 40% !important; }
 
 .lolol {
   border: none !important;
