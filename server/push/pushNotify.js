@@ -67,7 +67,7 @@ module.exports = {
               if (user && user.notify_photos) {
                 console.log('New Photo for favor: ', favor_id, favors);
                 var message = "A photo was taken for your favor \"" + favor.description + "\" at " + favor.place_name;
-                message += ", " + new Date();
+                message += ", " + new Date().toLocaleString();
                 console.log('message: ', message);
                 sendMessage([favor.user_id], message);
               }
@@ -96,7 +96,7 @@ module.exports = {
         console.log('Error finding users for box:', box, err);
       } else {
         var message = 'There is a new favor requested near you at ' + favor.place_name + ', ' + favor.address;
-        message += ", " + new Date();
+        message += ", " + new Date().toLocaleString();
         var usersToNofify = [];
         users.forEach(function(user) {
           console.log('new favor, nearby user: ', user.name, ', notify_favors: ', user.notify_favors );
