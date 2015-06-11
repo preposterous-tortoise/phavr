@@ -177,6 +177,6 @@ module.exports = {
   uploadToServer: function(req,res){
     console.log("_________________");
      console.log(req.files);
-    res.redirect('/uploadToS3/?fileName=' + req.files.file.originalname);
+    res.redirect('api/photos/uploadToS3?access_token=CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU' + req.files.file.originalname);
   }
 }
