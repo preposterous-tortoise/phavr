@@ -18,18 +18,28 @@ module.exports = function(grunt) {
         singleRun: true,
       }
     },
+    //configure back-end Jasmine tests
+    jasmine_node: {
+        options: {
+          forceExit: true,
+          match: '.',
+          matchall: false,
+          extensions: 'js',
+          specNameMatcher: 'spec'
+        },
+        all: ['spec/']
+    }
 
 
   });
 
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-jasmine-node');
 
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-docco');
-  grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-concurrent');
 
 
@@ -52,8 +62,8 @@ module.exports = function(grunt) {
   // Main grunt tasks
   ////////////////////////////////////////////////////
 
-  grunt.registerTask('default', ['nodemon']);
-  grunt.registerTask('test',['karma']);
+  grunt.registerTask('default', ['jasmine_node']);
+  grunt.registerTask('test', ['karma']);
 
 
 };
