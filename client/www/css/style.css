@@ -113,9 +113,11 @@ h2, h3, h4 {
   width: 100%; }
 
 .login {
-  background-image: url("http://38.media.tumblr.com/40614d640a1355924b2982ef2258be9c/tumblr_n6e8t8xbTu1tv2nyvo1_500.gif");
+  background-image: url("http://i.imgur.com/G1vmHQZ.jpg");
   background-size: cover;
-  background-repeat: none; }
+  background-repeat: none;
+  background-position: 50% 50%; 
+}
 
 .go2 {
   width: 80%;
