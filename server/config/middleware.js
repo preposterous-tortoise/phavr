@@ -20,11 +20,6 @@ var fbAuth = require('../auth/newAuthPassport')(passport);
 /**
  * Core Middleware
  * Sets up top-level routes, authentication, and session initialization
- * @api public
- * @method exports
- * @param {Application} app - Express Application
- * @param {Express} express
- * @return 
  */
 
 module.exports = function(app, express){
@@ -72,18 +67,11 @@ module.exports = function(app, express){
   app.use('/api/votes', passport.authenticate('facebook-token'), voteRouter);
   app.use('/api/users', passport.authenticate('facebook-token'), userRouter);
 
-
-
- 
-
-
   // Used to grab user information from the user property of the request. 
   // Provides FB info for name and profile picture
   app.get('/api/profileID', passport.authenticate('facebook-token'), 
     function(req, res){
-      console.log('*******************/api/profileID: :', JSON.stringify(req.user, null, '\t'));
       res.send(req.user);
-
   });
 
   //Adding routes
@@ -94,39 +82,30 @@ module.exports = function(app, express){
 
 
 
-  // //Setting up twitter and instagram scraping routes
-  // var twitterScrapeRouter = express.Router();
-  // app.use('/api/twitter', /*auth.athenticate*/ twitterScrapeRouter);
-  // require("../webScraping/twitterRoutes.js")(twitterScrapeRouter);
+  //Setting up twitter and instagram scraping routes
+  /*var twitterScrapeRouter = express.Router();
+  app.use('/api/twitter', /*auth.athenticate*/ /*twitterScrapeRouter);
+  require("../webScraping/twitterRoutes.js")(twitterScrapeRouter);*/
 
-  //var instagramScrapeRouter = express.Router();
-  //app.use('/api/instagram', /*auth.athenticate*/ instagramScrapeRouter);
-  //require("../webScraping/instagramRoutes.js")(instagramScrapeRouter);
+  /*var instagramScrapeRouter = express.Router();
+  app.use('/api/instagram', /*auth.athenticate*/ /*instagramScrapeRouter);
+  require("../webScraping/instagramRoutes.js")(instagramScrapeRouter);*/
 
-app.post('/auth/facebook/token',
-  passport.authenticate('facebook-token'),
-    function (req,res) {
-      console.log('authorized user!');
-      console.log(req.user);
-      res.send(req.user? 201 : 401)
-    }
-  );
-
+  app.post('/auth/facebook/token',
+    passport.authenticate('facebook-token'),
+      function (req,res) {
+        console.log('authorized user!');
+        //console.log(req.user);
+        res.send(req.user? 201 : 401)
+      });
 
   //Multer is an NPM module used to upload multi-part data
   app.use(multer({ dest: './uploads/', 
-    /**
-     * Description
-     * @method rename
-     * @param {} fieldname
-     * @param {} filename
-     * @return filename
-     */
     rename: function(fieldname, filename) {
               console.log(fieldname);
               console.log(filename);
               return filename;
-              }
+            }
   }));
 
   //Used to chunk the photos into one coherent file before uploading them to S3

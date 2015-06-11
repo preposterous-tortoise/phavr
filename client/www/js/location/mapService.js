@@ -34,7 +34,7 @@ angular.module('phavr.mapService', [])
        * @return BinaryExpression
        */
       function deg2rad(deg) {
-        return deg * (Math.PI/180)
+        return deg * (Math.PI/180);
       }
       var R = 6371; // Radius of the earth in km
       var dLat = deg2rad(lat2-lat1);  // deg2rad below
@@ -42,8 +42,7 @@ angular.module('phavr.mapService', [])
       var a = 
         Math.sin(dLat/2) * Math.sin(dLat/2) +
         Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
-        Math.sin(dLon/2) * Math.sin(dLon/2)
-        ; 
+        Math.sin(dLon/2) * Math.sin(dLon/2); 
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
       var d = R * c; // Distance in km
       
@@ -222,7 +221,8 @@ angular.module('phavr.mapService', [])
               var description = favor.description || "";
               //for caption purposes
               if (addInfoWindow) {
-                infowindow.setContent('<div>' + description + '</div><div><strong>' + favor.place_name + '</strong><br>');
+                infowindow.setContent('<div>' + description + 
+                                      '</div><div><strong>' + favor.place_name + '</strong><br>');
                 infowindow.open(map, marker);
               }
 
@@ -276,7 +276,8 @@ angular.module('phavr.mapService', [])
         marker.setVisible(true);
         var description = favor.description || "";
         if (addInfoWindow) {
-          infowindow.setContent('<div>' + description + '</div><div><strong>' + favor.place_name + '</strong><br>');
+          infowindow.setContent('<div>' + description + '</div><div><strong>' + 
+                                favor.place_name + '</strong><br>');
           infowindow.open(map, marker);
         }
         if (favor._id) {
