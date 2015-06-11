@@ -39,12 +39,11 @@ angular.module('phavr.nav', [])
    * @return CallExpression
    */
   $scope.logOut = function(){
-    Auth.accessToken = null;
-    return $http({
-          method: 'GET',
-          url: window.localStorage.getItem('domain') + '/logout',
-        })
-        .then($location.path('/'))
+    window.localStorage.removeItem("token");
+    $rootScope.login = false;
+    $ionicSideMenuDelegate.toggleLeft();
+    $location.path("/");
+
   };
 
 

@@ -5,13 +5,14 @@ angular.module('phavr.login', [])
    * Takes out the header bar
    */
   $rootScope.login = false;
+  console.log("token", window.localStorage.getItem("token"));
 
   window.localStorage.setItem("domain", "");
 
   /*
    * Checks the environment the app is running in. Whether it be a phone or inside a browser
    */
-  ionic.Platform.ready(function() {
+
     var domain;
     if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || 
       $location.host() === 'phavr.herokuapp.com') {
@@ -22,8 +23,25 @@ angular.module('phavr.login', [])
     Favors.setDomain(domain);
     window.localStorage.setItem("domain", domain);
     console.log('domain is: ', domain);
-  });
-  
+
+
+    if(window.localStorage.getItem("token")) {
+    Auth.setAccessToken(window.localStorage.getItem("token"));
+
+    Auth.getUserInfo()
+      .then(function(data){
+        localStorage.setItem('user_provider_id', data.data.provider_id);
+        localStorage.setItem('user', JSON.stringify(data.data));
+
+      });
+    } 
+    $location.path('/home');
+
+
+
+
+
+
 
   /**
    * The function allows for browser deployment and use
@@ -49,7 +67,10 @@ angular.module('phavr.login', [])
    * @return 
    */
   $scope.fbLogin = function() {
-    //get user access token
+
+  $rootScope.login = true;
+
+
     $cordovaOauth.facebook(Auth.clientID, ['user_friends'])
       .then(function(result) {
 
@@ -76,7 +97,7 @@ angular.module('phavr.login', [])
           alert("There was a problem getting your profile. Check the logs for details.");
           console.log(error);
       });
-        
+    
   };
 
 });
