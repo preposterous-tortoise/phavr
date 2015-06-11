@@ -6,7 +6,7 @@
  *
  */
 angular.module('phavr.favorfact', [])
-.factory('Favors', function ($http, $location, Auth) {
+.factory('Favors', function($http, $location, Auth) {
 
   //set domain for $http requests
   var domain = localStorage.getItem("domain") || "http://phavr.herokuapp.com";

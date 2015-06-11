@@ -22,7 +22,8 @@ body {
   font-weight: normal !important; }
 
 .favor {
-  margin: 5px !important; }
+  margin: 5px !important; 
+}
 
 h2, h3, h4 {
   color: silver !important;
@@ -37,26 +38,30 @@ h2, h3, h4 {
 .kudos {
   display: inline-block !important;
   position: relative !important;
-  left: 183px !important;
+  left: 150px !important;
   font-size: 20px !important;
   top: -10px !important;
   color: silver !important; }
 
 .byYou {
-  margin-top: 5px !important; }
+  position: relative;
+  color: white !important;
+  top: 39px;
+  left: 10px;
+}
 
 .profPic2 {
   border-radius: 50% !important;
   height: 50px !important;
   width: 50px !important;
   position: relative;
-  left: 20px !important; }
+  left: 34px !important; }
 
 .border {
   border-top: none !important !important; }
 
 .description {
-  border-color: #66CDAA !important;
+  border-color: rgba(102, 205, 170, 0.65) !important;
   border-width: 2px !important;
   border-radius: 10px !important;
   /*background-color: #E6F4EF !important;*/ }
@@ -166,7 +171,7 @@ h2, h3, h4 {
 
 .favorDetail {
   width: 100%;
-  /*max-width: 100%;*/ }
+  border-radius: 10px !important; }
 
 .picVoting {
   /*top: 50%;*/
@@ -240,12 +245,18 @@ h2, h3, h4 {
   border: none !important;
   color: white !important; }
 
+.profilepic {
+  position: relative;
+  top: 52px;
+}
+
 .highlighted {
   background-color: #86e0c2 !important; }
 
 .profileHead {
   position: absolute;
   left: 50%;
+  width: 181px;
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
   -ms-transform: translateX(-50%);

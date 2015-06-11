@@ -1,43 +1,46 @@
-<ion-view title="login">
-   <div class="bar bar-subheader favorHead">
-      <h2 class="title favorHead">{{ selectedFavor.topic }}</h2>
-    </div>
+<ion-view title="favorDetails">
+  <div class="bar bar-subheader favorHead">
+    <h2 class="title favorHead">{{ selectedFavor.topic }}</h2>
+  </div>
+  
   <ion-content class="has-subheader" padding="false">
-  <ion-content>
-  <ion-refresher on-refresh="getAllPhotos()">
-  </ion-refresher>
-  <div class="row noPadding">
-    <div class="col">
-      <p>{{ selectedFavor.address }}</p>
-    </div>
-  </div>
-  <div class="row noPadding">
-    <div class="col">
-      <ion-item class="wrap description font">
-        {{ selectedFavor.description }}
-      </ion-item>
-    </div>
-  </div>
-    <ion-list ng-repeat="photo in selectedFavor.photos | orderBy:'-votes'" class="wrap">
-      <div class="list card noPadding margin">
-      <div class="row">
-        <div class="col col-90">
-          <div class="item item-image description"><img class="favorDetail" ng-src="{{photo.url}}"></div>
-        </div>
-
-        <div class="col col-center">
-          <div class="picVoting">
-            <a ng-click="upVotePhoto(photo)" class="button button-icon icon ion-ios-arrow-up"></a><br>
-            <span class="votes">{{photo.votes}}</span><br>
-            <a ng-click="downVotePhoto(photo)" class="button button-icon icon ion-ios-arrow-down"></a>
-         </div>
-        </div>
+    <ion-refresher on-refresh="getAllPhotos()"></ion-refresher>
+    <div class="row noPadding">
+      <div class="col">
+        <p>{{ selectedFavor.address }}</p>
       </div>
     </div>
+    
+    <div class="row noPadding">
+      <div class="col">
+        <ion-item class="wrap description font">
+          {{ selectedFavor.description }}
+        </ion-item>
+      </div>
+    </div>
+    
+    <ion-list ng-repeat="photo in selectedFavor.photos | orderBy:'-votes'" class="wrap">
+      <div class="list card noPadding margin">
+        <div class="row">
+          <div class="col col-90">
+            <div class="item item-image description">
+              <img class="favorDetail" ng-src="{{photo.url}}">
+            </div>
+          </div>
+
+          <div class="col col-center">
+            <div class="picVoting">
+              <a ng-click="upVote(photo)" class="button button-icon icon ion-ios-arrow-up"></a><br>
+              <span class="votes">{{photo.votes}}</span><br>
+              <a ng-click="downVote(photo)" class="button button-icon icon ion-ios-arrow-down"></a>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </ion-list>
   </ion-content>
   <ion-footer-bar class="camera-footer bar-calm">  
-    <button class="button cambutton button-icon icon ion-camera" ng-click="getPhoto()"></button>    
+    <button class="button cambutton button-icon icon ion-camera" ng-show="selectedFavor.camera" ng-click="getPhoto()"></button>    
   </ion-footer-bar>
 </ion-view>

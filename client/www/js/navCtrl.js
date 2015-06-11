@@ -1,3 +1,4 @@
+
 angular.module('phavr.nav', [])
 .controller('NavCtrl', function($scope, $rootScope, $location, $http, $ionicSideMenuDelegate, Auth, Favors, PushFactory,geo){ 
 

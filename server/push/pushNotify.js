@@ -1,9 +1,8 @@
 var favorController = require('../favors/favorController.js');
 var Favor = require('../db/favorModel.js');
 var User = require('../db/userModel.js');
+var utils = require('../utils/utils.js');
 var request = require('request');
-var Q = require('q');
-
 
 /**
  * Description: send a message to the push server
@@ -39,48 +38,6 @@ var sendMessage = function(users, message) {
     }
   );
 }
-
-/**
- * Description: given a lng/lat point returns the bounding box for a 1-mile radius
- * @method getBoxForLoc
- * @param {Array[lng, lat]} coords
- * @return {Array} box
- */
-var getBoxForLoc = function(coords) {
-  var miles = 1;
-  var radius = 0.02899*miles;
-  var box = [[coords[0]-radius, coords[1]-radius], //sw
-            [coords[0]+radius, coords[1]+radius]]; //ne
-  return box;
-}
-
-/**
- * Description: return a polygon box for sw/ne coordinates
- * @method getPolyBoxQuery
- * @param {Array[sw,ne]} box
- * @return ObjectExpression
- */
-var getPolyBoxQuery = function(box) {
-  var polyBox = [  // sw, ne
-    [
-      [box[0][0], box[0][1]],
-      [box[1][0], box[0][1]],
-      [box[1][0], box[1][1]],
-      [box[0][0], box[1][1]],
-      [box[0][0], box[0][1]]
-    ]
-  ];
-  return {
-    "loc": {
-      "$geoWithin": {
-        "$geometry": {
-          "type": "Polygon",
-          "coordinates": polyBox
-        }
-      }
-    }
-  }
-};
 
 module.exports = {
 
@@ -128,9 +85,10 @@ module.exports = {
    */
   notifyNewFavor: function(favor) {
     console.log("notifyNewFavor: ", favor);
-    console.log('new favor box: ', getBoxForLoc(favor.loc.coordinates));
-    var box = getBoxForLoc(favor.loc.coordinates);
-    var query = User.find(getPolyBoxQuery(box));
+    console.log('utils: ', JSON.stringify(utils, null, '\t'));
+    console.log('new favor box: ', utils.getBoxForLoc(favor.loc.coordinates));
+    var box = utils.getBoxForLoc(favor.loc.coordinates);
+    var query = User.find(utils.getPolyBoxQuery(box));
     query.exec(function(err, users) {
       console.log("notifyNewFavor, nearby user count: ", users ? users.length : 0);
       console.log("favor user id: ", favor.user_id);
