@@ -91,7 +91,7 @@ angular.module('phavr.photoFactory', [])
         options.mimeType = "image/jpeg";
         var ft = new FileTransfer();
         //file transfer photo to server
-        ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/photoUploads/uploadToServer"), win, fail, options);
+        ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/api/photos/photoUploads/uploadToServer"), win, fail, options);
       }
 
       /**
