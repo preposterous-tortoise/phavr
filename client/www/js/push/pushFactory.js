@@ -36,7 +36,7 @@ angular.module('phavr.pushfact', [])
 
       if (ionic.Platform.isAndroid()) {
         config = {
-          "senderID": "659702567252", // REPLACE THIS WITH YOUR GCM senderID
+          "senderID": "659702567252", // GCM senderID
           'ecb': 'onNotificationGCM'
         };
       } else if (ionic.Platform.isIOS()) {
