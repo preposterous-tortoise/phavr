@@ -210,10 +210,10 @@ angular.module('phavr.mapService', [])
                 console.log('using far icon');
                 marker.setIcon( /** @type {google.maps.Icon} */ ({
                   url: farIconURL, //favor.icon,
-                  size: new google.maps.Size(71, 71),
+                  size: new google.maps.Size(32, 32),
                   origin: new google.maps.Point(0, 0),
-                  anchor: new google.maps.Point(17, 34),
-                  scaledSize: new google.maps.Size(35, 35)
+                  anchor: new google.maps.Point(16, 16),
+                  scaledSize: new google.maps.Size(32, 32)
                 }));
               }
 
@@ -265,10 +265,10 @@ angular.module('phavr.mapService', [])
             console.log('using far icon');
             marker.setIcon( /** @type {google.maps.Icon} */ ({
               url: farIconURL, //favor.icon,
-              size: new google.maps.Size(71, 71),
+              size: new google.maps.Size(32, 32),
               origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(17, 34),
-              scaledSize: new google.maps.Size(35, 35)
+              anchor: new google.maps.Point(16, 16),
+              scaledSize: new google.maps.Size(32, 32)
             }));
         }
 
