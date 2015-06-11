@@ -1,5 +1,5 @@
  angular.module('phavr.settings', [])
-   .controller('settingsCtrl', function($scope, $http) {
+   .controller('settingsCtrl', function($scope, $http, $cordovaToast) {
 
      $scope.user = JSON.parse(window.localStorage.getItem('user'));
 
@@ -14,6 +14,9 @@
            localStorage.getItem('domain') + '/api/users/update',
            $scope.user)
          .success(function(data, status, headers, config) {
+           if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
+             $cordovaToast.showShortCenter('Your settings have been saved.');
+           }
            return data;
          })
          .error(function(data, status, headers, config) {
