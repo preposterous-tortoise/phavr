@@ -1,5 +1,5 @@
 angular.module('phavr.mapService', [])
-  .factory('mapService', function($window, $location, Favors, $cordovaGeolocation) {
+  .factory('mapService', function($window, $location, Favors) {
 
     var myLatlng = new google.maps.LatLng(37.783724, -122.40897799999999);
 
@@ -168,53 +168,27 @@ angular.module('phavr.mapService', [])
           //only change markers if we're on the phone
           console.log('getting location to place correct marker...');
 
-          //get user's location
-            var posOptions = { timeout: 10000, enableHighAccuracy: false };
-            $cordovaGeolocation.getCurrentPosition(posOptions)
-            .then(function(spot) {//calculate distance
-              var lat1 = spot.coords.latitude;
-              var lon1 = spot.coords.longitude;
-              var lat2 = location.lat;
-              var lon2 = location.lng;
+          var lat1 = myLatlng.lat();
+          var lon1 = myLatlng.lng();
+          var lat2 = location.lat;
+          var lon2 = location.lng;
 
-              console.log(lat1, lon1, lat2, lon2);
+          console.log(lat1, lon1, lat2, lon2);
 
-              console.log('calculating distance...');
-              var dist = calculateDistance(lat1, lon1, lat2, lon2);
+          console.log('calculating distance...');
+          var dist = calculateDistance(lat1, lon1, lat2, lon2);
 
-              if(dist > 2) { //if the favor is more than two miles away from the user
-                //set the icon
-                console.log('that favor is too far away!');
-                isClose = false;
-              }
-              
-              var infowindow = new google.maps.InfoWindow();
-              var marker = new google.maps.Marker({
-                position: location,
-                map: map
-              });
-
-              //set icon based on distance
-              if(isClose) {
-                console.log('using close icon');
-                //set marker properties
-                marker.setIcon( /** @type {google.maps.Icon} */ ({
-                  url: genericIconURL, //favor.icon,
-                  size: new google.maps.Size(32, 32),
-                  origin: new google.maps.Point(0, 0),
-                  anchor: new google.maps.Point(16, 16),
-                  scaledSize: new google.maps.Size(32, 32)
-                }));
-              } else {
-                console.log('using far icon');
-                marker.setIcon( /** @type {google.maps.Icon} */ ({
-                  url: farIconURL, //favor.icon,
-                  size: new google.maps.Size(32, 32),
-                  origin: new google.maps.Point(0, 0),
-                  anchor: new google.maps.Point(16, 32),
-                  scaledSize: new google.maps.Size(32, 32)
-                }));
-              }
+          if(dist > 2) { //if the favor is more than two miles away from the user
+            //set the icon
+            console.log('that favor is too far away!');
+            isClose = false;
+          }
+          
+          var infowindow = new google.maps.InfoWindow();
+          var marker = new google.maps.Marker({
+            position: location,
+            map: map
+          });
 
               marker.setPosition(location);
               marker.setVisible(true);
@@ -226,22 +200,52 @@ angular.module('phavr.mapService', [])
                 infowindow.open(map, marker);
               }
 
+          //set icon based on distance
+          if(isClose) {
+            console.log('using close icon');
+            //set marker properties
+            marker.setIcon( /** @type {google.maps.Icon} */ ({
+              url: genericIconURL, //favor.icon,
+              size: new google.maps.Size(32, 32),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(16, 16),
+              scaledSize: new google.maps.Size(32, 32)
+            }));
+          } else {
+            console.log('using far icon');
+            marker.setIcon( /** @type {google.maps.Icon} */ ({
+              url: farIconURL, //favor.icon,
+              size: new google.maps.Size(32, 32),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(16, 32),
+              scaledSize: new google.maps.Size(32, 32)
+            }));
+          }
+
+          marker.setPosition(location);
+          marker.setVisible(true);
+          var description = favor.description || "";
+          //for caption purposes
+          if (addInfoWindow) {
+            infowindow.setContent('<div>' + description + '</div><div><strong>' + favor.place_name + '</strong><br>');
+            infowindow.open(map, marker);
+          }
+
+          if (favor._id) {
+            // add click listener, to redirect to favor details page when marker is clicked
+            google.maps.event.addListener(marker, "click", function() {
+              var favor = getFavorForMarker(this, markerMap);
               if (favor._id) {
-                // add click listener, to redirect to favor details page when marker is clicked
-                google.maps.event.addListener(marker, "click", function() {
-                  var favor = getFavorForMarker(this, markerMap);
-                  if (favor._id) {
-                    Favors.setFavor(favor);
-                    $window.location.assign('#/favordetails');
-                  }
-                });
-                markerMap[favor._id] = {
-                  marker: marker,
-                  favor: favor
-                };
+                Favors.setFavor(favor);
+                $window.location.assign('#/favordetails');
               }
-              return marker;
             });
+            markerMap[favor._id] = {
+              marker: marker,
+              favor: favor
+            };
+          }
+              // return marker;
         } else {
 
         //for browser do the same thing as phones
@@ -258,7 +262,7 @@ angular.module('phavr.mapService', [])
             url: genericIconURL, //favor.icon,
             size: new google.maps.Size(32, 32),
             origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(16, 32),
+            anchor: new google.maps.Point(16, 16),
             scaledSize: new google.maps.Size(32, 32)
           }));
         } else {

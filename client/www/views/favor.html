@@ -10,13 +10,13 @@
       <form ng-submit="createFavor()">   
         <div class="list list-inset">
           <label class="item item-input">
-            <input ng-model="favor.topic" type="text" placeholder="Topic?">
-          </label>
-          <label class="item item-input">
-            <input ng-model="favor.description" type="text" placeholder="Describe your search!">
-          </label>
-          <label class="item item-input">
             <input id="pac-input" type="text" ng-model="favor.address" placeholder="Where is it?">
+          </label>
+          <label class="item item-input">
+            <input ng-model="favor.topic" type="text" placeholder="Topic?" required>
+          </label>
+          <label class="item item-input">
+            <input ng-model="favor.description" type="text" placeholder="Describe your search!" required>
           </label>
         </div>
         <div>
