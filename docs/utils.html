@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>utils.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="AuthConfig.html">
+                AuthConfig.js
+              </a>
+            
+              
+              <a class="source" href="authPassport.html">
+                authPassport.js
+              </a>
+            
+              
+              <a class="source" href="localSignUp.html">
+                localSignUp.js
+              </a>
+            
+              
+              <a class="source" href="newAuthPassport.html">
+                newAuthPassport.js
+              </a>
+            
+              
+              <a class="source" href="middleware.html">
+                middleware.js
+              </a>
+            
+              
+              <a class="source" href="favorModel.html">
+                favorModel.js
+              </a>
+            
+              
+              <a class="source" href="photoModel.html">
+                photoModel.js
+              </a>
+            
+              
+              <a class="source" href="userModel.html">
+                userModel.js
+              </a>
+            
+              
+              <a class="source" href="voteModel.html">
+                voteModel.js
+              </a>
+            
+              
+              <a class="source" href="votePhotoModel.html">
+                votePhotoModel.js
+              </a>
+            
+              
+              <a class="source" href="favorController.html">
+                favorController.js
+              </a>
+            
+              
+              <a class="source" href="favorRoutes.html">
+                favorRoutes.js
+              </a>
+            
+              
+              <a class="source" href="photoController.html">
+                photoController.js
+              </a>
+            
+              
+              <a class="source" href="photoRoutes.html">
+                photoRoutes.js
+              </a>
+            
+              
+              <a class="source" href="pushNotify.html">
+                pushNotify.js
+              </a>
+            
+              
+              <a class="source" href="server.html">
+                server.js
+              </a>
+            
+              
+              <a class="source" href="drakeapp-spec.html">
+                drakeapp-spec.js
+              </a>
+            
+              
+              <a class="source" href="binaryHeap.html">
+                binaryHeap.js
+              </a>
+            
+              
+              <a class="source" href="userController.html">
+                userController.js
+              </a>
+            
+              
+              <a class="source" href="userRoutes.html">
+                userRoutes.js
+              </a>
+            
+              
+              <a class="source" href="utils.html">
+                utils.js
+              </a>
+            
+              
+              <a class="source" href="voteController.html">
+                voteController.js
+              </a>
+            
+              
+              <a class="source" href="votePhotoController.html">
+                votePhotoController.js
+              </a>
+            
+              
+              <a class="source" href="voteRoutes.html">
+                voteRoutes.js
+              </a>
+            
+              
+              <a class="source" href="instagramRoutes.html">
+                instagramRoutes.js
+              </a>
+            
+              
+              <a class="source" href="instagramScrape.html">
+                instagramScrape.js
+              </a>
+            
+              
+              <a class="source" href="twitterRoutes.html">
+                twitterRoutes.js
+              </a>
+            
+              
+              <a class="source" href="twitterScrape.html">
+                twitterScrape.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>utils.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/**
+ * Description: given a lng/lat point returns the bounding box for a 1-mile radius
+ * @method getBoxForLoc
+ * @param {Array[lng, lat]} coords
+ * @return {Array} box
+ */</span>
+<span class="hljs-keyword">var</span> getBoxForLoc = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">coords</span>) </span>{
+  <span class="hljs-keyword">var</span> miles = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">var</span> radius = <span class="hljs-number">0.02899</span> * miles;
+  <span class="hljs-keyword">var</span> box = [
+    [coords[<span class="hljs-number">0</span>] - radius, coords[<span class="hljs-number">1</span>] - radius], <span class="hljs-comment">//sw</span>
+    [coords[<span class="hljs-number">0</span>] + radius, coords[<span class="hljs-number">1</span>] + radius]
+  ]; <span class="hljs-comment">//ne</span>
+  <span class="hljs-keyword">return</span> box;
+};
+
+<span class="hljs-comment">/**
+ * Description: return a polygon box for sw/ne coordinates
+ * @method getPolyBoxQuery
+ * @param {Array[sw,ne]} box
+ * @return ObjectExpression
+ */</span>
+<span class="hljs-keyword">var</span> getPolyBoxQuery = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">box</span>) </span>{
+  <span class="hljs-keyword">var</span> polyBox = [ <span class="hljs-comment">// sw, ne</span>
+    [
+      [box[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>], box[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]],
+      [box[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>], box[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]],
+      [box[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>], box[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]],
+      [box[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>], box[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]],
+      [box[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>], box[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]]
+    ]
+  ];
+  <span class="hljs-keyword">return</span> {
+    <span class="hljs-string">"loc"</span>: {
+      <span class="hljs-string">"$geoWithin"</span>: {
+        <span class="hljs-string">"$geometry"</span>: {
+          <span class="hljs-string">"type"</span>: <span class="hljs-string">"Polygon"</span>,
+          <span class="hljs-string">"coordinates"</span>: polyBox
+        }
+      }
+    }
+  }
+};
+
+<span class="hljs-built_in">module</span>.exports = {
+  getBoxForLoc: getBoxForLoc,
+  getPolyBoxQuery: getPolyBoxQuery
+};</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

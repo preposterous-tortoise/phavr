@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>binaryHeap.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="AuthConfig.html">
+                AuthConfig.js
+              </a>
+            
+              
+              <a class="source" href="authPassport.html">
+                authPassport.js
+              </a>
+            
+              
+              <a class="source" href="localSignUp.html">
+                localSignUp.js
+              </a>
+            
+              
+              <a class="source" href="newAuthPassport.html">
+                newAuthPassport.js
+              </a>
+            
+              
+              <a class="source" href="middleware.html">
+                middleware.js
+              </a>
+            
+              
+              <a class="source" href="favorModel.html">
+                favorModel.js
+              </a>
+            
+              
+              <a class="source" href="photoModel.html">
+                photoModel.js
+              </a>
+            
+              
+              <a class="source" href="userModel.html">
+                userModel.js
+              </a>
+            
+              
+              <a class="source" href="voteModel.html">
+                voteModel.js
+              </a>
+            
+              
+              <a class="source" href="votePhotoModel.html">
+                votePhotoModel.js
+              </a>
+            
+              
+              <a class="source" href="favorController.html">
+                favorController.js
+              </a>
+            
+              
+              <a class="source" href="favorRoutes.html">
+                favorRoutes.js
+              </a>
+            
+              
+              <a class="source" href="photoController.html">
+                photoController.js
+              </a>
+            
+              
+              <a class="source" href="photoRoutes.html">
+                photoRoutes.js
+              </a>
+            
+              
+              <a class="source" href="pushNotify.html">
+                pushNotify.js
+              </a>
+            
+              
+              <a class="source" href="server.html">
+                server.js
+              </a>
+            
+              
+              <a class="source" href="drakeapp-spec.html">
+                drakeapp-spec.js
+              </a>
+            
+              
+              <a class="source" href="binaryHeap.html">
+                binaryHeap.js
+              </a>
+            
+              
+              <a class="source" href="userController.html">
+                userController.js
+              </a>
+            
+              
+              <a class="source" href="userRoutes.html">
+                userRoutes.js
+              </a>
+            
+              
+              <a class="source" href="utils.html">
+                utils.js
+              </a>
+            
+              
+              <a class="source" href="voteController.html">
+                voteController.js
+              </a>
+            
+              
+              <a class="source" href="votePhotoController.html">
+                votePhotoController.js
+              </a>
+            
+              
+              <a class="source" href="voteRoutes.html">
+                voteRoutes.js
+              </a>
+            
+              
+              <a class="source" href="instagramRoutes.html">
+                instagramRoutes.js
+              </a>
+            
+              
+              <a class="source" href="instagramScrape.html">
+                instagramScrape.js
+              </a>
+            
+              
+              <a class="source" href="twitterRoutes.html">
+                twitterRoutes.js
+              </a>
+            
+              
+              <a class="source" href="twitterScrape.html">
+                twitterScrape.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>binaryHeap.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+
+
+	<span class="hljs-keyword">var</span> makeNode = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">votes</span>) </span>{
+		<span class="hljs-keyword">this</span>.votes = votes || <span class="hljs-number">0</span>;
+	}
+
+	<span class="hljs-keyword">var</span> BinaryHeap = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">propertyToCompare, arr</span>) </span>{
+		<span class="hljs-keyword">this</span>.content = [<span class="hljs-literal">null</span>]
+		<span class="hljs-keyword">if</span>(arr) arr.forEach(<span class="hljs-keyword">this</span>.insert.bind(<span class="hljs-keyword">this</span>));
+
+		<span class="hljs-keyword">this</span>.getVal = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">i</span>) </span>{
+			<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.content[i][propertyToCompare];
+		}
+
+	}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	BinaryHeap.prototype = {
+
+		<span class="hljs-comment">/**
+		* API methods
+		*/</span>
+
+		peak: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">object</span>) </span>{
+			<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.content[<span class="hljs-number">1</span>];
+		},
+
+		insert: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">object</span>) </span>{
+			<span class="hljs-keyword">this</span>.bubble(<span class="hljs-keyword">this</span>.content.push(object)-<span class="hljs-number">1</span>);
+		},
+
+
+		remove: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+			<span class="hljs-keyword">var</span> minObject = <span class="hljs-keyword">this</span>.content[<span class="hljs-number">1</span>];
+			<span class="hljs-keyword">this</span>.content[<span class="hljs-number">1</span>] = <span class="hljs-keyword">this</span>.content.pop();
+			<span class="hljs-keyword">this</span>.sink(<span class="hljs-number">1</span>);
+
+			<span class="hljs-keyword">return</span> minObject;
+		},
+
+		<span class="hljs-comment">/**
+		*auxiliary methods
+		*/</span>
+
+		bubble: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">i</span>) </span>{
+			<span class="hljs-keyword">var</span> parentIndex = <span class="hljs-built_in">Math</span>.floor(i/<span class="hljs-number">2</span>);
+			<span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.content[parentIndex] &gt; <span class="hljs-keyword">this</span>.content[i] &amp;&amp; i&gt;<span class="hljs-number">1</span>) {
+				<span class="hljs-keyword">this</span>.swap(i, parentIndex);
+				<span class="hljs-keyword">this</span>.bubble(parentIndex);
+			}
+
+		},
+
+		sink: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">i</span>) </span>{
+			<span class="hljs-keyword">var</span> isLeftLesser = <span class="hljs-keyword">this</span>.content[i*<span class="hljs-number">2</span>] &lt; <span class="hljs-keyword">this</span>.content[i*<span class="hljs-number">2</span>+<span class="hljs-number">1</span>];
+			<span class="hljs-keyword">var</span> childIndex = isLeftLesser ? i*<span class="hljs-number">2</span>: i*<span class="hljs-number">2</span>+<span class="hljs-number">1</span>;
+
+			<span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.content[childIndex]&lt; <span class="hljs-keyword">this</span>.content[i]){
+				<span class="hljs-keyword">this</span>.swap(i, childIndex);
+				<span class="hljs-keyword">this</span>.sink(i);
+			}
+		},
+    	
+    	swap: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">i,j</span>) </span>{
+        	<span class="hljs-keyword">if</span> (j&lt; <span class="hljs-number">0</span>) j += <span class="hljs-keyword">this</span>.content.length; 
+        	<span class="hljs-keyword">this</span>.content[i] ^= <span class="hljs-keyword">this</span>.content[j];
+        	<span class="hljs-keyword">this</span>.content[j] ^= <span class="hljs-keyword">this</span>.content[i];
+        	<span class="hljs-keyword">this</span>.content[i] ^= <span class="hljs-keyword">this</span>.content[j];
+    	}
+
+
+	}
+
+
+
+<span class="hljs-keyword">var</span> heap = <span class="hljs-keyword">new</span> BinaryHeap(<span class="hljs-string">""</span>,[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span> ]);
+<span class="hljs-built_in">console</span>.log(heap.content);
+
+heap.insert(<span class="hljs-number">2</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'1'</span>);
+
+
+heap.insert(<span class="hljs-number">3</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'2'</span>);
+
+
+heap.remove();
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'3'</span>);
+
+
+heap.insert(<span class="hljs-number">7</span>);
+heap.insert(<span class="hljs-number">4</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'4'</span>);
+
+
+heap.remove();
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'5'</span>);
+
+
+heap.remove();
+
+heap.remove();
+heap.insert(<span class="hljs-number">1</span>);
+heap.insert(<span class="hljs-number">0</span>);
+<span class="hljs-built_in">console</span>.log(heap.content);
+
+
+heap.insert(<span class="hljs-number">0</span>);
+heap.insert(<span class="hljs-number">1</span>);
+heap.insert(<span class="hljs-number">2</span>);
+heap.insert(<span class="hljs-number">3</span>);
+heap.insert(<span class="hljs-number">4</span>);
+heap.insert(<span class="hljs-number">5</span>);
+heap.insert(<span class="hljs-number">6</span>);
+heap.insert(<span class="hljs-number">7</span>);
+
+<span class="hljs-built_in">console</span>.log(heap.content);</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
