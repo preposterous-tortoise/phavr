@@ -42,7 +42,7 @@ var sendMessage = function(users, message) {
 module.exports = {
 
   /**
-   * Description
+   * Tells the user that there is a new photo in their favor's thread
    * @method notifyNewPhoto
    * @param {} favor_id
    * @return 
@@ -78,7 +78,7 @@ module.exports = {
   },
 
   /**
-   * Description
+   * Tell's the user that they have entered the vicinity of a new favor
    * @method notifyNewFavor
    * @param {FavorSchema} favor
    * @return 

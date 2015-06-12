@@ -3,7 +3,7 @@ var Q = require('q');
 
 module.exports = {
   /**
-   * Description
+   * Update the user's location coordinates in their table
    * @method updateLocation
    * @param {Object} req
    * @param {Object} res
@@ -11,7 +11,6 @@ module.exports = {
    * @return 
    */
   updateLocation: function(req, res, next) {
-    console.log('updateLocation: ', req.body);
     User.findOne({
       provider_id: req.user.provider_id,
     }, function(err, user) {
@@ -34,7 +33,7 @@ module.exports = {
     });
   },
   /**
-   * Description
+   * Update the user's location coordinates in their table
    * @method update
    * @param {Object} req
    * @param {Object} res

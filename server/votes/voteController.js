@@ -7,7 +7,7 @@ var Vote = require('../db/voteModel.js');
 
 module.exports = {
   /**
-   * Description
+   * Function does both upvoting and downvoting
    * @method upVote
    * @param {} req
    * @param {} res
@@ -15,7 +15,6 @@ module.exports = {
    * @return 
    */
   upVote: function(req, res, next) {
-    console.log("I NEED THIS PROVIDER ID BRUH "+req.user)
 
 
     //Query the Vote table for entries with a certain userID and favorID
@@ -69,22 +68,15 @@ module.exports = {
             Vote.findByIdAndUpdate(vote._id,
               { $inc: {vote: -1 } },
               function(err, data) {
-                console.log('THIS IS THE DATA DAWG!!!! '+data);
                   Favor.findByIdAndUpdate(req.body.favor._id, 
                   { $inc: {votes: -1 } }, 
                     function(err, data){
-                        console.log("THIS IS DELETE DATA!"+ JSON.stringify(data))
                         if (data.votes <= -4) {
-                          console.log("DETECTED LESS THAN -4, WILL NOW REMOVE!")
-                          // Favor.findOneAndRemove({
-                          //   _id : req.body.favor_id
-                          // })
                           data.remove()
                         } else if (data.votes > -5){
                           User.findByIdAndUpdate(req.user._id,
                             { $inc: {points: -1 } },
                             function(err, data) {
-                              console.log('succesfully did points!!!!!!!!!!!!!');
                               res.send('-1');
                             });
                         }
@@ -92,7 +84,6 @@ module.exports = {
               });
           
         } else { 
-          console.log("AWWW NOOOOOO");
           res.send('0'); 
         }
         // //otherwise, you've already voted. send back 0
@@ -118,11 +109,9 @@ module.exports = {
           Favor.findByIdAndUpdate(req.body.favor._id,
           { $inc: {votes: -1} },
           function(err, data) {
-            console.log('downvoted!!!');
             res.send('-1'); 
           });
         }
-        // done(null, user);
       });
       }
     });
@@ -130,27 +119,9 @@ module.exports = {
 
   },
 
-  /**
-   * Description
-   * @method downVote
-   * @param {} req
-   * @param {} res
-   * @param {} next
-   * @return 
-   */
-  downVote: function(req, res, next) {
-    // var userObj = req.session.passport.user;
-    // var create, newPortfolio;
-
-    Favor.findByIdAndUpdate(req.body._id, 
-      {votes: req.body.votes-1 }, 
-      function(err, data){
-      res.send('successfully downvoted');
-    });
-  },
 
   /**
-   * Description
+   * This function does both upvoting and downvoting for photos
    * @method upVotePhoto
    * @param {} req
    * @param {} res
@@ -167,14 +138,10 @@ module.exports = {
       photoID: req.body.photo._id
     }, function (err, vote) {
       
-      console.log("photoID", req.body.photo._id);
-      console.log("THIS IS USER VOTE! "+vote);
       console.log(err);
       
       // console.log('ERROR in finding user on login: ', err);
       if (err) throw (err);
-
-      // console.log('LOGIN no error, user: ', user);
       
       // check if there's already a vote by this user...
       if (!err && vote != null) {
@@ -183,20 +150,16 @@ module.exports = {
         console.log("vote.vote", vote.vote);
         if (req.body.vote === 1 && (vote.vote ===-1 || vote.vote ===0))  { //if sending an upvote, check if there is already a downvote
 
-            console.log('overriding downvote');
-            //override the downvote
-            //vote.vote = 1;
+            //find that exact vote, photo, and up the user's kudos by 1
             Vote.findByIdAndUpdate(vote._id,
               { $inc: {vote: 1 } },
               function(err, data) {
-                console.log('succesfully did findbyidandupdate');
                 Photo.findByIdAndUpdate(req.body.photo._id, 
                 { $inc: {votes: 1 } }, 
                 function(err, data){
                   User.findByIdAndUpdate(req.user._id,
                     { $inc: {points: 1 } },
                     function(err, data) {
-                      console.log('succesfully did points!!!!!!!!!!!!!');
                       res.send('1');
                     });
                 });
@@ -206,24 +169,19 @@ module.exports = {
 
         else if(req.body.vote === -1 && (vote.vote === 1|| vote.vote ===0)){
 
-            //vote.vote = -1;
+            //find that exact vote, photo, and down the user's kudos by 1
             Vote.findByIdAndUpdate(vote._id,
               { $inc: {vote: -1 } },
               function(err, data) {
-                console.log('succesfully did findbyidandupdate');
                 Photo.findByIdAndUpdate(req.body.photo._id, 
                 { $inc: {votes: -1 } }, 
                   function(err, data){
                     if (data.votes <= -4) {
-                      // Photo.findOneAndRemove({
-                      //   _id : req.body.photo._id
-                      // })
                       data.remove()
                     } else if (data.votes > -5){
                       User.findByIdAndUpdate(req.user._id,
                         { $inc: {points: -1 } },
                         function(err, data) {
-                          console.log('succesfully did points!!!!!!!!!!!!!');
                           res.send('1');
                         });
                     }
@@ -231,12 +189,12 @@ module.exports = {
               });
           
         } else { 
-          console.log("AWWW NOOOOOO");
           res.send('0'); 
         }
         // //otherwise, you've already voted. send back 0
       } else {
       
+      //Create a new vote table if one does not already exist!
       var vote = new Vote({
         userID: req.user.provider_id,
         photoID: req.body.photo._id,
@@ -256,11 +214,9 @@ module.exports = {
           Photo.findByIdAndUpdate(req.body.photo._id,
           { $inc: {votes: -1} },
           function(err, data) {
-            console.log('downvoted!!!');
             res.send('-1'); 
           });
         }
-        // done(null, user);
       });
       }
     });

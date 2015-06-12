@@ -6,7 +6,7 @@ var Q = require('q');
 
 module.exports = {
   /**
-   * Description
+   * Queries the databsse for favors inside the given box
    * @method fetchFavors
    * @param {} req
    * @param {} res
@@ -14,20 +14,18 @@ module.exports = {
    * @return 
    */
   fetchFavors: function(req, res, next) {
-    console.log("I AM INSIDE OF fetchFavors!!!");
   	var box = req.body.box;
     var query = Favor.find(utils.getPolyBoxQuery(box));
     query.exec(function(err, docs) {
       res.json(docs);
       if (err) {
-        console.log('ERROR in Favor.find ', err)
         res.send('ERROR in Favor.find ' + err)
       }
     });
   },
   
   /**
-   * Description
+   * This function adds favors to the database.
    * @method createFavor
    * @param {} req
    * @param {} res
@@ -35,7 +33,6 @@ module.exports = {
    * @return 
    */
   createFavor: function(req, res, next) {
-    console.log("IM INSIDE CREATE FAVOR "+JSON.stringify(req.body));
     var favor = new Favor({
       topic: req.body.topic,
       description: req.body.description,
@@ -61,59 +58,9 @@ module.exports = {
       res.send(favor);
     });
   },
-  /**
-   * Description
-   * @method updateFavor
-   * @param {} req
-   * @param {} res
-   * @param {} next
-   * @return 
-   */
-  updateFavor: function(req, res, next) {
-    // var userObj = req.session.passport.user;
-    // var create, newPortfolio;
-    res.send('updateFavor called with body: ' + JSON.stringify(req.body));
-  },
 
   /**
-   * Description
-   * @method upVoteFavor
-   * @param {} req
-   * @param {} res
-   * @param {} next
-   * @return 
-   */
-  upVoteFavor: function(req, res, next) {
-  
-    Favor.findByIdAndUpdate(req.body._id, 
-      {votes: req.body.votes+1 }, 
-      function(err, data){
-      res.send('successfully upvoted');
-    });
-
-  },
-
-  /**
-   * Description
-   * @method downVoteFavor
-   * @param {} req
-   * @param {} res
-   * @param {} next
-   * @return 
-   */
-  downVoteFavor: function(req, res, next) {
-    // var userObj = req.session.passport.user;
-    // var create, newPortfolio;
-
-    Favor.findByIdAndUpdate(req.body._id, 
-      {votes: req.body.votes-1 }, 
-      function(err, data){
-      res.send('successfully downvoted');
-    });
-  },
-
-  /**
-   * Description
+   * This function grabs favors for a specific user. Used for profile page
    * @method grabFavor
    * @param {} req
    * @param {} res
@@ -121,7 +68,6 @@ module.exports = {
    * @return 
    */
   grabFavor: function(req, res, next) {
-    console.log("I'M INSIDE GRAB FAVOR!!!"+req.user)
     Favor.find(
       {user_id : req.user.provider_id},  
       function(err, data){

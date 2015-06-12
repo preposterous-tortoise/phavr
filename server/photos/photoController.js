@@ -9,7 +9,7 @@ var S3_BUCKET = process.env.S3_BUCKET;
 
 module.exports = {
   /**
-   * Description
+   * Creates a new photo entry in the Photo table
    * @method createPhoto
    * @param {} req
    * @param {} res
@@ -33,7 +33,7 @@ module.exports = {
   },
 
   /**
-   * Description
+   * Creates a new dummy photo for testing purposes
    * @method createDummyPhoto
    * @param {} req
    * @param {} res
@@ -51,9 +51,8 @@ module.exports = {
 
   },
 
-  //Query the Photo table for photos from a certain favor
   /**
-   * Description
+   * Query the Photo table for a photos from a certain favor
    * @method fetchPhotosForFavor
    * @param {} req
    * @param {} res
@@ -67,51 +66,13 @@ module.exports = {
     query.exec(function(err, docs) {
       res.json(docs);
       if (err) {
-        console.log('ERROR in fetchPhotosForFavor ', err)
         res.send('ERROR in fetchPhotosForFavor ' + err)
       }
     });
   },
 
-  
   /**
-   * Description
-   * @method updatePhoto
-   * @param {} req
-   * @param {} res
-   * @param {} next
-   * @return 
-   */
-  updatePhoto: function(req, res, next) {
-    res.send('updatePhoto called with body: ' + JSON.stringify(req.body));
-  },
-
-  /**
-   * Description
-   * @method upVotePhoto
-   * @param {} req
-   * @param {} res
-   * @param {} next
-   * @return 
-   */
-  upVotePhoto: function(req, res, next) {
-    
-  },
-
-  /**
-   * Description
-   * @method downVotePhoto
-   * @param {} req
-   * @param {} res
-   * @param {} next
-   * @return 
-   */
-  downVotePhoto: function(req, res, next) {
-   
-  },
-
-  /**
-   * Description
+   * This function uploads the chunkified picture to the Amazon S3 service
    * @method uploadToS3
    * @param {} req
    * @param {} res
@@ -168,7 +129,7 @@ module.exports = {
   },
 
   /**
-   * Description
+   * This function is used to make sure the photo is completely chunkified before its sent of to the S3 servers
    * @method uploadToServer
    * @param {} req
    * @param {} res
