@@ -163,97 +163,23 @@ angular.module('phavr.mapService', [])
         //get favor's location
         var location = getFavorLocation(favor);
         var isClose = true;
-
-        if(ionic.Platform.isAndroid() || ionic.Platform.isIOS()) {
-          //only change markers if we're on the phone
-          console.log('getting location to place correct marker...');
-
-          var lat1 = myLatlng.lat();
-          var lon1 = myLatlng.lng();
-          var lat2 = location.lat;
-          var lon2 = location.lng;
-
-          console.log(lat1, lon1, lat2, lon2);
-
-          console.log('calculating distance...');
-          var dist = calculateDistance(lat1, lon1, lat2, lon2);
-
-          if(dist > 2) { //if the favor is more than two miles away from the user
-            //set the icon
-            console.log('that favor is too far away!');
-            isClose = false;
-          }
-          
-          var infowindow = new google.maps.InfoWindow();
-          var marker = new google.maps.Marker({
-            position: location,
-            map: map
-          });
-
-              marker.setPosition(location);
-              marker.setVisible(true);
-              var description = favor.description || "";
-              //for caption purposes
-              if (addInfoWindow) {
-                infowindow.setContent('<div>' + description + 
-                                      '</div><div><strong>' + favor.place_name + '</strong><br>');
-                infowindow.open(map, marker);
-              }
-
-          //set icon based on distance
-          if(isClose) {
-            console.log('using close icon');
-            //set marker properties
-            marker.setIcon( /** @type {google.maps.Icon} */ ({
-              url: genericIconURL, //favor.icon,
-              size: new google.maps.Size(32, 32),
-              origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(16, 16),
-              scaledSize: new google.maps.Size(32, 32)
-            }));
-          } else {
-            console.log('using far icon');
-            marker.setIcon( /** @type {google.maps.Icon} */ ({
-              url: farIconURL, //favor.icon,
-              size: new google.maps.Size(32, 32),
-              origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(16, 32),
-              scaledSize: new google.maps.Size(32, 32)
-            }));
-          }
-
-          marker.setPosition(location);
-          marker.setVisible(true);
-          var description = favor.description || "";
-          //for caption purposes
-          if (addInfoWindow) {
-            infowindow.setContent('<div>' + description + '</div><div><strong>' + favor.place_name + '</strong><br>');
-            infowindow.open(map, marker);
-          }
-
-          if (favor._id) {
-            // add click listener, to redirect to favor details page when marker is clicked
-            google.maps.event.addListener(marker, "click", function() {
-              var favor = getFavorForMarker(this, markerMap);
-              if (favor._id) {
-                Favors.setFavor(favor);
-                $window.location.assign('#/favordetails');
-              }
-            });
-            markerMap[favor._id] = {
-              marker: marker,
-              favor: favor
-            };
-          }
-              // return marker;
-        } else {
-
-        //for browser do the same thing as phones
-        var infowindow = new google.maps.InfoWindow();
+        var lat1 = myLatlng.lat();
+        var lon1 = myLatlng.lng();
+        var lat2 = location.lat;
+        var lon2 = location.lng;
         var marker = new google.maps.Marker({
           position: location,
           map: map
         });
+
+        console.log(lat1, lon1, lat2, lon2);
+        console.log('calculating distance...');
+        var dist = calculateDistance(lat1, lon1, lat2, lon2);
+        if(dist > 2) { //if the favor is more than two miles away from the user
+          //set the icon
+          console.log('that favor is too far away!');
+          isClose = false;
+        }
 
         //set icon based on distance
         if(isClose) {
@@ -271,7 +197,7 @@ angular.module('phavr.mapService', [])
               url: farIconURL, //favor.icon,
               size: new google.maps.Size(32, 32),
               origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(16, 16),
+              anchor: new google.maps.Point(16, 32),
               scaledSize: new google.maps.Size(32, 32)
             }));
         }
@@ -280,6 +206,7 @@ angular.module('phavr.mapService', [])
         marker.setVisible(true);
         var description = favor.description || "";
         if (addInfoWindow) {
+          var infowindow = new google.maps.InfoWindow();
           infowindow.setContent('<div>' + description + '</div><div><strong>' + 
                                 favor.place_name + '</strong><br>');
           infowindow.open(map, marker);
@@ -298,7 +225,6 @@ angular.module('phavr.mapService', [])
           };
         }
         return marker;
-      }
       },
 
       /**

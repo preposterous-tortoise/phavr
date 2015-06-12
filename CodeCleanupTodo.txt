@@ -33,3 +33,9 @@ homeCtrl: updateFavors sets location on localStorage
 
 in Factories:  user $http.post instead of $http({ method: 'POST'});
 
+
+=========================
+
+homeCtrl should call mapService.getBounds in all cases.
+mapService.getBounds should return the default box around the curren location if getBounds === null
+
