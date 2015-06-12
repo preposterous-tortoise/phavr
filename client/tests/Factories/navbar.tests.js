@@ -1,18 +1,17 @@
-describe('homeCtrl', function() {
+/*describe('homeCtrl', function() {
   // var google;
 
   beforeEach(function() {
-    module('drakeApp.favorfact');
-    module('drakeApp.home');
-    module('drakeapp.photoFactory');
-    module('drakeapp.locationFactory');
-    module('drakeApp.mapService');
-    module('drakeapp.authFactory');
-    module('drakeApp.navfact');
-    module('drakeApp.mapService');
-    module('drakeapp.locationFactory');
+    module('phavr.favorfact');
+    module('phavr.home');
+    module('phavr.photoFactory');
+    module('phavr.locationFactory');
+    module('phavr.mapService');
+    module('phavr.authFactory');
+    module('phavr.nav');
+    module('phavr.mapService');
+    module('phavr.locationFactory');
     module('ngCordovaMocks');
-    module('drakeApp.navfact');
 
   });
 
@@ -30,4 +29,4 @@ describe('homeCtrl', function() {
     expect(nav.navBar).toEqual(false);
   });
 
-});
+});*/
