@@ -177,8 +177,22 @@
 
 	console.log(h.content);
 	console.log(topK);
+	processNew('d');
+		processNew('d');
+		processNew('e');
 
+processNew('d');
+		processNew('d');
+		processNew('e');processNew('d');
+		processNew('d');
 
+	console.log(h.content);
+	console.log(topK);
+
+/**
+* Now figure out whether the frequencies are accurate
+* auto time expiry nodes 
+*/
 
 // var heap = new BinaryHeap("",[1],3);
 // heap.remove();
