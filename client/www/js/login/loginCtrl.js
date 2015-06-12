@@ -1,5 +1,5 @@
 angular.module('phavr.login', [])
-.controller('loginCtrl', function ($scope, $rootScope, $location, $cordovaOauth, Auth, $http, Favors, PushFactory, Auth, geo){
+.controller('loginCtrl', function ($scope, $ionicHistory, $rootScope, $location, $cordovaOauth, Auth, $http, Favors, PushFactory, Auth, geo){
   
   /**
    * Takes out the header bar
@@ -37,6 +37,10 @@ angular.module('phavr.login', [])
     //$location.path('/home');
     } 
 
+    $ionicHistory.nextViewOptions({
+      historyRoot: true
+    });
+
 
 
 
@@ -68,7 +72,7 @@ angular.module('phavr.login', [])
    */
   $scope.fbLogin = function() {
 
-  $rootScope.login = true;
+  // $rootScope.login = true;
 
 
     $cordovaOauth.facebook(Auth.clientID, ['user_friends'])

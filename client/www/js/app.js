@@ -16,6 +16,29 @@ angular.module('phavr', ['ionic', 'ngCordova', 'phavr.login', 'phavr.home', 'pha
     }
   });
 })
+.run(function($rootScope, $ionicPlatform, $ionicHistory){
+  $ionicPlatform.registerBackButtonAction(function(e){
+    if ($rootScope.backButtonPressedOnceToExit) {
+      ionic.Platform.exitApp();
+    }
+
+    else if ($ionicHistory.backView()) {
+      $ionicHistory.goBack();
+    }
+    else {
+      $rootScope.backButtonPressedOnceToExit = true;
+      window.plugins.toast.showShortCenter(
+        "Press back button again to exit",function(a){},function(b){}
+      );
+      setTimeout(function(){
+        $rootScope.backButtonPressedOnceToExit = false;
+      },2000);
+    }
+    e.preventDefault();
+    return false;
+  },101);
+
+})
 .config(function(uiGmapGoogleMapApiProvider) {
   // asynchronously load the google maps api, as instructed by angular-google-maps.
   // (see their docs for reference)
