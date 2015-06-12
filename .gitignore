@@ -3,3 +3,4 @@ server/node_modules
 server/auth/authConfig.js
 phavr/www/lib
 server/npm-debug.log
+client/my-release-key.keystore
