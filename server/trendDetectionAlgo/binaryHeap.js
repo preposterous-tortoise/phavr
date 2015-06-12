@@ -1,8 +1,5 @@
 
-	var topK = {
-
-	};
-
+	var topK = {};
 
 	var makeNode = function(votes) {
 		this.votes = votes || 0;
@@ -153,7 +150,6 @@
 				
 			} else {
 				h.insert({favorID:favorID, count:1 - decrementCounter});
-				
 			}
 
 		}
