@@ -68,7 +68,7 @@ angular.module('phavr.login', [])
    */
   $scope.fbLogin = function() {
 
-  $rootScope.login = true;
+  // $rootScope.login = true;
 
 
     $cordovaOauth.facebook(Auth.clientID, ['user_friends'])
