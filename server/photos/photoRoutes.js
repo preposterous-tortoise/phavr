@@ -7,6 +7,7 @@ var photoController = require('./photoController.js');
  * @return 
  */
 module.exports = function (app) {
+  console.log('photo router');
   app.route('/create')
     .post(photoController.createPhoto);
 
