@@ -72,7 +72,7 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('default', ['jasmine_node']);
-  grunt.registerTask('test', ['karma', 'jasmine_node']);  
+  grunt.registerTask('test', ['jasmine_node', 'karma']);  
 
 
 };
