@@ -1,4 +1,4 @@
-
+	
 	var topK = {};
 
 	var makeNode = function(votes) {
@@ -128,7 +128,9 @@
 		var h = new BinaryHeap("count",[],3);
 		var decrementCounter = 0;
 
-	var processNew = function(favorID) {
+	var processNew = function(favorID, time) {
+
+
 
 		//check whether favor is already in top K
 		if(topK[favorID]) {
@@ -149,38 +151,34 @@
 				}
 				
 			} else {
-				h.insert({favorID:favorID, count:1 - decrementCounter});
+				h.insert({favorID:favorID, count:1 - decrementCounter, time:time});
 			}
 
 		}
 
+
+				setTimeout(function(){
+					console.log(favorID);
+					console.log(topK);
+					console.log(h.content);
+			h.content[topK[favorID]].count = -999;
+			h.bubble(topK[favorID]);
+			h.remove();
+								// console.log(topK);
+
+			delete topK[favorID];
+			console.log(h.content);
+		}, 3000);
+
 		
 	};
-
-	processNew('a');
-	processNew('b');
-	processNew('c');
-	processNew('c');
-	processNew('a');
-
-	console.log(h.content);
-	console.log(topK);
-
-	processNew('d');
-		processNew('d');
-		processNew('e')
+	console.log();
+	processNew('a',(new Date()).getTime());
+		processNew('b',(new Date()).getTime());
 
 
-	console.log(h.content);
-	console.log(topK);
-	processNew('d');
-		processNew('d');
-		processNew('e');
 
-processNew('d');
-		processNew('d');
-		processNew('e');processNew('d');
-		processNew('d');
+
 
 	console.log(h.content);
 	console.log(topK);
