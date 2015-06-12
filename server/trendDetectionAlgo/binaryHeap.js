@@ -1,14 +1,7 @@
+
 	var topK = {
 
 	};
-
-
-	var processNew = function(favorID) {
-
-
-	};
-
-
 
 
 	var makeNode = function(votes) {
@@ -17,6 +10,7 @@
 
 	var BinaryHeap = function(propertyToCompare, arr, k) {
 		this.content = [null]
+		this.propertyToCompare = propertyToCompare;
 		this.k = k;
 		if(arr) arr.forEach(this.insert.bind(this));
 
@@ -49,6 +43,8 @@
 
 			if(!this.isFull()) {
 
+				//insert into min heap, and bubble to correct position
+				topK[object.favorID] = this.content.length;
 				this.bubble(this.content.push(object)-1);
 			}
 		},
@@ -78,7 +74,8 @@
 
 		bubble: function(i) {
 			var parentIndex = Math.floor(i/2);
-			if(this.content[parentIndex] > this.content[i] && i>1) {
+
+			if(i>1 &&this.content[parentIndex][this.propertyToCompare] > this.content[i][this.propertyToCompare]) {
 				this.swap(i, parentIndex);
 				this.bubble(parentIndex);
 			}
@@ -86,10 +83,10 @@
 		},
 
 		sink: function(i) {
-			var isLeftLesser = this.content[i*2] < this.content[i*2+1];
+			var isLeftLesser = this.content[i*2][this.propertyToCompare] < this.content[i*2+1][this.propertyToCompare];
 			var childIndex = isLeftLesser ? i*2: i*2+1;
 
-			if(this.content[childIndex]< this.content[i]){
+			if(this.content[childIndex][this.propertyToCompare]< this.content[i][this.propertyToCompare]){
 				this.swap(i, childIndex);
 				this.sink(i);
 			}
@@ -97,9 +94,9 @@
     	
     	swap: function(i,j) {
         	if (j< 0) j += this.content.length; 
-        	this.content[i] ^= this.content[j];
-        	this.content[j] ^= this.content[i];
-        	this.content[i] ^= this.content[j];
+        	var temp = this.content[i];
+        	this.content[i] = this.content[j];
+        	this.content[j] = temp;
     	}
 
 
@@ -107,20 +104,37 @@
 
 
 
+	/**
+	*	Look at element in data stream
+	*/
+
+	var h = new BinaryHeap("count",[{favorID:"5", count: 1}],3);
 
 
-var heap = new BinaryHeap("",[1],3);
-heap.remove();
-
-heap.remove();
-heap.insert(1);
-heap.insert(2);
-heap.remove();
-heap.insert(2);
-
-heap.remove();
-heap.remove();
 
 
-console.log(heap.content);
+
+	console.log(h.content);
+	var processNew = function(favorID) {
+
+
+		
+	};
+
+
+
+
+// var heap = new BinaryHeap("",[1],3);
+// heap.remove();
+
+// heap.remove();
+// heap.insert(1);
+// heap.insert(2);
+// heap.remove();
+// heap.insert(2);
+
+// heap.remove();
+// heap.remove();
+
+// console.log(heap.content);
 
