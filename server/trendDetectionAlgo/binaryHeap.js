@@ -83,9 +83,21 @@
 		},
 
 		sink: function(i) {
-			var isLeftLesser = this.content[i*2][this.propertyToCompare] < this.content[i*2+1][this.propertyToCompare];
-			var childIndex = isLeftLesser ? i*2: i*2+1;
+			var childIndex;
+			var isLeftLesser;
+			if( this.content[i*2] === undefined && this.content[i*2+1]=== undefined ){
+				return;
 
+			}else if( this.content[i*2] === undefined){
+				isLeftLesser = false;
+			}else if( this.content[i*2+1] === undefined) {
+				isLeftLesser = true;
+			}else {
+				//both child exists
+				isLeftLesser = this.content[i*2][this.propertyToCompare] < this.content[i*2+1][this.propertyToCompare];
+			}
+			
+			childIndex = isLeftLesser ? i*2: i*2+1;
 			if(this.content[childIndex][this.propertyToCompare]< this.content[i][this.propertyToCompare]){
 				this.swap(i, childIndex);
 				this.sink(i);
@@ -119,10 +131,14 @@
 
 	var processNew = function(favorID) {
 
-
+		//check whether favor is already in top K
 		if(topK[favorID]) {
+			//if already in topK, increment it
+			h.content[topK[favorID]].count++;
+			h.sink(topK[favorID]);
 
 		}else {
+
 			h.insert({favorID:favorID, count:1});
 		}
 
@@ -130,12 +146,25 @@
 	};
 
 	processNew('a');
-	processNew('a');
-	processNew('a');
-	processNew('a');
 	processNew('b');
-	processNew('a');
 	processNew('c');
+	processNew('a');
+	processNew('a');
+		processNew('b');
+			processNew('b');
+				processNew('b');
+					processNew('b');
+					processNew('c');
+					processNew('c');processNew('c');
+					processNew('c');
+					processNew('c');
+					processNew('c');
+
+
+
+
+
+
 
 
 	console.log(h.content);
