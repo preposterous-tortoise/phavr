@@ -1,20 +1,21 @@
-/*describe('homeCtrl', function() {
+describe('homeCtrl', function() {
   var scope;
   var favors;
   var upVoting;
   
-  var domain = "http://localhost:3000";
+  var domain = "http://phavr.herokuapp.com";
   var access = 'test';
 
   beforeEach(function() {
-  	module('drakeApp.favorfact');
-  	module('drakeApp.home');
-  	module('drakeapp.photoFactory');
-  	module('drakeapp.locationFactory');
-  	module('ngCordovaMocks');
-  	module('drakeApp.mapService');
-    module('drakeapp.authFactory');
-    module('drakeApp.navfact');
+    module('phavr.favorfact');
+    module('phavr.home');
+    module('phavr.photoFactory');
+    module('phavr.locationFactory');
+    module('ngCordovaMocks');
+    module('phavr.mapService');
+    module('phavr.authFactory');
+    module('phavr.nav');
+    module('uiGmapgoogle-maps');
 
   });
 
@@ -24,17 +25,13 @@
     favors = Favors;
     auth = Auth;
     $controller('homeCtrl', {$scope: scope});
-    upVoting = $httpBackend.when('POST', domain+'/api/votes/upVote?access_token='+access).respond('1');
+    upVoting = $httpBackend.when('POST', domain+'/api/votes/upVote').respond('1');
 
   }));
 
   afterEach(function() {
     $httpBackend.verifyNoOutstandingExpectation();
     $httpBackend.verifyNoOutstandingRequest();
-  });
-
-  it('should have testVar set to true', function() {
-    expect(scope.testVar).toEqual(true);
   });
 
   it('should be getting the selected favor from favor factory', function() {
@@ -50,7 +47,7 @@
   it('should upvote a favor', function() {
     var favor = { votes: 0 };
     auth.setAccessToken(access);
-    $httpBackend.expectPOST(domain+'/api/votes/upVote?access_token='+access);
+    $httpBackend.expectPOST(domain+'/api/votes/upVote');
     scope.upVote(favor);
     $httpBackend.flush();
     expect(favor.votes).toEqual(1);
@@ -60,9 +57,9 @@
     var favor = { votes: 0 };
     upVoting.respond('-1');
     auth.setAccessToken(access);
-    $httpBackend.expectPOST(domain+'/api/votes/upVote?access_token='+access);
+    $httpBackend.expectPOST(domain+'/api/votes/upVote');
     scope.upVote(favor);
     $httpBackend.flush();
     expect(favor.votes).toEqual(-1);
   });
-});*/
+});
