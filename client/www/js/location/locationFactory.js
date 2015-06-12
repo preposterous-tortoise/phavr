@@ -184,58 +184,5 @@ angular.module('phavr.locationFactory', [])
     },
 
 
-    /*
-     * Enables Geo-Tracking
-     * @method enableTracking
-     * @return 
-     */
-    enableTracking: function() {
-      if (watchID != null) {
-        navigator.geolocation.clearWatch(watchID);
-        watchID = null;
-      } else {
-        /*
-         * Device APIs for tracking are available
-         * @method enableTracking
-         * @return 
-         */
-        (function onDeviceReady() {
-            // Throw an error if no update is received every 30 seconds
-            var options = {   
-              enableHighAccuracy: true,
-              timeout: 30000 };
-              watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
-            }
-            )();
-        /**
-         * On a succesful Geolocation, send a tuple of two locations to the back-end tp fetch for favors
-         * particular to the user's location
-         * @method onSuccess
-         * @param {} position
-         * @return 
-         */
-        function onSuccess(position) {
-
-          var radius = 0.289855/2; //= 2 miles
-          var box = [[position.coords.longitude-radius, position.coords.latitude-radius], [position.coords.longitude+radius, position.coords.latitude+radius]];
-
-          Favors.fetchRequests(box, function(data){
-            console.log(data);
-          });
-
-        }
-        /*
-         * Something went wrong with the device's geolocation
-         * @method onError
-         * @param {} error
-         * @return 
-         */
-        function onError(error) {
-          alert('code: '    + error.code    + '\n' +
-            'message: ' + error.message + '\n');
-        }
-
-      }
-    }
   }
 });
