@@ -37,7 +37,7 @@
 		},
 
 		isEmpty: function() {
-			return this.content.length ===1 ? true : false;
+			return this.content.length === 1 ? true : false;
 		},
 
 		peak: function(object) {
@@ -58,9 +58,14 @@
 
 			if(!this.isEmpty()){
 
+
 				var minObject = this.content[1];
-				this.content[1] = this.content.pop();
-				this.sink(1);
+				if(this.content.length === 2) {
+					this.content.pop();
+				} else {
+					this.content[1] = this.content.pop();
+					this.sink(1);
+				}
 
 				return minObject;
 				
@@ -104,49 +109,18 @@
 
 
 
-var heap = new BinaryHeap("",[],3);
-console.log(heap.content);
-
-heap.insert(2);
-console.log(heap.content);
-
-
-heap.insert(3);
-console.log(heap.content);
-
-
-
-heap.remove();
-
-
-
-heap.insert(7);
-heap.insert(4);
-console.log(heap.content);
-
-
-
-heap.remove();
-
-
-
+var heap = new BinaryHeap("",[1],3);
 heap.remove();
 
 heap.remove();
 heap.insert(1);
-heap.insert(0);
-console.log(heap.content);
-
-
-heap.insert(0);
-heap.insert(1);
 heap.insert(2);
-heap.insert(3);
-heap.insert(4);
-heap.insert(5);
-heap.insert(6);
-heap.insert(7);
+heap.remove();
+heap.insert(2);
+
+heap.remove();
+heap.remove();
+
 
 console.log(heap.content);
-
 
