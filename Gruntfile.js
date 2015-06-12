@@ -18,6 +18,15 @@ module.exports = function(grunt) {
         singleRun: true,
       }
     },
+    //configure documentation
+    docco: {
+      debug: {
+        src: ['client/www/js.js', 'server/**/*.js'],
+        options: {
+          output: 'docs/'
+        }
+      }
+    },
     //configure back-end Jasmine tests
     jasmine_node: {
         options: {

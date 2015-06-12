@@ -1,0 +1,92 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'c:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'grunt-jasmine-karma',
+1 verbose cli   '--save' ]
+2 info using npm@2.5.1
+3 info using node@v0.12.0
+4 warn package.json fs@0.0.2 fs is also the name of a node core module.
+5 warn package.json fs@0.0.2 No description
+6 warn package.json fs@0.0.2 No repository field.
+7 warn package.json http@0.0.0 http is also the name of a node core module.
+8 warn package.json http@0.0.0 No description
+9 warn package.json http@0.0.0 No repository field.
+10 silly cache add args [ 'grunt-jasmine-karma', null ]
+11 verbose cache add spec grunt-jasmine-karma
+12 silly cache add parsed spec { raw: 'grunt-jasmine-karma',
+12 silly cache add   scope: null,
+12 silly cache add   name: 'grunt-jasmine-karma',
+12 silly cache add   rawSpec: '',
+12 silly cache add   spec: '*',
+12 silly cache add   type: 'range' }
+13 verbose addNamed grunt-jasmine-karma@*
+14 silly addNamed semver.valid null
+15 silly addNamed semver.validRange *
+16 silly addNameRange { name: 'grunt-jasmine-karma', range: '*', hasData: false }
+17 silly mapToRegistry name grunt-jasmine-karma
+18 silly mapToRegistry using default registry
+19 silly mapToRegistry registry https://registry.npmjs.org/
+20 silly mapToRegistry uri https://registry.npmjs.org/grunt-jasmine-karma
+21 verbose addNameRange registry:https://registry.npmjs.org/grunt-jasmine-karma not in flight; fetching
+22 verbose request uri https://registry.npmjs.org/grunt-jasmine-karma
+23 verbose request no auth needed
+24 info attempt registry request try #1 at 7:46:24 PM
+25 verbose request id 938c3fc5832857d0
+26 http request GET https://registry.npmjs.org/grunt-jasmine-karma
+27 http 404 https://registry.npmjs.org/grunt-jasmine-karma
+28 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+28 verbose headers   'content-type': 'application/json',
+28 verbose headers   'cache-control': 'max-age=0',
+28 verbose headers   'content-length': '51',
+28 verbose headers   'accept-ranges': 'bytes',
+28 verbose headers   date: 'Fri, 12 Jun 2015 02:46:31 GMT',
+28 verbose headers   via: '1.1 varnish',
+28 verbose headers   age: '0',
+28 verbose headers   connection: 'keep-alive',
+28 verbose headers   'x-served-by': 'cache-iad2121-IAD',
+28 verbose headers   'x-cache': 'MISS',
+28 verbose headers   'x-cache-hits': '0',
+28 verbose headers   'x-timer': 'S1434077190.933929,VS0,VE355' }
+29 silly get cb [ 404,
+29 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+29 silly get     'content-type': 'application/json',
+29 silly get     'cache-control': 'max-age=0',
+29 silly get     'content-length': '51',
+29 silly get     'accept-ranges': 'bytes',
+29 silly get     date: 'Fri, 12 Jun 2015 02:46:31 GMT',
+29 silly get     via: '1.1 varnish',
+29 silly get     age: '0',
+29 silly get     connection: 'keep-alive',
+29 silly get     'x-served-by': 'cache-iad2121-IAD',
+29 silly get     'x-cache': 'MISS',
+29 silly get     'x-cache-hits': '0',
+29 silly get     'x-timer': 'S1434077190.933929,VS0,VE355' } ]
+30 verbose stack Error: 404 Not Found: grunt-jasmine-karma
+30 verbose stack     at CachingRegistryClient.<anonymous> (c:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:251:14)
+30 verbose stack     at Request._callback (c:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:178:14)
+30 verbose stack     at Request.self.callback (c:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:344:22)
+30 verbose stack     at Request.emit (events.js:110:17)
+30 verbose stack     at Request.<anonymous> (c:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:1239:14)
+30 verbose stack     at Request.emit (events.js:129:20)
+30 verbose stack     at IncomingMessage.<anonymous> (c:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:1187:12)
+30 verbose stack     at IncomingMessage.emit (events.js:129:20)
+30 verbose stack     at _stream_readable.js:908:16
+30 verbose stack     at process._tickCallback (node.js:355:11)
+31 verbose statusCode 404
+32 verbose pkgid grunt-jasmine-karma
+33 verbose cwd c:\Users\Kaivon\Documents\phavr1\phavr
+34 error Windows_NT 6.3.9600
+35 error argv "c:\\Program Files\\nodejs\\node.exe" "c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "grunt-jasmine-karma" "--save"
+36 error node v0.12.0
+37 error npm  v2.5.1
+38 error code E404
+39 error 404 Not Found: grunt-jasmine-karma
+39 error 404
+39 error 404 'grunt-jasmine-karma' is not in the npm registry.
+39 error 404 You should bug the author to publish it (or use the name yourself!)
+39 error 404 It was specified as a dependency of 'phavr'
+39 error 404
+39 error 404 Note that you can also install from a
+39 error 404 tarball, folder, http url, or git url.
+40 verbose exit [ 1, true ]
