@@ -8,6 +8,7 @@
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.31.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.9.3/lodash.min.js"></script>
     <!-- compiled css output -->
+    <link href="css/style.css" rel="stylesheet">
     <link href="css/ionic.app.css" rel="stylesheet">
 
 
@@ -41,10 +42,8 @@
     <script src="js/login/loginCtrl.js"></script>
     <script src="js/favors/favorDetailsCtrl.js"></script>
     <script src="js/login/profileCtrl.js"></script>
-    <script src="js/push/pushCtrl.js"></script>
-    <!-- google maps javascript -->
-    <!--  EITHER IMPORT GOOGLE MAPS HERE (not using Angular Google Maps or 
-       IMPORT using config in app.js-->
+    <script src="js/push/notificationCtrl.js"></script>
+    <script src="js/push/settingsCtrl.js"></script>
   </head>
   <body ng-app="phavr">
 
@@ -69,19 +68,27 @@
 
      <ion-side-menu side="left" ng-controller="NavCtrl">
       <ion-header-bar ng-click="toggleLeft()" class="bar-dark">
-        <h1 class="title">{{ user.data.name  }}</h1>
+        <h1 class="title font">{{ user.data.name  }}</h1>
       </ion-header-bar>
       <ion-content>
          <ion-list>
           <ion-item ng-click="toggleLeft()" ui-sref="profile">
-            <div class="item-avatar">
-              <img src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal">
-              <span>Profile</span>
+            <div>
+              <img class="profPic" src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal">
             </div>
           </ion-item>
-          <ion-item>Notifications</ion-item>
-          <ion-item>Settings</ion-item>
-          <ion-item ng-click="getUserInfo()">Hello!</ion-item>
+          <ion-item ng-click="toggleLeft()" ui-sref="notifications">
+            <div>
+              <span>Notifications</span>
+            </div>
+          </ion-item>
+          <ion-item ng-click="toggleLeft()" ui-sref="settings">
+            <div>
+              <span>Settings</span>
+            </div>
+          </ion-item>          
+          <ion-item ng-click="toggleGeotracking()"> {{toggleGeo}} Geotracking </ion-item>
+          <ion-item ng-click="logOut()">Log Out</ion-item>
          </ion-list>
        </ion-content>
      </ion-side-menu>

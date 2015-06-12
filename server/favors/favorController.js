@@ -1,45 +1,37 @@
 var Favor = require('../db/favorModel.js');
 var Photo = require('../db/photoModel.js');
 var Notifier = require('../push/pushNotify.js');
+var utils = require('../utils/utils.js');
 var Q = require('q');
 
-var getPolyBoxQuery = function(box) {
-  var polyBox = [  // sw, ne
-    [
-      [box[0][0], box[0][1]],
-      [box[1][0], box[0][1]],
-      [box[1][0], box[1][1]],
-      [box[0][0], box[1][1]],
-      [box[0][0], box[0][1]]
-    ]
-  ];
-  return {
-    "loc": {
-      "$geoWithin": {
-        "$geometry": {
-          "type": "Polygon",
-          "coordinates": polyBox
-        }
-      }
-    }
-  }
-};
-
 module.exports = {
-  getPolyBoxQuery: getPolyBoxQuery,
-
+  /**
+   * Queries the databsse for favors inside the given box
+   * @method fetchFavors
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   fetchFavors: function(req, res, next) {
   	var box = req.body.box;
-    var query = Favor.find(getPolyBoxQuery(box));
+    var query = Favor.find(utils.getPolyBoxQuery(box));
     query.exec(function(err, docs) {
       res.json(docs);
       if (err) {
-        console.log('ERROR in Favor.find ', err)
         res.send('ERROR in Favor.find ' + err)
       }
     });
   },
   
+  /**
+   * This function adds favors to the database.
+   * @method createFavor
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   createFavor: function(req, res, next) {
     var favor = new Favor({
       topic: req.body.topic,
@@ -66,35 +58,16 @@ module.exports = {
       res.send(favor);
     });
   },
-  updateFavor: function(req, res, next) {
-    // var userObj = req.session.passport.user;
-    // var create, newPortfolio;
-    res.send('updateFavor called with body: ' + JSON.stringify(req.body));
-  },
 
-  upVoteFavor: function(req, res, next) {
-  
-    Favor.findByIdAndUpdate(req.body._id, 
-      {votes: req.body.votes+1 }, 
-      function(err, data){
-      res.send('successfully upvoted');
-    });
-
-  },
-
-  downVoteFavor: function(req, res, next) {
-    // var userObj = req.session.passport.user;
-    // var create, newPortfolio;
-
-    Favor.findByIdAndUpdate(req.body._id, 
-      {votes: req.body.votes-1 }, 
-      function(err, data){
-      res.send('successfully downvoted');
-    });
-  },
-
+  /**
+   * This function grabs favors for a specific user. Used for profile page
+   * @method grabFavor
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   grabFavor: function(req, res, next) {
-    console.log("I'M INSIDE GRAB FAVOR!!!"+req.user)
     Favor.find(
       {user_id : req.user.provider_id},  
       function(err, data){

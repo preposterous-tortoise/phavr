@@ -1,14 +1,11 @@
 <ion-view title="profile">
   <ion-content>
-  
     <h2 class="profileHead">{{ user.data.name }}</h2>
-
-    <div class="item item-avatar profilepic">
-      <img src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal">
+    <div class="profilepic border">
+      <img class="profPic2" src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal">
+      <p class="kudos">Kudos:{{ user.data.points}}</p>
     </div>
-
-    <h2>Favors by You:</h2>
-
+    <h2 class ="byYou">Favors by You:</h2>
     <ion-list ng-repeat="favor in favors | orderBy: filter ">
       <ion-item>
         <h3>{{favor.topic}}</h3>
@@ -26,7 +23,6 @@
         </div>
       </ion-item>
     </ion-list>
-
   </ion-content>
    <ion-footer-bar ng-class="{'tall-footer': toggle}" class="camera-footer map-footer bar-calm">    
     <div class="button-bar searchbar">

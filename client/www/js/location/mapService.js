@@ -1,16 +1,61 @@
 angular.module('phavr.mapService', [])
-  .factory('mapService', function($window, $location, Favors) {
+  .factory('mapService', function($window, $location, Favors, $cordovaGeolocation) {
 
     var myLatlng = new google.maps.LatLng(37.783724, -122.40897799999999);
 
-    var genericIconURL = "http://frit-talk.com/mobile/2/endirect.png"
+    //Icon for the location of a favor
+    var genericIconURL = "http://frit-talk.com/mobile/2/endirect.png";
+    
+    //Icon for the location of a favor that is outside the user's allowed area to take photos
+    var farIconURL = "http://simpleicon.com/wp-content/uploads/map-marker-1.png";
 
+    //Options for the Google Map API
     var mapOptions = {
       center: myLatlng,
       zoom: 16,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
+    /**
+     * This function calculates the distance between two geo-coordinates in miles
+     * @method calculateDistance
+     * @param {} lat1
+     * @param {} lon1
+     * @param {} lat2
+     * @param {} lon2
+     * @return BinaryExpression
+     */
+    var calculateDistance = function(lat1, lon1, lat2, lon2){
+
+      /*
+       * Inner function that converts degrees to radians
+       * @method deg2rad
+       * @param {} deg
+       * @return BinaryExpression
+       */
+      function deg2rad(deg) {
+        return deg * (Math.PI/180);
+      }
+      var R = 6371; // Radius of the earth in km
+      var dLat = deg2rad(lat2-lat1);  // deg2rad below
+      var dLon = deg2rad(lon2-lon1); 
+      var a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2); 
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      var d = R * c; // Distance in km
+      
+      console.log('calculated distance!!', d*0.621371);
+      return d *0.621371; //distance in miles
+    };
+
+    /*
+     * Get's the box(bounds) for finding favors within the passed location
+     * @method getBoxForBounds
+     * @param {} bounds
+     * @return ArrayExpression
+     */
     var getBoxForBounds = function(bounds) {
       return [
         [bounds.getSouthWest().lng(), bounds.getSouthWest().lat()],
@@ -18,6 +63,13 @@ angular.module('phavr.mapService', [])
       ];
     };
 
+    /*
+     * Get the favor corresponding to the marker
+     * @method getFavorForMarker
+     * @param {} marker
+     * @param {} markerMap
+     * @return 
+     */
     var getFavorForMarker = function(marker, markerMap) {
       var value;
       for (var key in markerMap) {
@@ -28,6 +80,12 @@ angular.module('phavr.mapService', [])
       }
     };
 
+    /**
+     * Get the location date from the favor
+     * @method getFavorLocation
+     * @param {} favor
+     * @return 
+     */
     var getFavorLocation = function(favor) {
       if (favor.loc) {
         var coords = favor.loc.coordinates;
@@ -47,10 +105,22 @@ angular.module('phavr.mapService', [])
 
       getFavorLocation: getFavorLocation,
       
+      /*
+       * Returns your location
+       * @method getLocation
+       * @return myLatlng
+       */
       getLocation: function() {
         return myLatlng;
       },
 
+      /**
+       * Sets the location of the map
+       * @method setLocation
+       * @param {} lat
+       * @param {} lng
+       * @return 
+       */
       setLocation: function(lat, lng) {
         myLatlng = new google.maps.LatLng(lat, lng);
         mapOptions = {
@@ -60,6 +130,12 @@ angular.module('phavr.mapService', [])
         };
       },
 
+      /**
+       * Add's a default marker to the map of where you are
+       * @method addDefaultMarker
+       * @param {} map
+       * @return 
+       */
       addDefaultMarker: function(map) {
         var favor = {
             place_name: 'You are here',
@@ -74,25 +150,134 @@ angular.module('phavr.mapService', [])
         this.marker = this.addMarker(favor, map, null, true);
       },
 
+      /**
+       * This function adds a marker to the map
+       * @method addMarker
+       * @param {Object} favor
+       * @param {Object} map
+       * @param {Object} markerMap
+       * @param {Boolean} addInfoWindow
+       * @return 
+       */
       addMarker: function(favor, map, markerMap, addInfoWindow) {
+        //get favor's location
         var location = getFavorLocation(favor);
+        var isClose = true;
+
+        if(ionic.Platform.isAndroid() || ionic.Platform.isIOS()) {
+          //only change markers if we're on the phone
+          console.log('getting location to place correct marker...');
+
+          //get user's location
+            var posOptions = { timeout: 10000, enableHighAccuracy: false };
+            $cordovaGeolocation.getCurrentPosition(posOptions)
+            .then(function(spot) {//calculate distance
+              var lat1 = spot.coords.latitude;
+              var lon1 = spot.coords.longitude;
+              var lat2 = location.lat;
+              var lon2 = location.lng;
+
+              console.log(lat1, lon1, lat2, lon2);
+
+              console.log('calculating distance...');
+              var dist = calculateDistance(lat1, lon1, lat2, lon2);
+
+              if(dist > 2) { //if the favor is more than two miles away from the user
+                //set the icon
+                console.log('that favor is too far away!');
+                isClose = false;
+              }
+              
+              var infowindow = new google.maps.InfoWindow();
+              var marker = new google.maps.Marker({
+                position: location,
+                map: map
+              });
+
+              //set icon based on distance
+              if(isClose) {
+                console.log('using close icon');
+                //set marker properties
+                marker.setIcon( /** @type {google.maps.Icon} */ ({
+                  url: genericIconURL, //favor.icon,
+                  size: new google.maps.Size(32, 32),
+                  origin: new google.maps.Point(0, 0),
+                  anchor: new google.maps.Point(16, 16),
+                  scaledSize: new google.maps.Size(32, 32)
+                }));
+              } else {
+                console.log('using far icon');
+                marker.setIcon( /** @type {google.maps.Icon} */ ({
+                  url: farIconURL, //favor.icon,
+                  size: new google.maps.Size(32, 32),
+                  origin: new google.maps.Point(0, 0),
+                  anchor: new google.maps.Point(16, 32),
+                  scaledSize: new google.maps.Size(32, 32)
+                }));
+              }
+
+              marker.setPosition(location);
+              marker.setVisible(true);
+              var description = favor.description || "";
+              //for caption purposes
+              if (addInfoWindow) {
+                infowindow.setContent('<div>' + description + 
+                                      '</div><div><strong>' + favor.place_name + '</strong><br>');
+                infowindow.open(map, marker);
+              }
+
+              if (favor._id) {
+                // add click listener, to redirect to favor details page when marker is clicked
+                google.maps.event.addListener(marker, "click", function() {
+                  var favor = getFavorForMarker(this, markerMap);
+                  if (favor._id) {
+                    Favors.setFavor(favor);
+                    $window.location.assign('#/favordetails');
+                  }
+                });
+                markerMap[favor._id] = {
+                  marker: marker,
+                  favor: favor
+                };
+              }
+              return marker;
+            });
+        } else {
+
+        //for browser do the same thing as phones
         var infowindow = new google.maps.InfoWindow();
         var marker = new google.maps.Marker({
           position: location,
           map: map
         });
-        marker.setIcon( /** @type {google.maps.Icon} */ ({
-          url: genericIconURL, //favor.icon,
-          size: new google.maps.Size(71, 71),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(17, 34),
-          scaledSize: new google.maps.Size(35, 35)
-        }));
+
+        //set icon based on distance
+        if(isClose) {
+          console.log('using close icon');
+          marker.setIcon( /** @type {google.maps.Icon} */ ({
+            url: genericIconURL, //favor.icon,
+            size: new google.maps.Size(32, 32),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(16, 32),
+            scaledSize: new google.maps.Size(32, 32)
+          }));
+        } else {
+            console.log('using far icon');
+            marker.setIcon( /** @type {google.maps.Icon} */ ({
+              url: farIconURL, //favor.icon,
+              size: new google.maps.Size(32, 32),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(16, 16),
+              scaledSize: new google.maps.Size(32, 32)
+            }));
+        }
+
         marker.setPosition(location);
         marker.setVisible(true);
         var description = favor.description || "";
         if (addInfoWindow) {
-          infowindow.setContent('<div>' + description + '</div><div><strong>' + favor.place_name + '</strong><br>');
+          infowindow.setContent('<div>' + description + '</div><div><strong>' + 
+                                favor.place_name + '</strong><br>');
           infowindow.open(map, marker);
         }
         if (favor._id) {
@@ -109,12 +294,25 @@ angular.module('phavr.mapService', [])
           };
         }
         return marker;
+      }
       },
 
+      /**
+       * Adds a Google Map to the DOM
+       * @method createMap
+       * @return NewExpression
+       */
       createMap: function() {
         return new google.maps.Map(document.getElementById("map"), mapOptions);
       },
 
+      /**
+       * This function adds markers and removes markers accordingly as the user moves and zoom in/outs the map
+       * @method addBoundsListener
+       * @param {} map
+       * @param {} markerMap
+       * @return 
+       */
       addBoundsListener: function(map, markerMap) {
       	var context = this;
         google.maps.event.addListener(map, "bounds_changed", function() {
@@ -125,7 +323,7 @@ angular.module('phavr.mapService', [])
             return;
           }
 
-          Favors.fetchRequests(box, function(favors) {
+          Favors.fetchFavors(box, function(favors) {
             if (favors) {
               for (var i = 0; i < favors.length; i++) {
                 if (!(markerMap[favors[i]._id]))
@@ -139,6 +337,13 @@ angular.module('phavr.mapService', [])
         });
       },
 
+      /**
+       * Function thats listens to a place change and updates the map and feed
+       * @method addPlaceChangedListener
+       * @param {} map
+       * @param {} mapName
+       * @return 
+       */
       addPlaceChangedListener: function(map, mapName) {
       	var context = this;
         var input = (document.getElementById('pac-input'));

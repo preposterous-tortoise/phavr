@@ -1,27 +1,26 @@
 <ion-view title="favorMap">
   <ion-content data-tap-disabled="true" padding="false" ng-controller="FavorMapCtrl">
-    <!--     <div id="map" data-tap-disabled="true" style="width:100%; height:100%"></div> -->
-    <ui-gmap-google-map center="map.center" options="options" zoom="map.zoom" style="width:100%; height:100%"
-         dragging="map.dragging"
-         bounds="map.bounds"
-         events="map.events"
-         pan="true"
-         control="map.control"
-    >
-<!--       <ui-gmap-markers models="map.markers" coords="'self'" icon="'icon'" fit='true' modelsbyref="false" click="onClick">
-      </ui-gmap-markers> -->
+    <ui-gmap-google-map center="map.center" 
+        options="options" 
+        zoom="map.zoom" 
+        style="width:100%; height:100%"
+        dragging="map.dragging"
+        bounds="map.bounds"
+        events="map.events"
+        pan="true"
+        control="map.control">
     </ui-gmap-google-map>
   </ion-content>
-  <ion-footer-bar ng-class="{'tall-footer': toggle}" class="camera-footer map-footer bar-calm">    
+  <ion-footer-bar ng-class="{'tall-footer': search}" class="camera-footer map-footer bar-calm">    
     <div class="button-bar searchbar">
       <button class="button button-outline set-height button-light padding-left lolol">Hot</button>
-      <a ng-click="setToggle()" class="button button-icon icon ion-search set-height"></a>
+      <a ng-click="toggleSearch()" class="button button-icon icon ion-search set-height lolol"></a>
       <button class="button button-outline button-light padding-right set-height lolol">New</button>
     </div>
     <br>
-    <div class="map-search">  
+    <div class="map-search">
       <input id="req-input" type="text" placeholder="Change location">
     </div>
   </ion-footer-bar>  
-
 </ion-view>
+

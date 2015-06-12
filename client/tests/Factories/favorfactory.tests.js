@@ -3,22 +3,20 @@ describe('favorFactory', function() {
   var savingRequest;
   var sendingRequest;
   var upVoting;
-
   var auth;
   var favor;
-
-  var domain = "http://localhost:3000";
+  var domain = "http://phavr.herokuapp.com";
   var access = 'test';
 
   beforeEach(function() {
-    module('drakeApp.favorfact');
-    module('drakeApp.home');
-    module('drakeapp.photoFactory');
-    module('drakeapp.locationFactory');
+    module('phavr.favorfact');
+    module('phavr.home');
+    module('phavr.photoFactory');
+    module('phavr.locationFactory');
     module('ngCordovaMocks');
-    module('drakeApp.mapService');
-    module('drakeapp.authFactory');
-    module('drakeApp.navfact');
+    module('phavr.mapService');
+    module('phavr.authFactory');
+    module('phavr.nav');
 
   });
 
@@ -27,11 +25,11 @@ describe('favorFactory', function() {
     favor = Favors;
     auth = Auth;
 
-    savingRequest = $httpBackend.when('POST', domain+'/api/requests/create?access_token='+access).respond('success');
+    savingRequest = $httpBackend.when('POST', domain+'/api/requests/create').respond('success');
 
-    sendingRequest = $httpBackend.when('POST', domain+'/api/requests?access_token='+access).respond({ topic: 'test' });
+    sendingRequest = $httpBackend.when('POST', domain+'/api/requests').respond({ topic: 'test' });
     
-    upVoting = $httpBackend.when('POST', domain+'/api/votes/upVote?access_token='+access).respond('success');
+    upVoting = $httpBackend.when('POST', domain+'/api/votes/upVote').respond('success');
   }));
 
 
@@ -41,21 +39,21 @@ describe('favorFactory', function() {
   });
 
   it('should save a favor', function() {
-    $httpBackend.expectPOST(domain+'/api/requests/create?access_token='+access);
+    $httpBackend.expectPOST(domain+'/api/requests/create');
     auth.setAccessToken(access);
-    favor.saveRequest({ topic: 'test' });
+    favor.saveFavor({ topic: 'test' });
     $httpBackend.flush();
   })
 
   it('should fetch requests from the server', function() {
-    $httpBackend.expectPOST(domain+'/api/requests?access_token='+access);
+    $httpBackend.expectPOST(domain+'/api/requests');
     auth.setAccessToken(access);
-    favor.fetchRequests([]);
+    favor.fetchFavors([]);
     $httpBackend.flush();
   });
 
   it('should upvote a request', function() {
-    $httpBackend.expectPOST(domain+'/api/votes/upVote?access_token='+access);
+    $httpBackend.expectPOST(domain+'/api/votes/upVote');
     auth.setAccessToken(access);
     favor.upVote(1);
     $httpBackend.flush();

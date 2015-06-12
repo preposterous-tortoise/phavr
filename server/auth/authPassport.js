@@ -4,6 +4,12 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 // API keys configuration file
 var config = require('./AuthConfig');
 
+/**
+ * Description
+ * @method authenticated
+ * @param {} req
+ * @return LogicalExpression
+ */
 var authenticated = function (req) {
   return req.session && req.session.passport && req.session.passport.user;
 }
@@ -22,9 +28,10 @@ module.exports = {
   /**
    * Initializes the FacebookStrategy to create a user object if needed
    * on successful authentication
-   * 
-   * @param {Passport} passport authentication 
    * @api public
+   * @method init
+   * @param {Passport} passport authentication 
+   * @return 
    */
   init: function (passport) {
 
@@ -79,6 +86,11 @@ module.exports = {
    * For authenticating api calls, returns 401 if not authenticated
    *  
    * @api public
+   * @method authenticate
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
    */
   authenticate: function (req, res, next) {
     if (authenticated(req)) {
@@ -92,6 +104,11 @@ module.exports = {
    * For protecting static assets, redirects to /signin.html
    *  
    * @api public
+   * @method signInIfNotAuthenticated
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
    */
   signInIfNotAuthenticated: function (req, res, next) {
     if (authenticated(req)) {

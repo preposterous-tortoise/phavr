@@ -1,0 +1,14 @@
+<ion-view title="settings">
+  <ion-content>
+    <h2>Settings</h2>
+    <ion-list>
+      <ion-item>
+      <form ng-submit="saveSettings()">
+          <ion-checkbox  type="checkbox" name="photoNotification" ng-model="user.notify_photos">Notify me for new photos for my favors</ion-checkbox>
+          <ion-checkbox  type="checkbox" name="favorNotification" ng-model="user.notify_favors">Notify me for new nearby favors</ion-checkbox>
+          <button type="submit" ng-click="saveSettings()" id="save_button" class="button button-full button-positive">Save</button>
+      </form>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

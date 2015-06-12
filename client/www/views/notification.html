@@ -1,0 +1,10 @@
+<ion-view title="notifications">
+  <ion-content>
+    <h2>Notifications</h2>
+    <ion-list ng-repeat="notification in notifications track by $index">
+      <ion-item ng-click="showNotification(notification)">
+        {{notification}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

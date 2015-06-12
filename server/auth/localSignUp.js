@@ -1,6 +1,12 @@
 var User = require('../db/userModel.js');
 var LocalStrategy  = require('passport-local').Strategy;
 
+/**
+ * Description
+ * @method authenticated
+ * @param {} req
+ * @return LogicalExpression
+ */
 var authenticated = function (req) {
   return req.session && req.session.passport && req.session.passport.user;
 }
@@ -8,6 +14,12 @@ var authenticated = function (req) {
 
 module.exports = {
 
+  /**
+   * Description
+   * @method init
+   * @param {} passport
+   * @return 
+   */
   init: function(passport) {
 
     console.log("I'm inside!")
@@ -82,6 +94,11 @@ module.exports = {
    * For authenticating api calls, returns 401 if not authenticated
    *  
    * @api public
+   * @method authenticate
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
    */
   authenticate: function (req, res, next) {
     if (authenticated(req)) {
@@ -95,6 +112,11 @@ module.exports = {
    * For protecting static assets, redirects to /signin.html
    *  
    * @api public
+   * @method signInIfNotAuthenticated
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
    */
   signInIfNotAuthenticated: function (req, res, next) {
     if (authenticated(req)) {

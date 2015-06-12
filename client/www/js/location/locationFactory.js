@@ -1,19 +1,23 @@
 angular.module('phavr.locationFactory', [])
 .factory('geo', function($cordovaGeolocation, mapService, Favors, $location, $http) {
 
+  //Variable for background geolocation storage
   var bgGeo;
+  //Processing variable to show if the location has already been acquired, starts as null
   var processing = false;
+  //ID for background geotracking
   var watchID = null;
 
-  var domain;
-  if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || 
-    $location.host() === 'phavr.herokuapp.com') {
-    domain = "http://phavr.herokuapp.com";
-  } else {
-    domain = "http://localhost:3000";
-  }
+  var domain = localStorage.getItem("domain");
+  // console.log("domain is: ", domain);
 
   return {
+    /**
+     * Get's the User's location through the native Geolocation API, sends back the data via a callback with latitude and longitide
+     * @method getLocation
+     * @param {} callback
+     * @return 
+     */
     getLocation: function(callback) {
     	if(processing) return;
     	processing = true;
@@ -27,35 +31,54 @@ angular.module('phavr.locationFactory', [])
 
     },
 
-    backgroundTracking: function(){
+    /**
+     * Background location tracking using PhoneGap cordova tracking
+     * @method backgroundTracking
+     * @return 
+     */
+    backgroundTracking: function() {
       //start backgroundGeotracking
       bgGeo = window.plugins.backgroundGeoLocation;
 
       /**
-      *  This is my callback for ajax-requests after POSTING background geolocation to my server
-      */
+       *  This is my callback for ajax-requests after POSTING background geolocation to my server, stops background tracking
+       * @method myAjaxCallback
+       * @param {} response
+       * @return 
+       */
       var myAjaxCallback = function(response) {
         bgGeo.finish();
       };
 
       /**
-      *  This call back will be executed every time a geolocation is recorded in the background.
-      */
+       *  This call back will be executed every time a geolocation is recorded in the background.
+       * @method callbackFn
+       * @param {} location
+       * @return 
+       */
       var callbackFn = function(location) {
 
-        console.log('BackgroundGeoLocation callback:'+ location.latitude +',' + location.longitude);
+        // console.log('BackgroundGeoLocation callback:'+ location.latitude +',' + location.longitude);
         //HTTP requeset here to Post Location to my server
 
         myAjaxCallback.call(this);
       }
 
+      /**
+       * This is invoked when there is a failure with background tracking
+       * @method failureFn
+       * @param {} error
+       * @return 
+       */
       var failureFn = function(error) {
         console.log('BackgroundGeoLocation error');
       }
 
-
+      /*
+       * Settings for the background tracking
+       */
       bgGeo.configure(callbackFn, failureFn, {
-        url: 'http://phavr.herokuapp.com/location',
+        url: 'http://phavr.herokuapp.com/api/users/updateloc',
         headers: {
           access_token: window.localStorage.getItem("token")
         },
@@ -69,16 +92,28 @@ angular.module('phavr.locationFactory', [])
         stopOnTerminal: false
       });
 
-      console.log("bg geo started");
       bgGeo.start();
+      // console.log("access token is", window.localStorage.getItem("token"));
     },
 
+    /*
+     * This stops Background Trcking 
+     * @method stopBackGroundTracking
+     * @return 
+     */
     stopBackGroundTracking: function() {
       bgGeo.stop();
     },
 
 
 
+    /*
+     * Get's the User's location using Cordova/PhoneGap methods, send back data latitude and longitiude with 
+     * a callback. Also saves the data in local storage. 
+     * @method phoneLocation
+     * @param {} callback
+     * @return 
+     */
     phoneLocation: function(callback) {
       var context = this;
       var posOptions = { timeout: 10000, enableHighAccuracy: false };
@@ -92,6 +127,11 @@ angular.module('phavr.locationFactory', [])
       });
     },
 
+    /**
+     * Updates the User's Location in the database based on their longitude and Latitude stored in Local Storage
+     * @method updateUserLocation
+     * @return 
+     */
     updateUserLocation: function() {
       var provider_id = localStorage.getItem('user_provider_id');
       var lat = localStorage.getItem('latitude');
@@ -110,8 +150,23 @@ angular.module('phavr.locationFactory', [])
       });
     },
 
-    calculateDistance: function(lat1, lon1, lat2, lon2, callback){
+    /**
+     * This function calculates the distance between two geo-coordinates in miles
+     * @method calculateDistance
+     * @param {} lat1
+     * @param {} lon1
+     * @param {} lat2
+     * @param {} lon2
+     * @return BinaryExpression
+     */
+    calculateDistance: function(lat1, lon1, lat2, lon2) {
 
+      /*
+       * Inner function that converts degrees to radians
+       * @method deg2rad
+       * @param {} deg
+       * @return BinaryExpression
+       */
       function deg2rad(deg) {
         return deg * (Math.PI/180)
       }
@@ -129,14 +184,21 @@ angular.module('phavr.locationFactory', [])
     },
 
 
-    enableTracking: function(callback){
+    /*
+     * Enables Geo-Tracking
+     * @method enableTracking
+     * @return 
+     */
+    enableTracking: function() {
       if (watchID != null) {
         navigator.geolocation.clearWatch(watchID);
         watchID = null;
       } else {
-
-
-        // device APIs are available
+        /*
+         * Device APIs for tracking are available
+         * @method enableTracking
+         * @return 
+         */
         (function onDeviceReady() {
             // Throw an error if no update is received every 30 seconds
             var options = {   
@@ -145,26 +207,29 @@ angular.module('phavr.locationFactory', [])
               watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
             }
             )();
-
-        // onSuccess Geolocation
-        //
+        /**
+         * On a succesful Geolocation, send a tuple of two locations to the back-end tp fetch for favors
+         * particular to the user's location
+         * @method onSuccess
+         * @param {} position
+         * @return 
+         */
         function onSuccess(position) {
-          console.log( 'Latitude: '  + position.coords.latitude      + '<br />' +
-            'Longitude: ' + position.coords.longitude     + '<br />' +
-            '<hr />');
 
           var radius = 0.289855/2; //= 2 miles
           var box = [[position.coords.longitude-radius, position.coords.latitude-radius], [position.coords.longitude+radius, position.coords.latitude+radius]];
 
           Favors.fetchRequests(box, function(data){
-            console.log('got requests');
             console.log(data);
           });
 
         }
-
-        // onError Callback receives a PositionError object
-        //
+        /*
+         * Something went wrong with the device's geolocation
+         * @method onError
+         * @param {} error
+         * @return 
+         */
         function onError(error) {
           alert('code: '    + error.code    + '\n' +
             'message: ' + error.message + '\n');

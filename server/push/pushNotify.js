@@ -1,12 +1,17 @@
 var favorController = require('../favors/favorController.js');
 var Favor = require('../db/favorModel.js');
 var User = require('../db/userModel.js');
+var utils = require('../utils/utils.js');
 var request = require('request');
-var Q = require('q');
 
-
+/**
+ * Description: send a message to the push server
+ * @method sendMessage
+ * @param {Array} users - the provider ids of the recipients
+ * @param {String} message
+ * @return 
+ */
 var sendMessage = function(users, message) {
-  console.log('sending message to frank-push for id: ', user_profile_id);
   var data = {
     users: users,
     android: {
@@ -15,9 +20,9 @@ var sendMessage = function(users, message) {
       }
     }
   };
-  console.log('data to be send to frank-push: ', data);
+  console.log('data to be send to phavr-push: ', data);
   request.post({
-      url: 'http://frank-push.herokuapp.com/send',
+      url: 'http://phavr-push.herokuapp.com/send',
       json: true,
       headers: {
         "content-type": "application/json",
@@ -34,38 +39,14 @@ var sendMessage = function(users, message) {
   );
 }
 
-var getBoxForLoc = function(coords /* [lng, lat] */) {
-  var miles = 1;
-  var radius = 0.02899*miles;
-  var box = [[coords[0]-radius, coords[1]-radius], //sw
-            [coords[0]+radius, coords[1]+radius]]; //ne
-  return box;
-}
-
-var getPolyBoxQuery = function(box) {
-  var polyBox = [  // sw, ne
-    [
-      [box[0][0], box[0][1]],
-      [box[1][0], box[0][1]],
-      [box[1][0], box[1][1]],
-      [box[0][0], box[1][1]],
-      [box[0][0], box[0][1]]
-    ]
-  ];
-  return {
-    "loc": {
-      "$geoWithin": {
-        "$geometry": {
-          "type": "Polygon",
-          "coordinates": polyBox
-        }
-      }
-    }
-  }
-};
-
 module.exports = {
 
+  /**
+   * Tells the user that there is a new photo in their favor's thread
+   * @method notifyNewPhoto
+   * @param {} favor_id
+   * @return 
+   */
   notifyNewPhoto: function(favor_id) {
     Favor.find({
         _id: favor_id
@@ -74,33 +55,59 @@ module.exports = {
         if (err) {
           console.log('Error fetching favor for notification: ', err, favors);
         } else {
-          console.log('New Photo for favor: ', favor_id, favors);
-          // A photo was taken for your favor "description" at PLACE_NAME
-          // 
           var favor = favors[0];
-          var message = "A photo was taken for your favor \"" + favor.description + "\" at " + favor.place_name;
-          console.log('message: ', message);
-          sendMessage([favor.user_id], message);
+          var query = User.findOne({
+            provider_id: favor.user_id
+          });
+          query.exec(function(err, user) {
+            if (err) {
+              console.log('Error finding user by id:', err);
+            } else {
+              console.log('found user for notifyNewPhoto', JSON.stringify(user, null, '\t'));
+              if (user && user.notify_photos) {
+                console.log('New Photo for favor: ', favor_id, favors);
+                var message = "A photo was taken for your favor \"" + favor.description + "\" at " + favor.place_name;
+                message += ", " + new Date().toLocaleString();
+                console.log('message: ', message);
+                sendMessage([favor.user_id], message);
+              }
+            }
+          });
         }
       });
   },
 
+  /**
+   * Tell's the user that they have entered the vicinity of a new favor
+   * @method notifyNewFavor
+   * @param {FavorSchema} favor
+   * @return 
+   */
   notifyNewFavor: function(favor) {
-    // console.log("notifyNewFavor: ", favor);
-    // console.log('new favor box: ', getBoxForLoc(favor.loc.coordinates));
-    var box = getBoxForLoc(favor.loc.coordinates);
-    var query = User.find(getPolyBoxQuery(box));
+    console.log("notifyNewFavor: ", favor);
+    console.log('utils: ', JSON.stringify(utils, null, '\t'));
+    console.log('new favor box: ', utils.getBoxForLoc(favor.loc.coordinates));
+    var box = utils.getBoxForLoc(favor.loc.coordinates);
+    var query = User.find(utils.getPolyBoxQuery(box));
     query.exec(function(err, users) {
+      console.log("notifyNewFavor, nearby user count: ", users ? users.length : 0);
+      console.log("favor user id: ", favor.user_id);
       if (err) {
         console.log('Error finding users for box:', box, err);
       } else {
         var message = 'There is a new favor requested near you at ' + favor.place_name + ', ' + favor.address;
-        var users = [];
+        message += ", " + new Date().toLocaleString();
+        var usersToNofify = [];
         users.forEach(function(user) {
-          if (user.provider_id !== favor.user_id)
-            user.push(user.provider_id);
+          console.log('new favor, nearby user: ', user.name, ', notify_favors: ', user.notify_favors );
+          console.log('ids: ', user.provider_id != favor.user_id, user.provider_id, favor.user_id);
+          if ((user.provider_id != favor.user_id) && user.notify_favors)
+            usersToNofify.push(user.provider_id);
         });
-        sendMessage(users, message);
+        console.log('users to notify for new favor: ', usersToNofify.length);
+        if (usersToNofify.length > 0) {
+          sendMessage(usersToNofify, message);
+        }
       }
     });
   }

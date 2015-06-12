@@ -8,6 +8,14 @@ var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
 
 module.exports = {
+  /**
+   * Creates a new photo entry in the Photo table
+   * @method createPhoto
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   createPhoto: function(req, res, next) {
     //Create a new Photo and Save it
     var photo = new Photo({ url: req.body.image, 
@@ -24,6 +32,14 @@ module.exports = {
           });
   },
 
+  /**
+   * Creates a new dummy photo for testing purposes
+   * @method createDummyPhoto
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   createDummyPhoto: function(req, res, next) {
     var photo = new Photo({ url: req.body.url, 
                             request_id: req.body.favor_id
@@ -35,7 +51,14 @@ module.exports = {
 
   },
 
-  //Query the Photo table for photos from a certain favor
+  /**
+   * Query the Photo table for a photos from a certain favor
+   * @method fetchPhotosForFavor
+   * @param {} req
+   * @param {} res
+   * @param {} next
+   * @return 
+   */
   fetchPhotosForFavor: function(req, res, next) {
     var query = Photo.find({
       request_id: req.body.favor_id
@@ -43,25 +66,18 @@ module.exports = {
     query.exec(function(err, docs) {
       res.json(docs);
       if (err) {
-        console.log('ERROR in fetchPhotosForFavor ', err)
         res.send('ERROR in fetchPhotosForFavor ' + err)
       }
     });
   },
 
-  
-  updatePhoto: function(req, res, next) {
-    res.send('updatePhoto called with body: ' + JSON.stringify(req.body));
-  },
-
-  upVotePhoto: function(req, res, next) {
-    
-  },
-
-  downVotePhoto: function(req, res, next) {
-   
-  },
-
+  /**
+   * This function uploads the chunkified picture to the Amazon S3 service
+   * @method uploadToS3
+   * @param {} req
+   * @param {} res
+   * @return 
+   */
   uploadToS3: function(req,res){
 
       console.log("THIS IS THE UPLOAD S3 BODY!"+JSON.stringify(req.body));
@@ -112,9 +128,16 @@ module.exports = {
     res.send('upload complete');
   },
 
+  /**
+   * This function is used to make sure the photo is completely chunkified before its sent of to the S3 servers
+   * @method uploadToServer
+   * @param {} req
+   * @param {} res
+   * @return 
+   */
   uploadToServer: function(req,res){
     console.log("_________________");
      console.log(req.files);
-    res.redirect('photos/photoUploads/uploadToS3/?fileName=' + req.files.file.originalname);
+    res.redirect('api/photos/uploadToS3?access_token=CAAUhHz7c2VoBAHdARERGW4UkcUpCCmUnzf8oDLUyzWGlqZCKklFJa9sfwaqBkirZCsmbozPlpL0271S4NGrd76GpZACFMi6jDtcskXe85Sg46lLuyr6Yj1PtcWMi1q1xt02xGOX3IrZARMSUQaWHKNyWKORQp3u9ucNDSHFHEjHUhr8OcunU' + req.files.file.originalname);
   }
 }

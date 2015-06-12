@@ -17,7 +17,7 @@ module.exports = function(config) {
     files: [
       'http://maps.googleapis.com/maps/api/js?sensor=false&language=en',  
       '../www/lib/angular/angular.js',
-      '../www/js/*.js',
+      '../www/js/**/*.js',
       '../www/lib/angular-mocks/angular-mocks.js',
       '../www/lib/ionic/js/ionic.bundle.js',
       '../www/lib/ngCordova/dist/ng-cordova-mocks.js',
