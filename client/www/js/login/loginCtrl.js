@@ -1,5 +1,5 @@
 angular.module('phavr.login', [])
-.controller('loginCtrl', function ($scope, $rootScope, $location, $cordovaOauth, Auth, $http, Favors, PushFactory, Auth, geo){
+.controller('loginCtrl', function ($scope, $ionicHistory, $rootScope, $location, $cordovaOauth, Auth, $http, Favors, PushFactory, Auth, geo){
   
   /**
    * Takes out the header bar
@@ -36,6 +36,10 @@ angular.module('phavr.login', [])
       });
     //$location.path('/home');
     } 
+
+    $ionicHistory.nextViewOptions({
+      historyRoot: true;
+    });
 
 
 

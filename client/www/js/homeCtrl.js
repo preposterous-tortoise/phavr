@@ -10,7 +10,7 @@
  */
 
 angular.module('phavr.home', [])
-.controller('homeCtrl', function($scope, $ionicHistory, $rootScope, $location, $http, $timeout, Favors, Photos, geo, mapService, uiGmapGoogleMapApi) {
+.controller('homeCtrl', function($scope, $rootScope, $location, $http, $timeout, Favors, Photos, geo, mapService, uiGmapGoogleMapApi) {
 
   //allows header bar to be shown
   $rootScope.login = true;
@@ -18,9 +18,6 @@ angular.module('phavr.home', [])
   //the favors being displayed in this view
   $scope.favors = [];
 
-  $ionicHistory.nextViewOptions({ 
-    disableBack: true
-  });
   
   //hard-coded example favors, for testing purposes:
 
