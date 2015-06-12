@@ -17,14 +17,14 @@ module.exports = function (app) {
   app.route('/fetch')
     .post(photoController.fetchPhotosForFavor);
 
-  app.route('/update')
-    .post(photoController.updatePhoto);
+  // app.route('/update')
+  //   .post(photoController.updatePhoto);
 
-  app.route('/upVote')
-    .post(photoController.upVotePhoto);
+  // app.route('/upVote')
+  //   .post(photoController.upVotePhoto);
 
-  app.route('/downVote')
-    .post(photoController.downVotePhoto);
+  // app.route('/downVote')
+  //   .post(photoController.downVotePhoto);
 
   app.route('/uploadToS3')
     .get(photoController.uploadToS3);
