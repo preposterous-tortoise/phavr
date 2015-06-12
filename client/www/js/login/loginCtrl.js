@@ -38,7 +38,7 @@ angular.module('phavr.login', [])
     } 
 
     $ionicHistory.nextViewOptions({
-      historyRoot: true;
+      historyRoot: true
     });
 
 
