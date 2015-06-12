@@ -1,3 +1,13 @@
+	var topK = {
+
+	};
+
+
+	var processNew = function(favorID) {
+
+
+	};
+
 
 
 
@@ -5,8 +15,9 @@
 		this.votes = votes || 0;
 	}
 
-	var BinaryHeap = function(propertyToCompare, arr) {
+	var BinaryHeap = function(propertyToCompare, arr, k) {
 		this.content = [null]
+		this.k = k;
 		if(arr) arr.forEach(this.insert.bind(this));
 
 		this.getVal = function(i) {
@@ -21,22 +32,39 @@
 		/**
 		* API methods
 		*/
+		isFull: function(){
+			return this.content.length > this.k  ? true : false;
+		},
+
+		isEmpty: function() {
+			return this.content.length ===1 ? true : false;
+		},
 
 		peak: function(object) {
 			return this.content[1];
 		},
 
 		insert: function(object) {
-			this.bubble(this.content.push(object)-1);
+
+
+			if(!this.isFull()) {
+
+				this.bubble(this.content.push(object)-1);
+			}
 		},
 
 
 		remove: function() {
-			var minObject = this.content[1];
-			this.content[1] = this.content.pop();
-			this.sink(1);
 
-			return minObject;
+			if(!this.isEmpty()){
+
+				var minObject = this.content[1];
+				this.content[1] = this.content.pop();
+				this.sink(1);
+
+				return minObject;
+				
+			}
 		},
 
 		/**
@@ -74,28 +102,32 @@
 
 
 
-var heap = new BinaryHeap("",[1,2,3,4,5 ]);
+
+
+var heap = new BinaryHeap("",[],3);
 console.log(heap.content);
 
 heap.insert(2);
-console.log('1');
+console.log(heap.content);
 
 
 heap.insert(3);
-console.log('2');
+console.log(heap.content);
+
 
 
 heap.remove();
-console.log('3');
+
 
 
 heap.insert(7);
 heap.insert(4);
-console.log('4');
+console.log(heap.content);
+
 
 
 heap.remove();
-console.log('5');
+
 
 
 heap.remove();
@@ -116,4 +148,5 @@ heap.insert(6);
 heap.insert(7);
 
 console.log(heap.content);
+
 
