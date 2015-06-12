@@ -145,15 +145,14 @@
 				decrementCounter--;
 				var minElement= h.peak();
 
-				while( minElement.count + decrementCounter <=0 ) {
-					var removeID = minElement.favorID;
+				while( minElement && minElement.count + decrementCounter <=0 ) {
 					h.remove();
-					delete topK[removeID];
+					delete topK[minElement.favorID];
 					minElement  = h.peak();
 				}
 				
 			} else {
-				h.insert({favorID:favorID, count:1});
+				h.insert({favorID:favorID, count:1 - decrementCounter});
 				
 			}
 
@@ -172,6 +171,9 @@
 	console.log(topK);
 
 	processNew('d');
+		processNew('d');
+		processNew('e')
+
 
 	console.log(h.content);
 	console.log(topK);
