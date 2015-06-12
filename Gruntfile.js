@@ -21,12 +21,22 @@ module.exports = function(grunt) {
     //configure documentation
     docco: {
       debug: {
-        src: ['client/www/js.js', 'server/**/*.js'],
+        src: ['dist/*.js'],
         options: {
           output: 'docs/'
         }
       }
     },
+    //make it into one big file
+    concat: {
+       options: {
+         separator: ';',
+       },
+       dist: {
+         src: ['client/www/js.js', 'server/**/*.js'],
+         dest: 'dist/built.js',
+       },
+     },
     //configure back-end Jasmine tests
     jasmine_node: {
         options: {
@@ -45,6 +55,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-jasmine-node');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-contrib-watch');
