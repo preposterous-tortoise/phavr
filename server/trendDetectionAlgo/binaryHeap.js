@@ -10,6 +10,7 @@
 
 	var BinaryHeap = function(propertyToCompare, arr, k) {
 		this.content = [null]
+
 		this.propertyToCompare = propertyToCompare;
 		this.k = k;
 		if(arr) arr.forEach(this.insert.bind(this));
@@ -128,6 +129,7 @@
 	*	Look at element in data stream
 	*/
 		var h = new BinaryHeap("count",[],3);
+		var decrementCounter = 0;
 
 	var processNew = function(favorID) {
 
@@ -136,10 +138,25 @@
 			//if already in topK, increment it
 			h.content[topK[favorID]].count++;
 			h.sink(topK[favorID]);
-
 		}else {
 
-			h.insert({favorID:favorID, count:1});
+			if(h.isFull()){
+				//if full, decrement everything
+				decrementCounter--;
+				var minElement= h.peak();
+
+				while( minElement.count + decrementCounter <=0 ) {
+					var removeID = minElement.favorID;
+					h.remove();
+					delete topK[removeID];
+					minElement  = h.peak();
+				}
+				
+			} else {
+				h.insert({favorID:favorID, count:1});
+				
+			}
+
 		}
 
 		
@@ -148,24 +165,13 @@
 	processNew('a');
 	processNew('b');
 	processNew('c');
+	processNew('c');
 	processNew('a');
-	processNew('a');
-		processNew('b');
-			processNew('b');
-				processNew('b');
-					processNew('b');
-					processNew('c');
-					processNew('c');processNew('c');
-					processNew('c');
-					processNew('c');
-					processNew('c');
 
+	console.log(h.content);
+	console.log(topK);
 
-
-
-
-
-
+	processNew('d');
 
 	console.log(h.content);
 	console.log(topK);
