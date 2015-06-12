@@ -94,9 +94,17 @@
     	
     	swap: function(i,j) {
         	if (j< 0) j += this.content.length; 
+
+
+        	//update hashtable with new indexes
+        	topK[this.content[i]["favorID"]] = j;
+        	topK[this.content[j]["favorID"]] = i;
+
+
         	var temp = this.content[i];
         	this.content[i] = this.content[j];
         	this.content[j] = temp;
+
     	}
 
 
@@ -110,11 +118,13 @@
 
 	var h = new BinaryHeap("count",[{favorID:"5", count: 1}],3);
 
-
-
+	h.insert({favorID:'6', count:0});
+		h.insert({favorID:'7', count:-1});
+				h.insert({favorID:'9', count:-1});
 
 
 	console.log(h.content);
+	console.log(topK);
 	var processNew = function(favorID) {
 
 
