@@ -35,6 +35,52 @@ angular.module('phavr.home', [])
      distance: 0.256, 
      camera: true}];*/
 
+  /*$scope.favors = [
+    { _id: 1,
+      topic: 'Costumes!',
+      description: "What's the best costume you've seen?",
+      topPhoto: 'http://cdn.funcheap.com/wp-content/uploads/2013/05/bay-to-breakers-soldiers.jpg',
+      votes: 12,
+      distance: 0.256,
+      camera: true,
+      createdAt: 1
+    },
+    { _id: 2,
+      topic: 'Caterpillars',
+      description: 'Show me some rad Bay to Breakers caterpillars',
+      topPhoto: 'http://cdn3.dogomedia.com/pictures/7604/content/breakersslideshow_1002174528_Bay_to_Breakers.JPEG-02a2e.JPG?1305661329',
+      votes: 3,
+      distance: 0.413,
+      camera: true,
+      createdAt: 7
+    },
+    { _id: 3,
+      topic: 'STREET FOOD',
+      description: 'What did you eat for lunch?',
+      topPhoto: 'http://www.nycgo.com/images/460x285/Taim_V1_460x285.jpg',
+      votes: 9,
+      distance: 0.13,
+      camera: true,
+      createdAt: 6
+    },
+    { _id: 4,
+      topic: "Farmer's Market",
+      description: 'How is the produce?',
+      topPhoto: 'http://img2.timeinc.net/health/images/slides/blueberry-intro-400x400.jpg',
+      votes: 8,
+      distance: 0.6,
+      camera: true,
+      createdAt: 4
+    },
+    { _id: 5,
+      topic: 'babies',
+      description: "Who is the coolest baby?",
+      votes: 2,
+      distance: 0.33,
+      camera: true,
+      createdAt: 10
+    }];*/
+
   $scope.selectedFavor = Favors.selectedFavor;
   
   $scope.noFavors = false; //determines whether a 'no favors available' message is displayed

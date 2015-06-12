@@ -22,8 +22,7 @@ body {
   font-weight: normal !important; }
 
 .favor {
-  margin: 5px !important; 
-}
+  margin: 5px !important; }
 
 h2, h3, h4 {
   color: silver !important;
@@ -38,30 +37,26 @@ h2, h3, h4 {
 .kudos {
   display: inline-block !important;
   position: relative !important;
-  left: 150px !important;
+  left: 183px !important;
   font-size: 20px !important;
   top: -10px !important;
   color: silver !important; }
 
 .byYou {
-  position: relative;
-  color: white !important;
-  top: 39px;
-  left: 10px;
-}
+  margin-top: 5px !important; }
 
 .profPic2 {
   border-radius: 50% !important;
   height: 50px !important;
   width: 50px !important;
   position: relative;
-  left: 34px !important; }
+  left: 20px !important; }
 
 .border {
   border-top: none !important !important; }
 
 .description {
-  border-color: rgba(102, 205, 170, 0.65) !important;
+  border-color: #66CDAA !important;
   border-width: 2px !important;
   border-radius: 10px !important;
   /*background-color: #E6F4EF !important;*/ }
@@ -116,8 +111,7 @@ h2, h3, h4 {
   background-image: url("http://i.imgur.com/G1vmHQZ.jpg");
   background-size: cover;
   background-repeat: none;
-  background-position: 50% 50%; 
-}
+  background-position: 50% 50%; }
 
 .go2 {
   width: 80%;
@@ -139,22 +133,21 @@ h2, h3, h4 {
   margin-bottom: 5px; }
 
 .phavr-title {
-  position: relative;
-  bottom: 20%;
   position: absolute;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  transform: translateX(-50%); }
+  bottom: 20%;
+  /*@include centre(x);*/ }
+
+.logo {
+  position: relative;
+  width: 100%; }
 
 .tagline {
   position: relative;
   top: -20px;
   max-width: 100%;
-  width: 190px;
-  color: white; }
+  /*width: 190px;*/
+  color: white;
+  text-align: center; }
 
 .hiddenmap {
   display: none; }
@@ -173,7 +166,8 @@ h2, h3, h4 {
 
 .favorDetail {
   width: 100%;
-  border-radius: 10px !important; }
+  border-radius: 10px;
+  /*max-width: 100%;*/ }
 
 .picVoting {
   /*top: 50%;*/
@@ -233,24 +227,15 @@ h2, h3, h4 {
   transform: translateX(-50%); }
 
 .oauth_button {
-  width: 40%;
+  width: 20% !important;
   z-index: 3;
-  position: absolute;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  transform: translateX(-50%); }
+  position: absolute !important;
+  bottom: 10% !important;
+  left: 40% !important; }
 
 .lolol {
   border: none !important;
   color: white !important; }
-
-.profilepic {
-  position: relative;
-  top: 52px;
-}
 
 .highlighted {
   background-color: #86e0c2 !important; }
@@ -258,7 +243,6 @@ h2, h3, h4 {
 .profileHead {
   position: absolute;
   left: 50%;
-  width: 181px;
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
   -ms-transform: translateX(-50%);

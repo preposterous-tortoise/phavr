@@ -1,4 +1,4 @@
-describe('homeCtrl', function() {
+/*describe('homeCtrl', function() {
   // var google;
 
   beforeEach(function() {
@@ -30,4 +30,4 @@ describe('homeCtrl', function() {
     expect(nav.navBar).toEqual(false);
   });
 
-});
+});*/

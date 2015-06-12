@@ -9,16 +9,15 @@ describe('favorDetailsCtrl', function() {
   var access = 'test';
 
   beforeEach(function() {
-    module('drakeApp.favorfact');
-  	module('drakeApp.home');
-    module('drakeApp.favorDetails');
-  	module('drakeapp.photoFactory');
-  	module('drakeapp.locationFactory');
-  	module('ngCordovaMocks');
-    module('drakeApp.favorfact');
-  	module('drakeApp.mapService');
-    module('drakeapp.authFactory');
-    module('drakeApp.navfact');
+    module('ngCordovaMocks');
+    module('phavr.home');
+    module('phavr.favorfact');
+    //module('phavr.favorDetails');
+    //module('phavr.photoFactory');
+    //module('phavr.locationFactory');
+    //module('phavr.mapService');
+    //module('phavr.authFactory');
+    //module('phavr.navfact');
   });
 
   beforeEach(inject(function($injector, $rootScope, $controller, Favors, photoFactory, Auth) {

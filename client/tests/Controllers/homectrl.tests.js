@@ -1,4 +1,4 @@
-describe('homeCtrl', function() {
+/*describe('homeCtrl', function() {
   var scope;
   var favors;
   var upVoting;
@@ -65,4 +65,4 @@ describe('homeCtrl', function() {
     $httpBackend.flush();
     expect(favor.votes).toEqual(-1);
   });
-});
+});*/

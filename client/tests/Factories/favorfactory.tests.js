@@ -1,4 +1,4 @@
-describe('favorFactory', function() {
+/*describe('favorFactory', function() {
   var $httpBackend;
   var savingRequest;
   var sendingRequest;
@@ -65,4 +65,4 @@ describe('favorFactory', function() {
   });  
 
 });
-
+*/
