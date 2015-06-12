@@ -115,22 +115,31 @@
 	/**
 	*	Look at element in data stream
 	*/
+		var h = new BinaryHeap("count",[],3);
 
-	var h = new BinaryHeap("count",[{favorID:"5", count: 1}],3);
-
-	h.insert({favorID:'6', count:0});
-		h.insert({favorID:'7', count:-1});
-				h.insert({favorID:'9', count:-1});
-
-
-	console.log(h.content);
-	console.log(topK);
 	var processNew = function(favorID) {
 
+
+		if(topK[favorID]) {
+
+		}else {
+			h.insert({favorID:favorID, count:1});
+		}
 
 		
 	};
 
+	processNew('a');
+	processNew('a');
+	processNew('a');
+	processNew('a');
+	processNew('b');
+	processNew('a');
+	processNew('c');
+
+
+	console.log(h.content);
+	console.log(topK);
 
 
 
