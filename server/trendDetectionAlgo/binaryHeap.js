@@ -58,7 +58,9 @@
 					this.content.pop();
 				} else {
 					this.content[1] = this.content.pop();
+					topK[this.content[1]["favorID"]] = 1;
 					this.sink(1);
+
 				}
 
 				return minObject;
@@ -158,30 +160,40 @@
 
 
 				setTimeout(function(){
-					console.log(favorID);
-					console.log(topK);
-					console.log(h.content);
+
+					console.log("_________");
+
 			h.content[topK[favorID]].count = -999;
 			h.bubble(topK[favorID]);
 			h.remove();
 								// console.log(topK);
 
 			delete topK[favorID];
+			console.log(topK);
 			console.log(h.content);
 		}, 3000);
 
 		
 	};
-	console.log();
+
 	processNew('a',(new Date()).getTime());
-		processNew('b',(new Date()).getTime());
 
 
 
+		setTimeout(function(){
+			processNew('b',(new Date()).getTime());
+			console.log(topK);
+			console.log(h.content);
 
 
-	console.log(h.content);
-	console.log(topK);
+		},1000);
+			console.log(topK);
+			console.log(h.content);
+
+
+
+	// console.log(h.content);
+	// console.log(topK);
 
 /**
 * Now figure out whether the frequencies are accurate
