@@ -51,6 +51,7 @@ angular.module('phavr', ['ionic', 'ngCordova', 'phavr.login', 'phavr.home', 'pha
   $urlRouterProvider.otherwise('/')
   
   $stateProvider.state('home', {
+    cache: false,
     url: '/home',
     templateUrl: 'views/home.html',
     controller: 'homeCtrl'
