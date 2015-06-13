@@ -24,12 +24,12 @@ angular.module('phavr.home', [])
   }
 
   //the favors being displayed in this view
-  $scope.favors = [];
+  //$scope.favors = [];
 
   
   //hard-coded example favors, for testing purposes:
 
-  /*[{_id: 1, 
+  $scope.favors = [{_id: 1, 
     topic: 'Street Fashion', 
     description: 'What are people on Filmore St wearing?', 
     topPhoto: 'https://farm4.staticflickr.com/3875/14660511001_9f7cf7150a_b.jpg', 
@@ -42,7 +42,7 @@ angular.module('phavr.home', [])
      topPhoto: 'http://www.autofish.net/mirrors/images/animals/cats/long_cat.jpg', 
      votes: 2, 
      distance: 0.256, 
-     camera: true}];*/
+     camera: true}];
 
   /*$scope.favors = [
     { _id: 1,

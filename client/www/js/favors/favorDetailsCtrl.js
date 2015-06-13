@@ -16,7 +16,7 @@ angular.module('phavr.favorDetails', [])
   
   //hard-coded photos, for testing purposes:
 
-  /*$scope.selectedFavor.photos = [
+  $scope.selectedFavor.photos = [
     { votes:9, 
       url:'http://cdn3.dogomedia.com/pictures/7604/content/breakersslideshow_1002174528_Bay_to_Breakers.JPEG-02a2e.JPG?1305661329'
     }, 
@@ -31,7 +31,7 @@ angular.module('phavr.favorDetails', [])
     },
     { votes: 6,
       url: 'http://www.rentcafe.com/blog/wp-content/uploads/2012/05/breakers.jpg'
-    }];*/
+    }];
 
   /**
    * take a photo to upload

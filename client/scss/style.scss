@@ -58,72 +58,71 @@ $roboto-condensed: 'Roboto Condensed', sans-serif;
 
 
 body {
-  font-family: $roboto-condensed !important;
-  font-weight: normal !important;
+  font-family: $roboto-condensed;
+  font-weight: normal;
 }
 
 .font {
-  font-family: $roboto-condensed !important;
-  font-weight: normal !important;
+  font-family: $roboto-condensed;
+  font-weight: normal;
 }
 
 .favor {
-  margin: 5px !important;
+  margin: 5px;
 }
 
 h2, h3, h4 {
-  color: silver !important;
-  font-family: $roboto-condensed !important;
-  font-weight: normal !important;
+  color: silver;
+  font-family: $roboto-condensed;
+  font-weight: normal;
 
 }
 
 .profPic {
-  border-radius: 50% !important;
-  position: relative !important;
-  left: 61px !important;
+  border-radius: 50%;
+  position: relative;
+  left: 61px;
 }
 
 .kudos {
-  display: inline-block !important;
-  position: relative !important;
-  left: 183px !important;
-  font-size: 20px !important;
-  top: -10px !important;
-  color: silver !important;
+  display: inline-block;
+  position: relative;
+  left: 183px;
+  font-size: 20px;
+  top: -10px;
+  color: silver;
 }
 
 .byYou {
-  margin-top: 5px !important;
+  margin-top: 5px;
 }
 
 .profPic2 {
-  border-radius: 50% !important;
-  height: 50px !important;
-  width: 50px !important;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
   position: relative;
-  left: 20px !important;
+  left: 20px;
 }
 
 .border {
-  border-top: none !important !important;
+  border-top: none;
 }
 
 .description {
-  border-color: $calm !important;
-  border-width: 2px !important;
-  border-radius: 10px !important;
-  /*background-color: #E6F4EF !important;*/
+  border-color: $calm;
+  border-width: 2px;
+  border-radius: 10px;
 }
 
 .upvote {
-  height: 10px !important;
-  color: gray !important;
+  height: 10px;
+  color: gray;
 
 }
 
 .downvote {
-  color: gray !important;
+  color: gray;
 }
 
 .distance {
@@ -132,20 +131,16 @@ h2, h3, h4 {
 }
 
 .favorHead {
-  color: black !important;
+  color: black;
 }
 
 .tall-footer {
-  height: 200px !important;
+  height: 200px;
 
-  -webkit-transition: height 0.8s !important;
-  -moz-transition: height 0.8s !important;
-  transition: height 0.8s !important;
+  -webkit-transition: height 0.8s;
+  -moz-transition: height 0.8s;
+  transition: height 0.8s;
   
-}
-
-.margin {
-  margin-bottom: 5px;
 }
 
 .set-height {
@@ -161,7 +156,6 @@ h2, h3, h4 {
 
 .searchbar {
   position: absolute;
-  display: block;
   width: 100%;
   max-height: 40px;
   input {
@@ -257,21 +251,13 @@ h2, h3, h4 {
   position: relative;
 }
 
-.feedView {
-  padding: 0 !important;
-}
-
 .noPadding {
-  padding: 0 !important;
+  padding: 0;
 }
 
 .bottom-detail {
 	border: none;
 
-}
-
-.camera-footer {
-  position: relative;
 }
 
 .cambutton {
@@ -315,15 +301,15 @@ h2, h3, h4 {
 }
 
 .oauth_button {
-  width: 20% !important;
+  width: 20%;
   z-index: 3;
-  position: absolute !important;
-  bottom: 10% !important;
-  left: 40% !important;
+  position: absolute;
+  bottom: 10%;
+  left: 40%;
 }
 
-.lolol {
-  border: none !important;
+.borderless {
+  border: none;
   color: white !important;
 }
 
