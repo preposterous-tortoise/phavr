@@ -57,9 +57,12 @@ The favor details view displays information for a single favor, selected by the 
 - [ ] pulling down from the top should refresh the feed
 - [ ] displays the selected favor's address, topic, description, and all photos submitted for that favor.
 - [ ] if the favor is within 5 mi of the user, a camera button is available in the footer to submit a photo.
+- [ ] If a photo is uploaded there will be toast messages when the upload starts and finishes.
+- [ ] There is also a toast message if the photo is cancelled
 - [ ] photos each have their own set of votes displayed.
 - [ ] photos can be upvoted or downvoted
 - [ ] if a photo's votes drops below -5, it is removed from the database and details page.
+
 
 ##Favor Creation - Frank
 
