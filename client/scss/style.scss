@@ -87,13 +87,14 @@ h2, h3, h4 {
 .kudos {
   display: inline-block;
   position: relative;
-  left: 183px;
+  left: 159px;
   font-size: 20px;
-  top: -10px;
+  top: 32px;
   color: silver;
 }
 
 .byYou {
+  display: none;
   margin-top: 5px;
 }
 
@@ -102,7 +103,8 @@ h2, h3, h4 {
   height: 50px;
   width: 50px;
   position: relative;
-  left: 20px;
+  left: 35px;
+  top: 52px;
 }
 
 .border {
@@ -318,6 +320,7 @@ h2, h3, h4 {
 }
 
 .profileHead {
+  width: 205px;
   @include centre(x);
 }
 
