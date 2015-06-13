@@ -20,9 +20,14 @@ angular.module('phavr.login', [])
     } else {
       domain = "http://localhost:3000";
     }
+
     Favors.setDomain(domain);
     window.localStorage.setItem("domain", domain);
     console.log('domain is: ', domain);
+
+    $ionicHistory.nextViewOptions({
+      historyRoot: true
+    });
 
 
     if(window.localStorage.getItem("token")) {
@@ -34,13 +39,9 @@ angular.module('phavr.login', [])
         localStorage.setItem('user', JSON.stringify(data.data));
 
       });
-    //$location.path('/home');
+    
+      // $location.path('/home');
     } 
-
-    $ionicHistory.nextViewOptions({
-      historyRoot: true
-    });
-
 
 
 

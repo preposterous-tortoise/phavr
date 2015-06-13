@@ -1,7 +1,7 @@
 <ion-view title="profile">
   <ion-content>
     <h2 class="profileHead">{{ user.data.name }}</h2>
-    <div class="profilepic border">
+    <div class="profilepic">
       <img class="profPic2" src="https://graph.facebook.com/{{user.data.provider_id}}/picture?type=normal">
       <p class="kudos">Kudos:{{ user.data.points}}</p>
     </div>
@@ -26,9 +26,9 @@
   </ion-content>
    <ion-footer-bar ng-class="{'tall-footer': toggle}" class="camera-footer map-footer bar-calm">    
     <div class="button-bar searchbar">
-      <button class="button button-outline set-height button-light padding-left lolol" ng-click="hot()">Hot</button>
+      <button class="button button-outline set-height button-light padding-left borderless" ng-click="hot()">Hot</button>
       <a ng-click="setToggle()" class="button button-icon icon ion-search set-height"></a>
-      <button class="button button-outline button-light padding-right set-height lolol" ng-click="new()">New</button>
+      <button class="button button-outline button-light padding-right set-height borderless" ng-click="new()">New</button>
     </div>
     <br>
     <div class="map-search">  

@@ -6,7 +6,7 @@
  */
 
 angular.module('phavr.favor', ['ngMessages'])
-.controller('favorCtrl', function($scope, $window, $location, Favors, mapService) {
+.controller('favorCtrl', function($scope, $window, $location, Favors, mapService, $cordovaToast) {
 
   /**
    * gets form data and submits a new request to server
@@ -21,6 +21,14 @@ angular.module('phavr.favor', ['ngMessages'])
     //console.log('creating favor...');
 
     var mapFavor = mapService.favor; 
+    if (!$scope.favor || !$scope.favor.topic || !$scope.favor.description) {
+      if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
+        $cordovaToast.showShortCenter('Please enter a topic and description.');
+      } else {
+        alert('Please enter a topic and description.');
+      }
+      return;
+    }
     if (mapFavor) {
       $scope.favor.address = mapFavor.address;
       $scope.favor.place_name = mapFavor.place_name;

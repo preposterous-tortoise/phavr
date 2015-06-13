@@ -20,7 +20,7 @@
     </div>
     
     <ion-list ng-repeat="photo in selectedFavor.photos | orderBy:'-votes'" class="wrap">
-      <div class="list card noPadding margin">
+      <div class="list card noPadding favor">
         <div class="row">
           <div class="col col-90">
             <div class="item item-image description">
@@ -29,7 +29,7 @@
           </div>
 
           <div class="col col-center">
-            <div class="picVoting">
+            <div>
               <a ng-click="upVote(photo)" class="button button-icon icon ion-ios-arrow-up"></a><br>
               <span class="votes">{{photo.votes}}</span><br>
               <a ng-click="downVote(photo)" class="button button-icon icon ion-ios-arrow-down"></a>
@@ -40,7 +40,7 @@
 
     </ion-list>
   </ion-content>
-  <ion-footer-bar class="camera-footer bar-calm">  
+  <ion-footer-bar class="bar-calm">  
     <button class="button cambutton button-icon icon ion-camera" ng-show="selectedFavor.camera" ng-click="getPhoto()"></button>    
   </ion-footer-bar>
 </ion-view>

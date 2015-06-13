@@ -169,8 +169,6 @@
 								// console.log(topK);
 
 			delete topK[favorID];
-			console.log(topK);
-			console.log(h.content);
 		}, 3000);
 
 		
@@ -182,13 +180,7 @@
 
 		setTimeout(function(){
 			processNew('b',(new Date()).getTime());
-			console.log(topK);
-			console.log(h.content);
-
-
 		},1000);
-			console.log(topK);
-			console.log(h.content);
 
 
 

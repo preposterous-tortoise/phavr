@@ -89,13 +89,15 @@ angular.module('phavr.photoFactory', [])
         options.fileKey = "file";
         options.fileName = time +"___"+favorID+".jpg";
         options.mimeType = "image/jpeg";
+        console.log(localStorage.getItem('token'));
+        options.headers = {'access_token': localStorage.getItem('token') };
         var ft = new FileTransfer();
         //file transfer photo to server
         $timeout(function() {
           $cordovaToast.showShortCenter('Photo upload starting...');
         }, 200);
         // alert('Photo upload starting...');
-        ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/photoUploads/uploadToServer"), win, fail, options);
+        ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/api/photos/uploadToServer"), win, fail, options);
       }
 
       /**
