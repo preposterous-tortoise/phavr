@@ -15,16 +15,14 @@
           <label class="item item-input">
             <input ng-model="favor.topic" type="text" placeholder="Topic?" required name="topic">
           </label>
-          <div ng-messages="favorForm.topic.$error" ng-messages-include="views/error-messages.html" 
-        class="form-errors" ng-if="favorForm.topic.$touched">
+          <div ng-messages="favorForm.topic.$error" class="form-errors" ng-if="favorForm.topic.$touched">
           <div class="form-error" ng-message="required">Please enter a topic</div>
         </div>
 
           <label class="item item-input">
             <input ng-model="favor.description" type="text" placeholder="Describe your search!" required name="description">
           </label>
-        <div ng-messages="favorForm.description.$error" ng-messages-include="views/error-messages.html" 
-        class="form-errors" ng-if="favorForm.description.$touched">
+        <div ng-messages="favorForm.description.$error" class="form-errors" ng-if="favorForm.description.$touched">
           <div class="form-error" ng-message="required">Please enter a description</div>
         </div>
         </div>
