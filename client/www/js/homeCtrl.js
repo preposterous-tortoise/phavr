@@ -15,6 +15,14 @@ angular.module('phavr.home', [])
   //allows header bar to be shown
   $rootScope.login = true;
 
+  $scope.onSwipeRight = function() {
+    $location.path("/favormap");
+  }
+
+  $scope.onSwipeLeft = function() {
+    $location.path("/favor");
+  }
+
   //the favors being displayed in this view
   $scope.favors = [];
 
