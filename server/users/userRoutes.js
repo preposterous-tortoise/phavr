@@ -18,7 +18,7 @@ module.exports = function (app) {
   	});
 
   app.route('/updateloc')
-    .post(userController.updateLocation);
+    .post(userController.update);
    app.route('/update')
     .post(userController.update);
 };

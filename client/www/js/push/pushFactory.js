@@ -9,7 +9,7 @@ angular.module('phavr.pushfact', [])
     /**
      * Description
      * @method onNotificationGCM
-     * @param {} notification
+     * @param {Object} notification
      * @return 
      */
     window.onNotificationGCM = function(notification) {
@@ -27,7 +27,7 @@ angular.module('phavr.pushfact', [])
     /**
      * Description: regiester for 
      * @method register
-     * @param {} provider_id
+     * @param {Number} provider_id
      * @return 
      */
     var register = function(provider_id) {
@@ -62,26 +62,11 @@ angular.module('phavr.pushfact', [])
       notifications = notifications || [];
     }
 
-    // Notification Received
-    // This is the official documented way, but it does not work
-    /*$scope.$on('$cordovaPush:notificationReceived', function(event, notification) {
-      console.log("NOTIFICATION RECEIVED.");
-      console.log(JSON.stringify([notification]));
-      if (ionic.Platform.isAndroid()) {
-        handleAndroid(notification);
-      } else if (ionic.Platform.isIOS()) {
-        handleIOS(notification);
-        $scope.$apply(function() {
-          $scope.notifications.push(JSON.stringify(notification.alert));
-        })
-      }
-    });*/
-
     // Android Notification Received Handler
     /**
      * Description
      * @method handleAndroid
-     * @param {} notification
+     * @param {Object} notification
      * @return 
      */
     var handleAndroid = function(notification) {
