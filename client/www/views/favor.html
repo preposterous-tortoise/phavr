@@ -1,23 +1,29 @@
 <ion-view title="favor" on-swipe-right="onSwipeRight()">
   <ion-content padding="false">
-    <h3 class="favorTitle">What do you want to see?</h3>
+    <h3 class="favorTitle">Make a photo request</h3>
 
     <div ng-controller="FavorCreationMapCtrl" style="width:100%; height:50%">
       <div id="map" data-tap-disabled="true" style="width:100%; height:100%"></div>
     </div>
     
     <div ng-controller="favorCtrl">
-      <form ng-submit="createFavor()">   
+      <form ng-submit="createFavor()" name="favorForm">   
         <div class="list list-inset">
           <label class="item item-input">
             <input id="pac-input" type="text" ng-model="favor.address" placeholder="Where is it?">
           </label>
           <label class="item item-input">
-            <input ng-model="favor.topic" type="text" placeholder="Topic?" required>
+            <input ng-model="favor.topic" type="text" placeholder="Topic? i.e. EDC Las Vegas" >
           </label>
+          <div ng-messages="favorForm.topic.$error" class="form-errors" ng-if="favorForm.topic.$touched">
+          <div class="form-error" ng-message="required">Please enter a topic</div>
+        </div>
           <label class="item item-input">
-            <input ng-model="favor.description" type="text" placeholder="Describe your search!" required>
+            <input ng-model="favor.description" type="text" placeholder="What do you want to see? i.e. 'Show me the best dressed dancers' ">
           </label>
+        <div ng-messages="favorForm.description.$error" class="form-errors" ng-if="favorForm.description.$touched">
+          <div class="form-error" ng-message="required">Please enter a description</div>
+        </div>
         </div>
         <div>
           <button type="submit" class="button button-block button-calm">Submit</button>

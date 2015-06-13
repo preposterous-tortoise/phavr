@@ -51,12 +51,14 @@ angular.module('phavr', ['ionic', 'ngCordova', 'phavr.login', 'phavr.home', 'pha
   $urlRouterProvider.otherwise('/')
   
   $stateProvider.state('home', {
+    cache: false,
     url: '/home',
     templateUrl: 'views/home.html',
     controller: 'homeCtrl'
   })
 
   $stateProvider.state('favormap', {
+    cache: false,
     url: '/favormap',
     templateUrl: './views/favorMap.html',
     controller: 'FavorMapCtrl'
@@ -69,18 +71,21 @@ angular.module('phavr', ['ionic', 'ngCordova', 'phavr.login', 'phavr.home', 'pha
   })
 
   $stateProvider.state('favor', {
+    cache: false,
     url: '/favor',
     templateUrl: './views/favor.html',
     controller: 'favorCtrl'
   })
 
   $stateProvider.state('favordetails', {
+    cache: false,
     url: '/favordetails',
     templateUrl: './views/favorDetails.html',
     controller: 'favorDetailsCtrl'
   })
 
   $stateProvider.state('profile', {
+    cache: false,
     url: '/profile',
     templateUrl: 'views/profile.html',
     controller: 'profileCtrl'

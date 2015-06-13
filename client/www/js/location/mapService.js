@@ -180,6 +180,10 @@ angular.module('phavr.mapService', [])
           console.log('that favor is too far away!');
           isClose = false;
         }
+        //show camera icon if favor distance is less than 5 miles
+        if(dist < 5) {
+          favor.camera = dist < 5;
+        }
 
         //set icon based on distance
         if(isClose) {
