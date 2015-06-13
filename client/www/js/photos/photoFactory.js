@@ -1,9 +1,9 @@
 angular.module('phavr.photoFactory', [])
-.factory('Photos', ['$location', '$q', '$http', 'Auth', function($location, $q, $http, Auth) {
+.factory('Photos', ['$location', '$q', '$http', 'Auth', '$cordovaToast', '$timeout', 
+  function($location, $q, $http, Auth, $cordovaToast, $timeout) {
 
   //For production or development purposes
   var domain = localStorage.getItem("domain") || "http://phavr.herokuapp.com";
-  console.log("domain is: ", domain);
 
   return {
     /**
@@ -60,7 +60,7 @@ angular.module('phavr.photoFactory', [])
         var win = function (r) {
           clearCache();
           retries = 0;
-          alert('Done!');
+          $cordovaToast.showShortCenter('Your photo is now stored on the server.');
           //Tell sever to save Photo url in photo databse
           Photos.sendPicture("https://s3.amazonaws.com/darrendrakeapp/"+time+"___"+favorID +".jpg", favorID);
         }
@@ -81,7 +81,7 @@ angular.module('phavr.photoFactory', [])
           } else {
               retries = 0;
               clearCache();
-              alert('Whoops. Problem encountered uploading photo! Try again!');
+              alert('Problem encountered uploading photo! Try again!');
             }
           }
 
@@ -91,6 +91,10 @@ angular.module('phavr.photoFactory', [])
         options.mimeType = "image/jpeg";
         var ft = new FileTransfer();
         //file transfer photo to server
+        $timeout(function() {
+          $cordovaToast.showShortCenter('Photo upload starting...');
+        }, 200);
+        // alert('Photo upload starting...');
         ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/photoUploads/uploadToServer"), win, fail, options);
       }
 
@@ -114,7 +118,7 @@ angular.module('phavr.photoFactory', [])
        * @return 
        */
       function onFail(message) {
-        alert('Failed because: ' + message);
+        $cordovaToast.showShortCenter('Failed because: ' + message);
       }
 
       //invoke photo taking
