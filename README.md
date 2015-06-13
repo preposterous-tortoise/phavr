@@ -51,6 +51,9 @@ We use Token Facebook authentication using Passport and Node-Express/ng-Cordova.
 ###Database Interactions
 We used Mongoose and Mongo to store out User, Photo, favorVote, photoVote, and Favor tables. Mongo allowed for quicker storage, speedier lookup, and integrated use of location data. 
 
+##Push Notifications
+Push Notification is done in conjunction with an instance of node-pushserver running as a separate service on phavr-push.herokuapp.com.  Node-pushserver handles message subsciptions and sending messages to Google Cloud Messaging.
+
 ##Technology Stack
 
 ###BackEnd
@@ -60,6 +63,7 @@ We used Mongoose and Mongo to store out User, Photo, favorVote, photoVote, and F
 - *ORM* **Mongoose**
 - *Photo Storage* **Amazon/S3**
 - *Task Runner* **Gulp/Grunt**
+- *Push Notifications* **Google Cloud Messaging with node-pushserver**
 
 ###FrontEnd
 - *Mobile Architecture* **Ionic/Angular**

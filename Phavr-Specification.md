@@ -75,3 +75,8 @@ Below the map there will be the following input fields
 - [ ] The previous marker should be removed.
 
 ##Voting - Kaivon
+
+##Push Notifications - Frank
+
+- [ ]  If the settings permit new photo notification then the user will be notified for each new photo submitted for their favors
+- [ ]  If the settings permit new favor notification then the user will be notified for new favors created by other users within 2 miles of the user's current location
