@@ -44,7 +44,7 @@ module.exports = {
   /**
    * Tells the user that there is a new photo in their favor's thread
    * @method notifyNewPhoto
-   * @param {} favor_id
+   * @param {String} favor_id
    * @return 
    */
   notifyNewPhoto: function(favor_id) {
@@ -78,7 +78,7 @@ module.exports = {
   },
 
   /**
-   * Tell's the user that they have entered the vicinity of a new favor
+   * Tell's the user that there is a new favor nearby
    * @method notifyNewFavor
    * @param {FavorSchema} favor
    * @return 
