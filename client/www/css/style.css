@@ -51,13 +51,11 @@ h2, h3, h4 {
   height: 50px;
   width: 50px;
   position: relative;
-  left: 35px; 
-  top: 41px;
-}
+  left: 35px;
+  top: 41px; }
 
 .profilepic {
-  height: 103px;
-}
+  height: 103px; }
 
 .description {
   border-color: #66CDAA;
@@ -234,9 +232,9 @@ h2, h3, h4 {
   background-color: #86e0c2 !important; }
 
 .profileHead {
+  width: 205px;
   position: absolute;
   left: 50%;
-  width: 205px;
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
