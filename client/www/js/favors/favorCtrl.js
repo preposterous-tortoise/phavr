@@ -13,6 +13,10 @@ angular.module('phavr.favor', [])
    * @method createFavor
    */
 
+   $scope.onSwipeRight = function() {
+    $location.path("/home");
+   }
+
   $scope.createFavor = function() {
     //console.log('creating favor...');
 
