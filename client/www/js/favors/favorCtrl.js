@@ -5,7 +5,7 @@
  *
  */
 
-angular.module('phavr.favor', [])
+angular.module('phavr.favor', ['ngMessages'])
 .controller('favorCtrl', function($scope, $window, $location, Favors, mapService) {
 
   /**
