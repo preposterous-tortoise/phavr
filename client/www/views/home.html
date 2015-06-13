@@ -3,7 +3,7 @@
     <ion-refresher on-refresh="updateFavors()"></ion-refresher>
     <h3 ng-show="noFavors" class="favorTitle">Oops! There are no requests here!!!</h3>
     <ion-list ng-repeat="favor in favors | orderBy: filter ">
-      <ion-item class="feedView description favor">
+      <ion-item class="noPadding description favor">
         <div class="row">
           <div class="col col-80">
             <h3 class="favorHead">{{favor.topic}}</h3>
@@ -55,14 +55,14 @@
   <ion-footer-bar ng-class="{'tall-footer': search}" class="bar-calm">    
     <div class="button-bar searchbar">
       <button ng-click="hot()" ng-class="{'highlighted': popular}" 
-        class="button button-outline set-height button-light lolol">
+        class="button button-outline set-height button-light borderless">
         Hot
       </button>
       
       <a ng-click="toggleSearch()" class="button button-icon icon ion-search set-height"></a>
       
       <button ng-click="new()" ng-class="{'highlighted': !popular}" 
-        class="button button-outline button-light set-height lolol highlighted">
+        class="button button-outline button-light set-height borderless highlighted">
         New
       </button>
     </div>
