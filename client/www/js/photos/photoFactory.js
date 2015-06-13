@@ -1,5 +1,6 @@
 angular.module('phavr.photoFactory', [])
-.factory('Photos', ['$location', '$q', '$http', 'Auth', '$cordovaToast', function($location, $q, $http, Auth, $cordovaToast) {
+.factory('Photos', ['$location', '$q', '$http', 'Auth', '$cordovaToast', '$timeout', 
+  function($location, $q, $http, Auth, $cordovaToast, $timeout) {
 
   //For production or development purposes
   var domain = localStorage.getItem("domain") || "http://phavr.herokuapp.com";
@@ -90,8 +91,10 @@ angular.module('phavr.photoFactory', [])
         options.mimeType = "image/jpeg";
         var ft = new FileTransfer();
         //file transfer photo to server
-        $cordovaToast.showShortCenter('Photo upload starting...');
-        alert('Photo upload starting...');
+        $timeout(function() {
+          $cordovaToast.showShortCenter('Photo upload starting...');
+        }, 200);
+        // alert('Photo upload starting...');
         ft.upload(fileURI, encodeURI("http://phavr.herokuapp.com/photoUploads/uploadToServer"), win, fail, options);
       }
 
