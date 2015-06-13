@@ -39,7 +39,7 @@ h2, h3, h4 {
   position: relative;
   left: 159px;
   font-size: 20px;
-  top: 32px;
+  top: 24px;
   color: silver; }
 
 .byYou {
@@ -52,11 +52,11 @@ h2, h3, h4 {
   width: 50px;
   position: relative;
   left: 35px; 
-  top: 52px;
+  top: 41px;
 }
 
 .profilepic {
-  height: 109px;
+  height: 103px;
 }
 
 .description {
