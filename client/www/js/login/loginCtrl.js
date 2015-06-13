@@ -40,7 +40,7 @@ angular.module('phavr.login', [])
 
       });
     
-      $location.path('/home');
+      // $location.path('/home');
     } 
 
 
