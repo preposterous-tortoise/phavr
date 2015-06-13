@@ -138,6 +138,6 @@ module.exports = {
   uploadToServer: function(req,res){
     console.log("_________________");
      console.log('req.files', req.files);
-    res.redirect('/uploadToS3/?fileName=' + req.files.file.originalname);
+    res.redirect('api/photos/uploadToS3/?fileName=' + req.files.file.originalname);
   }
 }
