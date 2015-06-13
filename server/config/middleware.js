@@ -61,6 +61,16 @@ module.exports = function(app, express){
     next();
   });
 
+  //Multer is an NPM module used to upload multi-part data
+  app.use(multer({ dest: './uploads/', 
+    rename: function(fieldname, filename) {
+              console.log(fieldname);
+              console.log(filename);
+              return filename;
+            }
+  }));
+
+
   //Routes from Front-End $http requests to their respective routers; authenticated
   app.use('/api/requests', passport.authenticate('facebook-token'), favorRouter);
   app.use('/api/photos', passport.authenticate('facebook-token'), photoRouter);
