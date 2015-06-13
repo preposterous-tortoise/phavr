@@ -57,6 +57,7 @@ The favor details view displays information for a single favor, selected by the 
 - [ ] pulling down from the top should refresh the feed
 - [ ] displays the selected favor's address, topic, description, and all photos submitted for that favor.
 - [ ] if the favor is within 5 mi of the user, a camera button is available in the footer to submit a photo.
+- [ ] Test for presence of camera button based on distance for all three cases of navigating to favor details (from home feed, favor map, and user profile)
 - [ ] photos each have their own set of votes displayed.
 - [ ] photos can be upvoted or downvoted
 - [ ] if a photo's votes drops below -5, it is removed from the database and details page.
@@ -75,3 +76,8 @@ Below the map there will be the following input fields
 - [ ] The previous marker should be removed.
 
 ##Voting - Kaivon
+
+##Push Notifications - Frank
+
+- [ ]  If the settings permit new photo notification then the user will be notified for each new photo submitted for their favors
+- [ ]  If the settings permit new favor notification then the user will be notified for new favors created by other users within 2 miles of the user's current location

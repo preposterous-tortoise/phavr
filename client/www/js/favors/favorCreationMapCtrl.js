@@ -17,7 +17,6 @@ angular.module('phavr.favorCreationMap', [])
     var markerMap = {};
     var map = mapService.createMap();
 
-    //mapService.addBoundsListener(map, markerMap);
     mapService.addPlaceChangedListener(map, false);
     mapService.addDefaultMarker(map);
   }

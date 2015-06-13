@@ -318,7 +318,6 @@ angular.module('phavr.home', [])
     $timeout(function() {
       var map = $scope.map.control.getGMap();
       if (map) {
-        //mapService.addBoundsListener(map, markerMap);
         mapService.addPlaceChangedListener(map, 'feedMap');
       }
     });

@@ -38,7 +38,9 @@ angular.module('phavr.favorfact', [])
         data: favor
       })
       .success(function(data, status, headers, config) {
-        $cordovaToast.showShortCenter('Your favor has been created.');
+        if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
+          $cordovaToast.showShortCenter('Your favor has been created.');
+        }
         return data;
       })
       .error(function(data, status, headers, config) {
