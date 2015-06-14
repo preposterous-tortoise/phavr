@@ -1,7 +1,7 @@
 angular.module('phavr.mapService', [])
   .factory('mapService', function($window, $location, Favors) {
 
-    var myLatlng = new google.maps.LatLng(37.783724, -122.40897799999999);
+    var myLatlng = (window.google) ? new google.maps.LatLng(37.783724, -122.40897799999999) : null;
 
     //Icon for the location of a favor
     var genericIconURL = "http://frit-talk.com/mobile/2/endirect.png";
@@ -13,7 +13,7 @@ angular.module('phavr.mapService', [])
     var mapOptions = {
       center: myLatlng,
       zoom: 16,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: (window.google) ? google.maps.MapTypeId.ROADMAP: null
     };
 
     /**
@@ -331,6 +331,10 @@ angular.module('phavr.mapService', [])
               map.setZoom(17); // Why 17? Because it looks good.
             }
             return false;
+          });
+
+          google.maps.event.addDomListener(input, 'keydown', function(e) {
+            if (e.keyCode == 13) { e.preventDefault(); }
           });
         }
       }

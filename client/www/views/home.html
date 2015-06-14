@@ -1,7 +1,7 @@
 <ion-view title="home" on-swipe-left="onSwipeLeft()">
   <ion-content>
     <ion-refresher on-refresh="updateFavors()"></ion-refresher>
-    <h3 ng-show="noFavors" class="favorTitle">Oops! There are no requests here!!!</h3>
+    <h3 ng-show="noFavors" class="favorTitle">There are no requests in this area</h3>
     <ion-list ng-repeat="favor in favors | orderBy: filter ">
       <ion-item class="noPadding description favor">
         <div class="row">

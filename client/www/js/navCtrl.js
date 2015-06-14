@@ -1,6 +1,6 @@
 
 angular.module('phavr.nav', [])
-.controller('NavCtrl', function($scope, $rootScope, $location, $http, $ionicSideMenuDelegate, Auth, Favors, PushFactory,geo){ 
+.controller('NavCtrl', function($scope, $rootScope, $location, $ionicViewService, $ionicHistory, $http, $ionicSideMenuDelegate, Auth, Favors, PushFactory,geo){ 
 
   /**
    * Description
@@ -43,6 +43,10 @@ angular.module('phavr.nav', [])
     window.localStorage.removeItem("token");
     $rootScope.login = false;
     $ionicSideMenuDelegate.toggleLeft();
+    //$ionicViewService.clearHistory()
+    $ionicHistory.nextViewOptions({
+      historyRoot: true
+    });
     $location.path("/");
 
   };
