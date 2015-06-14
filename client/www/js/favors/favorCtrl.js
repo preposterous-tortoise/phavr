@@ -5,7 +5,7 @@
  *
  */
 
-angular.module('phavr.favor', ['ngMessages'])
+angular.module('phavr.favor', [])
 .controller('favorCtrl', function($scope, $window, $location, Favors, mapService, $cordovaToast) {
 
   /**
