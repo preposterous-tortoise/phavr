@@ -74,6 +74,7 @@ Below the map there will be the following input fields
 - [ ] Favor topic (required)
 - [ ] Favor description (required)
 
+- [ ] If you attempt to submit a favor without providing a topic or description a toast error message will be posted
 - [ ] If the topic or description is missing the submit should be disabled
 - [ ] Choosing auto-complete dropdown items should cause navigation to the corresponding place marked by a camera icon.
 - [ ] The previous marker should be removed.
