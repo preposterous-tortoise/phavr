@@ -182,7 +182,7 @@ module.exports = {
                       User.findByIdAndUpdate(req.user._id,
                         { $inc: {points: -1 } },
                         function(err, data) {
-                          res.send('1');
+                          res.send('-1');
                         });
                     }
                   });
