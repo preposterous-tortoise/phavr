@@ -1,6 +1,9 @@
 angular.module('phavr.login', [])
 .controller('loginCtrl', function ($scope, $ionicHistory, $rootScope, $location, $cordovaOauth, Auth, $http, Favors, PushFactory, Auth, geo){
   
+  if (!window.google) {
+    alert('No internet connection. Phavr requires internet access.');
+  }
   /**
    * Takes out the header bar
    */
