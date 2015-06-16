@@ -136,7 +136,9 @@ h2, h3, h4 {
 
 .logo {
   position: relative;
-  width: 100%; }
+  width: 100%; 
+  top: -14px;
+}
 
 .tagline {
   position: relative;
