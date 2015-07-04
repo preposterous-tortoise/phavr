@@ -266,6 +266,16 @@ angular.module('phavr.home', [])
     $scope.search = !$scope.search;
   }
 
+  $scope.disableTap = function(){
+    container = document.getElementsByClassName('pac-container');
+    // disable ionic data tab
+    angular.element(container).attr('data-tap-disabled', 'true');
+    // leave input field if google-address-entry is selected
+    angular.element(container).on("click", function(){
+        document.getElementById('feed-input').blur();
+    });
+  };
+
   /**
    * Calculate distance between user and a favor
    * @method getDistance
