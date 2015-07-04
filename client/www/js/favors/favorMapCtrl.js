@@ -24,6 +24,16 @@ angular.module('phavr.favorMap', ['ionic', 'uiGmapgoogle-maps'])
     $scope.search = !$scope.search;
   };
 
+  $scope.disableTap = function(){
+    container = document.getElementsByClassName('pac-container');
+    // disable ionic data tab
+    angular.element(container).attr('data-tap-disabled', 'true');
+    // leave input field if google-address-entry is selected
+    angular.element(container).on("click", function(){
+        document.getElementById('req-input').blur();
+    });
+  };
+
   //initialize map:
   uiGmapGoogleMapApi.then(function(maps) {
     //console.log('initializing the request map...');

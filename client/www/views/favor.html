@@ -10,7 +10,7 @@
       <form ng-submit="createFavor()" name="favorForm">   
         <div class="list list-inset">
           <label class="item item-input">
-            <input id="pac-input" type="text" ng-model="favor.address" placeholder="Where is it?">
+            <input id="pac-input" type="text" ng-model="favor.address" placeholder="Where is it?" ng-focus="disableTap()">
           </label>
           <label class="item item-input">
             <input ng-model="favor.topic" type="text" placeholder="Topic? i.e. EDC Las Vegas" >
